@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        线性代数 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-行列式性质及计算"><span class="toc-text">1. 行列式性质及计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1"><span class="toc-text">1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-行列式计算"><span class="toc-text">1.2 行列式计算</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-行列式展开"><span class="toc-text">2. 行列式展开</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-余子式-M-ij-和代数余子式-A-ij"><span class="toc-text">2.1 余子式 $M_{ij}$ 和代数余子式$A_{ij}$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-行列式展开"><span class="toc-text">2.2 行列式展开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-范德蒙行列式"><span class="toc-text">2.3 范德蒙行列式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-矩阵"><span class="toc-text">3. 矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-行列式和矩阵的区别"><span class="toc-text">3.1 行列式和矩阵的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-三则运算"><span class="toc-text">3.2 三则运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-转置矩阵-A-T"><span class="toc-text">3.3 转置矩阵 $A^T$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-伴随矩阵-A"><span class="toc-text">3.4 伴随矩阵 $A^*$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-单位矩阵"><span class="toc-text">3.5 单位矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-逆矩阵-A-1"><span class="toc-text">3.6 逆矩阵 $A^{-1}$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-矩阵的行列式"><span class="toc-text">3.7 矩阵的行列式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-正交矩阵"><span class="toc-text">3.8 正交矩阵</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        线性代数
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-01 23:58:29</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#数学" title="数学">数学</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="1-行列式性质及计算"><a href="#1-行列式性质及计算" class="headerlink" title="1. 行列式性质及计算"></a>1. 行列式性质及计算</h1><p>行列式是一个函数，它可以将方阵（注意只有方阵才有行列式）映射到一个实值，他等于矩阵特征值的乘积，也就是说，他的大小可以衡量矩阵变换后空间扩大或者缩小的情况。比如：如果行列式为0那么说明空间至少沿着某一维完全收缩了，使其失去了所有体积，行列式为1则说明矩阵变换没有改变空间体积。</p>
+<h2 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h2><h2 id="1-2-行列式计算"><a href="#1-2-行列式计算" class="headerlink" title="1.2 行列式计算"></a>1.2 行列式计算</h2><p>上三角公式</p>
+<h1 id="2-行列式展开"><a href="#2-行列式展开" class="headerlink" title="2. 行列式展开"></a>2. 行列式展开</h1><h2 id="2-1-余子式-M-ij-和代数余子式-A-ij"><a href="#2-1-余子式-M-ij-和代数余子式-A-ij" class="headerlink" title="2.1 余子式 $M_{ij}$ 和代数余子式$A_{ij}$"></a>2.1 余子式 $M_{ij}$ 和代数余子式$A_{ij}$</h2><ul>
+<li>余子式$M_{ij}$：去掉 $a_ij$ 所在的行与列</li>
+<li>代数余子式 $A_{ij} = (-1)^{i+j} M_{ij}$</li>
+</ul>
+<p><strong>【题1】已知 D，求 $M_{23}, A_{23}$：</strong></p>
+<script type="math/tex; mode=display">
+D = \left|
+\begin{array}{ll}
+1 & 3 & -2 \\
+2 & 4 & 1 \\
+3 & 1 & 2
+\end{array}
+\right|</script><p> 则：</p>
+<script type="math/tex; mode=display">
+M_{23} = \left|
+\begin{array}{ll}
+1 & 3   \\
+3 & 1 \\
+\end{array}
+\right| =1 \times 1 - 3 \times 3 = -8</script><script type="math/tex; mode=display">A_{23} = (-1)^{2+3}M_{23} = 8</script><h2 id="2-2-行列式展开"><a href="#2-2-行列式展开" class="headerlink" title="2.2 行列式展开"></a>2.2 行列式展开</h2><p>行列式展开公式（求解行列式）：</p>
+<ul>
+<li>按行展开：$D = a_{i1} A_{i1} + a_{i2} A_{i2} + … + a_{im} A_{im}  (i=1,2,3,…, n)$</li>
+<li>按列展开：$D = a_{1j} A_{1j} + a_{2j} A_{2j} + … + a_{mj} A_{mj}  (j=1,2,3,…, n)$</li>
+</ul>
+<p>如</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+D = \left|
+\begin{array}{ll}
+1 & 2 & 3 \\
+2 & 1 & 1 \\
+1 & 3 & 2
+\end{array}
+\right| &=& 1 A_{11}+2A_{12} + 3A_{13}  \\
+&=& 1 \times (-1)^{1+1} M_{11} +  2 \times (-1)^{1+2} M_{12} + 3 \times (-1)^{1+3} M_{13}  \\
+&=& -1- 6 + 15 = 8 
+\end{array}</script><p><strong>定理：某行（列）元素与另一行（列）的代数余子式之积相加等于 0</strong></p>
+<p>要求解 $A_{11} + A_{12} + A_{13} + A_{14}$，方法是把 D 的第一行元素换为 $[1 1 1 1]$ 得到$D’$，解 $D’$ 的值。</p>
+<h2 id="2-3-范德蒙行列式"><a href="#2-3-范德蒙行列式" class="headerlink" title="2.3 范德蒙行列式"></a>2.3 范德蒙行列式</h2><script type="math/tex; mode=display">
+D = \left|
+\begin{array}{ll}
+1 & 1 & 1 & 1 \\
+a & b & c & d \\
+a^2 & b^2 & c^2 & d^2 \\
+a^3 & b^3 & c^3 & d^3 
+\end{array}
+\right| = (d-c)(d-b)(d-a)(c-b)(c-a)(b-a)</script><h1 id="3-矩阵"><a href="#3-矩阵" class="headerlink" title="3. 矩阵"></a>3. 矩阵</h1><h2 id="3-1-行列式和矩阵的区别"><a href="#3-1-行列式和矩阵的区别" class="headerlink" title="3.1 行列式和矩阵的区别"></a>3.1 行列式和矩阵的区别</h2><ul>
+<li>行列式是一个数，矩阵是一个表；</li>
+<li>行列式是 n x n 阶，矩阵是 n x m 阶；</li>
+<li>$\lambda |A|$ 是把行列式某行/列 乘以 $\lambda$，$\lambda A$ 是把矩阵里每个元素都乘以 $\lambda$；</li>
+<li>行列式加减是数的运算，矩阵加减只能是同型矩阵，对应元素的加减；</li>
+<li>矩阵如果是方阵时，有行列式值。</li>
+</ul>
+<h2 id="3-2-三则运算"><a href="#3-2-三则运算" class="headerlink" title="3.2 三则运算"></a>3.2 三则运算</h2><ol>
+<li>矩阵加减：</li>
+</ol>
+<ul>
+<li>同型矩阵，同行同列；</li>
+<li>对应元素相加减。</li>
+</ul>
+<ol>
+<li>矩阵的数乘 $\lambda A$</li>
+</ol>
+<ul>
+<li>每个元素均要乘以 $\lambda$</li>
+</ul>
+<ol>
+<li>矩阵的乘法</li>
+</ol>
+<ul>
+<li>前行乘后列：$A_{m\times n} \cdot B_{n\times s} = C_{m \times s}$</li>
+<li>$AB \ne BA $时：$(A \pm B)^2 \ne A^2 + 2AB + B^2 ,  A^2 - B^2 \ne (A+B) (A-B) $</li>
+<li>$AB = BA $时：$(A \pm B)^2 = A^2 + 2AB + B^2 ,  A^2 - B^2  = (A+B) (A-B) $</li>
+</ul>
+<h2 id="3-3-转置矩阵-A-T"><a href="#3-3-转置矩阵-A-T" class="headerlink" title="3.3 转置矩阵 $A^T$"></a>3.3 转置矩阵 $A^T$</h2><p>行变列，列变行；<br>性质：</p>
+<ul>
+<li>$(AB)^T = B^T A^T$</li>
+<li>$(A^T)^T = A$</li>
+<li>$(kA^T)=kA^T$</li>
+<li>$(A\pm B)^T = A^T \pm B^T$</li>
+</ul>
+<h2 id="3-4-伴随矩阵-A"><a href="#3-4-伴随矩阵-A" class="headerlink" title="3.4 伴随矩阵 $A^*$"></a>3.4 伴随矩阵 $A^*$</h2><p>$A_{ij}$ 代数余子式<br>性质：</p>
+<ul>
+<li>$(AB)^<em> = B^</em>A^*$</li>
+<li>$|A^*| = |A|^{n-1}$</li>
+<li>当A 可逆时，$A^*=|A|A^{-1}$</li>
+<li>$(kA)^<em> = k^{n-1}A^</em>$</li>
+</ul>
+<h2 id="3-5-单位矩阵"><a href="#3-5-单位矩阵" class="headerlink" title="3.5 单位矩阵"></a>3.5 单位矩阵</h2><ul>
+<li>主对角线全为1，其他位置全0</li>
+<li>单位矩阵的行列式值为1， $|E| = 1$</li>
+<li>任何矩阵乘单位矩阵都等于它本身，$EA = AE = A$</li>
+</ul>
+<h2 id="3-6-逆矩阵-A-1"><a href="#3-6-逆矩阵-A-1" class="headerlink" title="3.6 逆矩阵 $A^{-1}$"></a>3.6 逆矩阵 $A^{-1}$</h2><p>若 $AB = BA = E$，则 $B$ 为 $A$ 的逆矩阵，记 $B=A^{-1}$，即：$AA^{-1} = E$</p>
+<ul>
+<li>$A^{-1} = \frac{A^*}{|A|}$</li>
+<li>A 可逆的充要条件：$|A| \ne 0$</li>
+</ul>
+<p>性质：</p>
+<ul>
+<li>$(AB)^{-1} = B^{-1}A^{-1}$</li>
+<li>$(kA)^{-1}=\frac{1}{k}A^{-1}$</li>
+<li>$(A^{-1})^{-1} = A$</li>
+<li>$(A^T)^{-1} = (A^{-1})^T$</li>
+</ul>
+<h2 id="3-7-矩阵的行列式"><a href="#3-7-矩阵的行列式" class="headerlink" title="3.7 矩阵的行列式"></a>3.7 矩阵的行列式</h2><ul>
+<li>$|A| = |A^T|$</li>
+<li>$|kA| = k^n|A|$</li>
+<li>$|AB| = |BA| = |A||B|$</li>
+<li>$|A^{-1}| = \frac{1}{|A|}$ </li>
+</ul>
+<p><strong>【题1】设 A 为3阶矩阵，已知 $|A| = 2$，则：</strong></p>
+<ul>
+<li>$|3A| = 3^3 |A| = 54$</li>
+<li>$|A^{-1} = frac{1}{|A|} = frac{1}{2}$ </li>
+<li>$|A^*| = |A|^{3-1} = 4$</li>
+</ul>
+<p><strong>【题2】设A、B都是 n 阶矩阵，且 $|A|=3, |B|=2$，则：</strong><br>$\big|\frac{1}{3}A^<em> B^{-1}\big| = (\frac{1}{3})^n |A^</em>| |B^{-1}| = (\frac{1}{3})^n |A|^{n-1} \cdot \frac{1}{|B|} = \frac{1}{6}$</p>
+<p><strong>【题3】设 A 为 n 阶矩阵，且 $|A| = 2$，则：</strong></p>
+<script type="math/tex; mode=display">
+ \begin {array}{ll}
+\Big|\Big(-\frac{1}{4}A\Big)^{-1} + A^*\Big| &=& |-4A^{-1} + |A|A^{-1}| \\
+&=& |-2A^{-1}| \\
+&=& (-2)^n \cdot \frac{1}{|A|} \\
+&=& (-1)^n \cdot 2^{n-1}
+\end{array}</script><h2 id="3-8-正交矩阵"><a href="#3-8-正交矩阵" class="headerlink" title="3.8 正交矩阵"></a>3.8 正交矩阵</h2><p>矩阵的转置和矩阵的乘积=单位阵，那么这个矩阵就是正交矩阵，他的列向量组一定是标准正交向量组</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

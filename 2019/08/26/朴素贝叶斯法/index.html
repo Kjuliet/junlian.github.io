@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        朴素贝叶斯法 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-朴素贝叶斯法的学习与分类"><span class="toc-text">4.1 朴素贝叶斯法的学习与分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-基本方法"><span class="toc-text">4.1.1 基本方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-后验概率最大化的含义"><span class="toc-text">4.1.2 后验概率最大化的含义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-朴素贝叶斯法的参数估计"><span class="toc-text">4.2 朴素贝叶斯法的参数估计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-极大似然估计"><span class="toc-text">4.2.1 极大似然估计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-3-贝叶斯估计"><span class="toc-text">4.2.3 贝叶斯估计</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        朴素贝叶斯法
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-26 12:22:44</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#机器学习" title="机器学习">机器学习</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>朴素贝叶斯是基于贝叶斯定理和特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入输出的联合概率分布；然后基于此模型，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。</p>
+<h2 id="4-1-朴素贝叶斯法的学习与分类"><a href="#4-1-朴素贝叶斯法的学习与分类" class="headerlink" title="4.1 朴素贝叶斯法的学习与分类"></a>4.1 朴素贝叶斯法的学习与分类</h2><h3 id="4-1-1-基本方法"><a href="#4-1-1-基本方法" class="headerlink" title="4.1.1 基本方法"></a>4.1.1 基本方法</h3><p>设$X，Y$分别是定义在输入空间和输出空间上的随机变量，$P(X, Y)$ 是 $X$和$Y$的联合概率分布，训练数据集 $T = \{(x_1, y_1), (x_2, y_2), …, (x_N, y_N)\}$ 由$P(X,Y)$独立同分布产生。</p>
+<p>朴素贝叶斯法通过训练数据集学习联合概率分布 $P(X, Y)$：</p>
+<ul>
+<li>先验概率分布 $P(Y=c_k), k=1,2,…,K$;</li>
+<li>条件概率分布$P(X=x|Y=c_k) = P(X^{(1)} = x^{(1)}, …, X^{(n)} = x^{(n)} | Y=c_k), k=1,2,…,K$；</li>
+<li>联合概率分布 $P(X, Y)=P(Y=c_k) P(X=x|Y=c_k)$</li>
+</ul>
+<p>条件概率分布$P(X=x|Y=c_k)$ 的参数量是指数级的，假设$x_{(j)}$可取值$S_j$个，$j=1,2,…,n$，$Y$的可取值有$K$个，那么参数个数为$K\prod \limits_{j=1}^n S_j$，要对它估计是不可行的。</p>
+<p>朴素贝叶斯法对条件概率做了条件独立性假设，就是说用于分类的特征在类确定的条件下都是条件独立的：</p>
+<script type="math/tex; mode=display">P(X=x|Y=c_k) = P(X^{(1)}=x^{(1)}, ..., X^{(n)}=x^{(n)}|Y=c_k) = \prod \limits_{j=1}^n P(X^{(j)}=x^{(j)}|Y=c_k) \tag{1}</script><p>这一假设使朴素贝叶斯法变得简单，但有时会牺牲一定的分类准确率。<br>朴素贝叶斯实际上是学习到了生成数据的机制，所以属于<strong>生成模型</strong>。</p>
+<p>朴素贝叶斯法分类时，对给定的输入$x$，通过学习到的模型计算后验概率分布$P(Y=c_k|X=x)$，将后验概率最大的类作为$x$的类的输出，后验概率计算：</p>
+<script type="math/tex; mode=display">P(Y=c_k | X=x)=\frac{P(X=x|Y=c_k)P(Y=c_k)}{\sum \limits_k P(X=x|Y=c_k)P(Y=c_k)} \tag{2}</script><p>将$(1)$带入$(2)$得：</p>
+<script type="math/tex; mode=display">P(Y=c_k | X=x)=\frac{P(Y=c_k)\prod \limits_{j} P(X^{(j)}=x^{(j)}|Y=c_k) }{\sum P(Y=c_k)\prod \limits_{j} P(X^{(j)}=x^{(j)}|Y=c_k) } \tag{2}</script><p>所以朴素贝叶斯分类器可表示为：</p>
+<script type="math/tex; mode=display">y=f(x)=arg \mathop{max}\limits_{c_k}\frac{P(Y=c_k)\prod \limits_{j} P(X^{(j)}=x^{(j)}|Y=c_k) }{\sum P(Y=c_k)\prod \limits_{j} P(X^{(j)}=x^{(j)}|Y=c_k) } \tag{3}</script><p>因为分母对所有$c_k$都是相同的，所以：</p>
+<script type="math/tex; mode=display">y=f(x)=arg \mathop{max}\limits_{c_k}{P(Y=c_k)\prod \limits_{j} P(X^{(j)}=x^{(j)}|Y=c_k) }\tag{4}</script><h3 id="4-1-2-后验概率最大化的含义"><a href="#4-1-2-后验概率最大化的含义" class="headerlink" title="4.1.2 后验概率最大化的含义"></a>4.1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大化的类中，也就是期望风险最小化。假设选择0-1损失函数：</p>
+<script type="math/tex; mode=display">
+\begin {equation}
+L(Y, f(X)) = \left\{\begin{array}
+a1, Y\ne f(X) \\
+0, Y= f(X)
+\end{array}
+\right .
+\end{equation}</script><p>$f(X)$是分类决策函数，这时期望风险函数为：</p>
+<script type="math/tex; mode=display">R_{exp}(f) = E[L(Y, f(X))]</script><p>期望是对联合分布$P(X, Y)$取的，由此取条件期望：</p>
+<script type="math/tex; mode=display">R_{exp}(f) = E_X \sum \limits_{k=1}^K[L(c_k, f(X))]P(c_j|X)</script><p>为了使期望风险最小化，只需对$X=x$逐个极小化：</p>
+<script type="math/tex; mode=display">
+\begin {equation}
+\begin{array}
+af(x) &= arg \mathop{min}\limits_{y \in Y} \sum_{k=1}^K L(c_k, y) P(c_k|X=x) \\&=arg \mathop{min}\limits_{y \in Y} \sum_{k=1}^K P(y \ne c_k|X=x) \\
+&= arg \mathop{min}(1-P(y=c_k | X= x)) \\
+&= arg \mathop{max} \limits_{y \in Y} P(y=c_k | X= x)
+\end{array}
+\end{equation}</script><p>所以根据期望风险最小化准则就得到了后验概率最大化准则：</p>
+<script type="math/tex; mode=display">f(x) = arg \mathop{max} \limits_{c_k} P(c_k | X= x)</script><h2 id="4-2-朴素贝叶斯法的参数估计"><a href="#4-2-朴素贝叶斯法的参数估计" class="headerlink" title="4.2 朴素贝叶斯法的参数估计"></a>4.2 朴素贝叶斯法的参数估计</h2><h3 id="4-2-1-极大似然估计"><a href="#4-2-1-极大似然估计" class="headerlink" title="4.2.1 极大似然估计"></a>4.2.1 极大似然估计</h3><p>在朴素贝叶斯法中，学习意味着估计$P(Y=c_k)$和$P(X^{(j)}=x^{(j)}|Y=c_k)$，可以用极大似然估计法估计相应的概率。先验概率 $P(Y=c_k)$的极大似然估计是：</p>
+<script type="math/tex; mode=display">P(Y=c_k) = \frac{\sum\limits_{i=1}^N I(y_i = c_k)}{N}, k=1,2,...,K</script><p>设第$j$个特征$x^{(j)}$可能取值的集合为$\{a_{j1}, a_{j2}, …, a_{jS_j}\}$，条件概率$P(X^{(j)} = a_{jl}|Y=c_k)$的极大似然估计是：</p>
+<script type="math/tex; mode=display">P(X^{(j)} = a_{jl}|Y=c_k) = \frac{\sum\limits_{i=1}^N I(x_i^{(j)} = a_{jl}, y_i = c_k)}{\sum\limits_{i=1}^N I(y_i=c_k)}</script><h4 id="4-2-3-贝叶斯估计"><a href="#4-2-3-贝叶斯估计" class="headerlink" title="4.2.3 贝叶斯估计"></a>4.2.3 贝叶斯估计</h4><p>用极大似然估计可能会出现所要估计的概率值为0 的情况，这会影响后验概率的计算结果。贝叶斯估计可以解决这个问题，先验概率的贝叶斯估计：</p>
+<script type="math/tex; mode=display">P_{\lambda}(Y=c_k) = \frac{\sum\limits_{i=1}^N I(y_i = c_k) + \lambda}{N+K\lambda}, k=1,2,...,K</script><p>条件概率的贝叶斯估计是：</p>
+<script type="math/tex; mode=display">P_{\lambda} (X^{(j)} = a_{jl}|Y=c_k)=\frac{\sum\limits_{i=1}^N I(x_i^{(j)} = a_{jl}, y_i = c_k)+\lambda}{\sum\limits_{i=1}^NI(y_i=c_k) + S_j \lambda}</script><p>$\lambda \ge 0$，当$\lambda = 0$是就是极大似然估计，常取$\lambda = 1$，这时称为拉普拉斯平滑，它对所以：</p>
+<script type="math/tex; mode=display">P_{\lambda} (X^{(j)} = a_{jl}|Y=c_k) > 0</script><script type="math/tex; mode=display">\sum\limits_{l=1}^{S_j}P_{\lambda} (X^{(j)} = a_{jl}|Y=c_k) = 1</script>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

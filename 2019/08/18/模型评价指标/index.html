@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        模型评价指标 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-分类问题"><span class="toc-text">1. 分类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Precision"><span class="toc-text">1.1 Precision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Recall"><span class="toc-text">1.2 Recall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-mAP-mean-Average-Precision"><span class="toc-text">1.3 mAP (mean Average Precision)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#python-实现"><span class="toc-text">python 实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-ROC-和-AUC"><span class="toc-text">1.4 ROC 和 AUC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-F1-score"><span class="toc-text">1.5 F1-score</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        模型评价指标
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-18 12:28:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#深度学习" title="深度学习">深度学习</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#机器学习" title="机器学习">机器学习</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="1-分类问题"><a href="#1-分类问题" class="headerlink" title="1. 分类问题"></a>1. 分类问题</h1><h2 id="1-1-Precision"><a href="#1-1-Precision" class="headerlink" title="1.1 Precision"></a>1.1 Precision</h2><p>precision：预测为positive 的样本有n个，true positive有m个，precision = n / m = TP / (TP + FP)</p>
+<h2 id="1-2-Recall"><a href="#1-2-Recall" class="headerlink" title="1.2 Recall"></a>1.2 Recall</h2><p>recall：ground truth 中positive样本（应该预测为positive）有p 个，ground truth 中为positive且预测为positive的样本（true positive）有q个，recall = q / p = TP / (TP + FN)</p>
+<h2 id="1-3-mAP-mean-Average-Precision"><a href="#1-3-mAP-mean-Average-Precision" class="headerlink" title="1.3 mAP (mean Average Precision)"></a>1.3 mAP (mean Average Precision)</h2><ul>
+<li>P：precision</li>
+<li>AP：对每个recall对应的precision求均值（recall为横轴，precision为纵轴的recall-precision曲线下的面积）</li>
+<li>mAP：m类标签的AP求均值</li>
+</ul>
+<p>对一个二分类问题，假设有20个实例，它们的真实类别和分类模型给出的positive confident score 如下：<br>| id | confident score | label |<br>|—-|—-|—-|<br>|1|0.3|0|<br>|2|0.82|1|<br>|3|0.81|0|<br>|4|0.71|1|<br>|5|0.26|1|<br>|6|0.74|1|<br>|7|0.79|1|<br>|8|0.80|0|<br>|9|0.08|0|<br>|10|0.89|1|</p>
+<p>（1）计算某个recall（阈值）下的 Precision<br>给一个对confident score进行排序：<br>| id | confident score | label |<br>|—-|—-|—-|<br>|10|0.89|1|<br>|2|0.82|1|<br>|3|0.81|0|<br>|8|0.80|0|<br>|7|0.79|1|<br>|6|0.74|1|<br>|4|0.71|1|<br>|1|0.3|0|<br>|5|0.26|1|<br>|9|0.08|0|</p>
+<p>如果要计算top-5的结果，10张图里模型把confident score排序前五的图片预测为positive，将剩余的5张图片预测为negtive，所以TP + FP = 5，TP=3 为top-5中ground truth为1的图片数，FP=2就是前5张中判断错误的图片数；TN + FN = 5，FN = 3是中ground truth为1，但预测为0的图片数（排在top-5之后），所以此时：</p>
+<script type="math/tex; mode=display">precision = \frac{TP}{TP + FP} = \frac{3}{5}</script><script type="math/tex; mode=display">recall = \frac{TP} {TP + FN} = \frac{3}{6}</script><p>（2）计算AP (Average Precision)<br>AP是说，我们不是只通过top-5的precision 和 recall 衡量模型好坏，而是用从top-1到top-N的precision 和recall来衡量，显然随着样本增多，recall会越来越低，precision会整体呈下降趋势。<br>precision-recall曲线 (R曲线) 是以recall 为横坐标，precision 为纵坐标的曲线。</p>
+<p>AP 计算有两种方法：</p>
+<ul>
+<li><p>设置一组阈值，比如 [0, 0.1, 0.2, …, 1]，对recall大于每一个阈值，都会得到一个对应的最大precision，这样就得到了11个precision，AP 就是这11个precision的平均值。</p>
+</li>
+<li><p>假设 N 个样本中有M 个正例，每个正例对应的Recall就是1/M, 2/M, …, M/M 共 M 个recall值，对每个recall值，可以计算出对应的最大的precision， 对这M个precision求平均就是AP。</p>
+</li>
+</ul>
+<p>（3）计算 mAP<br> AP 衡量的是模型在单个类别上的好坏，mAP 是衡量在所有类别上的好坏。</p>
+<h3 id="python-实现"><a href="#python-实现" class="headerlink" title="python 实现"></a>python 实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入</span></span><br><span class="line">binary_label = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>]  <span class="comment"># 真实标签，-1 unkown, 0 negative, 1 positive</span></span><br><span class="line">binary_scores = [<span class="number">0.30009308</span>, <span class="number">0.82937706</span>, <span class="number">0.81253225</span>, <span class="number">0.7192369</span> , <span class="number">0.26545918</span>,</span><br><span class="line">       <span class="number">0.740893</span>  , <span class="number">0.7958446</span> , <span class="number">0.8009611</span> , <span class="number">0.08757067</span>, <span class="number">0.8929019</span> ,</span><br><span class="line">       <span class="number">0.7623137</span> , <span class="number">0.8422255</span> , <span class="number">0.14921549</span>, <span class="number">0.2734051</span> , <span class="number">0.6152096</span> ,</span><br><span class="line">       <span class="number">0.23626493</span>, <span class="number">0.1914093</span> , <span class="number">0.5075575</span> , <span class="number">0.17102957</span>, <span class="number">0.14242946</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计时不考虑unknown</span></span><br><span class="line">valid_index = np.array(binary_label) != <span class="number">-1</span> <span class="comment"># array([ True,  True,  True, False,  True, False,  True,  True,  True, True,  True,  True,  True,  True,  True,  True,  True, False, True,  True])</span></span><br><span class="line">valid_label = np.array(binary_label)[valid_index]  <span class="comment"># 只保留下标在valid_index里为True的元素 array([0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0])</span></span><br><span class="line">valid_score = np.array(binary_scores)[valid_index] <span class="comment"># array([0.30009308, 0.82937706, 0.81253225, 0.26545918, 0.7958446 ,0.8009611 , 0.08757067, 0.8929019 , 0.7623137 , 0.8422255 ,0.14921549, 0.2734051 , 0.6152096 , 0.23626493, 0.1914093 ,0.17102957, 0.14242946])</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_mAP</span><span class="params">(label, scores)</span>:</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-4-ROC-和-AUC"><a href="#1-4-ROC-和-AUC" class="headerlink" title="1.4 ROC 和 AUC"></a>1.4 ROC 和 AUC</h2><p>ROC 关注两个指标：</p>
+<ul>
+<li>True Positive Rate 将正例分对的比例：<script type="math/tex; mode=display">TPR = TP / (TP + FN)</script></li>
+<li>False Positive Rate 负例中有多少分为了正例:<script type="math/tex; mode=display">FPR = FP / (FP + TN)</script></li>
+</ul>
+<p>ROC 空间以FPR 为横坐标，TPR 为纵坐标，描绘的是模型在“正确分类的正例TP”和 “错分为正例的 FP ”之间的关系</p>
+<p>在绘制 ROC 曲线时，confidence score是连续的，通过设置不同的阈值，把实例分为正类和负类，计算得到不同TPR 和 FPR，绘制ROC 曲线。</p>
+<p>AUC 就是ROC 曲线和横坐标围成的面积，可以把AUC理解为一个概率值，随机挑选一个正样本和负样本，当前分类算法计算得到的score 将这个正样本排在负样本之前的概率，就是AUC 的值，AUC 越大越好。</p>
+<p>希望AUC越大越好，0.5 &lt; AUC &lt; 1，AUC = 0.5相当于随机猜测，AUC &lt; 0.5 比随机猜测差，但只要反着预测就优于随机猜测。</p>
+<p>最优阈值就是找一个点，保证TPR高的同时FPR尽量小。找离(0,1)最近的点。</p>
+<p><strong>对于二分类问题，正负样本都足够的情况下用ROC。对多分类问题，用PR 曲线。</strong></p>
+<p><strong>计算过程：</strong><br>将预测结果按confident score从大到小排序，记为scores<br>top-n表示取scores的前n个的预测结果作为positive，n之后的所有样本都预测为negative，卡阈值。<br>计算每个recall 对应的 precision，同一个recall值可能有多个precision值。<br><strong>m类求均值得mAP</strong></p>
+<h2 id="1-5-F1-score"><a href="#1-5-F1-score" class="headerlink" title="1.5 F1-score"></a>1.5 F1-score</h2><p>从PR曲线可以看出，precision高 recall就低，recall高precision就低，所以需要综合权衡这两个指标，就提出了F1-score，它是 precision 和 recall 的调和平均数:</p>
+<script type="math/tex; mode=display">F1-score = 2\times\frac{precision\cdot recall }{precision + recall}</script><script type="math/tex; mode=display">F1-score = \frac{2\cdot TP }{2\cdot TP + FP + FN}</script>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

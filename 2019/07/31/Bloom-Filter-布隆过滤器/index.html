@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Bloom Filter 布隆过滤器 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#布隆过滤器Bloom-Filter"><span class="toc-text">布隆过滤器Bloom Filter</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Bloom Filter 布隆过滤器
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-31 21:09:25</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="布隆过滤器Bloom-Filter"><a href="#布隆过滤器Bloom-Filter" class="headerlink" title="布隆过滤器Bloom Filter"></a>布隆过滤器Bloom Filter</h2><p>在网络、高并发系统、分布式系统中用的很多，如比特币。</p>
+<p><strong>解决问题</strong><br><strong>可以用于检索一个元素是否在一个集合中</strong><br>缓存Cache的本质，要查询一个东西，如果在数据库或磁盘上查询会比较慢，所以要在内存甚至寄存器里面倒一个Cache，会非常快。</p>
+<p>Filter的概念和Cache是yi qu gong相互互补的，Filter是判断这个元素到底在，还是不在，如果Filter判断它不在，那它肯定不在，如果Filter说它在，那再去数据库或内存里面查找。</p>
+<p><strong>实现思想</strong><br><strong>一个很长的二进制向量 和 一个映射函数。</strong>Bloom Filter 和哈希函数的思想类似，但它不是映射到一个地址，而是把元素散射到一个很长的二进制向量里来，在64位的机子上一个integer整型就是64位的二进制向量。</p>
+<p><strong>优缺点</strong><br><strong>优点</strong>是空间效率和查询时间都远远超过一般的算法。因为使用二进制，且牺牲了一定的准确率。</p>
+<p><strong>缺点</strong>是有一定的误识别率和删除困难。当他判断一个元素在这个集合中时，有一定的误识别率，但当他说一个元素不在的时候，是100%肯定不在的。所以这个数据结构才有用。</p>
+<p>例1: 对新来元素w，映射到二进制位只要发现有一位不为1，说明w肯定不在。<br><img src="bloom_filter_1.png" alt></p>
+<p>例2: 误识别率，左边AE是已经插入的元素，右边ACB判断：还需要再进数据库查一次B是否真的存在。<br><img src="bloom_filter_2.png" alt></p>
+<p><strong>存储地位</strong><br>Filter是在前面预先挡了一层，把不存在的元素挡掉，在后面必须跟一个真正的数据存储文件，里面有完备的数据，也就是后面的是权威机构，前面只是预先处理模块。</p>
+<p><strong>案例</strong></p>
+<ol>
+<li>比特币<br>Redis VS BloomFilter<br>Redis：内存的缓存，把元素暂存在内存中，可以直接从内存返回；<br>BloomFilter：过滤，不在就不查，在的话再查。</li>
+</ol>
+<p><img src="bloom_filter_3.png" alt><br><strong>全节点Full Node</strong><br>最常见，把比特币里面所有的交易记录，谁给谁币，哪个钱包给哪个钱包打币之类的都存在里面。</p>
+<p><strong>SPV节点Simplified payment verification</strong><br>钱包也好，交易所的账号也好，可以在这个节点判断它是否拥有一些交易记录。也就是给一个payment记录，可以很快地判断它是否在这个节点里面。<br><img src="bloom_filter_4.png" alt><br>SPV实现就是在前面挡了一个Bloom Filter。<br>对任何一条交易如“A给B打钱”，发到服务器，服务器会先在Bloom Filter访问一次看这个节点是否在某一个block里面存在，如果它判断在这个block不存在，那就不需要在这个区块的细节里面查找，而只在它返回说存在的那些block相应的区块里去查看是否存在，找到了就返回相关的交易记录。</p>
+<p>因为区块至少有几十万个块，每个区块大概一两兆的交易记录，一个个查过去总体来说很慢。</p>
+<ol>
+<li>分布式系统 （Map-Reduce）<br>Google的Map Reduce 把一个大的任务切分成子任务，在判断这些子任务是否在某台机器上存在的时候，也是用Bloom Filter来完成的。</li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

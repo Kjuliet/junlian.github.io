@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        《C++ Primer Plus》第1章～第2章 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第-1-章-预备知识"><span class="toc-text">第 1 章 预备知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-C-简介和简史"><span class="toc-text">1.2  C++ 简介和简史</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-面向对象编程OOP"><span class="toc-text">1.2.3 面向对象编程OOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-泛型编程"><span class="toc-text">1.2.4 泛型编程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-程序创建"><span class="toc-text">1.4 程序创建</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第-2-章-开始学习C"><span class="toc-text">第 2 章 开始学习C++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-进入C"><span class="toc-text">2.1 进入C++</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-main-函数"><span class="toc-text">2.1.1 main() 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-C-注释"><span class="toc-text">2.1.2 C++注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-C-预处理器和iostream文件"><span class="toc-text">2.1.3 C++预处理器和iostream文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-头文件名"><span class="toc-text">2.1.4 头文件名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-名称空间"><span class="toc-text">2.1.5 名称空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-6-使用cout进行C-输出"><span class="toc-text">2.1.6 使用cout进行C++输出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-C-语句"><span class="toc-text">2.2 C++ 语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-声明语句和变量"><span class="toc-text">2.2.1 声明语句和变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-赋值语句"><span class="toc-text">2.2.2 赋值语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-类简介"><span class="toc-text">2.3.3 类简介</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-函数"><span class="toc-text">2.4 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-函数原型"><span class="toc-text">2. 4. 1 函数原型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-函数变体"><span class="toc-text">2.4.2 函数变体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3-定义函数"><span class="toc-text">2.4.3 定义函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-5-在多函数程序中使用using编译指令"><span class="toc-text">2.4.5 在多函数程序中使用using编译指令</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《C++ Primer Plus》第1章～第2章
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-30 00:16:37</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#C++" title="C++">C++</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="第-1-章-预备知识"><a href="#第-1-章-预备知识" class="headerlink" title="第 1 章 预备知识"></a>第 1 章 预备知识</h1><h2 id="1-2-C-简介和简史"><a href="#1-2-C-简介和简史" class="headerlink" title="1.2  C++ 简介和简史"></a>1.2  C++ 简介和简史</h2><p><strong>C 语言：</strong>自顶向下结构化编程<br><strong>C++：</strong>融合了OOP、泛型编程和传统的过程性方法</p>
+<h3 id="1-2-3-面向对象编程OOP"><a href="#1-2-3-面向对象编程OOP" class="headerlink" title="1.2.3 面向对象编程OOP"></a>1.2.3 <strong>面向对象编程OOP</strong></h3><p>类是描述新型数据格式的一种规范，对象是根据这种规范构造的特定数据结构。</p>
+<p>优点：</p>
+<ul>
+<li>有助于创建可重用的代码，减少大量的工作；</li>
+<li>信息隐藏可以保护数据，使其免遭不适当的访问；</li>
+<li>多态让我们能为运算符和函数创建多个定义，通过编程上下文来确定使用哪个定义；</li>
+<li>继承允许使用旧类派生出新类</li>
+</ul>
+<p><strong>bottom-up编程</strong><br>OOP程序设计方法首先设计类来表示程序要处理的东西，类规定了可使用哪些数据来表示对象以及可以对这些对象进行哪些操作，也就是将数据和方法合并为类定义。然后可以设计一个使用这些类的对象的程序。从低级组织（如类）到高级组织（如程序）的处理过程叫做自下向上（bottom-up）的编程。</p>
+<h3 id="1-2-4-泛型编程"><a href="#1-2-4-泛型编程" class="headerlink" title="1.2.4 泛型编程"></a>1.2.4 <strong>泛型编程</strong></h3><p>泛型编程 (generic programming) 是C++支持的另一种编程模式。<strong>“泛型”指的是创建独立于类型的代码</strong>，C++的数据表示有很多类型——整数、小数、字符、字符串、用户定义的、由多种类型组成的复合结构。如果要想对不同类型的数据进行排序，通常必须为每种类型创建一个排序函数。泛型编程需要对语言进行扩展，以便可以只编写一个泛型（即不是特定类型的）函数，并将其用于各种实际类型。</p>
+<p>它和OOP的目标相同，都是为了使重用代码和抽象通用概念的技术更简单。不同点在于：</p>
+<ul>
+<li>OOP强调的是编程的数据方面，而泛型强调的是独立于特定数据类型；</li>
+<li>OOP是一个管理大型项目的工具，而泛型编程提供了执行常见任务（如对数据排序或合并链表的工具）</li>
+</ul>
+<h2 id="1-4-程序创建"><a href="#1-4-程序创建" class="headerlink" title="1.4 程序创建"></a>1.4 程序创建</h2><ul>
+<li>C++后缀名： cpp，cc，C，cxx，c++</li>
+<li>编译：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Linux</span></span><br><span class="line">g++ first.cpp    <span class="comment"># 生成可执行文件a.out</span></span><br><span class="line">./a.out          <span class="comment"># 执行文件</span></span><br><span class="line"><span class="comment"># Windows </span></span><br><span class="line">g++ first.cpp    <span class="comment"># 生成可执行文件a.exe</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="第-2-章-开始学习C"><a href="#第-2-章-开始学习C" class="headerlink" title="第 2 章 开始学习C++"></a>第 2 章 开始学习C++</h1><h2 id="2-1-进入C"><a href="#2-1-进入C" class="headerlink" title="2.1 进入C++"></a>2.1 进入C++</h2><h3 id="2-1-1-main-函数"><a href="#2-1-1-main-函数" class="headerlink" title="2.1.1 main() 函数"></a>2.1.1 main() 函数</h3><p>C++函数可以被其他函数激活或调用，函数头描述了函数与调用它的函数之间的<strong>接口</strong>，函数名后括号中的部分叫 <strong>形参列表(argument list)</strong> 或 <strong>参数列表(parameter list)</strong>。</p>
+<p>main() 在启动代码时被调用，启动代码是由编译器添加到程序中的，是程序和操作系统之间的桥梁，实际上该函数头描述的是main()和操作系统之间的接口。可以将操作系统看作调用程序，它们使用并测试返回值（通常叫做<strong>退出值</strong>），<strong>退出值为0表示程序运行成功</strong>，非零则意味着有问题。</p>
+<p>main()函数可以给调用它的函数返回一个整数值，且不从调用它的函数那里获得任何信息。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int main()          # 函数头function heading, 返回类型int</span><br><span class="line">&#123;</span><br><span class="line">    statements</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在运行C++程序时，通常从main()函数开始执行。例外情况：</p>
+<ul>
+<li>Windows 编程中，可以编写一个动态链接库 (DLL) 模块，是其他Windows程序可以使用的模块，由于DLL模块不是独立的程序，因此不需要main()；</li>
+<li>用于专用环境的程序可能不需要main，如机器人中的控制芯片。</li>
+</ul>
+<h3 id="2-1-2-C-注释"><a href="#2-1-2-C-注释" class="headerlink" title="2.1.2 C++注释"></a>2.1.2 C++注释</h3><p><strong>注释</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">多行注释</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-1-3-C-预处理器和iostream文件"><a href="#2-1-3-C-预处理器和iostream文件" class="headerlink" title="2.1.3 C++预处理器和iostream文件"></a>2.1.3 C++预处理器和iostream文件</h3><p><strong>C++预处理器</strong><br>预处理器：在进行主编译之前对源文件进行处理的程序，它处理名称以#开头的编译指令。不用执行任何特殊的操作来调用该预处理器，它会在编译程序时自动运行。</p>
+<p>例如 :<code>#include &lt;iostream&gt;</code>使用了include编译指令，该编译指令导致预处理器将iostream文件的内容添加到程序中。发送给编译器前，iostream文件的内容将取代程序<code>#include &lt;iostream&gt;</code>的内容#include 组成了一个复合文件。</p>
+<p><strong>iostream</strong><br>iostream文件：涉及程序与外部世界之间的通信，iostream中的io指输入 (进入程序的信息) 和输出 (从程序中发送出去的信息)。</p>
+<p> 如果要使用C++输入或输出工具，需要有这两行代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;  </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-1-4-头文件名"><a href="#2-1-4-头文件名" class="headerlink" title="2.1.4 头文件名"></a>2.1.4 头文件名</h3><p>像iostream这样的文件叫包含文件（include file）——因为他们被包含在其他文件中；也叫头文件（header file）——因为他们被放在文件起始处。</p>
+<p>C++编译器自带了很多头文件，每个头文件都支持一组特定的工具，老式C的头文件保留了扩展名h，C++头文件没有扩展名，有些C头文件被转换为C++头文件，这些文件被重新命名，去掉了扩展名h，并在文件名称前面加上前缀c，如C++版本的math.h为cmath。<strong>没有h的头文件也可以包含名称空间</strong>。</p>
+<h3 id="2-1-5-名称空间"><a href="#2-1-5-名称空间" class="headerlink" title="2.1.5 名称空间"></a>2.1.5 名称空间</h3><p>如果使用iostream，而不是iostream.h，则应使用名称空间编译指令<code>using namespace std;</code>来使iostream中的定义对程序可用。这条指令叫using编译指令。</p>
+<p>名称空间支持时一项C++特性，目的是让用户在编写大型程序或将多个厂商现有的代码组合起来的程序时更容易，还有助于组织程序。比如有两个已经封装好的产品，它们都包含了一个叫wanda() 的函数，导致在使用wanda()函数时，编译器不知道指的是哪个版本。名称空间让厂商能够将其产品封装在一个叫做名称空间的单元中，这样就可以用名称空间的名称来指出想用哪个厂商的产品。</p>
+<p>类、函数和变量是C++编译器的标准组件，<strong>头文件没有扩展名h</strong>，他们都被放在名称空间std中。这意味着在iostream中定义的用于输出的<code>cout</code>变量实际上是<code>std::cout</code>，而<code>endl</code>实际上是 <code>std::endl</code>，<code>using namespace std;</code> 表明可以使用std名称空间中定义的名称，不必用std::前缀，所以如果参略编译指令using，也可以用下面的代码进行编码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::cont &lt;&lt; <span class="string">"Come up and C++ me some time."</span>;</span><br><span class="line"><span class="built_in">std</span>::cont &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
+<p><code>using namespace std;</code>使得std名称空间中的所有名称都可用，在大型项目中更好的方法是只使所需的名称可用：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-1-6-使用cout进行C-输出"><a href="#2-1-6-使用cout进行C-输出" class="headerlink" title="2.1.6 使用cout进行C++输出"></a>2.1.6 使用cout进行C++输出</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cont &lt;&lt; <span class="string">"Come up and C++ me some time."</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Now you have "</span> &lt;&lt; carrotes &lt;&lt; <span class="string">" carrots."</span> &lt;&lt; enndl; # 拼接语句</span><br><span class="line"><span class="comment">// 等价于：</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Now you have "</span></span><br><span class="line">	 &lt;&lt; carrotes</span><br><span class="line">	 &lt;&lt; <span class="string">" carrots."</span></span><br><span class="line">	 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 因为C++的自由格式规则将标记间的换行符和空格看作是可以相互替换的。</span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;&lt;</code> 符号表示把这个字符串发送给<code>cout</code>，该符号指出了信息流动的路径。<br><code>cout</code> 是一个预定义的对象，它知道如何显示字符串、数字和单个字符。<code>cout</code>对象的属性包括一个插入运算符<code>&lt;&lt;</code>，可以将其右边的信息<strong>插入到流中</strong>。</p>
+<blockquote>
+<p><strong>cout 打印字符串“25” 和 数字25:</strong></p>
+<ul>
+<li>打印“25”只需打印各个字符“2”和“5”；</li>
+<li>打印25时，25在计算机中存储为二进制，cout先把整数形式的数字转换为字符串的形式，打印。</li>
+</ul>
+</blockquote>
+<p>cout 和 fprint() 相比不需要指出打印的是字符串还是整数，它能识别类型，还可以扩展，比如可以重新定义&lt;&lt;运算符，使cout能够识别和显示所开发的新数据类型。</p>
+<p><strong>使用cin输入</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span> &gt;&gt; carrots;</span><br></pre></td></tr></table></figure></p>
+<p>将输入看作流入程序的字符流，信息流从cin流向carrots。<code>cin</code> 使用 <code>&gt;&gt;</code> 运算符从输入流中抽取字符，<strong>将通过键盘输入的一系列字符转换为接收信息的变量能够接受的形式</strong>。</p>
+<blockquote>
+<p><strong>运算符重载</strong><br><code>&lt;&lt;</code> 既是插入运算符，也是按位左移运算符，运算符重载就是同一个运算符有不同的含义，编译器通过上下文来确定运算符的含义。</p>
+</blockquote>
+<p><strong>控制符</strong><br>对<code>cout</code>来说有特殊含义的特殊符号被称为控制符，如<code>endl</code>表示重启一行，等价于用换行符<code>\n</code>，打印字符串时，<code>cout</code>不会自动移到下一行，每条<code>cout</code>语句的输出从前一个输出的末尾开始。</p>
+<p><code>endl</code>和<code>\n</code>的一个差别时，<code>endl</code>确保程序继续运行前刷新输出，即将其立即显示在屏幕上，而用换行符<code>\n</code>在有些系统中有时可能在用户输入信息后才会出现提示。</p>
+<h2 id="2-2-C-语句"><a href="#2-2-C-语句" class="headerlink" title="2.2 C++ 语句"></a>2.2 C++ 语句</h2><p>C++语句有多种类型，包括下述6种：</p>
+<ul>
+<li>声明语句</li>
+<li>赋值语句</li>
+<li>消息语句：将消息发送给对象，激发某种行为。</li>
+<li>函数调用</li>
+<li>函数原型：声明函数的返回类型、函数接受的参数类型。见 2.4.1</li>
+<li>返回语句</li>
+</ul>
+<h3 id="2-2-1-声明语句和变量"><a href="#2-2-1-声明语句和变量" class="headerlink" title="2.2.1 声明语句和变量"></a>2.2.1 声明语句和变量</h3><p>要将信息项存储在计算机中，必须指出信息的存储位置和所需的内存空间，所以使用声明语句来指出存储类型并提供位置标签。</p>
+<p><strong>声明变量</strong><br>在首次使用变量前声明它：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> carrots;</span><br></pre></td></tr></table></figure></p>
+<p>这条语句提供了两项信息：<strong>需要的内存</strong>以及<strong>该内存单元的名称</strong>，编译器负责分配和标记内存的细节。<code>carrots</code>称为变量，因为它的值可以修改。</p>
+<blockquote>
+<p>有些语言在使用新名称是创建新的变量，而不需要显式地进行声明，如BASIC，潜在的问题是如果变量名拼写错错，会在不知情的情况下创建一个新变量，这种错误很难发现。</p>
+</blockquote>
+<p>这样的声明语句叫定义声明 (defining declaration) 语句，简称定义，着意味着它会让编译器为变量分配内存空间。在较为复杂的情况下还可能有引用声明 (reference declaration)，命令计算机使用在其他地方定义的变量。声明不一定是定义。</p>
+<h3 id="2-2-2-赋值语句"><a href="#2-2-2-赋值语句" class="headerlink" title="2.2.2 赋值语句"></a>2.2.2 赋值语句</h3><p>赋值语句将值赋给存储单元：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">carrots = <span class="number">25</span>;</span><br><span class="line">a = b = c = <span class="number">11</span>;</span><br></pre></td></tr></table></figure></p>
+<p>连续使用赋值运算符时，赋值从右向左进行，首先 c = 11 ,  然后 b = c …</p>
+<h3 id="2-3-3-类简介"><a href="#2-3-3-类简介" class="headerlink" title="2.3.3 类简介"></a>2.3.3 类简介</h3><p>类是OOP的核心概念之一，是用户定义的一种数据类型，<strong>类定义描述的是数据格式及其用法</strong>，就是它能够表示什么信息和对数据可以执行哪些操作；<strong>类的对象则是根据类的数据格式规范创建的实体</strong>，类之于对象就像类型之于变量。类描述了一种数据类型的<strong>全部属性（包括可使用它执行的操作）</strong>，</p>
+<p>ostream 和 istream类来自类库，从技术上说，类库的中的类没有被内置到C++语言中，而是语言标准指定的类。</p>
+<p>要对特定对象执行类定义中允许的操作，需要诶对象发送一条消息，有两种方式：</p>
+<ul>
+<li>使用类方法，本质上就是函数调用</li>
+<li>重新定义运算符，cin 和 cout 就是重新定义 <code>&lt;&lt;</code> 运算符将“显示消息”发送给cout。</li>
+</ul>
+<h2 id="2-4-函数"><a href="#2-4-函数" class="headerlink" title="2.4 函数"></a>2.4 函数</h2><h3 id="2-4-1-函数原型"><a href="#2-4-1-函数原型" class="headerlink" title="2. 4. 1 函数原型"></a>2. 4. 1 函数原型</h3><p>要在函数使用之前提供函数原型<code>double sqrt(double);</code>之于函数就像变量声明之于变量——指出涉及的类型（<strong>参数</strong>是发送给函数的信息，返回值是从函数发送回去的值）。结尾的分号表明它是一条语句，所以是一个原型而不是函数头。</p>
+<p>函数原型不等于函数定义，原型只表述函数接口，即发送给函数的信息和返回的信息；而定义包含了函数的代码。</p>
+<blockquote>
+<p>函数是一个由出入他们的信息所指定的黑盒子，函数原型将这种观点诠释地淋漓尽致。</p>
+</blockquote>
+<p><strong>C++将库函数的原型和定义分开，库文件中包含了函数的编译代码，而头文件中包含了原型。</strong></p>
+<p>C++可以使用C库函数，要使用库函数，应当包含提供该函数原型的头文件，例如在程序中使用<code>sqrt()</code>时必须提供原型，可以用两种方法实现：</p>
+<ul>
+<li>在源代码文件中输入函数原型；</li>
+<li><p>包含头文件<code>cmath</code>，其中定义了原型（推荐方法）。对C++库中的每个函数，都在一个或多个头文件中提供了其原型。</p>
+<p>通常的做法是把原型放到<code>main()</code>函数定义前面</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;  // or math.h</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>编译器倾向于给函数名添加下划线前缀——提示它们对程序具有最后的发言权。</p>
+</blockquote>
+<h3 id="2-4-2-函数变体"><a href="#2-4-2-函数变体" class="headerlink" title="2.4.2 函数变体"></a>2.4.2 函数变体</h3><p><code>int rand(void)</code>和 <code>int rand()</code> 表示不接受任何参数。有些语言中，有返回值的函数称为函数，没返回值的称为过程或子程序。C++中这两种<strong>变体</strong>都被称为函数。</p>
+<h3 id="2-4-3-定义函数"><a href="#2-4-3-定义函数" class="headerlink" title="2.4.3 定义函数"></a>2.4.3 定义函数</h3><p><strong>函数定义不允许嵌套</strong>：C++ 不允许将函数定义嵌套在另一个函数定义中，每个函数定义都是独立的，所有函数的创建都是平等的。</p>
+<p><strong>参数列表</strong>：指出了何种信息将被传递给函数；<br><strong>函数类型</strong>：指出了返回值的类型。</p>
+<p><strong>关键字</strong>：是计算机语言中的词汇，如<code>int</code>, <code>void</code>, <code>return</code> 和 <code>double</code>；<strong><code>main</code>不是关键字，因为它不是语言的组成部分</strong>，但它是一个必不可少的函数的名称。</p>
+<h3 id="2-4-5-在多函数程序中使用using编译指令"><a href="#2-4-5-在多函数程序中使用using编译指令" class="headerlink" title="2.4.5 在多函数程序中使用using编译指令"></a>2.4.5 在多函数程序中使用using编译指令</h3><p>为了让每个函数都能够访问名称空间std，要将编译指令放在函数的外面，且<strong>位于这些函数的前面</strong>。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

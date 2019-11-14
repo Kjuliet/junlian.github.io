@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Siamese Neural Networks for One-shot Image Recognition (ICML, 2015) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Motivation"><span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach"><span class="toc-text">Approach</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Siamese-neural-network"><span class="toc-text">Siamese neural network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#损失函数"><span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练细节"><span class="toc-text">训练细节</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验结果"><span class="toc-text">实验结果</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Siamese Neural Networks for One-shot Image Recognition (ICML, 2015)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-28 16:18:05</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#One-shot Learning" title="One-shot Learning">One-shot Learning</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>目前图像识别任务的准确率依赖于大量的标注数据，但现实中对很多类别要获取足够多的标注数据成本很大，One-shot learning 是李飞飞第一次提出的概念，任务是要求模型准确识别出新类，这些新类在训练时只有一个标注样本。使用场景是：<strong>（1）训练时有模型从来没有见过新类，这些新类只有一个的标注样本；（2）不需要重新用原来的数据从头训练已经训练好的模型</strong>。</p>
+<p>One-shot learning 不希望得到只对目标任务识别准确率很高的domain-specific特征，因为这样的模型只有在相似的实例上才能表现好，对其他类型的任务没有很好的鲁棒性。论文提出的方法，<strong>对输入结构的假设做了限制，使模型根据很少的样本就能很好地泛化</strong>，不仅对新数据有较好的识别能力，对未知分布的新类别也有较好的泛化能力。</p>
+<p>用siamese neural network的原因是它从非常少的新分布样本中就能学到图像的<strong>通用特征</strong>，这些通用特征对未知类的分布也同样适用。另外通过用原数据构造样本对，很容易用优化算法训练。</p>
+<h2 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h2><p>整体思路是先用siamese neural network通过有监督的基于metric的学习方法得到图像的特征表达，然后用得到的特征做one-shot learning，这个过程中不需要任何重新训练。<br><img src="Figure4.jpg" alt></p>
+<p>对输入的一对图片，verification model 通过计算他们属于同一类还是不同类的概率来学习识别图片。</p>
+<h3 id="Siamese-neural-network"><a href="#Siamese-neural-network" class="headerlink" title="Siamese neural network"></a>Siamese neural network</h3><p>Siamese neural network 由两个完全相同的网络组成，两个网络接收不同的输入，分别输出高层的特征表达，最后用一个energy function以某种方法计算两个特征之间的metric来进行结合。如果输入网络的是两张非常相似的图片，因为两个网络的参数相同保证了他们在输出的特征空间的距离不可能非常大。<br><img src="Figure3.jpg" alt><br>论文用的 energy function 没有直接学习similarity metric，而是先计算两个twin特征向量的加权 $L1$ 距离，用sigmoid将 $L1$ 距离映射到0-1区间内，再用cross-entropy训练，即 $p = \sigma(\sum_j\alpha_j|h_{1,L-1}^{(j)}-h_{2,L-1}^{(j)}|)$ ,  $\alpha_j$ 是模型训练是学习到的辅助参数，用来描述不同距离对结果的影响程度。</p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>输入 $x_1^{(i)}$ 和  $x_2^{(i)}$  同一类时 $y(x_1^{(i)}, x_2^{(i)}) = 1$，不同类时 $y(x_1^{(i)}, x_2^{(i)}) = 0$，<strong>损失函数就是二分类的交叉熵 + 与模型复杂程度有关的正则项</strong>：<script type="math/tex">L(x_1^{(i)}, x_2^{(i)}) = y(x_1^{(i)}, x_2^{(i)}) log p(x_1^{(i)}, x_2^{(i)}) + (1-y(x_1^{(i)}, x_2^{(i)})) log (1-p(x_1^{(i)}, x_2^{(i)})) + \lambda^T|w|^2</script></p>
+<h3 id="训练细节"><a href="#训练细节" class="headerlink" title="训练细节"></a>训练细节</h3><ul>
+<li>数据增强用了Affine distortions；</li>
+<li>minibatch 128，学习率、momentum 和正则项权重按层定义，可以是不同的值，训练时每个epoch所有层的学习率decay 0.01；</li>
+<li>权重用normal distribution初始化，卷积层w初始化分布是均值0，标准差 $10^{-2}$ ，bias 是 均值0.5，标准差 $10^{-2}$ ，FC层的权重初始化设置为更wider的均值0，标准差 $2 \times 10^{-1}$ 。</li>
+</ul>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>数据集 Omniglot Dataset：不同字母的手写字符，每个字母有15到40个样本：<br><img src="Figure1.jpg" alt></p>
+<p>给定一张测试图片x，判断它属于 ${x_C}_{C=1}^C $ 中的哪一类。用 x 和 ${x_C}_{C=1}^C$ 组织成样本对输入模型，预测结果就是相似度最高的那一类：</p>
+<script type="math/tex; mode=display">C^* = argmax_cp^{(c)}</script><p>和其他方法相比的实验结果：<br><img src="Table2.jpg" alt></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

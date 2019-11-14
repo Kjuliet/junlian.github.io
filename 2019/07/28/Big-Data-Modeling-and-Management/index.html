@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Big Data Modeling and Management - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-management"><span class="toc-text">Data management</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-ingestion"><span class="toc-text">Data ingestion</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Storage"><span class="toc-text">Data Storage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Quality"><span class="toc-text">Data Quality</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Operations"><span class="toc-text">Data Operations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Scalability"><span class="toc-text">Data Scalability</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Security"><span class="toc-text">Data Security</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Real-Big-Data-Management-Applications"><span class="toc-text">Real Big Data Management Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Energy-Data-Management-Challenges-at-ConEd"><span class="toc-text">Energy Data Management Challenges at ConEd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gaming-industry-Data-Management-Q-amp-A-with-Apmetrix-CTO-Mark-Caldwell"><span class="toc-text">Gaming industry Data Management: Q&amp;A with Apmetrix CTO Mark Caldwell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Flight-Data-Management-at-FlightStats-A-Lecture-by-CTO-Chad-Berkley"><span class="toc-text">Flight Data Management at FlightStats: A Lecture by CTO Chad Berkley</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-Model"><span class="toc-text">Data Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Model-Structures"><span class="toc-text">Data Model Structures</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Model-Operations"><span class="toc-text">Data Model Operations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Model-Constraints"><span class="toc-text">Data Model Constraints</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Relational-Data-Model"><span class="toc-text">Relational Data Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Semi-structure-Data-Model"><span class="toc-text">Semi-structure Data Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector-Space-Model"><span class="toc-text">Vector Space Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Graph-Data-Model"><span class="toc-text">Graph Data Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Array-as-a-Data-Model"><span class="toc-text">Array as a  Data Model</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream-Data-system"><span class="toc-text">Stream Data system</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Stream"><span class="toc-text">Data Stream</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Challenges-for-streaming-data"><span class="toc-text">Challenges for streaming data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-Lake"><span class="toc-text">Data Lake</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DBMS-based"><span class="toc-text">DBMS-based</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Storing-Data-Files-vs-DBMS"><span class="toc-text">Storing Data - Files vs. DBMS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Parallel-and-Distributed-DBMS"><span class="toc-text">Parallel and Distributed DBMS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DBMS-and-MapReduce-style-Systems"><span class="toc-text">DBMS and MapReduce-style Systems</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Shifting-Requirements"><span class="toc-text">Shifting Requirements</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#No-Single-Solution-Mixed-solutions"><span class="toc-text">No Single Solution: Mixed solutions</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#From-DBMS-to-BDMS"><span class="toc-text">From DBMS to BDMS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Desired-Characteristics-of-BDMS"><span class="toc-text">Desired Characteristics of BDMS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ACID-and-BASE"><span class="toc-text">ACID and BASE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CAP-Theorem"><span class="toc-text">CAP Theorem</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modern-system"><span class="toc-text">Modern system</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Redis"><span class="toc-text">Redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Aerospike"><span class="toc-text">Aerospike</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AsterixDB"><span class="toc-text">AsterixDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Solr"><span class="toc-text">Solr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vertica"><span class="toc-text">Vertica</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Big Data Modeling and Management
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-28 11:21:36</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#BigData" title="BigData">BigData</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="Data-management"><a href="#Data-management" class="headerlink" title="Data management"></a>Data management</h3><p><strong>Must-Ask Questions about a Data Application</strong><br>We can not possibly cover all questions one should ask for a data-centric application, but here are some important ones.</p>
+<ul>
+<li>How do we ingest获取 the data?</li>
+<li>Where and how do we store it?</li>
+<li>How can we ensure data quality?</li>
+<li>What operations do we perform on the data?</li>
+<li>How can these operations be efficient?</li>
+<li>How do we scale up data volume, variety, velocity速率 and access?</li>
+<li>How to keep the data secure?</li>
+</ul>
+<h4 id="Data-ingestion"><a href="#Data-ingestion" class="headerlink" title="Data ingestion"></a>Data ingestion</h4><p>When you think of a scale system you would like to have more automation in the data ingestion processes.</p>
+<p>Here are some questions you might want to ask when you automate data ingestion.</p>
+<ul>
+<li>How many data sources?</li>
+<li>How large are data items?</li>
+<li>Will the number of data sources grow?</li>
+<li>Rate of data ingestion?</li>
+<li>What to do with bad data?</li>
+<li>What to do when data is too little or too much?</li>
+</ul>
+<p><strong>Example: A hospital information system</strong><br>Let’s think of a hypothetical假想 hospital information system and the answer to depressions忧伤 that we are putting there. </p>
+<ul>
+<li>How many data sources? - 20</li>
+<li>How large are data items? - record size:5KB, image size: 2GB; records: 50Millon</li>
+<li>Will the number of data sources grow? - Not much</li>
+<li>Rate of data ingestion? - 3k/day</li>
+<li>What to do with bad data? - Warn, flag and ingest</li>
+<li>What to do when data is too little or too much?  - Not likely</li>
+</ul>
+<p>Do not take the numbers to be very accurate. But it illustrates some important points.<code>Error handling policy</code>:The system contains medical records so data can never be discarded even when there are errors in the data. The errors in this specific case are flagged but the data is retained.</p>
+<p><strong>Example: A cloud based data store</strong></p>
+<ul>
+<li>How many data sources? - 2M</li>
+<li>How large are data items? - record size:3KB, image size: 2MB, records: 200Billon</li>
+<li>Will the number of data sources grow? - Now 25M, growing at 15% per year</li>
+<li>Rate of data ingestion? - peak 200k/hr</li>
+<li>What to do with bad data? - <strong>Retry重试 once, then discard</strong></li>
+<li>What to do when data is too little or too much?  <strong>- spill溢出 to auxiliary辅助 server for 10TB, reclaim收回 lazily, drop by 0.1% steps when &gt;85% full</strong></li>
+</ul>
+<h4 id="Data-Storage"><a href="#Data-Storage" class="headerlink" title="Data Storage"></a>Data Storage</h4><ul>
+<li>Capacity</li>
+</ul>
+<ol>
+<li>What should be the size of the memory?</li>
+<li>How large and how many disk units should we have?</li>
+</ol>
+<ul>
+<li>Scalability</li>
+</ul>
+<ol>
+<li>Should the storage devices be attached directly to the computers to make the direct IO fast but less scalable? </li>
+<li>Should the storage be attached to the network that connect the computers in the cluster?</li>
+</ol>
+<ul>
+<li>Memory hierarchy分层/storage hierarchy</li>
+</ul>
+<ol>
+<li>The top of the pyramid金字塔 structure shows a part of memory called cache memory, that lives inside the CPU and is very fast. There are different levels of cache, called L1, L2, L3, where L3 is the slowest but still faster than what we call memory.</li>
+<li>Memory is shown near the middle, their speed in terms of response times is 65 nanoseconds per access每次访问65纳秒.</li>
+<li>The speed of the traditional hard disk is of the order of 10 milliseconds.</li>
+<li>NVMe, NVM stands for non-volatile memory非易失性存储器, that makes data transfer between SSDs and memory much faster.</li>
+<li>SSDs or Solid State Devices. They are much faster than spinning hard disk.</li>
+</ol>
+<h4 id="Data-Quality"><a href="#Data-Quality" class="headerlink" title="Data Quality"></a>Data Quality</h4><p>The ways of knowing if the data is potentially error free and useful for the intended purpose.<br><strong>Wstahy worry about data quality</strong></p>
+<ul>
+<li>The ultimate use of big data is its ability to give us actionable insight. Poor quality data leads to poor analysis and hence to poor decisions.</li>
+<li>Data in regulated industries in areas like clinical trials临床试验 for pharmaceutical companies or financial data like from banks. Errors in data in these industries can regulate regulations leading to legal complications</li>
+<li>If your big data should be used by other people or a third party software it’s very important for the data to give good quality to gain trust as a leader provider.</li>
+</ul>
+<p><strong>Data quality management</strong></p>
+<ul>
+<li>Data profiling侧写，分析 and data quality measurement</li>
+<li>Parsing句法分析 and standardization</li>
+<li>Generalized cleansing</li>
+<li>Matching</li>
+<li>Monitoring</li>
+<li>Issue发行 resolution决议 and workflow</li>
+<li>Enrichment 富集</li>
+</ul>
+<h4 id="Data-Operations"><a href="#Data-Operations" class="headerlink" title="Data Operations"></a>Data Operations</h4><p>A very significant aspect of data management is to ducument, define, implement, and test the set of operations that are required for a specific application. In general, there are two broad divisions of operations.</p>
+<ul>
+<li>Operations on single data items that produce a sub-item. For example, cropping裁剪 an image.</li>
+<li>Operations on collections of data items.</li>
+</ul>
+<ol>
+<li>Operations that select a part of a collection.</li>
+<li>Operations that combine two collections.</li>
+<li>Operations that compute a function on a collection</li>
+</ol>
+<p><strong>Efficiency of Data Operations</strong><br>Measured by time and space.<br>Should use parallelism.</p>
+<h4 id="Data-Scalability"><a href="#Data-Scalability" class="headerlink" title="Data Scalability"></a>Data Scalability</h4><p>The Server industry has many solutions for scale-up/scale-out decisions. Simply put, it is a decision between making a machine that makes a server more powerful versus adding more machines.</p>
+<ul>
+<li>Vertical Scaling (Scale-up): </li>
+</ul>
+<ol>
+<li>Adding more processors and RAM, buying a more expensive and robust server.</li>
+<li>Many operations perform better with more memory, more cores.</li>
+<li>Maintenance can be difficult, expensive.</li>
+</ol>
+<ul>
+<li>Horizontal Scaling(Scale-out)</li>
+</ul>
+<ol>
+<li>Adding more, possibly less powerful machines that interconnect over a network.</li>
+<li>Parallel operations will possibly be slower.</li>
+<li>Easier in practice to add more machines.</li>
+</ol>
+<p>In many cases, we’ll choose the former to get more performance for large leader systems. The general trend in the big data world, however, is to target the scale out option. Cluster management is an important component in big data management systems.</p>
+<h4 id="Data-Security"><a href="#Data-Security" class="headerlink" title="Data Security"></a>Data Security</h4><ul>
+<li>Data security is a must for sensitive data.</li>
+<li>Increasing the number of machines leads to more security risks.</li>
+<li>Data in transit must be secure.</li>
+<li>Encryption and decryption increase security but make data operations expensive.</li>
+</ul>
+<h3 id="Real-Big-Data-Management-Applications"><a href="#Real-Big-Data-Management-Applications" class="headerlink" title="Real Big Data Management Applications"></a>Real Big Data Management Applications</h3><h4 id="Energy-Data-Management-Challenges-at-ConEd"><a href="#Energy-Data-Management-Challenges-at-ConEd" class="headerlink" title="Energy Data Management Challenges at ConEd"></a>Energy Data Management Challenges at ConEd</h4><p>We consider an energy company that provides gas and electricity to its consumers.<br><strong>Smart Meter Analytics</strong></p>
+<ul>
+<li>Consumption patterns</li>
+</ul>
+<ol>
+<li>Histograms of hourly usage.</li>
+<li>To determine the hourly requirements for this consumer.</li>
+</ol>
+<ul>
+<li>Thermal sensitivity</li>
+</ul>
+<ol>
+<li>Effect of outdoor temperature.</li>
+<li>This often involves fitting a piece-wise linear分段线性 progression model to the data.</li>
+</ol>
+<ul>
+<li>Consumption perdiction</li>
+</ul>
+<ol>
+<li>Daily, weekly usage profile.</li>
+<li>Economic implications.</li>
+</ol>
+<ul>
+<li>Consumer Grouping</li>
+</ul>
+<ol>
+<li>Similarity grouping.</li>
+<li>Energy saving campaign for consumer groups.</li>
+</ol>
+<p><strong>The Big Data Issue</strong></p>
+<ul>
+<li>Not only big and fast.</li>
+<li>Life-Cycle deadline.</li>
+<li>Estimating the need for parallel and distributed computing.</li>
+</ul>
+<ol>
+<li>How much are the computation can be executed in parallel.</li>
+<li>How many machines with what kind of capability are required to handle the data rate</li>
+<li>The number and complexity of the analytical computations needed.</li>
+</ol>
+<h4 id="Gaming-industry-Data-Management-Q-amp-A-with-Apmetrix-CTO-Mark-Caldwell"><a href="#Gaming-industry-Data-Management-Q-amp-A-with-Apmetrix-CTO-Mark-Caldwell" class="headerlink" title="Gaming industry Data Management: Q&amp;A with Apmetrix CTO Mark Caldwell"></a>Gaming industry Data Management: Q&amp;A with Apmetrix CTO Mark Caldwell</h4><ul>
+<li>Different data sources</li>
+</ul>
+<ol>
+<li>What type of device is coming from? It could be headsets耳机, joystick操纵杆 or mouse, keyboards.</li>
+<li>What happens inside the game itself as far cars or the driving, tires, flying machines, anything.</li>
+</ol>
+<ul>
+<li>Volume, variety, velocity, and quality challenges</li>
+</ul>
+<ol>
+<li>It really depends on the type of game and how often they want to send the data in.</li>
+<li>You’re tracking each tap of the screen, of where they went or each click of the mouse as they were using it.</li>
+<li>You have to be prepared to bring in all kinds of data. </li>
+<li>If you put taxonomy分类 together that you can define as an example of verb, object,location, value and any number of other sources, then you can basically track anything you want as long as they all fall into the same kind of buckets.</li>
+</ol>
+<ul>
+<li>The modeling and management challenges</li>
+</ul>
+<ol>
+<li>The modeling challenge has really come down to who designs the structure at which you store your data and how you want to retrieve that data. It’s important because what it really comes down to is speed.</li>
+<li>The management challenges really come down to trying to figure out what data to store,  and trying to make sure everybody communicates, they decide on the taxonomy and the structure and then we can go forward with tagging and getting in the entire game working.</li>
+</ol>
+<ul>
+<li>How much of the processing is done in batch processing versus real-time streaming</li>
+</ul>
+<ol>
+<li><strong>Streaming real-time data.</strong> Streaming data has scripts that run instantly the minute the data arrives. As the data come in, it gets processes and then stored in a reporting format.</li>
+<li><strong>batched or scheduled data.</strong> It depends on the type of data where it’s coming from. Most of the batch data we receive comes in as a CSV or other similar already processed formats. There’s not really a lot of processing we need to do.</li>
+</ol>
+<ul>
+<li>The technologies utilized in space, and how to overcome performance and scalability issues.</li>
+</ul>
+<ol>
+<li>They started from scratch从零开始 building their own data storage and retrieval, and reporting from the ground up.</li>
+<li>It was really about designing the parts of the system that could be independently scaled. The idea behind scalability is trying to break the services up into the type of services that they most make sense.So that if you need to, you can add just the service without rebuilding the entire platform.</li>
+</ol>
+<ul>
+<li>Advice for designing information system for big data</li>
+</ul>
+<ol>
+<li>Try to understand what you want to accomplish. What is the goal?</li>
+<li>This isn’t going to restrict you to only being a gardener, but it is going to give you focus on how to design your system, so that they’re actually going to work for you.</li>
+<li>Start with the goal of what your current solution is and expand from there.</li>
+<li>Try to keep the data in mind without keeping the world in mind.</li>
+</ol>
+<h4 id="Flight-Data-Management-at-FlightStats-A-Lecture-by-CTO-Chad-Berkley"><a href="#Flight-Data-Management-at-FlightStats-A-Lecture-by-CTO-Chad-Berkley" class="headerlink" title="Flight Data Management at FlightStats: A Lecture by CTO Chad Berkley"></a>Flight Data Management at FlightStats: A Lecture by CTO Chad Berkley</h4><p><strong>Who is FlightStats</strong><br>FlightStats is a data company and they basically are the leading provider of global real-time flight status data.</p>
+<p><strong>Scope and scale</strong></p>
+<ul>
+<li>Over 500 sources of data.</li>
+<li>Daily ingress进<ul>
+<li>about 15M flight events, includes landings, arrivals, departures.</li>
+<li>about 260M aircraft positions</li>
+<li>about 1M PNRs</li>
+</ul>
+</li>
+<li>Daily egress出<ul>
+<li>about 2M FlightStats.com requests</li>
+<li>about 1M mobile app requests</li>
+<li>about 15M Flex API requests</li>
+<li>about 1.5M flight/trip notifications</li>
+</ul>
+</li>
+</ul>
+<p><strong>Data Pipeline</strong><br><img src="./1530706486544.png" alt="Alt text"><br><img src="./1530706515635.png" alt="Alt text"></p>
+<p><strong>The Hub</strong><br>Object storage based, scalable, highly available, multi-channel data queuing and eventing system.</p>
+<p><strong>Collected and Aggregated Data(FLIFO)</strong></p>
+<ul>
+<li>Gate Departure</li>
+<li>Runway Departure</li>
+<li>In-flight Positional Tracking</li>
+<li>Runway Arrival</li>
+<li>Gate Arrival</li>
+</ul>
+<p><strong>Generated Data</strong></p>
+<ul>
+<li>Special incidents</li>
+<li>Delay Prediction</li>
+<li>Fligjt Notifications</li>
+<li>Synthetic Positions综合位置</li>
+</ul>
+<p><strong>Data Warehouse</strong></p>
+<ul>
+<li>Data warehouse with 6 Years of historical flight data</li>
+<li>Analytics Products<ul>
+<li>Airline competitive analysis</li>
+<li>Airline route analysis</li>
+<li>Airport operations analysis</li>
+<li>On time performance metrics</li>
+</ul>
+</li>
+</ul>
+<p><strong>Hybrid Cloud</strong></p>
+<ul>
+<li>Resources hosted in our private data center and with Amazon Web Service(AWS)<ul>
+<li>Core data processing and service layer resides in the private data center</li>
+<li>API endpoints that require low latency connections live in AWS.</li>
+</ul>
+</li>
+<li>Private infrastructure virtualized with VMWare.</li>
+</ul>
+<p><strong>Engineering Principles</strong></p>
+<ul>
+<li>Agile development</li>
+</ul>
+<ol>
+<li>Smail, fast teams</li>
+<li>Product centric</li>
+<li>Customer interactive</li>
+<li>Semi-autonomous</li>
+</ol>
+<ul>
+<li>Automate everything</li>
+<li>Measure everything</li>
+<li>Total system awareness</li>
+<li>Industry best practices and tools</li>
+<li>Recruit and hire the best talent</li>
+</ul>
+<p><strong>Software Stack</strong></p>
+<ul>
+<li>Java 8 backend</li>
+<li>Node.js micro-service edge layer</li>
+<li>PostgreSQL, MongoDB databases</li>
+<li>Web - HTML5, React, Redux, Elasticsearch</li>
+<li>Mobile - iOS/Android  </li>
+</ul>
+<h3 id="Data-Model"><a href="#Data-Model" class="headerlink" title="Data Model"></a>Data Model</h3><p>There are three components in a data model,  called <strong>structures, operations, and Constraints.</strong></p>
+<h4 id="Data-Model-Structures"><a href="#Data-Model-Structures" class="headerlink" title="Data Model Structures"></a>Data Model Structures</h4><p><strong>Structured data</strong><br>The content will grow, but the pattern of data organization will remain identical. This repeatable pattern of data organization makes the file structured.<br><strong>Unstructured data</strong></p>
+<ul>
+<li>It’s impossible to figure out how the data is organized and how to identify subparts of the data.</li>
+<li>Compressed压缩 data like JPEG images, MP3 audio files, MPEG3 video files, encrypted data, are usually unstructured.</li>
+</ul>
+<h4 id="Data-Model-Operations"><a href="#Data-Model-Operations" class="headerlink" title="Data Model Operations"></a>Data Model Operations</h4><p>Some types of operations are usually performed across all data models.</p>
+<ul>
+<li>Subsetting(selection/ filtering)： Extract a part of a collection based on the condition</li>
+<li>Substructure extraction/projection投影： Given a data collection with some structure, extract from each data item a part of the structure as specified by a condition.</li>
+<li>Union</li>
+</ul>
+<ol>
+<li>Given two data collections, create a new one with elements of the two input collections.</li>
+<li>Duplicate elimination重复消除</li>
+<li>The assumption behind the union operation is that the two collections involved have the <code>same structure</code>.</li>
+</ol>
+<ul>
+<li>Join</li>
+</ul>
+<ol>
+<li>It can be done when the two collections have different data content but have some common elements.</li>
+<li>There are two stages. First, for each data item think of a record of collection one, one finds a set of matching data items in collections two. In the second phase of the operation, all fields of the matching record pairs are put together.</li>
+<li>Duplicate elimination</li>
+</ol>
+<h4 id="Data-Model-Constraints"><a href="#Data-Model-Constraints" class="headerlink" title="Data Model Constraints"></a>Data Model Constraints</h4><p>A constraint is a logical statement. They can specify something about the semantics, that is, the meaning of the data.</p>
+<p>For example, the constraint that a week has seven and only seven days is something that a data system would not know unless this knowledge is passed on to it in the form of a constraint.</p>
+<p><strong>Types of Constraints</strong></p>
+<ul>
+<li>Value constraint: Age is never negative.</li>
+<li>Uniqueness constraint: A movie can have only one title.</li>
+<li>Cardinality基数 constraint: Count the number of values associated with each object and check whether it lies between an upper and lower bound. A person can take between 0 and 3 blood pressure medications at a time.</li>
+<li>Type constraint: Last Name is alphabetical拼音.</li>
+<li>Domain constraint: Day in (1,…,31), the domain of a data property or attribute is the possible set of values that are allowed for that attribute.</li>
+<li>Structural Constraints</li>
+</ul>
+<ol>
+<li>A structural constraint puts restrictions on the structure of the data rather than the data values themselves.</li>
+<li>We’ve restricted to be a square matrix, So the number of columns is exactly equal to the number of rows. We have not put any restriction on the number of rows or columns, but just that they have to be the same.</li>
+</ol>
+<h4 id="Relational-Data-Model"><a href="#Relational-Data-Model" class="headerlink" title="Relational Data Model"></a>Relational Data Model</h4><p>The primary data structure for a relational model is a table.</p>
+<ul>
+<li>Relational tuple.</li>
+</ul>
+<ol>
+<li>represented as a row in the table. </li>
+<li>It implies that unless otherwise stated, the elements of it are <strong>atomic</strong>. That is, they represent one unit of information and cannot be decomposed further.</li>
+</ol>
+<ul>
+<li>Primary key, it is unique.</li>
+<li>Foreign key.</li>
+</ul>
+<ol>
+<li>The term references means, the values in this column can exist only if the same values if you are in employees the table being referenced, also called the parent table.</li>
+<li>The EmpID column of EmpSalaries table is called a foreign key that refers to the primary key of the Employees table.</li>
+</ol>
+<ul>
+<li>Natural join:<br><img src="./1530758617716.png" alt="Alt text"></li>
+</ul>
+<ol>
+<li>Join is one of the most expensive that means time consuming and space consuming operations.</li>
+<li>So for analytical big data application that needs joins, it’s very important to choose a suiltable data  management platform that makes this operation efficient.</li>
+</ol>
+<h4 id="Semi-structure-Data-Model"><a href="#Semi-structure-Data-Model" class="headerlink" title="Semi-structure Data Model"></a>Semi-structure Data Model</h4><p>Semi-structure data model is the data model behind the web. While the data object has some structure it is more flexible.</p>
+<p>We can actually credit for the structure elements. For example, it is perfectly fine to ask, what is the name of the element which contains a sub-element whose textual content is cell type. We cannot perform an operation like this in a relational data model. For example, we cannot say which relation has a column with a value, john.</p>
+<ul>
+<li>HTML</li>
+<li>XML(extensible markup language), a generalization of HTML, where the elements can be any string. </li>
+<li>JSON(Java Script Object Notation对象表示): the key value pairs at atomic property names and their values.</li>
+</ul>
+<p><strong>Tree navigation导航</strong><br>One way to generalize about all these different forms of semi-structured data is to model them as trees.</p>
+<ul>
+<li>Text values are always the leaves of the tree.</li>
+<li>Nested structure.</li>
+<li>It allows what’s called a navigational access to data. For example, you can perform a getParent operation and navigate the ducument.</li>
+</ul>
+<h4 id="Vector-Space-Model"><a href="#Vector-Space-Model" class="headerlink" title="Vector Space Model"></a>Vector Space Model</h4><p>Vector Space Model has been successfully used to retrieve data from large collections of  text and images.</p>
+<p>Now we are finding text from a huge collection of text data. To find text, we need a different structure that is computed from the text data. To create the structure, we’ll introduce the notion概念 of the document vector model.</p>
+<ul>
+<li><strong>TF(Term frequency matrix)</strong></li>
+</ul>
+<ol>
+<li>The rows of the matrix stand for the documents</li>
+<li>The columns represent the words in the documents.</li>
+<li>We put the number of occurrences of returning the document in the appropriate cell of the matrix.<br><img src="./1530845687297.png" alt="Alt text"></li>
+</ol>
+<ul>
+<li><strong>IDF(Inverse document frequency)</strong></li>
+</ul>
+<ol>
+<li>The number of documents n, the term “new” occurs m times in the collection. So the IDF of the term “new” is log to the base 2, n divided by term count m.<script type="math/tex; mode=display">IDF(new)=\log_2^{\frac{n}{m}}=\log_2^{\frac{3}{2}}=0.584</script><img src="./1530845655982.png" alt="Alt text"></li>
+<li>We use = $\log_2$ instead of $\log_{10}$. There is no deep scientific reason for it. It’s more of a convention惯例 in many areas of Computer Science when many important numbers are powers of two. In reality, $\log_2^x=\log_{10}^x\times\log_2^{10}$ . So the relative score of IDF does not change regardless of the base we use.</li>
+<li>Using IDF penalizes words that are too commonplace in the collection, For example, “is” shouldn’t have more importance than “election”.</li>
+</ol>
+<hr>
+<ul>
+<li><strong>The tf-idf matrix</strong></li>
+</ul>
+<ol>
+<li>We multiply the tf numbers through the IDF numbers giving us a column-wise逐列 multiplication of the tf numbers with the IDF numbers giving us what we call the tf-idf matrix.</li>
+<li>For each document, we have a vector represented as a row.</li>
+<li>The row represents the relative importance of each term in the vocabulary词汇表. Vocabulary means the collection of all words that appear in this collection集合</li>
+<li>The last column after each document of vector is the length of the document vector, which is really the square root of the sum of squares of the individual term scores平方和的平方根.<br><img src="./1530845569950.png" alt="Alt text"></li>
+</ol>
+<p><strong>Searching in Vector Spcae</strong><br>To perform a search in the vector space, we’ll give a query document and ask the system to find all documents that are similar to it.</p>
+<p>we write a query “New New York”.</p>
+<ul>
+<li>Max frequency of a term (“new”) = 2. </li>
+</ul>
+<ol>
+<li>The term “New” appears two times.</li>
+<li>This is the maximum frequency out of all terms in the query.</li>
+</ol>
+<ul>
+<li>Create the query vector.</li>
+</ul>
+<ol>
+<li>We take the document vector of the query and multiply each term by the number of occurrences divided by two which is the maximum term frequency.</li>
+<li>Then we compute the length of the query vector.<br><img src="./1530845410685.png" alt="Alt text"></li>
+<li>We will compute the similarity between the query vector and each document.</li>
+</ol>
+<hr>
+<ul>
+<li><strong>Similarity Function</strong></li>
+</ul>
+<ol>
+<li>A similarity function between to vectors is a measure of how far they are apart<br>Many possible functions.</li>
+<li>A popular similarity measure is the cosine function, which measures the cosine function of the angle between two vectors. If the vectors are identical, then the angle between them is zero. And therefore, the cosine function evaluates to one.<blockquote>
+<p>Cosine function<br><img src="./1530845743450.png" alt="Alt text"></p>
+<ul>
+<li>Multiply the corresponding elements of the two vectors, then sum of these products.</li>
+<li>This sum is then divided by the product of the document length and the query length.</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li><strong>Query Term Weighting</strong></li>
+</ul>
+<ol>
+<li>More often than not users would like a little more control over the ranking of terms. So we put different weights on each query term.</li>
+<li>Every query term may optionally be associated with a weighting term.</li>
+</ol>
+<p><strong>Image Search</strong><br>Similarity search can compute features from images. One common feature is a scatter histogram散点直方图.</p>
+<ul>
+<li>Creating the histogram of the red, green and blue channels where histogram is the count of pixels having a certain density value.</li>
+<li>Thinking of histograms like a vector. </li>
+<li>Very often the pixel values will be bend before creating a vector, for example, the numbers for each row can be normalized with the size of the image to make the row sum equal to one.</li>
+</ul>
+<p>Similar vectors can be computed of the image texture纹理, shapes of objects mand any other properties.</p>
+<h4 id="Graph-Data-Model"><a href="#Graph-Data-Model" class="headerlink" title="Graph Data Model"></a>Graph Data Model</h4><p>Graph data model deals with the data with the form of graphs or networks, the most obvious example being social networks.</p>
+<p><strong>Data + Connectivivty</strong><br>What distinguishes a graph from other data models is that it bears two kinds of information.</p>
+<ul>
+<li>Properties and attributes of entities and relationships.</li>
+<li>The connectivity structure that constitutes构成 the network itself.</li>
+</ul>
+<p><strong>The property graph model</strong></p>
+<ul>
+<li>Vertex table, or node table, gives IDs to nodes and lists their properties.</li>
+<li>Edge table. gives the direction of the arrows in the network and the properties of the edge</li>
+</ul>
+<p><strong>Traversal operations遍历 </strong><br>Traversal is a class of operations and ground data. Consider a social network with:</p>
+<ul>
+<li>Three types of nodes, user, city and restaurant</li>
+<li>Three types of edges, friend, likes, and lives in</li>
+<li>We are interested in finding a good Italian restaurant in New York that my friends, or their friends, who also live in New York, like.</li>
+</ul>
+<p><strong>“Optimal Path” Operations</strong></p>
+<ul>
+<li>Find the shortest path between two nodes.</li>
+<li>Find an optimal round-trip path that must include some specific nodes. The classical application is a trip planner.</li>
+<li>Find “best compromise折中” paths between two nodes.</li>
+</ul>
+<ol>
+<li>Pareto-optimality. If I want to travel from my house to the airport using the shortest distance, but also minimizing the amount of highway travel.</li>
+</ol>
+<p><strong>Neighborhoods</strong></p>
+<ul>
+<li>The neighborhood of a node N in a graph is a set of edges directly connected to it.</li>
+<li>A K neighborhood of N is a collection of edges between nodes that are, at most, K steps away from N.</li>
+<li>The first neighborhoods, the second neighborhood, third level neighbor.</li>
+<li><strong>Community finding</strong> is a class of analysis to perform with neighborhoods.</li>
+</ul>
+<p><strong>Communites</strong><br>A community and a social network can be a very close group of friends.</p>
+<ul>
+<li>A subgraph of a graph that has many more edges within the subgraph compared to edges to nodes outside the subgraph.</li>
+<li>Operations</li>
+</ul>
+<ol>
+<li>Dense subgraph finding. It can be recognized as communities.</li>
+<li>Optimization of clusteredness.</li>
+</ol>
+<p><strong>Anomalous异常 Neighborhoods</strong></p>
+<ul>
+<li>Near star</li>
+</ul>
+<ol>
+<li>The nodes that the central node is connected to are almost unconnected amoungst其中包括 themselves. </li>
+<li>It’s odd because it doesn’t happen in reality much.</li>
+</ol>
+<ul>
+<li>Near clique集团</li>
+</ul>
+<ol>
+<li>A significantly large number of neighbors has connected amoungst themselves. </li>
+<li>This makes the graph very cliquish. That means a neighborhood where each node is connected to all other neighborhood modes in the neighborhood.</li>
+</ol>
+<ul>
+<li>Heavy vicinity附近: Some edges have an unusually heavy weight compared to the others</li>
+<li>Predominant主导 Edge: A special case of the third, where one edge is predominantly high rate compared to all the other edges.</li>
+</ul>
+<p><strong>Connectivity Operations</strong></p>
+<ul>
+<li>Connected graph: Every node is reachable from each node in the undirected version of the graph.</li>
+<li>Connected components</li>
+</ul>
+<ol>
+<li>If a graph is not connected, but there are subgraphs of it, which are connected, then these subgraphs are called connected components of the original graph.</li>
+<li>A search gradient like finding optimal paths should be performed only within each component and not across them.</li>
+</ol>
+<h4 id="Array-as-a-Data-Model"><a href="#Array-as-a-Data-Model" class="headerlink" title="Array as a  Data Model"></a>Array as a  Data Model</h4><p><strong>Array数组</strong>: indexed relation<br>A k dimensional array can be represented as a table:</p>
+<ul>
+<li>Number of columns = number of dimensions + 1<br>We can represent the two dimensional array as a three column table, One column for the row index, one column for the column index, and the last column for the value.</li>
+<li>Number of tuples = size of demension 1 $\times$ size of dimension2 $\times$ …</li>
+</ul>
+<p><strong>Arrays of Vectors</strong><br>The cells of an array have a vectors as values.<br>Images of vector valued arrays where each array cell has a three color vector. Because images often have a red, green and blue channels per pixel.</p>
+<p><strong>Operations on Array of Vectors</strong></p>
+<ul>
+<li>dim(A): number of dimensions of A</li>
+<li>size(A, dim): size of a specific dimension</li>
+<li>A(i, j): value of the element at the (i, j)-th cell</li>
+<li>A(i, j)[k]: value of the k-th element of the cell at A(i, j)</li>
+<li>length(A(i, j)): vector-length of the vector at the A(i, j)-th cell</li>
+<li>distance(A(i, j), A(k, l), f): vector distance between the values of two cells given the distance function f.</li>
+</ul>
+<h3 id="Stream-Data-system"><a href="#Stream-Data-system" class="headerlink" title="Stream Data system"></a>Stream Data system</h3><blockquote>
+<p><strong>Data format:</strong> </p>
+<ul>
+<li>A csv file</li>
+<li>Csv does not mean relational.</li>
+</ul>
+<p><strong>Data model</strong>: a graph</p>
+</blockquote>
+<h4 id="Data-Stream"><a href="#Data-Stream" class="headerlink" title="Data Stream"></a>Data Stream</h4><ul>
+<li>Size: unbounded</li>
+<li>Size and Frequency: unpredictable</li>
+<li>Processing: Fast and Simple</li>
+</ul>
+<p><strong>Streaming Data Processing Applications</strong><br>For some applications it presents the need to process data as it is generated, or in other words, as it streams. It refers to a constant stream of data flowing from a source.</p>
+<ul>
+<li>Data-Driven Marketing</li>
+</ul>
+<ol>
+<li>Making data-driven marketing decisions in real time.</li>
+<li>Through the use of data from real-time sales trends, social media analysis, and sales distributions分配.</li>
+</ol>
+<ul>
+<li>Monitoring and Fault Detection</li>
+</ul>
+<ol>
+<li>Monitoring of industrial or farming machinery in real time.</li>
+<li>For monitoring and detection of potential system faulures.</li>
+<li>Any sensor network or internet of things environment controlled by another entity, or set of entities falls under this category.</li>
+</ol>
+<ul>
+<li>Dynamic steering application动态转向</li>
+</ul>
+<ol>
+<li>Dynamic steering involves dynamically changing the next steps or direction of an application through a continuous computational process using streaming.</li>
+<li>A self-driving car is an example.</li>
+</ol>
+<p><strong>The key characteristics of stream</strong></p>
+<ul>
+<li>A possibly unbounded sequence of data items or records.</li>
+<li>It may or may not be related to, or correlated with each other.</li>
+<li>Each data is generally timestamped and in some cases geo-tagged.</li>
+<li>The data can stream from many sources. </li>
+<li>The data sometimes get referred to as event data as each data item is treated as an individual event in a synchronized sequence.</li>
+</ul>
+<p><strong>The requirements of  a streaming data system</strong><br>It cannot be separated from real-time processing of data. Because we often have only one chance to look at and process streaming data before more gets piled on堆叠如山.</p>
+<ul>
+<li>Manage one record or small time window.</li>
+</ul>
+<ol>
+<li>Be designed to manage relatively simple computations. </li>
+<li>The computations are done in near-real-time, sometimes in memory, and as independent computations.</li>
+</ol>
+<ul>
+<li>Near-real-time.</li>
+<li>Independent computations.</li>
+<li>Non-interactive.</li>
+</ul>
+<ol>
+<li>The processing components often subscribe to a system, or a stream source. </li>
+<li>This means they sent nothing back to the source, nor did they establish interaction with the source.</li>
+</ol>
+<p><strong>Some Streaming Data System</strong></p>
+<ul>
+<li>Amazon Kinesis</li>
+<li>Storm</li>
+<li>Flink</li>
+<li>Spark Streaming</li>
+<li>Samza</li>
+</ul>
+<h4 id="Challenges-for-streaming-data"><a href="#Challenges-for-streaming-data" class="headerlink" title="Challenges for streaming data"></a>Challenges for streaming data</h4><p><strong>Data-at-Rest静态数据</strong></p>
+<ul>
+<li>Mostly static data from one or more sources.</li>
+<li>Collected prior to analysis.</li>
+</ul>
+<p><strong>Data-in-Mostion动态数据</strong></p>
+<ul>
+<li>Analyzed as it is generated.</li>
+<li>Stream processing.</li>
+</ul>
+<p><strong>Data Processing Algorithms</strong></p>
+<ul>
+<li>Static/Batch processing:  Size determines time and space.</li>
+<li>Stream processing</li>
+</ul>
+<ol>
+<li>Unbounded size, but finite有限 time and space.</li>
+<li>Algorithms that require iterating or looping over the whole data set are not possible since with stream data, you never get to the end.</li>
+</ol>
+<p><strong>Streaming Data Management and Processing</strong></p>
+<ul>
+<li>Compute one data element or a small window of data elements at a time.</li>
+</ul>
+<ol>
+<li>These computations can update metrics指标, monitor监控 and plot情节 statistics on the streaming data.</li>
+<li>Or to learn about the dynamics of the system as a time series.</li>
+</ol>
+<ul>
+<li>Relatively fast and simple computations.</li>
+<li>No interaction with the data source. Although in most streaming system, the manangement, and processing system subscribe to the data source.</li>
+</ul>
+<p><strong>Lambda Architecture $\lambda$</strong><br>A hybrid混合 architecture, for processing streaming and back jobs at the same time.</p>
+<ul>
+<li>Streaming wheel over the real-time data is managed and kept until those data elements are pushed to a batch system and become available to access and process as batch data.</li>
+<li>A stream storage layer is used to enable fast trees of streams and ensure data ordering and consistency.</li>
+<li>A processing layer for data is used to retrieve data from the storage layer to analyze it, and most probably little bit to a batch data stream and <strong>notify the streaming storage that the data set does no longer need to be in streaming storage.</strong></li>
+</ul>
+<p><strong>Main challenges</strong></p>
+<ul>
+<li>Streaming Data Changes Over Time</li>
+</ul>
+<ol>
+<li>Size</li>
+<li>Frequency</li>
+</ol>
+<ul>
+<li>These changes can be unpredictable and may be driven by human behavior.</li>
+</ul>
+<ol>
+<li><strong>Periodic</strong>:  these changes can be periodic and occur in the evenings, weekends, etc.</li>
+<li><strong>Sporadicl</strong>零星:   There can be an increase in data size and frequency during major events, Breaking news. Dropping or missing data or even no data when there are network problems or device generating the data has hardware problems.</li>
+</ol>
+<h4 id="Data-Lake"><a href="#Data-Lake" class="headerlink" title="Data Lake"></a>Data Lake</h4><p>We need a fast and scalable storage system that is flexible enough to serve many current and future analytical processes. Data Lake was created in response of big data storage and processing challenges.</p>
+<p>Data lake is a part of a big data infrastructure that many streams can flow into and get stored for processing in their original form.</p>
+<ul>
+<li>A Big Data Storage Architecture.</li>
+<li>Collects all data for current and future analysis.</li>
+<li>Transforms data format only when needed.</li>
+<li>Supports all types of big data users. Including business, storage, analytics and computing experts.</li>
+<li>Infrastructure components which evolve变化 over time based on application-specific needs.</li>
+<li>Huge processing power and ability to handle a very large number of concurrence, data management and analytical tasks.</li>
+</ul>
+<p><strong>How a Data Lake Works</strong></p>
+<ul>
+<li>Load data from source.</li>
+<li>Store raw生的 data.</li>
+<li>Add data model on read. It is what we call <code>schema-on read</code>.<blockquote>
+<p><strong>Schema-on-read</strong></p>
+<ul>
+<li>The applications can freely read the data and add structure to it.</li>
+<li>Ensuring all data is stored for a potentially unknown use at a later time.</li>
+</ul>
+<p><strong>Schema-on-Write</strong></p>
+<ul>
+<li>Data Warehouse</li>
+<li>Data is not loaded into the warehouse unless there is a use for it.</li>
+<li>Transform and structure before load.</li>
+<li>Any application using the data needs to know this format in order to retrieve and use the data.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p><strong>Data Lake vs. Data Warehouse</strong></p>
+<ul>
+<li>Data Warehouse: Hierarchical分级 File System</li>
+<li>Data Lake: </li>
+</ul>
+<ol>
+<li>Stores data as flat平 files with a unique identifier, object storage.</li>
+<li>Each data is stored as a binary large object or BLOB二进制类型的大对象 and is assigned a unique identifier.</li>
+<li>Each data object is tagged with a number of metadata元数据 tages.</li>
+<li>The data can be searched using these metadata tags to retrieve it.</li>
+</ol>
+<h3 id="DBMS-based"><a href="#DBMS-based" class="headerlink" title="DBMS-based"></a>DBMS-based</h3><h4 id="Storing-Data-Files-vs-DBMS"><a href="#Storing-Data-Files-vs-DBMS" class="headerlink" title="Storing Data - Files vs. DBMS"></a>Storing Data - Files vs. DBMS</h4><p>In the old times, database operations were applications in file systems.</p>
+<ul>
+<li>There are multiple file formats.</li>
+<li>Data redundancy冗余, inconsistency and isolation.</li>
+</ul>
+<ol>
+<li>There was a duplication of information in different files.</li>
+<li>Especially when the data was large and the file content was complex.</li>
+</ol>
+<ul>
+<li>Each task a program.</li>
+</ul>
+<ol>
+<li>There wasn’t a uniform way to access data.</li>
+<li>People ended up writing different programs for data access, as well as data updata.</li>
+</ol>
+<ul>
+<li>Data integrity.完整性</li>
+</ul>
+<ol>
+<li>The enforcement of constraints.</li>
+<li>实体完整性，参照完整性，用户自定义完整性.</li>
+<li>If you want to change the constraint, you need to look for the programs where such a rule is hard coded.</li>
+</ol>
+<ul>
+<li>Atomicity of updates.</li>
+</ul>
+<ol>
+<li>It has to do with system failures.</li>
+<li>The term atomicity means that  all of the changes that we need to do must happen altogether, as a single unit.</li>
+<li>This atomicity is very difficult to handle when the data reside in one or more files.</li>
+</ol>
+<p><strong>Advantages of a DBMS</strong></p>
+<ul>
+<li>Declarative公布的 query languages</li>
+</ul>
+<ol>
+<li>Declarative means that we state what we want to retireve without telling the DBMS how exactly to retrieve it.</li>
+<li>No more task-based programs.</li>
+</ol>
+<ul>
+<li>Data independence</li>
+</ul>
+<ol>
+<li>The goal is to isolate the users from the record layout.</li>
+<li>Applications don’t worry about data storage formats and locations.</li>
+</ol>
+<ul>
+<li>Efficient access through optimization: The system automatically finds an efficient way to access data.</li>
+<li>Data integrity and security</li>
+</ul>
+<ol>
+<li>Transaction safety and failure recovery. A single logical operation on the data is called a transaction.</li>
+<li>ACID properties of transactions</li>
+<li>Failure recovery.<blockquote>
+<p>ACID: Atomicity, consistency, isolation and durability.</p>
+<ul>
+<li>Consistency: Any data written to the database must be valid according to all defined rules including constrains.</li>
+<li>Isolation: Not withstanding经受 the number of peopel accessing the system at the same time. Guaranting the concurrent access.</li>
+<li>Durability: Once a transaction has been committed, it will remain so, even in the event of power loss, crashes or errors.</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>Concurrent access: Many users can simultaneously access data without conflict.</li>
+</ul>
+<h4 id="Parallel-and-Distributed-DBMS"><a href="#Parallel-and-Distributed-DBMS" class="headerlink" title="Parallel and Distributed DBMS"></a>Parallel and Distributed DBMS</h4><p>The classical way in which DBSMs have handled the issue of large volumes is by created parallel and distributed databases.<br><strong>Parallel database system</strong></p>
+<ul>
+<li>Parallel Oracle, parallel DB2 or post SQL XE.</li>
+<li>Improve performance through parallel implementation.</li>
+<li>Often allows data replication.</li>
+</ul>
+<ol>
+<li>Data redundancy against table corruption.</li>
+<li>More concurrent queries.</li>
+</ol>
+<p><strong>Distributed database system</strong></p>
+<ul>
+<li>Data is stored across several sites.</li>
+<li>Each site managed by a DBMS capable of running independently and communicate with each other.</li>
+</ul>
+<p><code>Does your big data problem need these facilities?</code></p>
+<h4 id="DBMS-and-MapReduce-style-Systems"><a href="#DBMS-and-MapReduce-style-Systems" class="headerlink" title="DBMS and MapReduce-style Systems"></a>DBMS and MapReduce-style Systems</h4><p>DBMSs take into account the communication cost, that is the time needed to exchange data between machines. However, it did not take into account machine failure.</p>
+<p>Started with a different problem focus</p>
+<ul>
+<li>DBMSs: efficient storage, transactions and retrieval</li>
+<li>MapReduce-style systems: complex data processing over a cluster of machines. Very often, these algorithms have multiple stages, that is the output from one processing stage is the input to the next.</li>
+</ul>
+<h4 id="Shifting-Requirements"><a href="#Shifting-Requirements" class="headerlink" title="Shifting Requirements"></a>Shifting Requirements</h4><ul>
+<li>Data loading - a new bottleneck: Does the application need data sooner than the loading time?</li>
+<li>Too much functionality: Does the application use only a few data management features?</li>
+<li>Combined Transactional and Analytical Capabilities.</li>
+</ul>
+<h4 id="No-Single-Solution-Mixed-solutions"><a href="#No-Single-Solution-Mixed-solutions" class="headerlink" title="No Single Solution: Mixed solutions"></a>No Single Solution: Mixed solutions</h4><ul>
+<li>DBMS on HDFS</li>
+</ul>
+<ol>
+<li>Being developed to run on HDFS</li>
+<li>Taking advantage of his data replication capabilities.</li>
+</ol>
+<ul>
+<li>Relational operations in MapReduce systems like Spark. Spark has several kinds of join and data grouping operations in addition to map and reduce.</li>
+<li>Streaming input to DBMS.</li>
+</ul>
+<ol>
+<li>Be designed with the idea that the analysis they need to perform on the data are known before.</li>
+<li>As new data records arrive, they keep a record of the data in the memory long enough to finish the computation needed on that record.</li>
+</ol>
+<ul>
+<li>New parallel programming models for analytical computation within DBMS, like finding dense regions of a graph.</li>
+</ul>
+<h3 id="From-DBMS-to-BDMS"><a href="#From-DBMS-to-BDMS" class="headerlink" title="From DBMS to BDMS"></a>From DBMS to BDMS</h3><p>Big Data Management System</p>
+<h4 id="Desired-Characteristics-of-BDMS"><a href="#Desired-Characteristics-of-BDMS" class="headerlink" title="Desired Characteristics of BDMS"></a>Desired Characteristics of BDMS</h4><ul>
+<li>A flexible, semi-structured data model</li>
+</ul>
+<ol>
+<li>It will not only support a specific format like XML.</li>
+<li>The degree to which schemas should be supported by the system, “schema first” to “schema never”.</li>
+</ol>
+<ul>
+<li>Support for today’s common “Big Data data types”</li>
+</ul>
+<ol>
+<li>Textual, supporting operations on text and documents.</li>
+<li>Temporal, permitting social media and other data that have a time component and need temporal operations, like before, after, during, and so on.</li>
+<li>Spatial data, allowing operations like find all data within a five mile radius of a landmark.</li>
+</ol>
+<ul>
+<li>A full query language</li>
+</ul>
+<ol>
+<li>Expectedly at least the power of SQL.</li>
+<li>Let the query processor automatically determine optimal ways to receive data.</li>
+</ol>
+<ul>
+<li>An efficient parallel query engine, which will run on multiple machines. The machines can be connected to a shared nothing architecture, or shared memory architecture, or a shared cluster.</li>
+<li>Wide range of query sizes.</li>
+<li>Continuous data ingestion, stream ingestion.</li>
+<li>Scale gracefully to manage and query large volumes of data</li>
+</ul>
+<ol>
+<li>Use large clusters.</li>
+<li>It knows how to handle a failure.</li>
+<li>It can handle new machines joining or existing machines leaving the cluster.</li>
+</ol>
+<ul>
+<li>Full data management capability功能</li>
+</ul>
+<ol>
+<li>Ease of operational simplicity.</li>
+<li>Be easy to install, restart and configure配置, provide high availability and make operational management as simple as possible even when a BDMS is declined拒绝 across data centers that are possibly geographically apart.</li>
+</ol>
+<h4 id="ACID-and-BASE"><a href="#ACID-and-BASE" class="headerlink" title="ACID and BASE"></a>ACID and BASE</h4><p>ACID properties hard to maintain in a BDMS. It may lead to a significant slowdown of the system.</p>
+<p>It might be more practical to relax the ACID conditions and replace them with what’s called the BASE properties.</p>
+<ul>
+<li>BA: Basic Availability基本可用性<br>If you make a request, there will be a response to that request. But, the response could still be failure to obtain data or the data isn’t inconsistent state or changing state.</li>
+<li>S: Soft State<br>The state of the system is very likely to change over time. So even during times without input, there may be changes going on through the system due to eventual consistency. Thus the state of the system is always soft.</li>
+<li>E: Eventual Consistency.<br>The system will eventually become consistent once it stops receiving input. In reality the system will continue to receive input, and it’s not checking the consistency of every transaction at every moment because there’s still lots of transactions to process. </li>
+</ul>
+<h4 id="CAP-Theorem"><a href="#CAP-Theorem" class="headerlink" title="CAP Theorem"></a>CAP Theorem</h4><p>A distributed computer system cannot simultaneously achieve</p>
+<ul>
+<li>Consistency. All nodes see the same data at any time.</li>
+<li>Availability. Every request receives a response about whether it succeeded or failed.</li>
+<li>Partition Tolerance分区容错. The system continues to operate despite arbitrary任意 partitioning due to network failures.</li>
+</ul>
+<h3 id="Modern-system"><a href="#Modern-system" class="headerlink" title="Modern system"></a>Modern system</h3><h4 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h4><p>An in-memory data structure store. key-value缓存产品</p>
+<p>持久化到磁盘。It can persist data on disks, and does so to save its state, but it’s intended use is to optimally use memory and memory based methods to make a number of common data structures very fast for lots of users.</p>
+<p>Redis 优势</p>
+<ol>
+<li>支持二进制的String, Lists, Hashes, Sets 及 Ordered Sets数据类型的操作。</li>
+<li>单个操作是原子性的，多个操作也可以通过MULTI 和EXEC指令包起来支持原子性。</li>
+<li>支持publish/subscribe, 通知，key过期等特性。</li>
+<li>支持数据备份，mater-slave模式的数据备份。</li>
+</ol>
+<h4 id="Aerospike"><a href="#Aerospike" class="headerlink" title="Aerospike"></a>Aerospike</h4><p>Redis 数据库是内存型数据库，大数据背景下存储成本高，Aerospike数据库应运而生。</p>
+<p>相比Redis有以下优势：</p>
+<ol>
+<li>通过内存+SSD的方案代替Redis纯内存的方案，成本上有优势。Redis持久化方案每个key-value存一份，Aerospike ssd存储方案每个存两份，value存储于ssd，在一key多value下Aerospike更有优势</li>
+<li>Aerospike有与Redis匹敌的读性能，某些场景下更好。写性能中高。</li>
+<li>运维方便，官方文档齐全。部署扩容非常简单。</li>
+</ol>
+<h4 id="AsterixDB"><a href="#AsterixDB" class="headerlink" title="AsterixDB"></a>AsterixDB</h4><p>MongoDB is a dominant store for JSON style semi-structured data. A relatively new big data management system for semistructured data that’s currently being incubated by Apache is AsterixDB.<br>开源的大数据管理系统，可以在一个集群中大规模存储，索引，管理和查询语义结构的数据。</p>
+<p>突出特性：</p>
+<ol>
+<li>基于JSON对象数据库概念上的NoSQL风格数据模型。（ADM）</li>
+<li>用于查询半结构化数据的富有表达力与可声明式的查询语言。（AQL）</li>
+<li>包含运行时查询的执行引擎Hyracks，用于并行执行的查询工作。</li>
+<li>支持与AsterixDB存储中的数据一样的方式对外部数据（如HDFS）进行查询和索引。</li>
+<li>包含一系列丰富的原始数据类型，包括空间，时间，文本数据。</li>
+</ol>
+<h4 id="Solr"><a href="#Solr" class="headerlink" title="Solr"></a>Solr</h4><p>Now we move to another Apache product for large scale text data searching called Solr.</p>
+<ol>
+<li>Solr是将整个索引操作功能封装好了的搜索引擎系统，企业级。</li>
+<li>支持分布式集群，索引服务的容量和能力可以线性扩展。</li>
+<li>部署在专门的服务器上，它的索引库就不会受业务系统服务器存储空间的限制。</li>
+<li>可以部署到单独的服务器上提供服务，我们的业务系统只要发送请求，接收响应即可，降低了业务系统的负载。</li>
+</ol>
+<p><strong>Basic challenges with text</strong></p>
+<ul>
+<li>Defining a match</li>
+</ul>
+<ol>
+<li>Lexical difference, capitalization. 词汇差异，大写</li>
+<li>Structural punctuations. abc:def-230-39 ~= abcdef23039</li>
+<li>Nominal Variations. “Barak Hussein Obama = Barak Obama”</li>
+<li>Synonyms. Mom = mother</li>
+<li>Abbreviation. Dr. = Doctor</li>
+<li>Initialism首字母缩略词. USA = United States of America</li>
+</ol>
+<h4 id="Vertica"><a href="#Vertica" class="headerlink" title="Vertica"></a>Vertica</h4><p>基于列存储的数据库，相对于传统基于行的数据库，更适合在数据仓库存储方面发挥特长：</p>
+<ol>
+<li>对于聚集操作，比如sum，明显快于基于行的存储</li>
+<li>对于updata操作，不需要接触其他列值</li>
+<li>基于行存储的数据库在查询每行记录的多个列值更高效的条件是，row-size比较小，这样一次磁盘读取就可以获得整行。</li>
+<li>基于行存储的数据库更适合OLTP联机事务处理系统，基于列存储的数据库更适合OLAP联机分析处理系统。</li>
+<li>基于列存储更容易使用高效的存储方式，基于行存执智能采用随机方式处理列值。</li>
+<li>单独更新和混合存储结构，提高了查询、插入的欸性能，但增加了updata和delete的开销。</li>
+<li>压缩，减少存储开销和IO带宽开销。</li>
+<li>完全无共享架构，降低对共享资源的系统竞争。</li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

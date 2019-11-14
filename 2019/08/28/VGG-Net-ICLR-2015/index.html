@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        VGG Net (ICLR, 2015) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-模型结构"><span class="toc-text">1.  模型结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-多个小卷积核比单个大卷积核性能好"><span class="toc-text">1.1 多个小卷积核比单个大卷积核性能好</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1x1卷积层"><span class="toc-text">1.2 1x1卷积层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-LRN-层没有性能提升"><span class="toc-text">1.3 LRN 层没有性能提升</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-VGGNet-变种"><span class="toc-text">2. VGGNet 变种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-实现细节"><span class="toc-text">3.  实现细节</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        VGG Net (ICLR, 2015)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-28 18:42:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#backbone" title="backbone">backbone</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="https://arxiv.org/pdf/1409.1556.pdf" target="_blank" rel="noopener">Very Deep Convolutional Networks for Large-Scale Image Recognition</a><br>作者：Karen Simonyan， Andrew Zisserman</p>
+<p>VGG Net 是 ILSVRC2014 定位项目的第一名和分类项目的第二名，在top-5上的错误率为7.5%，通过堆叠小型的3x3卷积和2x2的池化核，成功构建了16和19层的网络，证明增加网络的深度能够提高模型的性能。</p>
+<h3 id="1-模型结构"><a href="#1-模型结构" class="headerlink" title="1.  模型结构"></a>1.  模型结构</h3><p>VGG 由 5 段卷积层，3 层全连接和一个softmax层构成，每段卷积内是多个3x3卷积串联，每段后面都有一个2x2的max-pooling，所有隐藏层的激活函数都是 ReLU。</p>
+<h4 id="1-1-多个小卷积核比单个大卷积核性能好"><a href="#1-1-多个小卷积核比单个大卷积核性能好" class="headerlink" title="1.1 多个小卷积核比单个大卷积核性能好"></a>1.1 多个小卷积核比单个大卷积核性能好</h4><p>VGG 没有采用AlexNet中的 7x7 大卷积核和3x3的大池化核，而是用了3x3的小卷积核和2x2的小池化核，通过降低卷积核的大小，增加卷积核层数来达到同样的性能。</p>
+<p>两个3x3的卷积层串联相当于一个5x5的卷积层，三个3x3的卷积层串联相当于1个7x7的卷积层，也就是说3个3x3的卷积层的感受野大小相当于1个7x7的卷积层，但3个3x3的卷积层的参数量只有7x7的一半左右，而且前者有3个非线性操作，而后者只有1个非线性操作，所以前者对特征的学习能力更强。</p>
+<p>网络层数的增加不会带来参数量的爆炸，因为参数量主要集中在最后3个全连接层中：<br>|网络|A, A-LRN| B | C | D (VGG16) | E (VGG19) |<br>|—-|—-|—-|—-|—-|—-|<br>|参数量（millions）|133|133|134|138|144|</p>
+<h4 id="1-2-1x1卷积层"><a href="#1-2-1x1卷积层" class="headerlink" title="1.2 1x1卷积层"></a>1.2 1x1卷积层</h4><p>论文用1x1的卷积层来增加线性变换，输出的通道数量没变。作者实验发现1x1的卷积也很有效，但没有3x3效果好，因为3x3可以学到更大的空间特征。</p>
+<p><strong>1x1卷积层作用：</strong></p>
+<ul>
+<li>用来提取特征，每张图片的大小不变，而是把多个通道的特征融合在一起，输出更大的通道或较小的通道；</li>
+<li>代替全连接层，可以<strong>适应各种尺寸的图片</strong>。</li>
+<li>增加线性变换，输出的通道数量不变（VGG）</li>
+</ul>
+<h4 id="1-3-LRN-层没有性能提升"><a href="#1-3-LRN-层没有性能提升" class="headerlink" title="1.3 LRN 层没有性能提升"></a>1.3 LRN 层没有性能提升</h4><p>AlexNet中用的Local response normalization 没有带来性能的提升，所以VGG其他网络中没有 LRN了。</p>
+<h3 id="2-VGGNet-变种"><a href="#2-VGGNet-变种" class="headerlink" title="2. VGGNet 变种"></a>2. VGGNet 变种</h3><p>常用的是VGG16 和 VGG19:<br><img src="Table1.png" alt></p>
+<h3 id="3-实现细节"><a href="#3-实现细节" class="headerlink" title="3.  实现细节"></a>3.  实现细节</h3><ul>
+<li>为加快收敛速度，作者在训练时先训练最简单的A，再用A网络的权重初始化后面的模型。</li>
+<li>在 FC 层中用了dropout，防止过拟合。</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

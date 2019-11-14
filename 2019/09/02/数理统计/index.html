@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        数理统计 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数理统计"><span class="toc-text">数理统计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-期望"><span class="toc-text">1. 期望</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-离散型期望"><span class="toc-text">1.1 离散型期望</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-连续型期望"><span class="toc-text">1.2 连续型期望</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-复合函数期望"><span class="toc-text">1.3 复合函数期望</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-方差"><span class="toc-text">2. 方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-离散型方差"><span class="toc-text">2.1 离散型方差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-连续型方差"><span class="toc-text">2.2 连续型方差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-E-X-D-X-的性质"><span class="toc-text">3. $E(X), D(X)$的性质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-期望-E-X-的性质："><span class="toc-text">3.1 期望 $E(X)$ 的性质：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-方差-D-X-的性质："><span class="toc-text">3.2 方差 $D(X)$ 的性质：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-特殊分布的-E-X-和-D-X"><span class="toc-text">4. 特殊分布的$E(X)$和$D(X)$</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-二项分布-B-n-p"><span class="toc-text">4.1 二项分布 $B(n, p)$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-柏松分布-P-lambda"><span class="toc-text">4.2 柏松分布 $P(\lambda)$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-均匀分布-U-a-b"><span class="toc-text">4.3 均匀分布 $U[a, b]$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-指数分布-E-lambda"><span class="toc-text">4.4 指数分布 $E(\lambda)$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-正态分布-N-mu-sigma-2"><span class="toc-text">4.5 正态分布 $N(\mu, \sigma ^2)$</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        数理统计
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-02 22:57:40</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#数学" title="数学">数学</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="数理统计"><a href="#数理统计" class="headerlink" title="数理统计"></a>数理统计</h1><h2 id="1-期望"><a href="#1-期望" class="headerlink" title="1. 期望"></a>1. 期望</h2><h3 id="1-1-离散型期望"><a href="#1-1-离散型期望" class="headerlink" title="1.1 离散型期望"></a>1.1 离散型期望</h3><script type="math/tex; mode=display">E(X) = \sum x_ip_i</script><p>【题1】已知一个工厂一周获利10万元的概率为0.2，获利5万元的概率为0.3，亏损2万元的概率是0.5，该工厂内利润的期望是多少？</p>
+<script type="math/tex; mode=display">E(X) = \sum x_ip_i = 10 \times 0.2 + 5 \times 0.3 + (-2) \times 0.5=2.5</script><h3 id="1-2-连续型期望"><a href="#1-2-连续型期望" class="headerlink" title="1.2 连续型期望"></a>1.2 连续型期望</h3><script type="math/tex; mode=display">E(X)=\int_{-\infty}^{+\infty}x f(x)dx</script><p>【题2】随机变量X的密度函数为</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+f(x) = \left\{
+\begin{array}{ll}
+0, &x<0 \\
+4x^3, &0 \le x \le 1 \\
+0 & x>0
+\end{array}
+\right.
+\end{equation}</script><p>则 <script type="math/tex">E(X)=\int_{-\infty}^{+\infty}x f(x)dx = \int_{-\infty}^0 x\cdot0\ dx + \int_0^1 x\cdot 4x^3\ dx + \int_1^{+\infty} x\cdot 0\ dx = \frac{4}{5}</script></p>
+<h3 id="1-3-复合函数期望"><a href="#1-3-复合函数期望" class="headerlink" title="1.3 复合函数期望"></a>1.3 复合函数期望</h3><p>已知 $Y=g(X)$，求$E(Y)$</p>
+<ul>
+<li>若X为离散型：$E(Y) = \sum g(x_i)p_i$</li>
+<li>若X为连续型：$E(Y)=\int _{-\infty}^{+\infty}g(x)\cdot f(x) dx$</li>
+</ul>
+<p>【题3】设随机变量X的密度函数为</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+f(x) = \left\{
+\begin{array}{ll}
+0, &x<0 \\
+4x^3, &0 \le x \le 1 \\
+0 & x>0
+\end{array}
+\right.
+\end{equation}</script><p>$Y=X^2$，则 <script type="math/tex">E(Y)=\int_{-\infty}^{+\infty}x^2 f(x)dx = \int_{-\infty}^0 x^2\cdot0\ dx + \int_0^1 x^2\cdot 4x^3\ dx + \int_1^{+\infty} x^2\cdot 0\ dx = \frac{2}{3}</script></p>
+<h2 id="2-方差"><a href="#2-方差" class="headerlink" title="2. 方差"></a>2. 方差</h2><h3 id="2-1-离散型方差"><a href="#2-1-离散型方差" class="headerlink" title="2.1 离散型方差"></a>2.1 离散型方差</h3><ul>
+<li>$D(X) = \sum [x_i - E(X)]^2\cdot p_i$</li>
+<li>$D(X)=E(X^2) - E^2(X)$</li>
+</ul>
+<p>【题4】设随机变量X的分布律为<br>|X|0|1|2|3|<br>|—-|—-|—-|—-|—-|<br>|P|0.1|0.2|0.3|0.4|<br>则：</p>
+<script type="math/tex; mode=display">E(X) = \sum x_ip_i = 2</script><script type="math/tex; mode=display">D(X) = \sum [x_i - E(X)]^2\cdot p_i = (0-2)^2 \cdot 0.1 +(1-2)^2 \cdot 0.2 + (2-2)^2 \cdot 0.3 + (3-2)^2 \cdot 0.4 = 1</script><p>或：<br>|$X^2$|0|1|4|9|<br>|—-|—-|—-|—-|—-|<br>|P|0.1|0.2|0.3|0.4|</p>
+<script type="math/tex; mode=display">E(X^2) = \sum x^2_ip_i = 5</script><script type="math/tex; mode=display">D(X)=E(X^2) - E^2(X) = 5 - 2^2 = 1</script><h3 id="2-2-连续型方差"><a href="#2-2-连续型方差" class="headerlink" title="2.2 连续型方差"></a>2.2 连续型方差</h3><p>$D(X)=E(X^2) - E^2(X)$</p>
+<p>【题5】设随机变量X的密度函数为</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+f(x) = \left\{
+\begin{array}{ll}
+0, &x<0 \\
+4x^3, &0 \le x \le 1 \\
+0 & x>0
+\end{array}
+\right.
+\end{equation}</script><p>求 $D(X)$：</p>
+<script type="math/tex; mode=display">E(X^2)=\int_{-\infty}^{+\infty}x^2 f(x)dx = \int_{-\infty}^0 x^2\cdot0\ dx + \int_0^1 x^2\cdot 4x^3\ dx + \int_1^{+\infty} x^2\cdot 0\ dx = \frac{2}{3}</script><script type="math/tex; mode=display">E(X)=\int_{-\infty}^{+\infty}x f(x)dx = \int_{-\infty}^0 x\cdot0\ dx + \int_0^1 x\cdot 4x^3\ dx + \int_1^{+\infty} x\cdot 0\ dx = \frac{4}{5}</script><script type="math/tex; mode=display">D(X)=E(X^2) - E^2(X) = \frac{2}{75}</script><h2 id="3-E-X-D-X-的性质"><a href="#3-E-X-D-X-的性质" class="headerlink" title="3. $E(X), D(X)$的性质"></a>3. $E(X), D(X)$的性质</h2><h3 id="3-1-期望-E-X-的性质："><a href="#3-1-期望-E-X-的性质：" class="headerlink" title="3.1 期望 $E(X)$ 的性质："></a>3.1 期望 $E(X)$ 的性质：</h3><ul>
+<li>$E(C) = C$</li>
+<li>$E(CX) = CE(X)$</li>
+<li>$E(X \pm Y) = E(X) \pm E(Y)$</li>
+<li>$E(XY) = E(X)E(Y) $，当 X 和 Y 相互独立时</li>
+</ul>
+<h3 id="3-2-方差-D-X-的性质："><a href="#3-2-方差-D-X-的性质：" class="headerlink" title="3.2 方差 $D(X)$ 的性质："></a>3.2 方差 $D(X)$ 的性质：</h3><ul>
+<li>$D(C) = 0$</li>
+<li>$D(CX) = C^2D(X)$</li>
+<li>$D(X \pm Y) = D(X) + D(Y)$，当 X 和 Y 相互独立时</li>
+</ul>
+<p>【题6】设随机变量X的分布律为<br>|X|0|1|2|3|<br>|—-|—-|—-|—-|—-|<br>|P|0.1|0.2|0.3|0.4|<br>已求得$E(X) = 2$，$D(X) = 1$，则：</p>
+<script type="math/tex; mode=display">E(2X^2 - 5) = 2E(X^2) = 2(D(X) + E^2(X)) - 5 = 5</script><script type="math/tex; mode=display">D(\sqrt7 X - 5) = D(\sqrt7 X) + D(5) = 7D(X) = 7</script><h2 id="4-特殊分布的-E-X-和-D-X"><a href="#4-特殊分布的-E-X-和-D-X" class="headerlink" title="4. 特殊分布的$E(X)$和$D(X)$"></a>4. 特殊分布的$E(X)$和$D(X)$</h2><h3 id="4-1-二项分布-B-n-p"><a href="#4-1-二项分布-B-n-p" class="headerlink" title="4.1 二项分布 $B(n, p)$"></a>4.1 二项分布 $B(n, p)$</h3><ul>
+<li>$E(X) = np$</li>
+<li>$D(X)=np(1-p)$</li>
+<li>$P(X=d) = C_n^dp^d(1-p)^{n-d}$</li>
+</ul>
+<p>【题7】随机变量X服从二项分布，且 $E(X) = 6$，$D(X)=3$，则：</p>
+<script type="math/tex; mode=display">E(X) = np = 6</script><script type="math/tex; mode=display">D(X)=np(1-p) = 3</script><p>则: <script type="math/tex">p=\frac{1}{2}，n=12</script></p>
+<script type="math/tex; mode=display">P(X=1)=C_{12}^1 (\frac{1}{2}) ^1 (1-\frac{1}{2})^{12-1} = 3 \times 2^{-10}</script><h3 id="4-2-柏松分布-P-lambda"><a href="#4-2-柏松分布-P-lambda" class="headerlink" title="4.2 柏松分布 $P(\lambda)$"></a>4.2 柏松分布 $P(\lambda)$</h3><ul>
+<li>$E(X) = \lambda$</li>
+<li>$D(X)=\lambda$</li>
+<li>$P(X=d) = \frac{\lambda ^d}{d!}e^{-\lambda}$</li>
+</ul>
+<p>【题7】随机变量X服从$\lambda=1$柏松分布，则：</p>
+<script type="math/tex; mode=display">E(X)=D(X) = \lambda = 1</script><script type="math/tex; mode=display">P[X=E(X^2)] = P[X=2] = \frac{\lambda ^d}{d!}e^{-\lambda} = \frac{1 ^2}{2!}e^{1}=\frac{1}{2e}</script><h3 id="4-3-均匀分布-U-a-b"><a href="#4-3-均匀分布-U-a-b" class="headerlink" title="4.3 均匀分布 $U[a, b]$"></a>4.3 均匀分布 $U[a, b]$</h3><ul>
+<li>$E(X) = \frac{a+b}{2}$</li>
+<li>$D(X)=\frac{(b-a)^2}{12}$</li>
+<li>$P(c\le X \le d) = \frac{d - c}{b-a}$</li>
+</ul>
+<h3 id="4-4-指数分布-E-lambda"><a href="#4-4-指数分布-E-lambda" class="headerlink" title="4.4 指数分布 $E(\lambda)$"></a>4.4 指数分布 $E(\lambda)$</h3><ul>
+<li>$E(X) = \frac{1}{\lambda}$</li>
+<li>$D(X)=\frac{1}{\lambda ^2}$</li>
+<li>$P(c\le X \le d) = \frac{1}{e^{c\lambda}} - \frac{1}{e^{d \lambda}}$</li>
+</ul>
+<h3 id="4-5-正态分布-N-mu-sigma-2"><a href="#4-5-正态分布-N-mu-sigma-2" class="headerlink" title="4.5 正态分布 $N(\mu, \sigma ^2)$"></a>4.5 正态分布 $N(\mu, \sigma ^2)$</h3><ul>
+<li>$E(X) = \mu$</li>
+<li>$D(X)=\sigma ^2$</li>
+<li>$P(c\le X \le d) = \Phi(\frac{d-u}{\sigma}) - \Phi(\frac{c-u}{\sigma}) $</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
