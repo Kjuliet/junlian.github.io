@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        《C++ Primer Plus》第3章～第4章 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第-3-章"><span class="toc-text">第 3 章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-简单变量"><span class="toc-text">3.1 简单变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-变量名"><span class="toc-text">3.1.1 变量名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-整型"><span class="toc-text">3.1.2 整型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-整型-short、int、long-和-long-long"><span class="toc-text">3.1.3 整型 short、int、long 和 long long</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-无符号类型"><span class="toc-text">3.1.4 无符号类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-6-整型字面值"><span class="toc-text">3.1.6 整型字面值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-7-确定常量的类型"><span class="toc-text">3.1.7 确定常量的类型</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《C++ Primer Plus》第3章～第4章
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-30 22:23:13</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#C++" title="C++">C++</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="第-3-章"><a href="#第-3-章" class="headerlink" title="第 3 章"></a>第 3 章</h1><p>OOP 的本质是设计并扩展自己的数据类型，设计自己的数据类型就是让类型与数据匹配，如果做到这一点，以后使用数据时会发现容易得多。而C++ <strong>内置的类型</strong>是在创建自己类型时的基本组件。</p>
+<p>内置的类型分两组：</p>
+<ul>
+<li>基本类型：整数和浮点数，以及它们的多种变体；</li>
+<li>复合类型：在基本类型的基础上创建的复合类型，包括数组、字符串、<strong>指针和结构</strong>。</li>
+</ul>
+<p>有了数据，还需要一种标识存储数据的方法，即<strong>变量</strong></p>
+<h2 id="3-1-简单变量"><a href="#3-1-简单变量" class="headerlink" title="3.1 简单变量"></a>3.1 简单变量</h2><p>为了把信息存储在计算机中，程序必须3个基本属性：</p>
+<ul>
+<li>存储在哪里；</li>
+<li>存储的是什么值；</li>
+<li>存储的是什么类型信息。</li>
+</ul>
+<p>采取的措施就是声明一个变量，通过声明的类型描述了信息的类型，通过符号表示值的变量名，对<code>int braincount; braincount = 5;</code>两条命令， 程序将找到一块能够存储int类型的内存，将该内存单元标记为变量名braincount，然后将 5 复制到该内存单元中，之后就可以在程序中使用braincount来访问该内存单元。</p>
+<p><strong>可以用<code>&amp;</code>运算符来检索braincount的内存地址</strong></p>
+<h3 id="3-1-1-变量名"><a href="#3-1-1-变量名" class="headerlink" title="3.1.1 变量名"></a>3.1.1 变量名</h3><ul>
+<li>以两个下划线或下划线加大写字母打头的名称被保留给编译器及其使用的资源使用；</li>
+<li>以一个下划线开头的名称被保留用作全局标识符。用<code>_time_stop</code> 这样的名称不会导致编译错误，但会导致行为的不确定性，换句话说，不知道结果将是什么。</li>
+</ul>
+<blockquote>
+<p>命名方案：很多程序员会加入描述变量类型或内容的前缀，如strWeight, bWeight, pWeight, cWeight, intWeight 分别表示字符串、布尔、指针、字符、整数类型。</p>
+</blockquote>
+<h3 id="3-1-2-整型"><a href="#3-1-2-整型" class="headerlink" title="3.1.2 整型"></a>3.1.2 整型</h3><p><strong>宽度 (width)</strong>：买哦树存储整数时使用的内存量。基本整型按宽度递增的顺序摆列分别是 char、short、int、long、long long，每种类型都有符号版本和无符号版本，所以共有10种类型。char类型较特殊，常用来表示的是字符，而不是数字。</p>
+<h3 id="3-1-3-整型-short、int、long-和-long-long"><a href="#3-1-3-整型-short、int、long-和-long-long" class="headerlink" title="3.1.3 整型 short、int、long 和 long long"></a>3.1.3 整型 short、int、long 和 long long</h3><p>计算机内存的单元是位(bit)，short、int、long 和 long long 通过使用不同数目的位来存储值：</p>
+<ul>
+<li>short 至少16位；</li>
+<li>int 至少和short一样长；</li>
+<li>long 至少32位，且至少和int一样长；</li>
+<li>long long至少64位，且至少与long一样长。</li>
+</ul>
+<blockquote>
+<p><strong>位和字节</strong><br> 字节 (byte) 指 8 位 (bit) 的内存单元，8位内存块可以设置出256种不同的组合，所以 1 字节可以表示0-255或-128到127。<br> 通常字节就是描述计算机内存量的度量单位，1KB = 1024字节，1MB = 1025KB。但<strong>C++对字节的定义不同</strong>，C++字节由至少能够容纳实现的基本字符集的相邻位组成，也就是说，可能取值的数目必须大于或等于字符数目。ASCII字符集可以用8位来容纳，而Unicode超过8位，所以有些实现可能使用16位甚至32位的字节。有些人使用术语八位组 (octet) 表示 8 位字节。</p>
+</blockquote>
+<p><strong>1. <code>sizeof()</code>运算符</strong><br>用<code>sizeof()</code>运算符（运算符是内置的语言元素，对一个或多个数据进行运算，并生成 一个值）检查类型的长度，单位是字节。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n_int = INT_MAX:</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"int is"</span> &lt;&lt; <span class="keyword">sizeof</span> (<span class="keyword">int</span>) &lt;&lt; <span class="string">" bytes."</span> &lt;&lt; <span class="built_in">endl</span>;  # 对类型名，要放括号里面</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"int is"</span> &lt;&lt; <span class="keyword">sizeof</span> n_int &lt;&lt; <span class="string">" bytes."</span> &lt;&lt; <span class="built_in">endl</span>;  # 对变量名，括号可有可无</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 头文件 climits</strong><br>头文件 climits 定义了符号常量 (用#define预处理方式) 来表示类型的限制，如：</p>
+<ul>
+<li>CHAR_BIT：char 的位数</li>
+<li>CHAR_MAX：char 的最大值</li>
+<li>INT_MAX</li>
+</ul>
+<p><code>#define</code> 和 <code>#include</code> 一样也是预处理器编译指令，<code>#define INT_MAX 32767</code>上面的指令告诉预处理器，在程序中查找<code>INT_MAX</code>，把所有的 <code>INT_MAX</code> 都替换为 32767。</p>
+<p>C++有更好的创建符号常量的方法：用关键字 <code>const</code>；但被设计成可用于C和C++的头文件中必须用<code>#define</code>。</p>
+<p><strong>3. C++11 初始化方式</strong><br>初始化常规变量的方法与初始化类变量的方式更像。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> emus&#123;<span class="number">7</span>&#125;;      # 等号可以省略</span><br><span class="line"><span class="keyword">int</span> rocs = &#123;&#125;;    # 变量初始化为<span class="number">0</span></span><br><span class="line"><span class="keyword">int</span> psychics&#123;&#125;;   # 变量初始化为<span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="3-1-4-无符号类型"><a href="#3-1-4-无符号类型" class="headerlink" title="3.1.4 无符号类型"></a>3.1.4 无符号类型</h3><p>short、int、long 和 long long都有不能存储负数值的无符号变体，优点是可以增大变量能够存储的最大值，当要存储人口、颗数等不可能为负的数值时使用：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> shot change;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> rovert;</span><br><span class="line"><span class="keyword">unsigned</span> quarterback;     <span class="meta"># unsigned 本身是 unsigned int 的缩写</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>带符号整型边界值+1 = 范围另一端的取值</strong>：<br><code>SHORT_MAX</code> = 32767, <code>SHORT_MAX</code> + 1 = -32768。</p>
+<h3 id="3-1-6-整型字面值"><a href="#3-1-6-整型字面值" class="headerlink" title="3.1.6 整型字面值"></a>3.1.6 整型字面值</h3><p>即常量，如212 或 1776，C++用前两位来标识数字常量的基数：</p>
+<ul>
+<li>第一位为1～9，则基数为10（十进制）;</li>
+<li>第一位为0，第二位为1～7，则基数为8；</li>
+<li>前两位为 0x 或 0X，则基数为16。</li>
+</ul>
+<p><code>cout</code> 默认以十进制输出<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; hex;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; waist &lt;&lt; <span class="built_in">endl</span>;  <span class="meta"># wasit 将以8进制输出</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; oct;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; waist &lt;&lt; <span class="built_in">endl</span>;  # <span class="number">16</span>进制</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; dec;            # <span class="number">10</span>进制</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-1-7-确定常量的类型"><a href="#3-1-7-确定常量的类型" class="headerlink" title="3.1.7 确定常量的类型"></a>3.1.7 确定常量的类型</h3><p><strong>如果有后缀名：</strong></p>
+<ul>
+<li>后缀为 l 或 L：long；</li>
+<li>后缀为 u 或 U ：unsigned int；</li>
+<li>后缀为 ul 或 lu (大小写均可)：unsigned long；</li>
+<li>后缀为 ll 或 LL：long long.</li>
+</ul>
+<p><strong>如果不带后缀</strong>：</p>
+<ul>
+<li>十进制数，用int、long、longlong 中能够存储该数的最小类型表示；</li>
+<li>十六进制 / 八进制整数，用int、unsigned int、unsigned long、long long、unsigned long long中能存储该数的最小类型表示。<strong>因为十六进制常用来表示内存地址，而内存地址是没有符号的，所以unsigned int 比 long 更适合用来表示16位地址。</strong></li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

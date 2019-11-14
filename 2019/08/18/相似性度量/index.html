@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        相似性度量 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-闵可夫斯基距离"><span class="toc-text">1. 闵可夫斯基距离</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-欧式距离-L-2"><span class="toc-text">1.1 欧式距离 $L_2$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-曼哈顿距离-L-1"><span class="toc-text">1.2 曼哈顿距离 $L_1$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-切比雪夫距离"><span class="toc-text">1.3 切比雪夫距离</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-马氏距离"><span class="toc-text">2. 马氏距离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-相关系数"><span class="toc-text">3. 相关系数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-夹角余弦"><span class="toc-text">4. 夹角余弦</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正则化"><span class="toc-text">正则化</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        相似性度量
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-18 12:22:34</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#机器学习" title="机器学习">机器学习</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#神经网络" title="神经网络">神经网络</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>不同相似性度量得到的结果并不一定一致，选择适合的距离或相似度非常重要</p>
+<h3 id="1-闵可夫斯基距离"><a href="#1-闵可夫斯基距离" class="headerlink" title="1. 闵可夫斯基距离"></a>1. 闵可夫斯基距离</h3><p>闵可夫斯基距离越大，相似性越小，设 $x_i = (x_{1i}, x_{2i}, …, x_{mi})$，$x_j = (x_{1j}, x_{2j}, …, x_{mj})$，样本$x_i$ 和 样本$x_j$ 的 $L_p$ 距离定义为：</p>
+<script type="math/tex; mode=display">L_p(x_i, x_j) = \Big(\sum\limits_{k=1}^m\big|x_{ki} - x_{kj}\big|^p\Big)^{\frac{1}{p}}, p \ge 1</script><h4 id="1-1-欧式距离-L-2"><a href="#1-1-欧式距离-L-2" class="headerlink" title="1.1 欧式距离 $L_2$"></a>1.1 欧式距离 $L_2$</h4><p>当$L_p$ 中 $p = 2$ 时，称为欧式距离:</p>
+<script type="math/tex; mode=display">L_2(x_i, x_j) = \Big(\sum\limits_{k=1}^m\big|x_{ki} - x_{kj}\big|^2\Big)^{\frac{1}{2}}</script><h4 id="1-2-曼哈顿距离-L-1"><a href="#1-2-曼哈顿距离-L-1" class="headerlink" title="1.2 曼哈顿距离 $L_1$"></a>1.2 曼哈顿距离 $L_1$</h4><p>当$L_p$ 中 $p = 1$ 时，称为曼哈顿距离：</p>
+<script type="math/tex; mode=display">L_1(x_i, x_j) = \Big(\sum\limits_{k=1}^m\big|x_{ki} - x_{kj}\big|\Big)</script><h4 id="1-3-切比雪夫距离"><a href="#1-3-切比雪夫距离" class="headerlink" title="1.3 切比雪夫距离"></a>1.3 切比雪夫距离</h4><p>当 $p = \infty$ 时，$L_p$ 是各个坐标数值差的绝对值的最大值：</p>
+<script type="math/tex; mode=display">d_{ij} = \mathop{max}\limits_k\big|x_{ki} - x_{kj}\big|</script><h3 id="2-马氏距离"><a href="#2-马氏距离" class="headerlink" title="2. 马氏距离"></a>2. 马氏距离</h3><p>考虑各个特征之间的相关性，而且和特征的尺度无关，给定一个样本集合 $X=\big[x_{ij}\big]_{m\times n}$，它的协方差矩阵是 $S$ ？，样本 $x_i$ 与样本$x_j$ 之间的马氏距离为：</p>
+<script type="math/tex; mode=display">d_{ij} = \big[ (x_i - x_j)^T S^{-1}(x_i - x_j) \big]^{\frac{1}{2}}</script><p>其中$x_i = (x_{1i}, x_{2i}, …, x_{mi})$，$x_j = (x_{1j}, x_{2j}, …, x_{mj})$，<strong>当 $S$ 是单位矩阵时，即样本各特征之间相互独立且特征间的方差为1时，马氏距离就是欧式距离</strong>。</p>
+<h3 id="3-相关系数"><a href="#3-相关系数" class="headerlink" title="3. 相关系数"></a>3. 相关系数</h3><p>样本之间的相似度可以用相关系数表示，相关系数的绝对值越接近1，样本越相似，越接近0越不相似，相关系数的定义是：</p>
+<script type="math/tex; mode=display">r_{ij}=\frac{\sum\limits_{k=1}^m (x_{ki} - \bar x_i)(x_{kj}-\bar x_j)}{\Big[\sum\limits_{k=1}^m(x_{ki}-\bar x_i)^2 \sum\limits_{k=1}^m(x_{kj}-\bar x_j)^2\Big]^{\frac{1}{2}}}</script><p>其中：</p>
+<script type="math/tex; mode=display">\bar x_i = \frac{1}{m}\sum\limits_{k=1}^m x_{ki}, \bar x_j = \frac{1}{m}\sum\limits_{k=1}^m x_{kj}</script><blockquote>
+<p>相关系数计算：</p>
+<script type="math/tex; mode=display">r(X, Y) = \frac{Cov(X, Y)}{\Big[Var[X] Var[Y]\Big]^{\frac{1}{2}}}</script></blockquote>
+<h3 id="4-夹角余弦"><a href="#4-夹角余弦" class="headerlink" title="4. 夹角余弦"></a>4. 夹角余弦</h3><p>夹角余弦越接近于 1 ，样本越相似，与接近于 0 越不相似，样本 $x_i$ 与样本$x_j$ 之间的夹角余弦定义为：</p>
+<script type="math/tex; mode=display">s_{ij} = \frac{\sum\limits_{k=1}^m x_{ki} x_{kj}}{\Big[\sum\limits_{k=1}^mx_{ki}^2 \sum\limits_{k=1}^mx_{kj}^2\Big]^{\frac{1}{2}}}</script><blockquote>
+<p>向量的内积：$ab=|a||b|cos(\theta)$<br>几何解释时一个向量在另一个向量上投影只积，即同方向的积，如果一个向量b是单位向量，那么两个向量的内积就是a在b上的投影。<br>内积在数值上可以描述两个向量在方向上的接近程度：</p>
+<ul>
+<li>当内积为正时，两个向量大致指向相同的方向，方向夹角小于90度；<br>当内积为负时，两个向量大致指向相反的方向，方向夹角大于90度；<br>当内积为0时，两个向量相互垂直；</li>
+</ul>
+<p>向量的外积 $ab = |a||b|sin(\theta)$<br>新生成的向量，这个向量垂直于 a 和 b 展成的平面。</p>
+</blockquote>
+<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p><strong>L2 正则化 ：</strong></p>
+<script type="math/tex; mode=display">+ \lambda \frac{1}{2}||\theta||_2</script><script type="math/tex; mode=display">||\theta||_2=(w_1)^2+(w_2)^2+...</script><p>每次参数更新时，是按固定的比例减少的，假如w 很大，每次更新会减少较大的值，假如 w 很小，每次减少较小的值。</p>
+<p><strong>L1 正则化 ：</strong></p>
+<script type="math/tex; mode=display">+ \lambda \frac{1}{2}||\theta||_1</script><script type="math/tex; mode=display">||\theta||_1=|w_1|+|w_2|+...</script><p>每次参数更新时，是按固定的量减少，假如w 为正，则减少一个固定量，如果w为负，则增加一个固定量，假如 w 本来很小，很容易被更新为0。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

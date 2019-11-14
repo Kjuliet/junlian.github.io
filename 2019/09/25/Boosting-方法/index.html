@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Boosting 方法 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-AdaBoost"><span class="toc-text">1. AdaBoost</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-AdaBoost-算法"><span class="toc-text">1.1 AdaBoost 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-AdaBoost算法的训练误差分析"><span class="toc-text">1.2 AdaBoost算法的训练误差分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-定理：AdaBoost-的训练误差界"><span class="toc-text">1.2.1 定理：AdaBoost 的训练误差界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-二分类问题AdaBoost的训练误差界"><span class="toc-text">1.2.2 二分类问题AdaBoost的训练误差界</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-AdaBoost-算法的解释"><span class="toc-text">1.3 AdaBoost 算法的解释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-1-前向分步算法"><span class="toc-text">8.3.1 前向分步算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-提升树"><span class="toc-text">2. 提升树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-提升树模型"><span class="toc-text">2.1 提升树模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-二分类问题"><span class="toc-text">2.1.1 二分类问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-回归问题"><span class="toc-text">2.1.2 回归问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-一般问题的梯度提升"><span class="toc-text">2.1.3 一般问题的梯度提升</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Boosting 方法
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-25 09:34:13</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#机器学习" title="机器学习">机器学习</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>在分类问题中，提升Boosting方法通过改变训练样本的权重，学习多个分类器后将这些分类器进行线性组合，提高分类性能。</p>
+<p>Boosting 方法基于的思想是：对于一个复杂的任务，适当地综合多个专家的判断，要比任何一个专家单独判断好，“三个臭皮匠顶个诸葛亮”。</p>
+<p>在概率近似正确（probably approximately correct PAC）学习的框架中，一个概念一个类：</p>
+<ul>
+<li>如果存在一个多项式的学习算法能够学习它，而且正确率很高，则称这个概念是<strong>强可学习</strong>的；</li>
+<li>如果存在一个多项式的学习算法能够学习，但正确率只比随机猜测略好，那么就称这个概念是<strong>弱可学习</strong>的。</li>
+</ul>
+<p>Schapire 证明强可学习和弱可学习是等价的，也就是说，在PAC下，一个概念是强可学习的充分必要条件是这个概念是弱可学习的。</p>
+<p>提升方法就是从比较容易得到的弱分类算法出发，反复学习，得到一系列弱分类器（基本分类器），然后组合这些弱分类器构成一个强分类器。大多数的提升方法都是改变训练数据的概率分布（训练数据的权值分布），针对不同的训练数据分布调用弱学习算法学习一系列弱分类器。</p>
+<p>提升方法要回答两个问题：</p>
+<ul>
+<li>在每一轮如何改变训练集的权值或概率分布；</li>
+<li>如何将弱分类器组合成一个强分类器。</li>
+</ul>
+<h1 id="1-AdaBoost"><a href="#1-AdaBoost" class="headerlink" title="1. AdaBoost"></a>1. AdaBoost</h1><p>Ada 即 Adaptive，它能适应弱分类器各自的训练误差率。</p>
+<p>AdaBoost 对提升方法要回答的两个问题：</p>
+<ul>
+<li>每一轮如何改变训练集权值：<strong>提高那些在前一轮弱分类器错误分类的样本的权值，降低那些被正确分类的样本的权值</strong>，这样那些没有得到正确分类的数据，因为其权值加大而受到后一轮的弱分类器的更大关注，分类问题被一系列弱分类器“分而治之”。</li>
+<li>如何组合：<strong>加权多数表决，</strong>加大分类误差率小的弱分类器的权值，使其在表决中起较大作用，减少分类误差较大的弱分类器的权值，使其在表决中起较小作用。</li>
+</ul>
+<h2 id="1-1-AdaBoost-算法"><a href="#1-1-AdaBoost-算法" class="headerlink" title="1.1 AdaBoost 算法"></a>1.1 AdaBoost 算法</h2><p>输入：训练数据集，弱学习算法<br>输出：最终分类器$G(x)$<br>（1）初始化训练数据的权值分布，保证第一步能够在原始数据上学习基本分类器$G_1(x)$：</p>
+<script type="math/tex; mode=display">D_1 = (w_{11}, ,,,, w_{1i}, w_{1N}), w_{1i}=\frac{1}{N} \tag{1}</script><p>（2）对 $m=1, 2, …, M$：</p>
+<ul>
+<li>用具有权值分布 $D_m$ 的训练数据集学习，得到基本分类器 $G_m(x): \mathcal X \rightarrow \{-1, +1\}$</li>
+<li>计算$G_m(x)$在训练数据集上的分类误差率，：<script type="math/tex; mode=display">e_m=\sum_{i=1}^NP(G_m(x_i) \ne y_i) = \sum_{i=1}^Nw_{mi}I(G_m(x_i)\ne y_i)=\sum_{G_m(x_i)\ne y_i}w_{mi} \tag{2}</script><script type="math/tex; mode=display">\sum_{i=1}^Nw_{mi}=1</script></li>
+<li>计算 $G_m(x)$的系数，当分类器的误差率大于0.5时，该分类器的系数为负数，对数是自然对数：<script type="math/tex; mode=display">\alpha_m = \frac{1}{2}log\frac{1-e_m}{e_m} \tag{3}</script></li>
+<li><p>更新训练数据集的权值分布：</p>
+<script type="math/tex; mode=display">D_{m+1}=(w_{m+1, 1}, ..., w_{m+1, i}, ..., w_{m+1, N}) \tag{4}</script><script type="math/tex; mode=display">w_{m+!,i}=\frac{w_{m, i}}{Z_m}exp(-\alpha_m y_i G_m(x_i)), i=1,2,..., N \tag{5}</script><p>其中 $Z_m$是规范化因子，使得$D_{m+1}$是一个概率分布：</p>
+<script type="math/tex; mode=display">Z_m=\sum_{i=1}^Nw_{mi}exp(-\alpha_m y_i G_m(x_i)) \tag{6}</script></li>
+<li><p>构建基本分类器的线性组合，$\alpha_m$ 的和不等于1，$f(x)$ 的符号决定实例 $x$ 的类，$f(x)$ 的绝对值表示分类的确信度：</p>
+<script type="math/tex; mode=display">f(x)=\sum_{m=1}^M\alpha_m G_m(x)\tag{7}</script></li>
+</ul>
+<p>所以最终分类器是：</p>
+<script type="math/tex; mode=display">G(x)=sign(f(x))=sign(\sum_{m=1}^M\alpha_mG_m(x)) \tag{8}</script><h2 id="1-2-AdaBoost算法的训练误差分析"><a href="#1-2-AdaBoost算法的训练误差分析" class="headerlink" title="1.2 AdaBoost算法的训练误差分析"></a>1.2 AdaBoost算法的训练误差分析</h2><p>AdaBoost 最基本性质就是它能在学习过程中不断减少在训练数据集上的分类误差率。</p>
+<h3 id="1-2-1-定理：AdaBoost-的训练误差界"><a href="#1-2-1-定理：AdaBoost-的训练误差界" class="headerlink" title="1.2.1 定理：AdaBoost 的训练误差界"></a>1.2.1 定理：AdaBoost 的训练误差界</h3><p>AdaBoost 分类器的训练误差界为：</p>
+<script type="math/tex; mode=display">\frac{1}{N}\sum_{i=1}^N I(G(x_i) \ne y_i) \le \frac{1}{N}\sum_i exp(-y_if(x_i)) = \prod_m Z_m</script><p><strong>证明：</strong><br>当 $G(x_i) \ne y_i$ 时，$y_if(x_i) \lt 0$，所以$exp(-y_if(x_i)) \ge 1$，前半部分得证。<br>接下来证明后半部分：<br>由式（5）变形得：</p>
+<script type="math/tex; mode=display">w_{m,i} exp(-\alpha_my_iG_m(x_i)) = w_{m+1, i}Z_m</script><p>后半部分：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+\frac{1}{N}\sum_i exp(-y_if(x_i)) &=& \frac{1}{N}\sum_i exp(-\sum_{m=1}^M\alpha_m y_iG_m(x_i)) \\
+&=&\sum_i w_{1i} \prod_{m=1}^M exp(-\alpha_m y_i G_m(x_i)) \\
+&=& Z_1 \sum_i w_{2i}\prod_{m=2}^M exp(-\alpha_m y_i G_m(x_i)) \\
+&=& Z_1Z_2 \sum_i w_{3i} \prod_{m=3}^M exp(-\alpha_m y_i G_m(x_i)) \\
+&=&... \\
+&=& \prod_{m=1}^{M-1} Z_m \sum_i w_{Mi} exp(-\alpha_M y_i G_M(x_i))  \\
+&=& \prod_{m=1}^M Z_m
+\end{array}</script><p>这一定理说明，可以在每一轮选取适当的$G_m$使得$Z_m$最小，从而使训练误差下降最快。</p>
+<h3 id="1-2-2-二分类问题AdaBoost的训练误差界"><a href="#1-2-2-二分类问题AdaBoost的训练误差界" class="headerlink" title="1.2.2 二分类问题AdaBoost的训练误差界"></a>1.2.2 二分类问题AdaBoost的训练误差界</h3><p>令 $\gamma_m = \frac{1}{2} - e_m$</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+\prod_{m=1}^M Z_m &=& \prod_{m=1}^M[2\sqrt{e_m(1-e_m)}] \\
+&=& \prod_{m=1}^M\sqrt{(1-4\gamma_m^2)} \\
+&=& exp(-2\sum_{m=1}^M \gamma_m^2)
+\end{array}</script><p>(由 $e^x$ 和 $\sqrt{1-x}$ 在点 $x=0$ 的泰勒展开式推出不等式$\sqrt{(1-4\gamma_m^2)} \le exp(-2\gamma_m^2)$)<br><strong>证明：</strong></p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+Z_m &=& \sum_{i=1}^N w_{mi}exp(-\alpha_my_i G_m(x_i)) \\
+&=& \sum_{y_i = G_m(x_i)} w_{mi}e^{-\alpha_m} + \sum_{y_i \ne G_m(x_i)} w_{mi}e^{\alpha_m} \\
+&=& (1-e_m)e^{-\alpha_m} + e_m e^{\alpha_m} \\
+&=& 2\sqrt{(e_m(1-e_m))} \\
+&=& \sqrt{1-4\gamma_m^2} 
+\end{array}</script><p><strong>推论：</strong>如果存在 $\gamma &gt; 0$，对所有 $m$ 有 $\gamma_m \ge \gamma$，则：</p>
+<script type="math/tex; mode=display">\frac{1}{N}\sum_{i=1}^NI(G(x_i) \ne y_i) \le exp(-2M\gamma^2)</script><p>表明 AdaBoost 的训练误差是以指数速率下降的。</p>
+<h2 id="1-3-AdaBoost-算法的解释"><a href="#1-3-AdaBoost-算法的解释" class="headerlink" title="1.3 AdaBoost 算法的解释"></a>1.3 AdaBoost 算法的解释</h2><p>AdaBoost 的另一种解释是，AdaBoost 是模型为加法模型、损失函数为指数模型，学习算法为前向分步算法时的二分类学习方法。</p>
+<h3 id="8-3-1-前向分步算法"><a href="#8-3-1-前向分步算法" class="headerlink" title="8.3.1 前向分步算法"></a>8.3.1 前向分步算法</h3><p>加法模型中， $b(x; \gamma_m)$ 为基函数：</p>
+<script type="math/tex; mode=display">f(x) = \sum_{m=1}^M\beta_mb(x; \gamma_m)</script><p>在给定训练数据及损失函数 $L(y, f(x))$ 的条件下，学习加法模型 $f(x)$ 就是经验分险极小化即损失函数极小化问题：</p>
+<script type="math/tex; mode=display">\mathop{min}_{\beta_m, \gamma_m}\sum_{i=1}^N L(y_i, \sum_{m=1}^M\beta_mb(x_i; \gamma_m))</script><p>对这个问题，前向分步算法的求解思想是：因为学习的是加法模型，如果能够从前往后，每一步只学习一个基函数及其系数，逐步逼近优化目标函数式，也就是每步只优化：</p>
+<script type="math/tex; mode=display">\mathop{min}_{\beta, \gamma} \sum_{i=1}^N L(y_i, \beta b(x_i; \gamma))</script><p><strong>算法：</strong><br>输入：训练数据集，损失函数，基函数集$\{b(x; \gamma)\}$<br>输出：加法模型 $f(x)$<br>（1）初始化 $f_0(x) = 0$<br>（2）对 $m=1, 2, …, M$：</p>
+<ul>
+<li>极小化损失函数得到参数 $\beta_m, \gamma_m$：<script type="math/tex; mode=display">(\beta_m, \gamma_m)=arg \mathop{min}_{\beta, \gamma} \sum_{i=1}^N L(y_i, f_{m-1}(x_i)+\beta b(x_i; \gamma))</script></li>
+<li>更新：<script type="math/tex; mode=display">f_m(x)=f_{m-1}(x)+\beta_m b(x; \gamma_m)</script></li>
+</ul>
+<p>（3）得到加法模型：</p>
+<script type="math/tex; mode=display">f(x) = f_M(x) = \sum_{m=1}^M \beta_m b(x; \gamma_m)</script><p>当前向分步算法的损失函数为指数损失函数，AdaBoost 算法是前向分步加法算法的特例：</p>
+<script type="math/tex; mode=display">L(y, f(x)) = exp[-yf(x)]</script><p><strong>证明：</strong><br>假设经过 m-1 轮迭代前向分步算法已经得到$f_{m-1}(x)$：</p>
+<script type="math/tex; mode=display">f_{m-1}(x) = f_{m-2}(x)+\alpha_{m-1}G_{m-1}(x)=\alpha_1G_1(x)+...+\alpha_{m-1}G_{m-1}(x)</script><p>在第m轮得到 $\alpha_m$:</p>
+<script type="math/tex; mode=display">f_m(x) = f_{m-1}(x) + \alpha_mG_m(x)</script><p>目标是使前向分步算法得到的 $\alpha_m$ 和 $G_m(x)$使$f_m(x))$在训练集上的指数损失最小：</p>
+<script type="math/tex; mode=display">
+\begin{array}
+(\alpha_m, G_m(x)) &=& arg \mathop{min}_{\alpha, G}\sum_{i=1}^Nexp[-y_i(f_{m-1}(x_i) + \alpha G(x_i))] \\
+&=&arg \mathop{min}_{\alpha, G}\sum_{i=1}^N \bar w_{mi} exp[-y_i\alpha G(x_i)]
+\end{array}
+\tag{9}</script><p>其中 $\bar w_{mi}=exp[-y_if_{m-1}(x_i)]$，所以使式（9）最小的 $\alpha_m^<em>$ 和 $G_m^</em>(x)$ 就是 AdaBoost 算法得到的 $\alpha_m$ 和 $G_m(x)$，求解过程分两步：<br>（1）求 $G_m^*(x)$，对任意 $\alpha &gt; 0$，使式（9）最小的 $G(x)$ 由下式得到：</p>
+<script type="math/tex; mode=display">G_m^*(x) = arg \mathop{min}_G\sum_{i=1}^N \bar w_{mi}I(y_i \ne G(x_i))</script><p>该分类器是第m轮加权训练数据分类误差率最小的基本分类器。<br>（2）求 $\alpha_m^*$：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+\sum_{i=1}^N\bar w_{mi} exp[-y_i \alpha G(x_i)] &=& \sum_{y_i=G_m(x_i)}\bar w_{mi} exp(-\alpha) + \sum_{y_i\ne G_m(x_i)} \bar w_{mi} exp(\alpha) \\
+&=& (e^\alpha - e^{-\alpha})\sum_{i=1}^N \bar w_{mi} I(y_i \ne G(x_i)) + e^{-\alpha} \sum_{i=1}^N \bar w_{mi}
+\end{array}</script><p>对 $\alpha$ 求导，并使导数等于 0，得到：</p>
+<script type="math/tex; mode=display">\alpha_m^* = \frac{1}{2}log\frac{1-e_m}{e_m}</script><p>每一轮样本权值的更新：</p>
+<script type="math/tex; mode=display">f_m(x) = f_{m-1}(x) + \alpha_mG_m(x)</script><p>由$\bar w_{mi} = exp[-y_i f_{m-1}(x_i)]$得：</p>
+<script type="math/tex; mode=display">\bar w_{m+1, i} = \bar w_{mi} exp[-y_i \alpha_m G_m(x)]</script><p>和 AdaBoost 算法相比，只差规范化因子，因而等价。</p>
+<h1 id="2-提升树"><a href="#2-提升树" class="headerlink" title="2. 提升树"></a>2. 提升树</h1><p>提升树是以分类树或回归树为基本分类器的提升方法。</p>
+<h2 id="2-1-提升树模型"><a href="#2-1-提升树模型" class="headerlink" title="2.1 提升树模型"></a>2.1 提升树模型</h2><p>以决策树为基函数的提升方法叫提升树 boosting tree，模型可以用决策树的叫加法模型表示：</p>
+<script type="math/tex; mode=display">f_M(x)=\sum_{m=1}^MT(x; \Theta_m)</script><p>算法采用前向分步算法，首先确定初始提升树 $f_0(x)=0$，第 m 步的模型是：</p>
+<script type="math/tex; mode=display">f_m(x)=f_{m-1}(x)+T(x; \Theta_m)</script><p>通过经验风险极小化确定下一颗决策树的参数 $\Theta_m$:</p>
+<script type="math/tex; mode=display">\hat\Theta_m = arg \mathop{min}_{\theta,m}\sum_{i=1}^NL(y_i, f_{m-1}(x_i)+T(x_i; \Theta_m))</script><p>针对不同问题的提升树算法，主要区别是损失函数不同：</p>
+<ul>
+<li>回归问题：平方误差损失函数；</li>
+<li>分类问题：指数损失函数；</li>
+<li>一般决策问题：一般损失函数；</li>
+</ul>
+<h3 id="2-1-1-二分类问题"><a href="#2-1-1-二分类问题" class="headerlink" title="2.1.1 二分类问题"></a>2.1.1 二分类问题</h3><p>对二分类问题，提升算法只需要将AdaBoost中的基本分类器限制为二类分类树即可，此时提升树算法是 AdaBoost 算法的特殊情况。</p>
+<h3 id="2-1-2-回归问题"><a href="#2-1-2-回归问题" class="headerlink" title="2.1.2 回归问题"></a>2.1.2 回归问题</h3><p>如果将输入空间吗$\mathcal X$ 划分为 $J$个互不相交的区域 $R_1, R_2, …, R_J$，在每个区域上确定输出的常量$c_j$，那么树可表示为：</p>
+<script type="math/tex; mode=display">T(x; \Theta) = \sum_{j=1}^Jc_jI(x\in R_j)</script><p>其中 $J$ 是回归树的复杂度即叶结点的个数。</p>
+<p>前向分步算法：</p>
+<script type="math/tex; mode=display">f_(0) = 0</script><script type="math/tex; mode=display">f_m(x)=f_{m-1}(x) + T(x; \Theta_m), m=1,2,...,M</script><script type="math/tex; mode=display">f_M(x) = \sum_{m=1}^MT(x; \Theta_m)</script><p>在前向分步算法的第m步，给定当前模型$f_{m-1}(x)$，通过求解：</p>
+<script type="math/tex; mode=display">\hat \Theta_m = arg \mathop{min}_{\Theta_m}\sum_{i=1}^N L(y_i, f_{m-1}(x_i) + T(x_i; \Theta_m))</script><p>采用平方误差损失函数：</p>
+<script type="math/tex; mode=display">L(y, f(x)) = (y - f(x))^2</script><script type="math/tex; mode=display">L(y, f_{m-1}(x) + T(x; \Theta_m)) = [y - f_{m-1}(x) - T(x; \Theta_m)]^2 = [r- T(x; \Theta_m)]^2</script><script type="math/tex; mode=display">r = y-f_{m-1}(x)</script><p>$r$是当前拟合模型的残差，所以对回归问题的提升树来说，只需拟合当前模型的残差。</p>
+<p><strong>回归问题的提升树算法：</strong><br>输入：训练数据集<br>输出：提升树 $f_M(x)$<br>（1）初始化 $f_0(x) = 0$<br>（2）对 $m=1, 2, …, M$：</p>
+<ul>
+<li>计算残差：<script type="math/tex; mode=display">r_{mi} = y_i - f_{m-1}(x_i), i = 1, 2, ..., N</script></li>
+<li>拟合残差 $r_{mi}$ 学习一个回归树，得到$T(x; \Theta_m)$</li>
+<li>更新 $f_m(x) = f_{m-1}(x) + T(x; \Theta_m)$<br>（3）得到回归问题提升树：<script type="math/tex; mode=display">f_M(x) = \sum_{m=1}^M T(x; \Theta_m))</script></li>
+</ul>
+<h3 id="2-1-3-一般问题的梯度提升"><a href="#2-1-3-一般问题的梯度提升" class="headerlink" title="2.1.3 一般问题的梯度提升"></a>2.1.3 一般问题的梯度提升</h3><p>对一般损失函数，可以用梯度提升 gradient boosting 算法，它是利用最快下降法的近似方法，利用损失函数在当前模型的负梯度值，来找残差的近似值，拟合回归树。</p>
+<p><strong>梯度提升算法：</strong><br>输入：训练数据集，损失函数<br>输出：回归树<br>（1）初始化：</p>
+<script type="math/tex; mode=display">f_0(x) = arg\mathop{min}_c\sum_{i=1}^N L(y_i, c)</script><p>（2）对 $m=1, 2, …, N$:</p>
+<ul>
+<li>对 $i = 1, 2, …, N$，计算：<script type="math/tex; mode=display">r_{mi} = -[\frac{\partial L(y_i, f(x_i))}{\partial f(x_i)}]f(x) = f_{m-1}(x)</script></li>
+<li>对$r_{mi}$拟合一个回归树，得到第 m 颗树的叶结点区域 $R_{mj}, j=1,2,…, J$</li>
+<li>对 $j=1, 2, …, J$，利用线性搜索估计叶结点区域的值：<script type="math/tex; mode=display">c_{mj}=arg\mathop{min}_c\sum_{x_i \in R_{mj}} L(y_i, f_{m-1}(x_i) + c)</script></li>
+<li>更新 $f_m(x) = f_{m-1}(x) + \sum_{j=1}^J c_{mj}I(x\in R_{mj})$<br>（3）得到回归树：<script type="math/tex; mode=display">\hat f(x) = f_M(x) = \sum_{m=1}^M\sum_{j=1}^J c_{mj}I(x\in R_{mj})</script></li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
