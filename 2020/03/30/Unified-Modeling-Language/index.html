@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Unified Modeling Language - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UML-Unified-Modeling-Language"><span class="toc-text">UML (Unified Modeling Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-用例图"><span class="toc-text">1 用例图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-类图"><span class="toc-text">2 类图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-对象图"><span class="toc-text">3 对象图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-组件图-Component-Diagram"><span class="toc-text">4 组件图 Component Diagram</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-部署图-Deployment-Diagram"><span class="toc-text">5 部署图 Deployment Diagram</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-时序图-Sequence-Diagram"><span class="toc-text">6 时序图 Sequence Diagram</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-协作图-Collaboration-Diagram"><span class="toc-text">7 协作图 Collaboration Diagram</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-状态图-State-Translation-Diagram"><span class="toc-text">8 状态图 State Translation Diagram</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-活动图-Activity-Diagram"><span class="toc-text">9 活动图 Activity Diagram</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Unified Modeling Language
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-30 06:57:21</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#软件工程" title="软件工程">软件工程</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="UML-Unified-Modeling-Language"><a href="#UML-Unified-Modeling-Language" class="headerlink" title="UML (Unified Modeling Language)"></a>UML (Unified Modeling Language)</h1><p>[TOC]</p>
+<p>Unified Modeling Language，统一建模语言，可以在面向对象的分析与设计过程中标识元素，构建模块，分析过程并通过文档说明系统中的重要细节。</p>
+<p>UML 图分类：1) 静态模型 Static Model；2) 动态模型 Dynamic Model</p>
+<p><strong>静态建模</strong>用于创建相关问题领域主要元素的视图，记录一个系统的静态特征，反映系统基础、固定的框架结构，包括：</p>
+<ul>
+<li><strong>用例图 Use Case Diagrams</strong></li>
+<li><strong>类图 Class Diagrams</strong></li>
+<li>对象图 Object Diagrams</li>
+<li>组件图 Component Diagrams</li>
+<li>部署图 Deployment Diagrams</li>
+</ul>
+<p><strong>动态建模</strong> 用来展示系统的行为，包括：</p>
+<ul>
+<li><strong>时序图 Sequence Diagrams</strong></li>
+<li>协作图 Collaboration Diagrams</li>
+<li>状态图 State Chart Diagrams</li>
+<li>活动图 Activity Diagrams</li>
+</ul>
+<p>其他 UML 元素：</p>
+<ul>
+<li>包 Package</li>
+<li>UML 扩展机制，包括：1) 注释 Comments；2) 构造型 Stereotypes；3) 标记值 Tagged Values；4) 限制 Constraints<br><img src="UML_package.png" alt></li>
+</ul>
+<h2 id="1-用例图"><a href="#1-用例图" class="headerlink" title="1 用例图"></a>1 用例图</h2><p>展示系统的核心功能和与其交互的用户，用户被称为“活动者 Actor”，椭圆是用例，表示用户能做什么事情，箭头由用户指向用例，可添加子用例，可标注优先级。</p>
+<p><img src="UML_useCaseDiagram.png" alt></p>
+<h2 id="2-类图"><a href="#2-类图" class="headerlink" title="2 类图"></a>2 类图</h2><p>描述类和接口的特征，以及对象之间的协作与交互关系。由一个或多个矩形区域构成，内容包括；1) 类型 Class，即类名；2) 属性 Attribute，成员变量；3) 操作 Operation，即成员方法。注意：</p>
+<ul>
+<li><code>+</code> 表示 public，<code>-</code> 表示 private；</li>
+<li>Operation 里面放重要的业务方法，成员变量的 set() 和 get() 方法不用列出；</li>
+</ul>
+<p><img src="UML_classDiagram.png" alt></p>
+<h2 id="3-对象图"><a href="#3-对象图" class="headerlink" title="3 对象图"></a>3 对象图</h2><p>表现对象的特征及对象之间的交互。对象图中不包含操作内容，因为同一类的对象操作是相同的？对象代表单独的实体，之间的关系是一对一的，不涉及多重性。<br><img src="UML_objectDiagram.png" alt></p>
+<h2 id="4-组件图-Component-Diagram"><a href="#4-组件图-Component-Diagram" class="headerlink" title="4 组件图 Component Diagram"></a>4 组件图 Component Diagram</h2><p>描述的是系统在高层次上的架构视图，组件是系统或子系统中的独立封装单位，提供一个或多个接口。<br><img src="UML_componentDiagram.png" alt></p>
+<h2 id="5-部署图-Deployment-Diagram"><a href="#5-部署图-Deployment-Diagram" class="headerlink" title="5 部署图 Deployment Diagram"></a>5 部署图 Deployment Diagram</h2><p>描述用于部署软件应用的物理设备信息。<br><img src="UML_deploymentDiagram.png" alt></p>
+<h2 id="6-时序图-Sequence-Diagram"><a href="#6-时序图-Sequence-Diagram" class="headerlink" title="6 时序图 Sequence Diagram"></a>6 时序图 Sequence Diagram</h2><p>在描述多个对象之间的交互信息时强调的是消息交互的时间顺序。<br><img src="UML_sequenceDiagram1.png" alt></p>
+<p>图中可以只有调用，没有返回值。<br><img src="UML_sequenceDiagram2.png" alt></p>
+<h2 id="7-协作图-Collaboration-Diagram"><a href="#7-协作图-Collaboration-Diagram" class="headerlink" title="7 协作图 Collaboration Diagram"></a>7 协作图 Collaboration Diagram</h2><p>描述对象间的协作信息，强调参与信息交流的对象之间的组织关系<br><img src="UML_collaborationDiagram.png" alt></p>
+<h2 id="8-状态图-State-Translation-Diagram"><a href="#8-状态图-State-Translation-Diagram" class="headerlink" title="8 状态图 State Translation Diagram"></a>8 状态图 State Translation Diagram</h2><p>状态是对象执行某项活动或等待某个事件时的条件，由成员变量维护。各状态之间由转移链接在一起，转移由某个事件触发后执行特定的操作，或评估是否是结束状态。<br><img src="UML_stateTranslationDiagram.png" alt></p>
+<h2 id="9-活动图-Activity-Diagram"><a href="#9-活动图-Activity-Diagram" class="headerlink" title="9 活动图 Activity Diagram"></a>9 活动图 Activity Diagram</h2><p>类似流程图：<br><img src="UML_activityDiagram.png" alt></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
