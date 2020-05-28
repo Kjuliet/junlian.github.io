@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Wide &amp; Deep (DLRS, 2016, Google) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Wide &amp; Deep (DLRS, 2016, Google)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-05-29 00:14:05</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="https://arxiv.org/abs/1606.07792" target="_blank" rel="noopener">Wide &amp; Deep Learning for Recommender Systems</a></p>
+<p>Wide&amp;Deep 的 Wide部分是单层的神经网络，有利于增强模型的“记忆能力”，可以简单得理解为直接的、显然的关联规则能力，比如在论文的应用希望在 Wide 部分发现 “用户安装了应用A，这时给用户推荐应用 B，用户安装 B 的概率很大” 这样的规则。Deep部分是多层神经网络，有利于增强模型的“泛化能力”，把所有能得到的特征都扔进这个黑盒去拟合函数，这个过程会把一些直接的因果关系模糊掉，泛化成一些间接的可能的相关性。<br><img src="Figure1.png" alt><br>输出层由softmax 和 logistics regression 综合输出。 Wide 部分训练时采用 L1 FTRL，是为了让 Wide 部分变得更加稀疏，即让 Wide 大部分权重变成0。FTRL 是一个稀疏性很好，还能达到不错精度的随机梯度下降方法，是线性模型在线训练的主要方法。随机梯度下降可以做到来一个样本就训练更新一次参数，因此可以实现模型的在线更新。而 L1 正则化比 L2 正则化更容易产生稀疏解。这样 Wide 大部分权重变成0，准备特征的时候就不用准备那么多 0 权重特征了，可以大大压缩模型权重，压缩特征向量的维度。</p>
+<p><img src="Figure3.png" alt><br>稀疏性对模型的精度会有负面影响，这里之所以要考虑让 Wide 部分稀疏，是因为特征向量的维度太高了。Google Play 在选取 Wide 部分 的特征时，为了发现当前曝光 app 和用户安装 app 的关联关系，用的是 User Installed App 和 Impression App 两个 id 类特征来直接影响最终的得分结果。但是两个 id 类的特征向量进行组合，在维度爆炸的同时，会让原本已经非常稀疏的 multihot 特征向量，变得更加稀疏。因此 wide 部分的权重数量其实是海量的，为了不把海量的权重都搬到线上进行 model serving，所以通过 L1 FTRL 把那些稀疏特征过滤掉。</p>
+<p>而 Deep 部分不需要特别考虑稀疏性，Deep 部分的输入是 Age，App installs 等数值类特征，要么是已经降维并且稠密化的 Embedding 向量，大家也不敢把过度稀疏的特征向量直接输入到 Deep 网络中。所以 Deep 部分不存在严重的特征稀疏问题，所以选择使用精度更好，更适用于深度学习训练的 AdaGrad 去训练。</p>
+<p><img src="Figure2.png" alt></p>
+<p><img src="Figure4.png" alt></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
