@@ -141,7 +141,9 @@
         <p>在多层神经网络中，上层节点的输出和下层节点的输入之间有一个函数关系，这个函数就是激活函数。</p>
 <h3 id="1-用途"><a href="#1-用途" class="headerlink" title="1. 用途"></a>1. 用途</h3><p>如果多层神经网络中没有激活函数，那么不管网络有多少层，输出永远是输入的线性组合，相当于原始的感知机，等于没有隐藏层。通过引入非线性的激活函数，增加网络的表达能力。</p>
 <h3 id="2-常用激活函数及性质"><a href="#2-常用激活函数及性质" class="headerlink" title="2. 常用激活函数及性质"></a>2. 常用激活函数及性质</h3><h4 id="2-1-sigmoid"><a href="#2-1-sigmoid" class="headerlink" title="2. 1 sigmoid"></a>2. 1 sigmoid</h4><script type="math/tex; mode=display">f(x)=\frac{1}{1+e^{-x}}</script><p>$f(x)$ 对 x 的导数：</p>
-<script type="math/tex; mode=display">f'(x) = \frac{e^{-x}}{(1+e^{-x})^2} = f(x)(1-f(x))</script><div class="table-container">
+<script type="math/tex; mode=display">f'(x) = \frac{e^{-x}}{(1+e^{-x})^2} = f(x)(1-f(x))</script><p>取对数后函数 $log f(x)$ 和 $log(1-f(x))$ 的导函数分别是：</p>
+<script type="math/tex; mode=display">log'f(x) = 1-f(x), log'(1-f(x))=-f(x)</script><p>因此sigmoid 常作为二分类问题的输出层激活函数，单个样本的损失函数为对数似然函数：</p>
+<script type="math/tex; mode=display">Loss(x_i, y_i)=-y_i \cdot log(f(x)) - (1-y_i) \cdot log(1-f(x))</script><div class="table-container">
 <table>
 <thead>
 <tr>

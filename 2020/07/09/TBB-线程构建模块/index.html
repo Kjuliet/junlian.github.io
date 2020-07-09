@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        TBB 线程构建模块 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TBB-Thread-Building-Blocks"><span class="toc-text">TBB (Thread Building Blocks)</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        TBB 线程构建模块
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-07-09 22:38:25</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="TBB-Thread-Building-Blocks"><a href="#TBB-Thread-Building-Blocks" class="headerlink" title="TBB (Thread Building Blocks)"></a>TBB (Thread Building Blocks)</h2><p>C++ 库，抽象了并行方面的编程。在多核的平台上开发并行化的程序时，通过 TBB 可以高效合理地配置系统资源，包括管理内存的访问次序、最大化重用缓存、匹配线程与内核数目等。用户只需要关注任务本身，不需要关注线程。</p>
+<p>TBB 库中包含六个模块：</p>
+<ul>
+<li>Generic Parallel Algorithms 通用的并行算法<ul>
+<li>parallel_for：循环并行，泛型 parallel_for(range, body, partitioner) 表示在 range 区域的每个值，并行执行 body，partitioner 指定分割策略</li>
+<li>parallel_while</li>
+<li>parallel_reduce：在一个区域迭代，将各个任务计算得到的结果合并。range类型要求与parallel_for相同，body 中包含：1）分割构造函数，拷贝运行需要的数据，初始化归并操作中的归并和变量；2） join 方法，合并各任务的结果</li>
+<li>Pipeline：流的并行算法<ul>
+<li>从过滤器基类 filter 继承构造过滤器类xxfilter，通过参数指定过滤器的模式。过滤器模式有三种：1）parallel：支持并行加速，可以不按特定的顺序并行处理多个 工作；2）serial_in_order：过滤器每次处理一个工作项，pipeline 中的所有serial_in_order过滤器都按相同的顺序处理工作；3）serial_out_of_order：不按特定顺序，每次处理一个工作项。</li>
+<li>每个过滤器xxfilter通过重载虚方法 filter::operator() 来实现对元素的处理，返回值是将被下一个过滤器处理的元素指针，若流里没有其他要处理的元素则返回空值。最后一个过滤器的返回值将被忽略。</li>
+<li>通过 pipeline p 生成 pipeline 的实例</li>
+<li>生成过滤器 xxfilter 的实例，按顺序通过p.add_filter() 将filter加入 pipeline，一个过滤器的实例在同一时间只能加给一个 pipeline；</li>
+<li>调用 pipeline::run 运行pipeline。通过 max_number_of_line_tokens 指定并发运行的数量上限</li>
+</ul>
+</li>
+<li>parallel_sort：快速并行排序，过程中调用了 parallel_for       </li>
+<li>paralle_scan：输入一个数组，生成一个数组，输出中每个元素的值都是原数组中在次元素之前的元素的某个运算结果的累积</li>
+</ul>
+</li>
+<li>Concurrent Containers 并行容器<ul>
+<li>concurrent_hash_map</li>
+<li>concurrent_queue</li>
+<li>concurrent_vector</li>
+</ul>
+</li>
+<li>Synchronization Primitives 同步原语：提供 atomic、mutex、lock 等同步原语的封装</li>
+<li>Memory Allocation 高性能的内存申请，用 TBB 的 allocator 代替 C++ 语言的 new/delete，提供了对 cache 机制更高效的支持</li>
+<li>Timing</li>
+<li>Task Scheduling 任务调度：并行算法的实现由task scheduling的接口实现，解决本地线程并行引起的性能问题，管理线程池</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
