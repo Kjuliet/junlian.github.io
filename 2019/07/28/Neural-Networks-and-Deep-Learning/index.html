@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Neural Networks and Deep Learning - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduce"><span class="toc-text">Introduce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic-Regression-as-a-Neural-Network"><span class="toc-text">Logistic Regression as a Neural Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sigmoid"><span class="toc-text">Sigmoid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cost-function"><span class="toc-text">Cost function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-Descent"><span class="toc-text">Gradient Descent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-and-Vectorization"><span class="toc-text">Python and Vectorization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Why-vectorization"><span class="toc-text">Why vectorization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Implementing-Logistic-Regression"><span class="toc-text">Implementing Logistic Regression</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Broadcasting-example"><span class="toc-text">Broadcasting example</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shallow-Neural-Network"><span class="toc-text">Shallow Neural Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Representation"><span class="toc-text">Representation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Activation-functions"><span class="toc-text">Activation functions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Sigmoid-function"><span class="toc-text">Sigmoid function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tangent-function-hyperbolic-tangent-function"><span class="toc-text">Tangent function/hyperbolic tangent function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ReLU-rectify-linear-unit"><span class="toc-text">ReLU(rectify linear unit)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Summary-of-gradient-descent"><span class="toc-text">Summary of gradient descent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Random-Initialization"><span class="toc-text">Random Initialization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-Neural-Network"><span class="toc-text">Deep Neural Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Matrix-dimensions"><span class="toc-text">Matrix dimensions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-deep-representations"><span class="toc-text">Why deep representations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Building-blocks-for-Forward-and-backward"><span class="toc-text">Building blocks for Forward and backward</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Forward-propagation-for-layer-l"><span class="toc-text">Forward propagation for layer $l$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Backward-propagation-for-layer-l"><span class="toc-text">Backward propagation for layer $l$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parameters-vs-Hyperparameters"><span class="toc-text">Parameters vs Hyperparameters</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#iterations"><span class="toc-text">iterations</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hidden-layer-L"><span class="toc-text">hidden layer L</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hidden-units-n-1-n-2-…"><span class="toc-text">hidden units $n^{[1]},n^{[2]},…$</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Summary-1"><span class="toc-text">Summary</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Neural Networks and Deep Learning
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-28 11:24:01</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#Deep Learning" title="Deep Learning">Deep Learning</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h2><p><strong>AI is the new Electricity</strong><br>Electricity had once transformed countless industries: transportation, manufacturing, healthcare, communications, and more.</p>
+<p>AI will now bring about an equally big transformation.</p>
+<p><strong>Neural network examples</strong><br><img src="./1539476822926.png" alt="Alt text"></p>
+<p><strong>Scale drives deep learning progress</strong></p>
+<ul>
+<li>The scale of the data.</li>
+<li>Computation, CPU or GPU </li>
+<li>Algorithms: change the algorithm because it allows that code to run much faster and train bigger neural networks.</li>
+</ul>
+<p>Fast computation is important, the process of training network is a circle.<br><img src="./1539477701410.png" alt="Alt text"></p>
+<h2 id="Logistic-Regression-as-a-Neural-Network"><a href="#Logistic-Regression-as-a-Neural-Network" class="headerlink" title="Logistic Regression as a Neural Network"></a>Logistic Regression as a Neural Network</h2><p><strong>Notation</strong><br><img src="./1539478500334.png" alt="Alt text"></p>
+<p><strong>Model</strong><br><img src="./1539479289543.png" alt="Alt text"></p>
+<h3 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h3><p>将计算结果转换到(0,1)之间：<br><img src="./1539479132143.png" alt="Alt text"></p>
+<h3 id="Cost-function"><a href="#Cost-function" class="headerlink" title="Cost function"></a>Cost function</h3><p><strong>Loss(error) function</strong><br>$L(\hat{y},y)=-(ylog\hat{y}+(1-y)log(1-\hat{y}))$<br><img src="./1539479675730.png" alt="Alt text"></p>
+<ul>
+<li>单个样本的损失函数</li>
+<li>更好优化，容易找到最优解，凸函数</li>
+</ul>
+<p><strong>Cost function</strong><br>$J(w,b)=\frac{1}{m}\sum^m_{i=1}L(\hat{y}^{(i)}-y^{(i)})$</p>
+<ul>
+<li>作用于整个数据集，参数的损失函数</li>
+</ul>
+<h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><p><img src="./1539481497394.png" alt="Alt text"></p>
+<p>The <strong>computation graph</strong> organizes a computation with arrow, left-to-right computation.</p>
+<p><strong>Computing derivatives</strong><br><img src="./1539483948614.png" alt="Alt text"></p>
+<p><strong>Logistic regression derivatives</strong><br><img src="./1539484474999.png" alt="Alt text"></p>
+<p><strong>On $m$ examples</strong><br><img src="./1539484831387.png" alt="Alt text"></p>
+<h3 id="Python-and-Vectorization"><a href="#Python-and-Vectorization" class="headerlink" title="Python and Vectorization"></a>Python and Vectorization</h3><h4 id="Why-vectorization"><a href="#Why-vectorization" class="headerlink" title="Why vectorization"></a>Why vectorization</h4><p><img src="./1539485430259.png" alt="Alt text"><br>更快，否则要用for循环。</p>
+<p><strong>GPU(Graphics Processing Unit)</strong><br>Both GPU and CPU have parallelization instructions. They’re sometimes called SIMD (single instruction multiple data单指令多数据流)instructions.</p>
+<p>SIMD means if we use built-in functions such as $np.$ function that don’t require you explicitly implementing a for loop, it enables Phyton Pi to take much better advantage of parallelism to do computions much faster.</p>
+<p>不管怎样，避免用for循环<br><img src="./1539486207196.png" alt="Alt text"></p>
+<h4 id="Implementing-Logistic-Regression"><a href="#Implementing-Logistic-Regression" class="headerlink" title="Implementing Logistic Regression"></a>Implementing Logistic Regression</h4><p><strong>对于每个样本：</strong><br><img src="./1539486349227.png" alt="Alt text"></p>
+<p><strong>对于整个训练集</strong><br><img src="./1539486559440.png" alt="Alt text"></p>
+<p><strong>反向传播</strong><br><img src="./1539489303895.png" alt="Alt text"></p>
+<h4 id="Broadcasting-example"><a href="#Broadcasting-example" class="headerlink" title="Broadcasting example"></a>Broadcasting example</h4><p><img src="./1539490811925.png" alt="Alt text"></p>
+<p><strong>General Principle</strong><br><img src="./1539491216154.png" alt="Alt text"></p>
+<ul>
+<li>代码少</li>
+<li>速度快<blockquote>
+<p>Using the reshape command to make sure that matrices are the size we need it to be.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Shallow-Neural-Network"><a href="#Shallow-Neural-Network" class="headerlink" title="Shallow Neural Network"></a>Shallow Neural Network</h2><p><img src="./1539491978397.png" alt="Alt text"><br><img src="./1539492060725.png" alt="Alt text"></p>
+<h3 id="Representation"><a href="#Representation" class="headerlink" title="Representation"></a>Representation</h3><p><strong>Single example</strong><br><img src="./1539493824143.png" alt="Alt text"><br><img src="./1539493913840.png" alt="Alt text"></p>
+<p><strong>Vectorize across multiple examples</strong><br><img src="./1539494360369.png" alt="Alt text"></p>
+<p><img src="./1539494115994.png" alt="Alt text"></p>
+<p><img src="./1539494272379.png" alt="Alt text"></p>
+<h3 id="Activation-functions"><a href="#Activation-functions" class="headerlink" title="Activation functions"></a>Activation functions</h3><p><strong>Non-linear activation function</strong><br>If we use linear activation function<br><img src="./1539499801171.png" alt="Alt text"><br>当输出y是房子的价格时，输出层可以用线性activation functions，但中间层还是不能用。</p>
+<h4 id="Sigmoid-function"><a href="#Sigmoid-function" class="headerlink" title="Sigmoid function"></a>Sigmoid function</h4><p><img src="./1539499455076.png" alt="Alt text"><br>$a=\frac{1}{1+e^{-z}}$</p>
+<ul>
+<li>Going within zero and one.</li>
+<li>If output is 0,1 value, if we’re using binary classification, then the sigmoid activation function is a natural choice for the output layer.<br><strong>Derivatives</strong><br><img src="./1539500629320.png" alt="Alt text"></li>
+</ul>
+<h4 id="Tangent-function-hyperbolic-tangent-function"><a href="#Tangent-function-hyperbolic-tangent-function" class="headerlink" title="Tangent function/hyperbolic tangent function"></a>Tangent function/hyperbolic tangent function</h4><p><img src="./1539499487262.png" alt="Alt text"><br>$a=tanh(z)=\frac{e^z-e^{-z}}{e^z+e^{-z}}$</p>
+<ul>
+<li>Going between plus 1 and minus 1.</li>
+<li>Actually mathematically a shifted version of the sigmoid function</li>
+<li>For hidden units, if we let the activation function be equal to tanh(z), this almost always works <strong>better than the sigmoid</strong> function. The mean of your data is closer to 0 rather than 0.5.</li>
+</ul>
+<p><strong>Derivatives</strong><br><img src="./1539500685482.png" alt="Alt text"></p>
+<h4 id="ReLU-rectify-linear-unit"><a href="#ReLU-rectify-linear-unit" class="headerlink" title="ReLU(rectify linear unit)"></a>ReLU(rectify linear unit)</h4><p><img src="./1539499500554.png" alt="Alt text"><br>$a=max(0,z)$</p>
+<ul>
+<li>ReLU is increasingly the default choice of activation function.</li>
+<li>In practice, enough of hidden units will have z greater than 0, so learning can still be quite fast for most training examples.</li>
+<li>So if you’re not sure what to use for hidden layer, just use the ReLU activation function.</li>
+</ul>
+<p><strong>Leaky ReLU</strong><br><img src="./1539499525781.png" alt="Alt text"><br>$a=max(0.01z,z)$</p>
+<ul>
+<li>It takes a slight slope like.</li>
+<li>Usually working better than the ReLU.</li>
+</ul>
+<p><strong>Derivatives</strong><br><img src="./1539500747552.png" alt="Alt text"></p>
+<h3 id="Summary-of-gradient-descent"><a href="#Summary-of-gradient-descent" class="headerlink" title="Summary of gradient descent"></a>Summary of gradient descent</h3><p><img src="./1539501152396.png" alt="Alt text"></p>
+<h3 id="Random-Initialization"><a href="#Random-Initialization" class="headerlink" title="Random Initialization"></a>Random Initialization</h3><p>b 可以初始化为0，w不能，否则隐藏层会平行symmetry problem</p>
+<p><strong>Initialization with 0:</strong><br><img src="./1539501524351.png" alt="Alt text"></p>
+<p>Initialize it to a very small random values.<br><img src="./1539501944925.png" alt="Alt text"></p>
+<p><strong>Use small values</strong></p>
+<ul>
+<li>We are using a tanh or sigmoid activation function, or the other sigmoid, even just at the output layer.</li>
+<li>If the weights are too large, large w make z, or at least some values of z very large or very small.</li>
+<li>The slope is very small, meaning that gradient descent will be very slow.</li>
+</ul>
+<h2 id="Deep-Neural-Network"><a href="#Deep-Neural-Network" class="headerlink" title="Deep Neural Network"></a>Deep Neural Network</h2><h3 id="Matrix-dimensions"><a href="#Matrix-dimensions" class="headerlink" title="Matrix dimensions"></a>Matrix dimensions</h3><p><img src="./1539503708745.png" alt="Alt text"></p>
+<p><strong>Single example to m examples</strong><br><img src="./1539503798843.png" alt="Alt text"></p>
+<h3 id="Why-deep-representations"><a href="#Why-deep-representations" class="headerlink" title="Why deep representations"></a>Why deep representations</h3><p>It’s not just that they need to be big neural networks, they need to be deep or to have a lot of hidden layers.<br><img src="./1539504445383.png" alt="Alt text"></p>
+<p>There are functions you can compute with a “small” L-layer deep neural network that shallower networks require exponentially more hidden units to compute.<br><img src="./1539504901730.png" alt="Alt text"></p>
+<h3 id="Building-blocks-for-Forward-and-backward"><a href="#Building-blocks-for-Forward-and-backward" class="headerlink" title="Building blocks for Forward and backward"></a>Building blocks for Forward and backward</h3><p><img src="./1539505097273.png" alt="Alt text"></p>
+<h4 id="Forward-propagation-for-layer-l"><a href="#Forward-propagation-for-layer-l" class="headerlink" title="Forward propagation for layer $l$"></a>Forward propagation for layer $l$</h4><p><img src="./1539505208264.png" alt="Alt text"></p>
+<h4 id="Backward-propagation-for-layer-l"><a href="#Backward-propagation-for-layer-l" class="headerlink" title="Backward propagation for layer $l$"></a>Backward propagation for layer $l$</h4><p><img src="./1539505279538.png" alt="Alt text"></p>
+<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><p><img src="./1539505399110.png" alt="Alt text"></p>
+<h3 id="Parameters-vs-Hyperparameters"><a href="#Parameters-vs-Hyperparameters" class="headerlink" title="Parameters vs Hyperparameters"></a>Parameters vs Hyperparameters</h3><p>Try out a range of values and see what works and then mix course.</p>
+<p><code>Hyper parameters control parameters</code>, they somehow determine the final value of the parameters.</p>
+<p><strong>Parameters: </strong></p>
+<ul>
+<li>$W^{[1]},b^{[1]},W^{[1]},b^{[1]}…$</li>
+</ul>
+<p><strong>Hyper parameters</strong></p>
+<ul>
+<li>Learning rate $\alpha$</li>
+<li><h1 id="iterations"><a href="#iterations" class="headerlink" title="iterations"></a>iterations</h1></li>
+<li><h1 id="hidden-layer-L"><a href="#hidden-layer-L" class="headerlink" title="hidden layer L"></a>hidden layer L</h1></li>
+<li><h1 id="hidden-units-n-1-n-2-…"><a href="#hidden-units-n-1-n-2-…" class="headerlink" title="hidden units $n^{[1]},n^{[2]},…$"></a>hidden units $n^{[1]},n^{[2]},…$</h1></li>
+<li><strong>choice of activation function</strong></li>
+<li>momentum动量 term</li>
+<li>mini batch size</li>
+<li>various forms of regularization</li>
+<li>…</li>
+</ul>
+<h3 id="Summary-1"><a href="#Summary-1" class="headerlink" title="Summary"></a>Summary</h3><p><img src="./1539506147671.png" alt="Alt text"></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

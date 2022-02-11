@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Kafka分布式流处理系统 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Kafka"><span class="toc-text">Kafka</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Kafka分布式流处理系统
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-07-09 22:40:23</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#大数据" title="大数据">大数据</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h1><p>Kafka 是分布式的流平台，具有可扩展性支持热扩展，吞吐量高每秒可以处理几十万条消息，低延迟最低只有几毫秒。相关术语的含义如下：</p>
+<ul>
+<li>Record：生产和消费一条消息的记录，每条记录包含一个 key，value 和 timestamp</li>
+<li>Broker：服务器，Kafka 集群包含一个或多个服务器</li>
+<li>Producer：负责发布 Record 到 Broker</li>
+<li>Topic：Record类别，不同 Topic 的Record分别存储。在逻辑上可以理解为是一个队列，发布到 kafka 集群的每条Record都必须有一个 Topic，也就是必须指定这条Record放到哪个队列中</li>
+<li>Partition：物理上的分区，每个 topic 在物理上分为一个或多个 Partition，每个partition 在物理机上对应一个文件夹，存储这个 partition 的所有 Record 和索引文件。有了Partition，同一个 Topic 的不同Record 可以并行写入不同 Broker 的不同 Partition 中。</li>
+<li>Offset：每条 Record 发布到 Broker 后会分配一个当前 Partition 的唯一的 64byte 的Offset，用于指明 Record 的位置，Offset 在单个每 partition 中有序递增。</li>
+<li>Consumer：向 Kafka Broker 读取 Record 的客户端</li>
+<li>Consumer Group：管理一组 Consumer 实例 </li>
+</ul>
+<p>一个典型的 Kafka 集群中包含若干 Producer，Broker 和 Consumer Group，各模块的功能</p>
+<p>Kafka 最常用的 API：</p>
+<ul>
+<li>Producer API：发布 Record 到一个或多个 Topic</li>
+<li>Consumer API：订阅一个或多个 Topic，对数据进行处理</li>
+</ul>
+<p>Partition<br>Partition 太多时集群元数据量大元数据同步慢，数据存储太碎片化随机读写增加；Partition 太少并发度小，单盘压力大。</p>
+<p>每个 Partition 可以有多个副本分布在不同的 Broker 上，多个副本中会选择其中一个作为 leader，客户端读写数据都通过 leader 完成，其他副本只从 leader 同步数据。数据同步通过 min.insync.replica 和 acks 两个参数控制，min.insync.replica =3, acks=2  表示至少3个副本保持同步，2 个同步中的副本写入成功时才写入确认成功，否则写入失败。</p>
+<p>Producer<br>Producer 将数据写入 Partition 时的分配规则称为分区策略，Producer API 提供了Random 和 keyhash 两种默认实现，可以通过实现 Partition 接口定制分区策略。</p>
+<p>缓存Batch<br>业务方产生 Record 后，先写入 cache，当 cache 中的 Record 数量达到 batch size / 达到逗留时间 linger_ms 时，将 Record  flush 到 Broker 中。<br>同步/异步发送<br>发送并忘记：调用 send() 后直接返回，不管发送结果<br>同步发送：调用 send() 后调用 get() 方法等待，可以通过将 linger_ms 设为 0，或者在调用 get 前调用 flush<br>异步发送：send() 方法指定返回一个回调函数，该回调函数工作在 kafka 发送线程里<br>确认成功<br>当有N个副本成功写入时，Producer 才会确定写入成功。N 由 acks 参数指定：</p>
+<ul>
+<li>acks = 0：表示不需要保证服务器收到消息</li>
+<li>acks = 1：只要 leader 收到消息，Producer 就会收到服务器发送成功的消息</li>
+<li>acks = all：所有副本全部收到消息时才算发送成功<br>发送失败问题和处理<br>发送过程失败：根据需要选择丢弃或重试，失败时 kafka 内部默认会重试三次，内部重试失败后，返回错误给业务<br>消息重复：Broker 写入成功，但回复丢失，客户端重试会导致写入数据重复<br>消息乱序：消息重复发送会导致消息乱序。可以通过 Producer + seq_id 可以保证同一个 Producer 的 同一个 Partition 内部消息重复和乱序</li>
+</ul>
+<p>Consumer（High level API 实现）<br>Consumer 和  Partition 之间的分配关系：High level API 屏蔽了 Consumer  Group 中 Consumer 和  Partition 之间的分配关系，Kafka 会自动对 partition 和 consumer 进行负载均衡：</p>
+<ul>
+<li>Consumer 数不要超过 Partition 数：Partition 不允许并发，Consumer 多了是浪费</li>
+<li>当Consumer 数比 Partition 数少时，尽量合理分配均匀地从 Partition 里面取数据。Consumer 从多个 Partition 中读数据时只能保证在一个 Partition 上的数据是有序的，不能保证多个 Partition 之间的顺序</li>
+<li>建议一个 Consumer Group 只消费一个 Topic，避免不同 Consumer 相互影响</li>
+</ul>
+<p>增减 / 重启 Consumer、Broker、Partition 时会触发 rebalance。Consumer rebalance 会释放之前分配的 partition 重新分配，此时需要所有 Consumer 停止消费。</p>
+<p>Consumer 重启后如果希望从之前的位置继续 Consumer，可以通过 Offset 管理实现，每条 Record 对应唯一的 Offset，重启后可以定位到对应的 Offset 继续消费。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

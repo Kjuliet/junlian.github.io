@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        《鸟哥的Linux私房菜》 七 Linux磁盘与文件系统管理 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3-修改磁盘-文件系统参数"><span class="toc-text">3 修改磁盘/文件系统参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-用-xfs-admin-修改XFS文件系统的UUID和Label-name"><span class="toc-text">3.1 用 xfs_admin 修改XFS文件系统的UUID和Label name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-用tune2fs修改-ext4-的-UUID-和-Label-name"><span class="toc-text">3.2 用tune2fs修改 ext4 的 UUID 和 Label name</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-开机挂载设置"><span class="toc-text">4 开机挂载设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-修改-etc-fstab"><span class="toc-text">4.1 修改 /etc/fstab</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-特殊装置-loop-挂载"><span class="toc-text">4.2 特殊装置 loop 挂载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#光盘映象文件"><span class="toc-text">光盘映象文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大文件格式化后挂载"><span class="toc-text">大文件格式化后挂载</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-建立内存置换空间swap"><span class="toc-text">5 建立内存置换空间swap</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-用实体分区槽建立-swap"><span class="toc-text">5.1 用实体分区槽建立 swap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-用文件建立-swap"><span class="toc-text">5.2 用文件建立 swap</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-删除分区槽"><span class="toc-text">6. 删除分区槽</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-其他问题和操作"><span class="toc-text">7. 其他问题和操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-磁盘空间浪费问题"><span class="toc-text">7.1 磁盘空间浪费问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-用-GNU-的-parted-分区"><span class="toc-text">7.2 用 GNU 的 parted 分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-开机时-“发现磁盘有问题”"><span class="toc-text">7.3 开机时 “发现磁盘有问题”</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《鸟哥的Linux私房菜》 七 Linux磁盘与文件系统管理
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-18 09:28:29</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#Linux" title="Linux">Linux</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>[TOC]</p>
+<h1 id="3-修改磁盘-文件系统参数"><a href="#3-修改磁盘-文件系统参数" class="headerlink" title="3 修改磁盘/文件系统参数"></a>3 修改磁盘/文件系统参数</h1><p>Linux 中所有装置都用文件表示，硬件的文件名是系统自动实时产生，不需要手动建立装置文件。在文件中，用主要装置代码 (Major) 和次要装置代码 (Minoe) 说明装置，Linux核心通过这两个数值来判断是否是其认识的装置，可以在核心官网找到更多核心支持的硬件装置代码（Major，Minor）。下面打印的是用到磁盘/dev/vda的相关装置，252 为Major，0 为Minor。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:/$ ll /dev/vda</span><br><span class="line">brw-rw---- 1 root disk 252, 0 Feb 27 08:24 /dev/vda</span><br></pre></td></tr></table></figure>
+<p>当服务器被关到特定目录下时 (chroot)，需要手动处理装置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mknod 装置文件名 [bcp] [Major] [Minor]</span><br><span class="line"><span class="comment"># Major 和 Minor 是有意义的，不要随意设定</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-1-用-xfs-admin-修改XFS文件系统的UUID和Label-name"><a href="#3-1-用-xfs-admin-修改XFS文件系统的UUID和Label-name" class="headerlink" title="3.1 用 xfs_admin 修改XFS文件系统的UUID和Label name"></a>3.1 用 <code>xfs_admin</code> 修改XFS文件系统的UUID和Label name</h2><p>如果格式化时忘记加标头名称，之后想加时并不需要重新格式化。<code>xfs_admin</code> 可以处理 Label name 和 UUID<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xfs_admin [-efjlpuV] [-c 0|1] [-L label] [-U uuid] 装置文件名</span><br><span class="line"><span class="comment"># -l：列出装置的 Label name</span></span><br><span class="line"><span class="comment"># -u：列出装置的UUID</span></span><br><span class="line"><span class="comment"># -L：设定 Label name</span></span><br><span class="line"><span class="comment"># -U：设定UUID</span></span><br></pre></td></tr></table></figure></p>
+<p>用 <code>uuidgen</code> 生成新UUID来设定装置，装置设定前要先用<code>umount</code>卸除，设置好新的UUID后再用<code>mount UUID=新UUID</code>挂载：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">umount 装置文件名</span><br><span class="line">uuidgen  <span class="comment"># 2326c8b0-1dcc-4444-8ade-795415776d82</span></span><br><span class="line">xfs_admin -U 2326c8b0-1dcc-4444-8ade-795415776d82 装置文件名</span><br><span class="line">mount UUID=2326c8b0-1dcc-4444-8ade-795415776d82 /data/xfs</span><br></pre></td></tr></table></figure></p>
+<p>用UUID作为挂载时写入的装置名称，而不是用装置文件名（如/dev/vda），是因为这个磁盘的文件名并不是在所有的Linux系统中都是 /dev/vda。</p>
+<h2 id="3-2-用tune2fs修改-ext4-的-UUID-和-Label-name"><a href="#3-2-用tune2fs修改-ext4-的-UUID-和-Label-name" class="headerlink" title="3.2 用tune2fs修改 ext4 的 UUID 和 Label name"></a>3.2 用<code>tune2fs</code>修改 ext4 的 UUID 和 Label name</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tune2fs [-l] [-L volume_label] [-U UUID] 装置文件名</span><br></pre></td></tr></table></figure>
+<h1 id="4-开机挂载设置"><a href="#4-开机挂载设置" class="headerlink" title="4 开机挂载设置"></a>4 开机挂载设置</h1><h2 id="4-1-修改-etc-fstab"><a href="#4-1-修改-etc-fstab" class="headerlink" title="4.1 修改 /etc/fstab"></a>4.1 修改 /etc/fstab</h2><p>系统挂载的限制：</p>
+<ul>
+<li>根目录 / 必须挂载，而且要先于其他所有 mount point 被挂载进来；</li>
+<li>其他 mount point 必须是已建立的目录，可任意指定；</li>
+<li>所有 mount point 在同一时间内只能挂载一次；</li>
+<li>所有 partition 在同一时间内只能挂载一次；</li>
+<li>如果要<strong>卸除，必须先将工作目录移到 mount point 及其子目录之外</strong>。</li>
+</ul>
+<p>当用 <code>mount</code> 指令进行挂载时，会将所有选项和参数写入/etc/fstab (filesystem tabel) 中，/etc/fstab 是开机配置文件，实际文件系统的挂载是记录到 /etc/mtab 和 /proc/mounts 两个文件中的，每次变动文件系统挂载时会同时更新这两个文件。/etc/fstab 文件内容共有六个字段：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ cat /etc/fstab</span><br><span class="line"><span class="comment"># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;  &lt;dump&gt;  &lt;pass&gt;</span></span><br><span class="line">UUID=5ba34c3d-bd14-451d-a7d8-09a64009e3f1  / ext4  errors=remount-ro 0  1</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>装置文件名/UUID/LABEL name：建议用UUID，可以用<code>blkid</code> 或 <code>xfs_admin</code>查询UUID；</li>
+<li>挂载点：一定是目录；</li>
+<li>磁盘分区槽的文件系统：手动挂载时可以让系统自动测试，但在文件中设置的话必须手动写入文件系统，如xfs, ext4, nfs等；</li>
+<li>文件系统参数：见<code>mount</code>指令中指定的参数，<code>defaults</code>预设为<code>rw,suid,dev,exec,auto,nouser,async</code>等参数；</li>
+<li>能否被dump备份指令作用：目前有太多备份方案，所以这个项目可以不用管直径输入0就好；</li>
+<li>是否以 fsck 检验扇区：早期开机时会通过 fsck 去检验本机的文件系统是否完整(clean)，不适用于 xfs 文件系统，xfs 会自己检验，不需要额外进行 fsck，所以直接填0；</li>
+</ol>
+<p>修改 /etc/fstab 让系统在开机时自动完成挂载的步骤如下：</p>
+<ol>
+<li><p>在/etc/fstab 中写入挂载参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=<span class="string">"xxxxx....xxxx"</span> 挂载点 xfs defaults 0 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查UUID指定的待挂载装置是否已经挂载，若挂载则卸除掉，因为对已经被挂载的文件系统，无论挂载到哪个目录，都不会进行测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df <span class="comment"># 查看是否挂载</span></span><br><span class="line">umount 目标装置名 <span class="comment"># 若已挂载则卸除</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试写入 /etc/fstab 的内容有没有语法错误，这个步骤很重要！如果写错将可能无法顺利开机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount -a</span><br><span class="line">df 目标装置名 <span class="comment"># 检查是否成功挂载</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当 /etc/fstab 有输入错误导致无法开机成功时，会进入单人维护模式，此时 / 是只读状态，无法修改 /etc/fstab，也不能更新 /etc/mtab。如果出现这种情况，可以用以下指令解决：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -n -o remount, rw /</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-2-特殊装置-loop-挂载"><a href="#4-2-特殊装置-loop-挂载" class="headerlink" title="4.2 特殊装置 loop 挂载"></a>4.2 特殊装置 loop 挂载</h2><p>对光盘映射文件，或用文件作为磁盘时，可以用loop挂载，不需要刻录就能读取内部数据。</p>
+<h3 id="光盘映象文件"><a href="#光盘映象文件" class="headerlink" title="光盘映象文件"></a>光盘映象文件</h3><p>下载映象文件后并不一定要刻录成光盘才能使用，可以通过 loop 装置来挂载<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir /data/xxx_dvd</span><br><span class="line">mount -o loop /xxx/xxx.iso /data/xxx_dvd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用完记得卸除</span></span><br><span class="line">umount /data/xxx_dvd</span><br></pre></td></tr></table></figure></p>
+<p>不需要将文件刻录成光盘就能读取内部数据，就是说也可以修改文件，所以很多映象档会给使用者提供MD5验证码来确认映象档没有问题。</p>
+<h3 id="大文件格式化后挂载"><a href="#大文件格式化后挂载" class="headerlink" title="大文件格式化后挂载"></a>大文件格式化后挂载</h3><p>制作一个大文件，将其格式化后进行挂载，这种方法可以在不改动分区槽原本的环境下，建立你想要的分区槽，比如当时只分区出一个容量很大的根目录，且已经没有多余的容量进行另外的分区，此时就可以制作一个大文件，然后将其挂载，这样感觉上就多了一个分区槽；还有在使用Linux上的虚拟机时，比如xen这个软件，就可以配合这种loop device的文件类型进行根目录的挂载。大文件的建立和挂载过程如下：</p>
+<ol>
+<li><p>用<code>dd</code> 在 /srv 下建立512MB的大型空文件，想垒砖一样，把512块，每块1MB的砖垒成一个大文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-10-ubuntu:~$ dd <span class="keyword">if</span>=/dev/zero of=/srv/loopdev bs=1M count=512</span><br><span class="line">512+0 records <span class="keyword">in</span></span><br><span class="line">512+0 records out</span><br><span class="line">536870912 bytes (537 MB, 512 MiB) copied, 2.23236 s, 240 MB/s</span><br><span class="line"></span><br><span class="line"><span class="comment"># if 是input file，/dev/zero是会一直输出0的装置</span></span><br><span class="line"><span class="comment"># of 是ouput file，将0写入的文件</span></span><br><span class="line"><span class="comment"># bs 是每个block大小，类似于文件系统block的意义</span></span><br><span class="line"><span class="comment"># count 是总共多少个bs，文件的容量就是count*bs</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用<code>mkfs.xfs</code>格式化，默认xfs是不能格式化文件的，需要加入参数 <code>-f</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-10-ubuntu:~$ mkfs.xfs -f /srv/loopdev</span><br><span class="line">meta-data=loopdev                isize=512    agcount=4, agsize=32768 blks</span><br><span class="line">         =                       sectsz=512   attr=2, projid32bit=1</span><br><span class="line">         =                       crc=1        finobt=1, sparse=0, rmapbt=0, reflink=0</span><br><span class="line">data     =                       bsize=4096   blocks=131072, imaxpct=25</span><br><span class="line">         =                       sunit=0      swidth=0 blks</span><br><span class="line">naming   =version 2              bsize=4096   ascii-ci=0 ftype=1</span><br><span class="line"><span class="built_in">log</span>      =internal <span class="built_in">log</span>           bsize=4096   blocks=855, version=2</span><br><span class="line">         =                       sectsz=512   sunit=0 blks, lazy-count=1</span><br><span class="line">realtime =none                   extsz=4096   blocks=0, rtextents=0</span><br><span class="line"></span><br><span class="line">root@VM-0-10-ubuntu:~$ blkid /srv/loopdev  <span class="comment"># 显示文件系统格式化后的UUID</span></span><br><span class="line">/srv/loopdev: UUID=<span class="string">"c69ad29e-bade-4008-92c9-f537bcb14108"</span> TYPE=<span class="string">"xfs"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用<code>mount -o loop</code>挂载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-10-ubuntu:~$ mount -o loop  UUID=<span class="string">"c69ad29e-bade-4008-92c9-f537bcb14108"</span> /data/file</span><br><span class="line"></span><br><span class="line">df /data/file</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="5-建立内存置换空间swap"><a href="#5-建立内存置换空间swap" class="headerlink" title="5 建立内存置换空间swap"></a>5 建立内存置换空间swap</h1><p>CPU所读取的内容都来自内存，当内存不足，为了让后续程序可以顺利运作，可以将内存中暂不使用的程序与数据拿到硬盘内存置换空间 swap 中此时内存就会空出来给需要执行的程序加载，否则突然某程序用掉大部分内存系统可能会损毁。也就是说只有物理内存不足时才会用到 swap（用到 swap 时主机磁盘灯会开始闪个不停），如果硬件配备资源足够的话系统一般用不到。因此早期安装 Linux 时一定需要根目录和 swap 两个 partition，目前在个人使用上可以不用设定 swap，但对服务器或工作站这些常年上线的系统来说，最好还是预留一些 swap 来作为系统内存的缓冲，因为不知道什么时候会有大量来自网络的要求。</p>
+<p>另外，如果主机支持电源管理模式，即主机可以进入休眠模式的话，那么运行当中的程序状态会被记录到 swap 中，以作为唤醒主机的状态依据。还有，某些程序在运行时，本身就会利用 swap 的特性来存放一些数据段，所以 swap 是需要建立的，但不用太大。</p>
+<p>如果系统已经建好，发现并没有建立 swap，可以用以下办法解决：</p>
+<h2 id="5-1-用实体分区槽建立-swap"><a href="#5-1-用实体分区槽建立-swap" class="headerlink" title="5.1 用实体分区槽建立 swap"></a>5.1 用实体分区槽建立 swap</h2><p>建立 swap 分区槽的步骤如下：</p>
+<ol>
+<li><p>用 <code>gdisk</code> 在磁盘里分出一个分区槽，由于 Linux 的 <code>gdisk</code> 会将分区槽ID预设为 Linux 文件系统，所以需要设定一下 system ID 8200：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo gdisk /dev/vda</span><br><span class="line">GPT fdisk (gdisk) version 1.0.3</span><br><span class="line">......</span><br><span class="line">Command (? <span class="keyword">for</span> <span class="built_in">help</span>): n</span><br><span class="line">Partition number (2-128, default 2):</span><br><span class="line">First sector (34-2047, default = 34) or &#123;+-&#125;size&#123;KMGTP&#125;:</span><br><span class="line">Last sector (34-2047, default = 2047) or &#123;+-&#125;size&#123;KMGTP&#125;: 116</span><br><span class="line">Current <span class="built_in">type</span> is <span class="string">'Linux filesystem'</span></span><br><span class="line">Hex code or GUID (L to show codes, Enter = 8300): 8200</span><br><span class="line">Changed <span class="built_in">type</span> of partition to <span class="string">'Linux swap'</span></span><br><span class="line"></span><br><span class="line">Command (? <span class="keyword">for</span> <span class="built_in">help</span>): p</span><br><span class="line">Disk /dev/vda: 104857600 sectors, 50.0 GiB</span><br><span class="line">......</span><br><span class="line">Number  Start (sector)    End (sector)  Size       Code  Name</span><br><span class="line">   1            2048       104857566   50.0 GiB    8300  Linux filesystem</span><br><span class="line">   2              34             116   41.5 KiB    8200  Linux swap</span><br><span class="line"></span><br><span class="line">Command (? <span class="keyword">for</span> <span class="built_in">help</span>): w</span><br><span class="line"></span><br><span class="line">Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING</span><br><span class="line">PARTITIONS!!</span><br><span class="line"></span><br><span class="line">Do you want to proceed? (Y/N): y</span><br><span class="line">OK; writing new GUID partition table (GPT) to /dev/vda.</span><br><span class="line">Warning: The kernel is still using the old partition table.</span><br><span class="line">The new table will be used at the next reboot or after you</span><br><span class="line">run partprobe(8) or kpartx(8)</span><br><span class="line">The operation has completed successfully.</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo partprobe /dev/vda</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ lsblk</span><br><span class="line">NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sr0     11:0    1   41M  0 rom</span><br><span class="line">vda    252:0    0   50G  0 disk</span><br><span class="line">├─vda1 252:1    0   50G  0 part /</span><br><span class="line">└─vda2 252:2    0 41.5K  0 part</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用 <code>mkswap 装置文件名</code> 将该分区槽格式化为 swap 格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo mkswap /dev/vda2</span><br><span class="line">Setting up swapspace version 1, size = 36 KiB (36864 bytes)</span><br><span class="line">no label, UUID=2aeaf1e1-28fb-49d7-91aa-3747e7836238</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo blkid /dev/vda2</span><br><span class="line">/dev/vda2: UUID=<span class="string">"2aeaf1e1-28fb-49d7-91aa-3747e7836238"</span> TYPE=<span class="string">"swap"</span> PARTLABEL=<span class="string">"Linux swap"</span> PARTUUID=<span class="string">"dd4d7385-a74f-4b20-834f-28630cf19487"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用 <code>swapon 装置文件名</code> 启动该 swap 装置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ free</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:        1877504      149840      195780        5308     1531884     1535144</span><br><span class="line">Swap:             0           0           0</span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo swapon /dev/vda2</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ free</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:        1877504      150584      194924        5308     1531996     1534400</span><br><span class="line">Swap:            36           0          36</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过 <code>free</code> 和 ‘swapon -s’ 观察内存用量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo swapon -s</span><br><span class="line">Filename				Type		Size	Used	Priority</span><br><span class="line">/dev/vda2                              	partition	36	0	-2</span><br><span class="line"><span class="comment"># 列出目前使用的 swap 装置有哪些</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写入配置文件，由于不是文件系统所以没有挂载点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo nano /etc/fstab</span><br><span class="line">UUID=2aeaf1e1-28fb-49d7-91aa-3747e7836238       /               swap    swap              0       0</span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo swapoff /dev/vda2</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo swapon -s</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo swapon -a</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ swapon -s</span><br><span class="line">Filename				Type		Size	Used	Priority</span><br><span class="line">/dev/vda2                              	partition	36	0	-2</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="5-2-用文件建立-swap"><a href="#5-2-用文件建立-swap" class="headerlink" title="5.2 用文件建立 swap"></a>5.2 用文件建立 swap</h2><p>如果实体分区槽不支持，比如没有多余的磁盘容量可以分区，则可以用 <code>loop</code> 建立一个 swap，步骤如下：</p>
+<ol>
+<li><p>用 <code>dd</code> 在 /tmp 下新建一个文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-10-ubuntu:~$ dd <span class="keyword">if</span>=/dev/zero of=/tmp/swap bs=1M count=128</span><br><span class="line">128+0 records <span class="keyword">in</span></span><br><span class="line">128+0 records out</span><br><span class="line">134217728 bytes (134 MB, 128 MiB) copied, 0.115141 s, 1.2 GB/s</span><br><span class="line"></span><br><span class="line">root@VM-0-10-ubuntu:~$ ll -h tmp/swap</span><br><span class="line">-rw-r--r-- 1 root root 128M Mar 20 21:17 tmp/swap</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用 <code>mkswap</code> 将 /tmp/swap 格式化为 swap 的文件格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-10-ubuntu:~$ mkswap /tmp/swap</span><br><span class="line">Setting up swapspace version 1, size = 128 MiB (134213632 bytes)</span><br><span class="line">no label, UUID=4c736f19-e50c-49ab-a9e8-6467ea0ed548</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用 <code>swapon</code> 启动 /tmp/swap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-10-ubuntu:~$ swapon /tmp/swap</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ swapon -s</span><br><span class="line">Filename				Type		Size	Used	Priority</span><br><span class="line">/tmp/swap                  	file    	131068	0	-2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用 ‘swapoff’ 关闭swap file，设定自动启用时不要用 UUID，因为系统只会查询 block device，不会查询文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-10-ubuntu:~$ swapoff /tmp/swap</span><br><span class="line">root@VM-0-10-ubuntu:~$ swapon -s</span><br><span class="line">root@VM-0-10-ubuntu:~$ nano /etc/fstab</span><br><span class="line">/tmp/swap swap swap defaults 0 0</span><br><span class="line">root@VM-0-10-ubuntu:~$ swapon -a</span><br><span class="line">root@VM-0-10-ubuntu:~$ swapon -s</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="6-删除分区槽"><a href="#6-删除分区槽" class="headerlink" title="6. 删除分区槽"></a>6. 删除分区槽</h1><p>删除 Partition 的步骤如下：</p>
+<ol>
+<li><p>用 <code>free/mount</code> 等指令查看要处理的文件系统是否被使用，如果有被使用则用 <code>umount</code> 卸除；如果是 swap，需要用 <code>swapon -s</code> 找出被使用的分区槽，再用 <code>swapoff</code> 卸除掉：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ free</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:        1877504      155232      189508        5452     1532764     1529608</span><br><span class="line">Swap:        131104         816      130288</span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ swapon -s</span><br><span class="line">Filename				Type		Size	Used	Priority</span><br><span class="line">/dev/vda2                              	partition	36	36	-2</span><br><span class="line">/home/ubuntu/tmp/swap                  	file    	131068	780	-3</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo swapoff /home/ubuntu/tmp/swap</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除 /etc/fstab 中对应的自动挂载记录行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo nano /etc/fstab</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用 <code>gdisk 装置名称</code> 删除，或用 <code>parted 装置名称 rm 号码</code> 删除：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo parted /dev/vda rm 2</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo partprobe <span class="comment"># 避免重新启动，强制核心更新分区表</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo rm /home/ubuntu/tmp/swap</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="7-其他问题和操作"><a href="#7-其他问题和操作" class="headerlink" title="7. 其他问题和操作"></a>7. 其他问题和操作</h1><h2 id="7-1-磁盘空间浪费问题"><a href="#7-1-磁盘空间浪费问题" class="headerlink" title="7.1 磁盘空间浪费问题"></a>7.1 磁盘空间浪费问题</h2><p>由于一个 block 只能放置一个文件，如果小文件太多会浪费很多磁盘容量。另外文件系统的 superblock，inode table 等其他中介数据也会浪费容量，所以当我们建立起文件系统时，一挂载就有很多容量被用掉了。可以通过 <code>ll -s</code> 来看文件容量的损耗？？第一行 total 就是该目录下所有数据所耗用的实际 block 数量 * block 大小的值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:/$ ll -sh</span><br><span class="line">total 104K</span><br><span class="line">4.0K drwxr-xr-x 25 root root 4.0K Mar 22 07:04 ./</span><br><span class="line">4.0K drwxr-xr-x 25 root root 4.0K Mar 22 07:04 ../</span><br><span class="line">4.0K drwxr-xr-x  2 root root 4.0K Jul 15  2019 bin/</span><br><span class="line">   0 drwxr-xr-x 18 root root 3.8K Mar 20 20:52 dev/</span><br><span class="line">   0 lrwxrwxrwx  1 root root   33 Jul 11  2019 initrd.img -&gt; boot/initrd.img-4.15.0-54-generic</span><br><span class="line">   0 dr-xr-xr-x 99 root root    0 Feb 27 08:24 proc/</span><br><span class="line">   0 drwxr-xr-x 24 root root  960 Mar 22 07:04 run/</span><br><span class="line">   0 dr-xr-xr-x 13 root root    0 Mar 20 07:00 sys/</span><br></pre></td></tr></table></figure>
+<h2 id="7-2-用-GNU-的-parted-分区"><a href="#7-2-用-GNU-的-parted-分区" class="headerlink" title="7.2 用 GNU 的 parted 分区"></a>7.2 用 GNU 的 <code>parted</code> 分区</h2><p><code>gdisk</code> 主要针对 GPT，<code>fdisk</code> 主要支持 MBR，这两个需要先查到分区表再用合适的指令。而<code>parted</code> 可以同时支持。当需要写一个让分区一口气建立的脚本，用 <code>parted</code> 可以免去跟用户互动。<code>parted</code> 常用操作：</p>
+<ul>
+<li>显示分区：<code>parted装置名 print</code></li>
+<li>新增分区：‘mkpart [primary | logical | extended] [ext4 | vfat | xfs] 开始位置 结束位置’</li>
+<li>删除分区：<code>rm [partition]</code></li>
+</ul>
+<p>用 <code>print</code> 显示分区：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo parted /dev/vda <span class="built_in">print</span></span><br><span class="line">Model: Virtio Block Device (virtblk)</span><br><span class="line">Disk /dev/vda: 53.7GB</span><br><span class="line">Sector size (logical/physical): 512B/512B</span><br><span class="line">Partition Table: gpt</span><br><span class="line">Disk Flags:</span><br><span class="line"></span><br><span class="line">Number  Start   End     Size    File system     Name              Flags</span><br><span class="line"> 2      17.4kB  59.9kB  42.5kB  linux-swap(v1)  Linux swap</span><br><span class="line"> 1      1049kB  53.7GB  53.7GB  ext4            Linux filesystem</span><br></pre></td></tr></table></figure></p>
+<p>其中分区表的输出：</p>
+<ul>
+<li>Number：分区槽号码，1 号代表 /dev/vda1；</li>
+<li>Start：分区起始位置在磁盘的多少 MB 处，是以容量为单位的；</li>
+<li>End：结束位置，注意 End 和 Start 的单位可能不一样，如果要统一用 MB 的话可以用 <code>parted /dev/vda unit mb print</code>；</li>
+<li>Size：End - Start；</li>
+<li>File system：分析可能是什么文件系统类型；</li>
+<li>Name：类似于 gdisk 的 System ID。</li>
+</ul>
+<p>MBR 和 GPT 分区表的相互切换：<br>注意因为分区表格式不能转换，所以磁盘的系统会损毁，转换后其后续分区会全部死掉，谨慎测试，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parted /dev/sda mklabel gpt</span><br></pre></td></tr></table></figure></p>
+<p>用 <code>mkpart</code> 新增名为 primary 的分区，分区格式为 vfat：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo parted /dev/vda <span class="built_in">print</span></span><br><span class="line">...</span><br><span class="line">Number  Start   End     Size    File system     Name              Flags</span><br><span class="line"> 2      17.4kB  59.9kB  42.5kB  linux-swap(v1)  Linux swap</span><br><span class="line"> 1      1049kB  53.7GB  53.7GB  ext4            Linux filesystem</span><br><span class="line"> <span class="comment"># 找出前一个分区的 End 位置，作为下一个分区的起始点</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo parted /dev/vda mkpart primary fat32 59.9kB 500kb</span><br><span class="line">Warning: You requested a partition from 59.4kB to 500kB (sectors 116..976).</span><br><span class="line">The closest location we can manage is 59.9kB to 500kB (sectors 117..976).</span><br><span class="line">Is this still acceptable to you?</span><br><span class="line">Yes/No? y</span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo parted /dev/vda <span class="built_in">print</span></span><br><span class="line">...</span><br><span class="line">Number  Start   End     Size    File system     Name              Flags</span><br><span class="line"> 2      17.4kB  59.9kB  42.5kB  linux-swap(v1)  Linux swap</span><br><span class="line"> 3      59.9kB  500kB   440kB                   primary           msftdata</span><br><span class="line"> 1      1049kB  53.7GB  53.7GB  ext4            Linux filesystem</span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo partprobe /dev/vda</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ lsblk /dev/vda3  <span class="comment"># 确定其存在</span></span><br><span class="line">NAME MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">vda3 252:3    0  430K  0 part</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo mkfs -t vfat /dev/vda3</span><br><span class="line">mkfs.fat 4.1 (2017-01-24)</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo blkid /dev/vda3</span><br><span class="line">/dev/vda3: SEC_TYPE=<span class="string">"msdos"</span> UUID=<span class="string">"6581-AD2E"</span> TYPE=<span class="string">"vfat"</span> PARTLABEL=<span class="string">"primary"</span> PARTUUID=<span class="string">"30a301c1-94fc-4d21-acda-5267a8cceef3"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动挂载</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo nano /etc/fstab</span><br><span class="line">UUID=<span class="string">"xxxx...xxx"</span>  挂载目录 vfat defaults 0 0</span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo mkdir 挂载目录</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo mount -a</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ df 挂载目录</span><br></pre></td></tr></table></figure></p>
+<h2 id="7-3-开机时-“发现磁盘有问题”"><a href="#7-3-开机时-“发现磁盘有问题”" class="headerlink" title="7.3 开机时 “发现磁盘有问题”"></a>7.3 开机时 “发现磁盘有问题”</h2><p>如果是某个 filesystem 里的 Superblock 数据损毁，或 inode 的架构损毁，或 block area 的记录遗失等，那么其实磁盘还好好的，只是磁盘上的文件系统不能再用了。</p>
+<p>一般来说，Linux 很少会造成 filesystem 的损毁，所以发生问题时，很可能是整个磁盘都损毁了。但如果主机常常不正常断电，那么很可能损毁 filesystem，此时的磁盘没有问题，只需要重建文件系统 <code>reinstall</code> 即可。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

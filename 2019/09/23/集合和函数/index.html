@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        集合和函数 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-元素和集合"><span class="toc-text">1 元素和集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-不要忘了空集！"><span class="toc-text">1.1 不要忘了空集！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-补集"><span class="toc-text">1.2 补集</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-函数"><span class="toc-text">2. 函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-基本初等函数"><span class="toc-text">3. 基本初等函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-对数函数"><span class="toc-text">3.1 对数函数</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        集合和函数
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-23 20:03:21</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#数学" title="数学">数学</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="1-元素和集合"><a href="#1-元素和集合" class="headerlink" title="1 元素和集合"></a>1 元素和集合</h2><ul>
+<li><p>研究的对象叫元素，小写字母表示；一些元素组成的总体叫集合，大写字母表示。</p>
+</li>
+<li><p><strong>集合的三个特点</strong></p>
+<ul>
+<li>确定性：比如高个子人，班里漂亮女生（即使没女生也不能叫集合）都不叫集合</li>
+<li>互异性：$\{x|x^2-2x+1=0\} = \{x=1\}$</li>
+<li>无序性：{1, 2, 3} 和 {3, 2, 1} 是一个集合</li>
+</ul>
+</li>
+<li><p>集合相等：元素和元素个数一样，<strong>但顺序不一定相等</strong>。</p>
+</li>
+<li>$a\in A$ 元素 a 属于集合 A；$a\notin A$ 元素 a 不属于集合 A；</li>
+<li><p>集合表示方法：</p>
+<ul>
+<li>列举法：${1, 3, 5, …}$ 无限集合也可以列举法表示；</li>
+<li>描述法：用集合所含元素的共同特征来表示集合，$\{x|x是拖拉机\}$；</li>
+</ul>
+</li>
+<li><p>常用数集表示方法</p>
+<ul>
+<li>非负整数 / 自然数 N：$\{0, 1, 2, …\}$</li>
+<li>正整数 $N^+$ / $N^*$</li>
+<li>整数 Z $\{0, 1, -1, 2, -2, …\}$</li>
+<li>有理数 Q $\{x|x=\frac{p}{q}, p, q \in Z\}$，可以表示成两个整数的比；</li>
+</ul>
+<blockquote>
+<p><strong>毕达哥拉斯</strong><br>毕达哥拉斯发明了勾股定理，直角边分别叫“勾”和“股”，斜边为“弦”；毕达哥斯拉是个怪兽。</p>
+<p>最早提出有理数的概念，毕达哥拉斯认为“万物皆是有理数，实数轴上的点和有理数是一一对应的。”知道有一天有一个学生问他一个直角三角形直角边都是1，斜边是多少，他怎么都没法用 $\frac{p}{q}$表示$\sqrt 2$，这个学生总问总问最后被毕达哥拉斯装袋子里丢进海里了…真“学霸”，学术大牛提出的理论不允许别人质疑</p>
+</blockquote>
+</li>
+<li><p>子集：如果集合 A 中任何一个元素都是集合 B 中的元素，称 A 是 B 的子集，或 A 包含于 B，$A \subseteq B$</p>
+<ul>
+<li>$A = B$：当$A\subseteq B$ 且 $B \subseteq A$</li>
+<li>$A\subsetneq B$：A是B的真子集，$A \subseteq B$ 但 $A \ne B$</li>
+<li>任何集合都是它自身的子集 $A\subseteq A$</li>
+<li>$\{\emptyset\}$ 不是空集 $\emptyset$，空集是任何集合的子集；</li>
+<li>一个含有 n 个元素的集合，有 $2^n$ 个子集。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>集合论<br>德国数学家康托尔提出，“在康托尔之前的数学不叫数学，那只是一种逻辑，而且是一种不完善的逻辑。”</p>
+<p>康托尔提出“任何集合都是它自身的子集 $A\subseteq A$”观点后造成了第三次数学危机，因为假如有一个集合是这么定义的：“所有不包含自身的集合的集合”，如果有自身，那么和定义矛盾；如果不包含自身，那他和性质矛盾了。</p>
+<p>这样的集合是存在的，罗素：有一个理发师，在门口立牌子，“我只给自己不刮胡子的人刮胡子”，请问他给不给自己刮胡子？</p>
+<p>最后康托尔疯掉了。叔本华和黑格尔辩哲学，辨不过也疯了，养了条黑色的狗叫“黑格尔”每天溜。</p>
+</blockquote>
+<p>-<br><strong>Fun Time</strong>：<br>3个红色，2个黄色的帽子，找三个小孩每人一顶帽子，看不到自己的帽子，只能看到别人的帽子，猜自己的帽子是什么颜色。三个小孩看一一遍没有说话，又看了一遍还是没有说话，然后一个小孩说，我带的是什么什么帽子。根据这个条件，请问这个小孩带的是什么帽子？</p>
+<p>三个小孩只有三种情况：<br>（1）红+红+红，正确答案<br>（2）红+红+黄：排除，因为带红帽的小孩看到一黄，又发现第一轮每人说自己是红帽子，那他肯定不是黄帽子，所以第二轮中就会知道自己是红帽子了<br>（3）红+黄+黄：排除，因为带红帽子的小孩看到两个黄帽子，第一轮就会知道自己是红帽子。</p>
+<p><strong>Fun Time</strong><br>36只羊，七天来宰光，宰单不宰双，各宰几只羊？<br><strong>无解，因为7个奇数的和肯定是奇数。</strong></p>
+<blockquote>
+<p><strong>立方和公式：</strong></p>
+<script type="math/tex; mode=display">(a+b)(a^2-ab+b^2) = a^3 + b^3</script><script type="math/tex; mode=display">(a-b)(a^2+ab+b^2) = a^3 - b^3</script></blockquote>
+<h3 id="1-1-不要忘了空集！"><a href="#1-1-不要忘了空集！" class="headerlink" title="1.1 不要忘了空集！"></a>1.1 不要忘了空集！</h3><p><strong>【题1】</strong> $A=\{a\le x\le b\}$，$B=\{x|c\le x \le d\}$，$A \subset B$，则：<br>（1）$A = \emptyset$，$a&gt;b$<br>（2）$A \ne \emptyset$，$a \le b$ and  $b \le d$ and $c \le a$</p>
+<blockquote>
+<p>玛丽莲梦露是双性人？？染色体XXY<br>氧气浓度太高会窒息？？脑干工作需要二氧化碳</p>
+</blockquote>
+<h3 id="1-2-补集"><a href="#1-2-补集" class="headerlink" title="1.2 补集"></a>1.2 补集</h3><p>包含所有元素的集合称为全集$U / I$，由全集中不属于A的元素组成的集合称为A的补集，记为$C_uA，C_IA$</p>
+<blockquote>
+<p><strong>闰年：</strong><br>能被4整除且不能被100整除，或者能被400整除</p>
+<p>1000年中能被4整除的有2500个 - 能被100整除的100个 + 能被400整除的25个 = 2425</p>
+<p>地球公转周期是365.2422，比365多1/4天，所以每4年多一个闰年，但如果每四年多一个闰年是不行的，因为每四年多一个闰年相当于是按365.25算，100年会多出1天来，1000年多100天呐。这样设计后，10000年中，每一年多了0.2425天，和0.2422相比，10000年差了3天，可以接受。</p>
+</blockquote>
+<h1 id="2-函数"><a href="#2-函数" class="headerlink" title="2. 函数"></a>2. 函数</h1><p><strong>定义：</strong>A中任何一个数在B中都有唯一的数$f(x)$与之对应，称为$A\rightarrow B$的函数，记作$y=f(x), x\in A$</p>
+<h1 id="3-基本初等函数"><a href="#3-基本初等函数" class="headerlink" title="3. 基本初等函数"></a>3. 基本初等函数</h1><h2 id="3-1-对数函数"><a href="#3-1-对数函数" class="headerlink" title="3.1 对数函数"></a>3.1 对数函数</h2><p><strong>定义：</strong>如果$a^x=N(a&gt;0 且 a\ne 1)$，则$x$叫做以$a$为底$N$的对数，记作$x=log_aN$。</p>
+<ul>
+<li>$N$ 叫真数，$N&gt;0$；</li>
+<li>$a$ 叫底数，$a&gt;0 且 a\ne 1$。</li>
+<li>$log_a1=0$</li>
+<li>$log_aa=1$</li>
+</ul>
+<p><strong>常用对数</strong>以10为底，记作 $lgN = log_{10}N$<br><strong>自然对数</strong>以e为底，记作 $lnN = log_eN$，$e=2.71828…$</p>
+<blockquote>
+<p>伽利略：给我时间、空间和对数，我可以创造一个世界。</p>
+<p>对数可以把一个很大的数换成很小的数， $lg1000 = 3$，所以在工程上很有用。</p>
+</blockquote>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

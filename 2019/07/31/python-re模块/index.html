@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        python re模块 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#re"><span class="toc-text">re</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#正则表达式匹配单个字符"><span class="toc-text">正则表达式匹配单个字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则表达式匹配多个字符"><span class="toc-text">正则表达式匹配多个字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过关键字获取组"><span class="toc-text">通过关键字获取组</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        python re模块
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-31 20:53:22</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#Python" title="Python">Python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="re"><a href="#re" class="headerlink" title="re"></a>re</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># 用match方法进行匹配操作</span></span><br><span class="line">result = re.match(需要匹配的字符串/正则表达式, 要匹配的字符串)</span><br><span class="line"><span class="comment"># 如果上一步匹配到了数据，可以用group提取数据</span></span><br><span class="line">result.group()</span><br></pre></td></tr></table></figure>
+<h4 id="正则表达式匹配单个字符"><a href="#正则表达式匹配单个字符" class="headerlink" title="正则表达式匹配单个字符"></a>正则表达式匹配单个字符</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>匹配</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>匹配任意一个字符（除了\n）</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配[]中列举的字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字，即0-9</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配非数字</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配空白，如空格、tab键</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配非空白</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配单词字符，如a-z，A-Z，0-9、_</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非单词字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">ret = re.match(<span class="string">"t.o"</span>, <span class="string">"too"</span>)</span><br><span class="line"><span class="keyword">print</span> (ret.group())</span><br><span class="line"><span class="comment"># [out] too</span></span><br><span class="line">ret = re.match(<span class="string">"t.o"</span>, <span class="string">"two"</span>)</span><br><span class="line"><span class="keyword">print</span> (ret.group())</span><br><span class="line"><span class="comment"># [out] two</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># []</span></span><br><span class="line"><span class="comment"># 大小写都可以</span></span><br><span class="line">et = re.match(<span class="string">"[hH]"</span>,<span class="string">"Hello Python"</span>)</span><br><span class="line">print(ret.group())                                                     </span><br><span class="line"><span class="comment"># [out] H</span></span><br><span class="line">ret = re.match(<span class="string">"[hH]ello Python"</span>,<span class="string">"Hello Python"</span>)</span><br><span class="line">print(ret.group())                                                     </span><br><span class="line"><span class="comment"># [out] Hello Python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 匹配0-9的两种写法</span></span><br><span class="line">ret = re.match(<span class="string">"[0123456789]Hello Python"</span>,<span class="string">"7Hello Python”) </span></span><br><span class="line"><span class="string">ret = re.match("</span>[<span class="number">0</span><span class="number">-9</span>]Hello Python<span class="string">", "</span><span class="number">7</span>Hello Python<span class="string">")</span></span><br><span class="line"><span class="string">ret = re.match("</span>[<span class="number">0</span><span class="number">-3</span>,<span class="number">5</span><span class="number">-9</span>]Hello Python<span class="string">","</span><span class="number">4</span>Hello Python<span class="string">") # [out] None</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 使用\d进行匹配</span></span><br><span class="line"><span class="string">ret = re.match("</span>嫦娥\d号<span class="string">","</span>嫦娥<span class="number">1</span>号发射成功<span class="string">")</span></span><br><span class="line"><span class="string">print(ret.group()) </span></span><br><span class="line"><span class="string"># [out] 嫦娥1号</span></span><br></pre></td></tr></table></figure>
+<h4 id="正则表达式匹配多个字符"><a href="#正则表达式匹配多个字符" class="headerlink" title="正则表达式匹配多个字符"></a>正则表达式匹配多个字符</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>匹配</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配前一个字符出现0次或无限次，可有可无</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前一个字符出现1次或无限次，至少有1次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前一个字符出现1次或0次，要么1次，要么没有</td>
+</tr>
+<tr>
+<td>{m}</td>
+<td>匹配前一个字符出现m次</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>匹配前一个字符出现从m到n次</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># * </span></span><br><span class="line"><span class="comment"># 第一个字母为大写字符，后面都是小写或没有</span></span><br><span class="line">ret = re.match(<span class="string">"[A-Z][a-z]*"</span>, <span class="string">"M"</span>)  <span class="comment">#[out] M</span></span><br><span class="line">ret = re.match(<span class="string">"[A-Z][a-z]*"</span>, <span class="string">"MnnM"</span>)  <span class="comment">#[out] Mnn</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># +</span></span><br><span class="line"><span class="comment"># 判断变量名是否有效 （1）只能是字母、数字或下划线的任意组合；（2）第一个字符不能是数字；（3）关键字不能声明为变量</span></span><br><span class="line">names = [<span class="string">"name1"</span>, <span class="string">"_name"</span>, <span class="string">"2_name"</span>, <span class="string">"__name__"</span>]</span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">    ret = re.match(<span class="string">"[a-zA-Z_]+[\w]*"</span>, name)</span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">'变量名 &#123;&#125; 合法'</span>.format(res.group()))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">"变量名 &#123;&#125; 非法"</span>.format(name))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ?</span></span><br><span class="line"><span class="comment"># 匹配出0-99间的数字</span></span><br><span class="line">ret = re.match(<span class="string">"[1-9]?[0-9]"</span>, <span class="string">"7"</span>)</span><br><span class="line">ret = re.match(<span class="string">"[1-9]?\d"</span>, <span class="string">"77"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#123;m&#125;</span></span><br><span class="line"><span class="comment"># 匹配出8到20位的密码，可以是大小写英文字母、数字、下划线</span></span><br><span class="line">ret = re.match(<span class="string">"[a-zA-Z0-9_]&#123;8-20&#125;"</span>, <span class="string">"hhhhhhhhahahahha"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="通过关键字获取组"><a href="#通过关键字获取组" class="headerlink" title="通过关键字获取组"></a>通过关键字获取组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过(?P&lt;KEY_NAME&gt;[正则匹配]) 获取</span></span><br><span class="line"></span><br><span class="line">m = re.match(<span class="string">'/data/(?P&lt;datasets&gt;.*)/HumanAttributes/train0603_(?P&lt;seg&gt;\d+).nori'</span>, <span class="string">'/data/dataset1/HumanAttributes/train0603_1.nori'</span>).groupdict()</span><br><span class="line"></span><br><span class="line">m[<span class="string">'seg'</span>] <span class="comment"># [out] '1'</span></span><br><span class="line">m[<span class="string">'datasets'</span>] <span class="comment"># [out] 'dataset1'</span></span><br></pre></td></tr></table></figure>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Face Recognition - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Face-Recognition"><span class="toc-text">Face Recognition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Classification"><span class="toc-text">Classification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Metric-Learning度量学习"><span class="toc-text">Metric Learning度量学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Contrastive对比-Loss"><span class="toc-text">Contrastive对比 Loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Triplet-Loss"><span class="toc-text">Triplet Loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Complementary-to-TripletLoss"><span class="toc-text">Complementary to TripletLoss</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hard-Sample-Mining"><span class="toc-text">Hard Sample Mining</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Triplet-Hard-Loss"><span class="toc-text">Triplet Hard Loss</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mutual-Learning"><span class="toc-text">Mutual Learning</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Person-Re-Identification"><span class="toc-text">Person Re-Identification</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行人重识别"><span class="toc-text">行人重识别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用-1"><span class="toc-text">应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#任务难点"><span class="toc-text">任务难点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型"><span class="toc-text">模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#baseline"><span class="toc-text">baseline</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PCB"><span class="toc-text">PCB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Aligned-ReID"><span class="toc-text">Aligned ReID</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Skeleton"><span class="toc-text">Skeleton</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mutual-Learning-1"><span class="toc-text">Mutual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-熵entropy"><span class="toc-text">1 熵entropy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-交叉熵"><span class="toc-text">2 交叉熵</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Face Recognition
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-31 21:22:15</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#Face Recognition" title="Face Recognition">Face Recognition</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="Face-Recognition"><a href="#Face-Recognition" class="headerlink" title="Face Recognition"></a>Face Recognition</h2><p>@(计算机视觉)</p>
+<p><img src="./1539261677124.png" alt="Alt text"></p>
+<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>Paradox反论:</p>
+<ul>
+<li>Classification can only discriminate the “seen” objects.<br>To recognize “unseen” objects:</li>
+<li>The similarity of the features learned in classification.</li>
+<li>Similar Classification Probability to Closer Feature Distance.</li>
+</ul>
+<p>Beyond Softmax</p>
+<ul>
+<li>Large Margin Cosine  Loss is effective and easy to train.<h3 id="Metric-Learning度量学习"><a href="#Metric-Learning度量学习" class="headerlink" title="Metric Learning度量学习"></a>Metric Learning度量学习</h3>Directly train model from Loss of feature distances.</li>
+<li>Learn a function that measures how similar two objects are.</li>
+<li>Compared to classification which works in a closed-world, metric learning deals with an <code>open-world</code>.</li>
+<li>Metric Learning can be done together with Classification.</li>
+</ul>
+<h4 id="Contrastive对比-Loss"><a href="#Contrastive对比-Loss" class="headerlink" title="Contrastive对比 Loss"></a>Contrastive对比 Loss</h4><p>$\delta$ is Kronecker Delta 克罗内克函数的自变量一般是两个整数，如果两者相等，则其输出值为1，否则为0。<br>$\alpha$ is the margin for different identities<br><img src="./1539159432752.png" alt="Alt text"></p>
+<ul>
+<li>The distance of images with the same identity (positive pairs) should be smaller.</li>
+<li>The distance of images with different identities (negative pairs) should be larger.</li>
+<li>$\alpha$ is used to ignore the “naive” negative pairs.</li>
+</ul>
+<p><strong>Contrastive Loss</strong></p>
+<ul>
+<li>Margin between all positive pairs and negative pairs.</li>
+<li>Positive &amp; negative pairs are also constrained.</li>
+<li>Positive pairs are always trained.</li>
+<li>Negative pairs are trained until it is greater than the margin.</li>
+</ul>
+<h4 id="Triplet-Loss"><a href="#Triplet-Loss" class="headerlink" title="Triplet Loss"></a>Triplet Loss</h4><p><img src="./1539160080897.png" alt="Alt text"><br>A batch of triplets (A, A$\prime$, B) are trained in each iteration.<br>A and A$\prime$ share the same identity, B has a different identity.</p>
+<ul>
+<li>The distance of A and A$\prime$ should be smaller than that of A and B</li>
+<li>$\alpha$ is the margin between negative and positive pairs.</li>
+<li>Without $\alpha$, all distance converge to zero.</li>
+</ul>
+<p><strong>Triplet Loss</strong></p>
+<ul>
+<li>Margin between positive pairs and negative pairs given the query.</li>
+<li>Stop training positive(negative) pairs that are smaller(larger) than all negative(positive) pairs with a margin.</li>
+<li>Pay more attention to samples that <code>disobey the order.</code></li>
+<li>Suffers from lack of generality</li>
+</ul>
+<h4 id="Complementary-to-TripletLoss"><a href="#Complementary-to-TripletLoss" class="headerlink" title="Complementary to TripletLoss"></a>Complementary to TripletLoss</h4><p><strong>Improved Triplet Loss</strong><br><img src="./1539165016199.png" alt="Alt text"><br>$\beta$-term penalizes distance between features of A and A$\prime$</p>
+<p>Triple Loss with Contrastive Loss<br>Only consider image pairs with the same identity.<br><img src="./1539165150359.png" alt="Alt text"></p>
+<p><strong>Quadruplet Loss</strong><br><img src="./1539165188189.png" alt="Alt text"><br>Triplet Loss &amp; Pairwise Loss<br>Distance between any identical images should be smaller than that between different images.</p>
+<p><strong>Common</strong></p>
+<ul>
+<li>Introduce loss to “strengthen” triplet loss</li>
+<li>Samples are still trained when triplet constraint is satisfied</li>
+</ul>
+<p><strong>Difference</strong></p>
+<ul>
+<li>Improved Triplet Loss: An absolute margin is given for positive pairs.</li>
+<li>Quadruplet Loss: A relative margin between all positive pairs and negative pairs.</li>
+<li><h3 id="Hard-Sample-Mining"><a href="#Hard-Sample-Mining" class="headerlink" title="Hard Sample Mining"></a>Hard Sample Mining</h3>The possible number of triplets grows cubically<br>Trivial triplets quickly become uninformative.<br>The fraction of trivial triplets are large.</li>
+</ul>
+<h4 id="Triplet-Hard-Loss"><a href="#Triplet-Hard-Loss" class="headerlink" title="Triplet Hard Loss"></a>Triplet Hard Loss</h4><p>Each batch contains K identities, each identities contains L images.<br>Compute the distance between each images in the batch.<br>Distance matrix</p>
+<ul>
+<li>Diagnal Blocks are distance between images with the same identity</li>
+<li>Others are distance between images with different identities.<h3 id="Mutual-Learning"><a href="#Mutual-Learning" class="headerlink" title="Mutual Learning"></a>Mutual Learning</h3><h2 id="Person-Re-Identification"><a href="#Person-Re-Identification" class="headerlink" title="Person Re-Identification"></a>Person Re-Identification</h2></li>
+</ul>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
+<li>验证：1 - 1</li>
+<li>识别：1 - n</li>
+<li>聚类：n - n</li>
+</ul>
+<h2 id="行人重识别"><a href="#行人重识别" class="headerlink" title="行人重识别"></a>行人重识别</h2><h3 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h3><ul>
+<li>做搜索，在一组图片中找出某一个人；</li>
+<li>单摄像机或多摄像机下做行人跟踪；</li>
+<li>做相册整理，行人聚类</li>
+</ul>
+<h3 id="任务难点"><a href="#任务难点" class="headerlink" title="任务难点"></a>任务难点</h3><ul>
+<li>相比人脸识别，输入图像更大，背景复杂，遮挡严重；</li>
+<li>检测不准确，行人不完整，两张图片中的行人如何对齐；</li>
+<li>图像质量差，模糊；</li>
+<li>行人朝向不同，正面和背面差异较大；</li>
+<li>两个人的服装非常像；</li>
+</ul>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><h4 id="baseline"><a href="#baseline" class="headerlink" title="baseline"></a>baseline</h4><ul>
+<li>分类loss，softmax 交叉熵，在不同数据集上的鲁棒性更强</li>
+<li>Triplet loss，Hard Mining</li>
+</ul>
+<h4 id="PCB"><a href="#PCB" class="headerlink" title="PCB"></a>PCB</h4><p>Baseline 存在的问题是指考虑了 global 信息，对行人重识别来说，某些局部信息的差异会起到很大作用。PCB 垂直分成 6 个部分，每个部分计算一个 Softmax 分类loss，用 concat 后的特征做Triplet loss</p>
+<h4 id="Aligned-ReID"><a href="#Aligned-ReID" class="headerlink" title="Aligned ReID"></a>Aligned ReID</h4><p>PCB会存在 misalignment 问题，AlignedReID 垂直分七个部分，设置了一个使各部分对齐的距离loss</p>
+<h4 id="Skeleton"><a href="#Skeleton" class="headerlink" title="Skeleton"></a>Skeleton</h4><p>AlignedReID 仍然没有解决检测不准确和遮挡问题。</p>
+<h3 id="Mutual-Learning-1"><a href="#Mutual-Learning-1" class="headerlink" title="Mutual Learning"></a>Mutual Learning</h3><p>一组student 模型相互学习<br>分类 mutual learning loss 用 KL 散度：</p>
+<script type="math/tex; mode=display">D_{KL}(P||Q) = \sum\limits_{i=1}^N\sum\limits_{m=1}^M P^m(x_i)log\frac{P^m{(x_i)}}{Q^m(x_i)}</script><p>Ranking 用 softmax</p>
+<p>Mutual matric loss 用 L2 距离</p>
+<h4 id="1-熵entropy"><a href="#1-熵entropy" class="headerlink" title="1 熵entropy"></a>1 熵entropy</h4><p>熵是随机变量不确定性的度量，熵越大，随机变量的不确定性越大，定义为：</p>
+<script type="math/tex; mode=display">H(X)=-\sum\limits_{i=1}^n p_i logp_i</script><p>因为它只依赖于X的分布，而与X的取值无关，所以也可以记为$H(p)$:</p>
+<script type="math/tex; mode=display">H(p) = -\sum\limits_{i=1}^np_ilogp_i</script><h4 id="2-交叉熵"><a href="#2-交叉熵" class="headerlink" title="2 交叉熵"></a>2 交叉熵</h4><p>又称相对熵，互熵，<strong>KL 散度</strong>，是两个概率分布 P 和 Q 差别的非对称度量，P 表示数据的真实分布，Q 表示数据的模型分布，即 P 的近似分布：</p>
+<script type="math/tex; mode=display">D_{KL}(p||q) = \sum\limits_{i=1}^n p(x_i)log\frac{p(x_i)}{q(x_i)}</script><p>KL 散度可以衡量两个随机分布之间的距离，当两个分布相同是，KL散度为0，分布的差异越大时，KL散度越大。但它不是真正的距离，因为它不具有对称性。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

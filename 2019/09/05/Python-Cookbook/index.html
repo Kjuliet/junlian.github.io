@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Python Cookbook - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-数据结构和算法"><span class="toc-text">1. 数据结构和算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-解压序列赋值给多个变量"><span class="toc-text">1.1 解压序列赋值给多个变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-星号表达式解压任意个数"><span class="toc-text">1.2 星号表达式解压任意个数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-保留最后-N-个元素"><span class="toc-text">1.3 保留最后 N 个元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-collection-deque"><span class="toc-text">1.3.1 collection.deque</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-查找最大或最小的-N-个元素"><span class="toc-text">1.4 查找最大或最小的 N 个元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-实现一个优先级队列"><span class="toc-text">1.5 实现一个优先级队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-字典一个键映射多个值-multidict"><span class="toc-text">1.6 字典一个键映射多个值 multidict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-字典排序Collections-OrderedDict"><span class="toc-text">1.7 字典排序Collections.OrderedDict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-字典的运算"><span class="toc-text">1.8 字典的运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-1-查找最小和最大值"><span class="toc-text">1.8.1 查找最小和最大值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-2-字典数据排序"><span class="toc-text">1.8.2 字典数据排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-9-查找两字典的相同点"><span class="toc-text">1.9 查找两字典的相同点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-1-keys-items-支持集合操作"><span class="toc-text">1.9.1  keys(),items()支持集合操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-10-删除序列中相同元素并保持顺序"><span class="toc-text">1.10 删除序列中相同元素并保持顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-1-集合-生成器去重"><span class="toc-text">1.10.1 集合/生成器去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-2-key指定去重规则"><span class="toc-text">1.10.2 key指定去重规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-3-set只去重不维序"><span class="toc-text">1.10.3 set只去重不维序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-11-slice-命名切片"><span class="toc-text">1.11 slice()命名切片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-collections-Counter统计出现次数"><span class="toc-text">1.12 collections.Counter统计出现次数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-通过关键字排序字典列表"><span class="toc-text">1.13 通过关键字排序字典列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-14-排序不支持原生比较的对象"><span class="toc-text">1.14 排序不支持原生比较的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-15-通过某个字段将记录分组"><span class="toc-text">1.15 通过某个字段将记录分组</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Python Cookbook
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-05 17:11:59</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="1-数据结构和算法"><a href="#1-数据结构和算法" class="headerlink" title="1. 数据结构和算法"></a>1. 数据结构和算法</h2><h2 id="1-1-解压序列赋值给多个变量"><a href="#1-1-解压序列赋值给多个变量" class="headerlink" title="1.1 解压序列赋值给多个变量"></a>1.1 解压序列赋值给多个变量</h2><p>任何可迭代对象（列表，元祖，字符串，文件对象，迭代器，生成器）可以通过一个简单的赋值语句解压并赋值给多个变量，前提是变量的数量和序列元素的数量一样多。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p = [<span class="string">'bmjk'</span>, <span class="number">5.6</span>, <span class="number">1</span>, (<span class="number">2018.11</span><span class="number">.07</span>)]</span><br><span class="line">a, b, c, d = p</span><br><span class="line"></span><br><span class="line">s = <span class="string">'Hello'</span></span><br><span class="line">a, b, c, d, e = s</span><br></pre></td></tr></table></figure></p>
+<p>如果只想解压一部分，丢掉其他的值，可以用任意变量名去占位，然后丢掉这些变量就可以了，要保证用的那些占位变量名在其他地方没被使用到：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = [<span class="string">'bmjk'</span>, <span class="number">5.6</span>, <span class="number">1</span>, (<span class="number">2018.11</span><span class="number">.07</span>)]</span><br><span class="line">_, b, c, _ = p</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-2-星号表达式解压任意个数"><a href="#1-2-星号表达式解压任意个数" class="headerlink" title="1.2 星号表达式解压任意个数"></a>1.2 星号表达式解压任意个数</h2><ol>
+<li><p>用<strong>星号表达式</strong> 把可迭代对象中的 N 个元素解压到一个变量中，星号表达式<code>*val</code> 也可以用在结尾或开始部分，解压出的变量永远都是<strong>列表类型</strong>，不管有几项：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drop_first_last</span><span class="params">(grades)</span>:</span></span><br><span class="line">    first, *middle, last = grades</span><br><span class="line">    <span class="keyword">return</span> avg(middle)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>星号表达式在迭代元素为可变长元祖的序列时很有用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">records = [</span><br><span class="line">	(&apos;foo&apos;, 1, 2),</span><br><span class="line">	(&apos;bar&apos;, &apos;hello&apos;),</span><br><span class="line">	(&apos;foo&apos;, 3, 4),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">def do_foo(x, y):</span><br><span class="line">    print (&apos;foo&apos;, x, y)</span><br><span class="line"></span><br><span class="line">def do_bar(s);</span><br><span class="line">    print (&apos;bar&apos;, s)</span><br><span class="line">    </span><br><span class="line">for tag, *args in records:</span><br><span class="line">    if tag == &apos;foo&apos;:</span><br><span class="line">        do_foo(*args)</span><br><span class="line">    elif tag == &apos;bar&apos;:</span><br><span class="line">        do_bar(*args)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>星号解压语法可用于字符串操作，比如字符串分割：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">'username/data/attributes/benchmark/haha'</span></span><br><span class="line">uname, *midPath, benchmark = line.split(<span class="string">'/'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用星号加废弃名称，如<code>*_</code> 丢弃一部分解压元素：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">record = (<span class="string">'ACME'</span>, <span class="number">50</span>, <span class="number">123.45</span>, (<span class="number">11</span>,<span class="number">07</span>,<span class="number">2018</span>))</span><br><span class="line">name, *_, (*_, year) = record</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>星号解压语法和列表处理有许多相似之处，比如有一个列表，可以用星号表达式把它分割成前后两部分：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">items = [<span class="number">1</span>, <span class="number">10</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">11</span>, <span class="number">3</span>]</span><br><span class="line">head, *tail = items</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>用这种方法实现递归算法（由于语言层面的限制，递归并不是 Python 擅长的，对这个不要太认真）：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(items)</span>:</span></span><br><span class="line">    head, *tail = items</span><br><span class="line">    <span class="keyword">return</span> head + sum(tail) <span class="keyword">if</span> tail <span class="keyword">else</span> head</span><br><span class="line"></span><br><span class="line">sum(items)</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-3-保留最后-N-个元素"><a href="#1-3-保留最后-N-个元素" class="headerlink" title="1.3 保留最后 N 个元素"></a>1.3 保留最后 N 个元素</h2><p>用 <code>collections.deque</code> 保留最后有限几个元素的历史记录，比如下面的代码在多行上面做简单的文本匹配，返回匹配所在行的最后N行：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(lines, pattern, history=<span class="number">5</span>)</span>:</span></span><br><span class="line">    previous_lines = deque(maxlen=history)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> line:  <span class="comment"># previous_lines 保存当前遍历行的最近的前几行，如过当前行满足条件，则yield previous_line</span></span><br><span class="line">            <span class="keyword">yield</span> line, previous_lines</span><br><span class="line">        previous_lines.append(line)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">r'../../cookbook/somefile.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line, prevlines <span class="keyword">in</span> search(f, <span class="string">'python'</span>, <span class="number">5</span>):</span><br><span class="line">            <span class="keyword">for</span> pline <span class="keyword">in</span> prevlines:</span><br><span class="line">                <span class="keyword">print</span> (pline, end=<span class="string">''</span>)</span><br><span class="line">                <span class="keyword">print</span> (line, end=<span class="string">''</span>)</span><br><span class="line">                <span class="keyword">print</span> (<span class="string">'_'</span> * <span class="number">20</span>)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>使用 yield 生成器函数，可以将搜索过程代码和使用搜索结果代码解耦。</p>
+</blockquote>
+<h3 id="1-3-1-collection-deque"><a href="#1-3-1-collection-deque" class="headerlink" title="1.3.1 collection.deque"></a>1.3.1 <code>collection.deque</code></h3><p>是一种双向队列，底层据说是用双链表实现的。</p>
+<p>用<code>deque(maxlen=N)</code>构造函数新建一个固定大小的队列，如果新的元素加入时这个队列已满，最老的元素会被自动移除，如果不设置maxlen，则会得到一个无限大小的额队列。</p>
+<p>常用方法包括：</p>
+<ul>
+<li>append：队尾加入元素；</li>
+<li>appendleft：队首加入元素；</li>
+<li>clear：清空队列；</li>
+<li>copy：浅拷贝，复制的是可变元素的引用，深拷贝的话复制的是不可变元素的引用和可变元素的复制；</li>
+<li>count：<code>a.count(1)</code> a 中 1 的数量；</li>
+<li>extend：参数是可迭代变量，按迭代顺序添加到右端；</li>
+<li>extendleft：按迭代顺序添加到左端；</li>
+<li>lndex：某个值第一个匹配项的索引位置；</li>
+<li>insert：<code>insert(index, obj)</code>在index前插入元素，如果index超过序列长度则插到最后，如果deque长度已经是maxlen，再插入时会报错。</li>
+<li>maxlen：不可被写的对象，如 <code>a.maxlen = 10</code>会报错；</li>
+<li>pop：队尾元素删除；</li>
+<li>popleft：队首元素删除；</li>
+<li>remove：<code>remove(1)</code>移除1的第一个匹配项；</li>
+<li>reverse：倒序；</li>
+<li>rotate：循环移动，参数为正则全体右移，参数为负则全体左移。</li>
+</ul>
+<h2 id="1-4-查找最大或最小的-N-个元素"><a href="#1-4-查找最大或最小的-N-个元素" class="headerlink" title="1.4 查找最大或最小的 N 个元素"></a>1.4 查找最大或最小的 N 个元素</h2><p>根据情况选择不同的方法：</p>
+<ul>
+<li>如果只想查找唯一的最小或最大的元素，即N=1时，用<code>min()</code>和<code>max()</code>更快；</li>
+<li>如果要查找的元素个数相对较小，用<code>nlargest()</code>和 <code>nsmallest()</code> </li>
+<li>如果N的大小和集合大小接近时，则先排序后切片会更快，即<code>sorted(items)[:N]</code>或<code>sorted(items)[-N:]</code></li>
+</ul>
+<p>用 <code>heapq</code> 模块的<code>nlargest()</code>和 <code>nsmallest()</code> 两个函数：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line">nums = [<span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">42</span>]</span><br><span class="line"><span class="keyword">print</span> (heapq.nlargest(<span class="number">3</span>, nums)) <span class="comment"># [42, 9, 8]</span></span><br><span class="line"><span class="keyword">print</span> (heapq.nsmallest(<span class="number">3</span>, nums)) <span class="comment"># [1, 2, 4]</span></span><br></pre></td></tr></table></figure></p>
+<p>这两个函数都能接受一个关键字参数，用于更复杂的数据结构，下面代码在对每个元素进行对比的时候，会以 price 的值进行比较：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">portfolio = [</span><br><span class="line">	&#123;<span class="string">'name'</span>: <span class="string">'IBM'</span>, <span class="string">'shares'</span>: <span class="number">100</span>, <span class="string">'price'</span>: <span class="number">91.1</span>&#125;,</span><br><span class="line">	&#123;<span class="string">'name'</span>: <span class="string">'AAPL'</span>, <span class="string">'shares'</span>: <span class="number">50</span>, <span class="string">'price'</span>: <span class="number">543.22</span>&#125;,</span><br><span class="line">	&#123;<span class="string">'name'</span>: <span class="string">'FB'</span>, <span class="string">'shares'</span>: <span class="number">200</span>, <span class="string">'price'</span>: <span class="number">21.09</span>&#125;,</span><br><span class="line">]</span><br><span class="line">cheap = heapq.nsmallest(<span class="number">3</span>, portfolio, key=<span class="keyword">lambda</span> s:s[<span class="string">'price'</span>])</span><br><span class="line">expensive = heapq.nlargest(<span class="number">3</span>, portfolio, key=<span class="keyword">lambda</span> s:s[<span class="string">'price'</span>])</span><br></pre></td></tr></table></figure></p>
+<p>如果要查找的元素个数相对较小，<code>nlargest()</code>和 <code>nsmallest()</code> 提供了很好的性能，在底层实现时，首先会将集合元素堆排序后放入一个列表中，堆数据结构最重要的特征是heap[0]永远是最小的元素，剩余的元素很容易通过调用<code>heapq.heappop()</code>方法得到，该方法会先将第一个元素弹出，然后用下一个最小的元素来取代被弹出元素，时间复杂度为O(logN)，N 是堆大小。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line">nums = [<span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">23</span>, <span class="number">7</span>, <span class="number">-4</span>, <span class="number">18</span>, <span class="number">23</span>, <span class="number">42</span>, <span class="number">37</span>, <span class="number">2</span>]</span><br><span class="line">heap = list(nums)</span><br><span class="line">heapq.heapify(heap)</span><br><span class="line"><span class="comment"># heap = [-4, 2, 1, 23, 7, 2, 18, 23, 42, 37, 8]</span></span><br><span class="line">heapq.heappop(heap) <span class="comment"># -4</span></span><br><span class="line">heapq.heappop(heap) <span class="comment"># 1</span></span><br><span class="line">heapq.heappop(heap) <span class="comment"># 2</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-5-实现一个优先级队列"><a href="#1-5-实现一个优先级队列" class="headerlink" title="1.5 实现一个优先级队列"></a>1.5 实现一个优先级队列</h2><p>用 heapq 模块实现优先级队列：<br><code>heapq.heappush()</code>在队列<code>_queue</code>上插入元素，<code>heapq.heappop()</code>表示删除第一个元素，<code>_queue</code>保证第一个元素拥有最高优先级，所以<code>heapq.heappop()</code>总返回“最小的”元素。<code>push</code> 和 <code>pop</code>操作时间复杂度为 $O(logN)$ 。</p>
+<p>假设待比较元素是元组，元组中第一项可比较，第二项不可比较，元组在比较时会先按第一项比较，当第一项优先级相同时，会继续比较下一项，如果下一项的对象不可比较，则会出错。</p>
+<p>所以下面实现中，引入index值，确保两个元素不可能有相同的 index 值：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PriorityQueue</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self._queue = []</span><br><span class="line">        self._index = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 堆里存的是可比较的元组</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self, item, priority)</span>:</span></span><br><span class="line">        heapq.heappush(self._queue, (-priority, self._index, item))  </span><br><span class="line">        <span class="comment"># 优先级为负的目的是为了让元素按优先级从高到低排序，-priority的最小对应的priority最大；</span></span><br><span class="line">        <span class="comment"># index的作用是保证同等优先级元素的正确排序，用不断增加的index下标变量确保元素按照插入顺序排序。</span></span><br><span class="line">        self._index += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> heapq.heappop(self._queue)[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
+<p>使用：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self._name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Item(&#123;!r&#125;)'</span>.format(self.name)</span><br><span class="line"></span><br><span class="line">q = PriorityQueue()</span><br><span class="line">q.push(Item(<span class="string">'foo'</span>), <span class="number">1</span>)</span><br><span class="line">q.push(Item(<span class="string">'bar'</span>), <span class="number">5</span>)</span><br><span class="line">q.push(Item(<span class="string">'spam'</span>), <span class="number">4</span>)</span><br><span class="line">q.push(Item(<span class="string">'grok'</span>), <span class="number">1</span>)</span><br><span class="line">q.pop()  <span class="comment"># Item('bar')</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-6-字典一个键映射多个值-multidict"><a href="#1-6-字典一个键映射多个值-multidict" class="headerlink" title="1.6 字典一个键映射多个值 multidict"></a>1.6 字典一个键映射多个值 multidict</h2><p>方法是把多个值放到另外的容器中，比如列表或集合，如果想保持元素的插入顺序就用列表，如果想去掉重复元素且不关心元素的顺序就用集合。</p>
+<p>可以用 <code>collections</code>模块的<code>defaultdict</code>构造字典，<code>defaultdict</code>会自动初始化每个key刚开始对应的值，这样只需要关注添加元素的操作：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line">d = defaultdict(list)</span><br><span class="line">d[<span class="string">'a'</span>].append(<span class="number">1</span>)</span><br><span class="line">d[<span class="string">'a'</span>].append(<span class="number">2</span>)</span><br><span class="line">d[<span class="string">'b'</span>].append(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">d = defaultdict(set)</span><br><span class="line">d[<span class="string">'a'</span>].add(<span class="number">1</span>)</span><br><span class="line">d[<span class="string">'a'</span>].add(<span class="number">2</span>)</span><br><span class="line">d[<span class="string">'b'</span>].add(<span class="number">4</span>)</span><br></pre></td></tr></table></figure></p>
+<p>也就是可以将：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> pairs:</span><br><span class="line">    <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> d:</span><br><span class="line">        d[key] = []</span><br><span class="line">    d[key].append(value)</span><br></pre></td></tr></table></figure></p>
+<p>改写为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = defaultdict(list)</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> pairs:</span><br><span class="line">    d[key].append(value)</span><br></pre></td></tr></table></figure></p>
+<p><code>defaultdict</code> 会自动为将要访问的键创建映射实体，就算目前字典并不存在，如果不想要这样的特性，可以在一个普通字典上用<code>setdefault()</code>方法代替：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;&#125;</span><br><span class="line">d.setdefault(<span class="string">'a'</span>, []).append(<span class="number">1</span>)</span><br><span class="line">d.setdefault(<span class="string">'a'</span>, []).append(<span class="number">2</span>)</span><br><span class="line">d.setdefault(<span class="string">'b'</span>, []).append(<span class="number">4</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-7-字典排序Collections-OrderedDict"><a href="#1-7-字典排序Collections-OrderedDict" class="headerlink" title="1.7 字典排序Collections.OrderedDict"></a>1.7 字典排序<code>Collections.OrderedDict</code></h2><p>用<code>collections</code>模块中的<code>OrderedDict</code>类控制字典中元素的顺序，在迭代操作时会保持元素被插入时的顺序。</p>
+<p>当想要构建一个将来需要序列化或编码成其他格式的映射的时候，比如想精确控制以 JSON 编码后字段的顺序，就可以先用 <code>OrderedDict</code>来构建这样的数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">d = OrderedDict()</span><br><span class="line">d[<span class="string">'foo'</span>] = <span class="number">1</span></span><br><span class="line">d[<span class="string">'bar'</span>] = <span class="number">2</span></span><br><span class="line">d[<span class="string">'spam'</span>] = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">json.dumps(d)</span><br></pre></td></tr></table></figure>
+<p><code>OrderedDict</code>内部维护着一个根据键插入顺序排序的双向链表，每次插入新元素时会被放到链表尾部，对一个已经存在的键赋值不会改变键的顺序。需要注意，<strong>一个<code>OrderedDict</code>的大小时一个普通字典的两倍，因为它内部维护着另外一个链表</strong>，所以如果要构建一个需要大量<code>OrderedDict</code>实例的数据结构的时候，就得权衡一下是否使用<code>OrderedDict</code>带来的好处会大过额外内存消耗的影响。</p>
+<h2 id="1-8-字典的运算"><a href="#1-8-字典的运算" class="headerlink" title="1.8 字典的运算"></a>1.8 字典的运算</h2><p>要对字典值执行计算操作，通常需要使用<code>zip()</code>函数先将键和值反转过来。</p>
+<h3 id="1-8-1-查找最小和最大值"><a href="#1-8-1-查找最小和最大值" class="headerlink" title="1.8.1 查找最小和最大值"></a>1.8.1 查找最小和最大值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">prices = &#123;</span><br><span class="line">    <span class="string">'ACME'</span>: <span class="number">45.23</span>,</span><br><span class="line">    <span class="string">'AAPL'</span>: <span class="number">612.76</span>,</span><br><span class="line">    <span class="string">'IBM'</span>: <span class="number">205.55</span>,</span><br><span class="line">    <span class="string">'HPQ'</span>: <span class="number">37.20</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">min_price = min(zip(prices.values(), prices.keys()))</span><br><span class="line">max_price = max(zip(prices.values(), prices.keys()))</span><br></pre></td></tr></table></figure>
+<p>注意！<strong>当多个实体有相同的值的时候，键会决定返回结果</strong>，比如在min()时，如果恰巧最小值有重复的，那么拥有最小键的实体会返回：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">prices = &#123;</span><br><span class="line">    <span class="string">'AAA'</span>: <span class="number">612.76</span>,</span><br><span class="line">    <span class="string">'ZZZ'</span>: <span class="number">612.76</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">min_price = min(zip(prices.values(), prices.keys())) <span class="comment"># (612.76, 'AAA')</span></span><br><span class="line">max_price = max(zip(prices.values(), prices.keys())) <span class="comment"># (612.76, 'ZZZ')</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>不用zip()的方法：</strong></p>
+<ul>
+<li><p>如果在字典上执行普通的数学运算会只作用于键，而不是值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min(prices)  <span class="comment"># returns 'AAPL' 只有键没有值！</span></span><br><span class="line">max(prices)  <span class="comment"># returns 'IBM'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果想在字典的值上计算，可以用<code>values()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min(prices.values())  <span class="comment"># returns 37.20</span></span><br><span class="line">max(prices.values())  <span class="comment"># returns 612.76</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果还想知道最大值或最小值对应的键的信息，可以用<code>min()</code>和<code>max()</code>提供的<code>key</code>函数参数来获取：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min(prices, key=<span class="keyword">lambda</span> k: prices[k])  <span class="comment"># return 'HPQ'</span></span><br><span class="line">max(prices, key=<span class="keyword">lambda</span> k: prices[k])  <span class="comment"># return 'AAPL'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这时如果还想得到最小值，又得执行一次查找操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min_value = prices[min(prices, key=<span class="keyword">lambda</span> k: prices[k])]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-8-2-字典数据排序"><a href="#1-8-2-字典数据排序" class="headerlink" title="1.8.2 字典数据排序"></a>1.8.2 字典数据排序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prices_sorted = sorted(zip(prices.values(), prices.keys()))</span><br></pre></td></tr></table></figure>
+<p>需要注意，<code>zip()</code> 函数创建的是一个只能访问一次的迭代器，比如下面的代码会报错：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prices_and_names = zip(prices.values(), prices.keys())</span><br><span class="line"><span class="keyword">print</span> (min(prices_and_names))  <span class="comment"># OK</span></span><br><span class="line"><span class="keyword">print</span> (max(prices_and_names))  <span class="comment"># ValueError:max() arg is an empty sequence</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-9-查找两字典的相同点"><a href="#1-9-查找两字典的相同点" class="headerlink" title="1.9 查找两字典的相同点"></a>1.9 查找两字典的相同点</h2><h3 id="1-9-1-keys-items-支持集合操作"><a href="#1-9-1-keys-items-支持集合操作" class="headerlink" title="1.9.1  keys(),items()支持集合操作"></a>1.9.1  <code>keys(),items()</code>支持集合操作</h3><p>在两字典的 <code>keys()</code>或<code>items()</code>的返回结果上执行<strong>集合操作</strong>：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;</span><br><span class="line">    <span class="string">'x'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'y'</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">'z'</span>: <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line">b = &#123;</span><br><span class="line">    <span class="string">'w'</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="string">'x'</span>: <span class="number">11</span>,</span><br><span class="line">    <span class="string">'y'</span>: <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line">a.keys() &amp; b.keys() <span class="comment"># &#123;'x', 'y'&#125; 返回的是集合</span></span><br><span class="line">a.keys() - b.keys() <span class="comment"># &#123;'z'&#125;</span></span><br><span class="line">a.items() &amp; b.items() <span class="comment"># &#123;('y', 2)&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>这些操作还可以用来修改或过滤字典元素，比如想以现有字典构造一个排除几个指定键的新字典：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c = &#123;key: a[key] <span class="keyword">for</span> key <span class="keyword">in</span> a.keys() - &#123;<span class="string">'z'</span>,<span class="string">'w'</span>&#125;&#125; <span class="comment"># &#123;'x': 1, 'y': 2&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>注意！<code>values()</code>不支持集合操作</strong>，因为字典不能保证所有值互不相同，所以如果要在值上做集合操作，需要先将其转换成set。</p>
+<h2 id="1-10-删除序列中相同元素并保持顺序"><a href="#1-10-删除序列中相同元素并保持顺序" class="headerlink" title="1.10 删除序列中相同元素并保持顺序"></a>1.10 删除序列中相同元素并保持顺序</h2><h3 id="1-10-1-集合-生成器去重"><a href="#1-10-1-集合-生成器去重" class="headerlink" title="1.10.1 集合/生成器去重"></a>1.10.1 集合/生成器去重</h3><p>如果序列上的值都是 hashable 类型，可以用集合或生成器解决：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dedupe</span><span class="params">(items)</span>:</span></span><br><span class="line">    seen = set()</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">            <span class="keyword">yield</span> item</span><br><span class="line">            seen.add(item)</span><br><span class="line">       </span><br><span class="line">a = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>]</span><br><span class="line">list(dedupe(a))  <span class="comment"># [1, 5, 2, 9, 10]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="1-10-2-key指定去重规则"><a href="#1-10-2-key指定去重规则" class="headerlink" title="1.10.2 key指定去重规则"></a>1.10.2 <code>key</code>指定去重规则</h3><p>如果元素不可哈希，如dict类型，可以用<code>key</code>参数指定一个函数，将序列元素转换成 hashable 类型。如果想基于单个字段、属性或者某个更大的数据结构来消除重复元素，也可以用这种方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dedupe</span><span class="params">(items, key=None)</span>:</span></span><br><span class="line">    seen = set()</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        val = item <span class="keyword">if</span> key <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> key(item)</span><br><span class="line">        <span class="keyword">if</span> val <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">            <span class="keyword">yield</span> item</span><br><span class="line">            seen.add(val) <span class="comment"># &#123;(1, 2), (1, 3), ...&#125;</span></span><br><span class="line">            </span><br><span class="line">a = [&#123;<span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'y'</span>: <span class="number">2</span>&#125;, &#123;<span class="string">'x'</span>:<span class="number">1</span>, <span class="string">'y'</span>: <span class="number">3</span>&#125;, &#123;<span class="string">'x'</span>:<span class="number">1</span>, <span class="string">'y'</span>: <span class="number">2</span>&#125;, &#123;<span class="string">'x'</span>:<span class="number">2</span>, <span class="string">'y'</span>: <span class="number">4</span>&#125;]</span><br><span class="line">list(dedupe(a, key=<span class="keyword">lambda</span> d: (d[<span class="string">'x'</span>], d[<span class="string">'y'</span>]))) <span class="comment"># 重复项为 (‘x’'y')</span></span><br><span class="line">list(dedupe(a, key=<span class="keyword">lambda</span> d: d[<span class="string">'x'</span>]))  <span class="comment"># 重复项为 'x'</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 读取一个文件，消除重复行</span></span><br><span class="line"><span class="keyword">with</span> open(file, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> dedupe(f):</span><br><span class="line">       ...</span><br></pre></td></tr></table></figure>
+<h3 id="1-10-3-set只去重不维序"><a href="#1-10-3-set只去重不维序" class="headerlink" title="1.10.3 set只去重不维序"></a>1.10.3 <code>set</code>只去重不维序</h3><p>如果只想消除重复元素，可以构造集合解决，这种方法不能维护元素的顺序：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">set(a)</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-11-slice-命名切片"><a href="#1-11-slice-命名切片" class="headerlink" title="1.11 slice()命名切片"></a>1.11 <code>slice()</code>命名切片</h2><p>内置的<code>slice()</code>函数创建了一个切片对象，可以用在任何切片允许使用的地方。</p>
+<p>把硬编码切片下标改为<code>slice()</code>命名切片，提高可读性和可维护性：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SHARES = slice(<span class="number">20</span>, <span class="number">23</span>)</span><br><span class="line">PRICE = slice(<span class="number">31</span>, <span class="number">37</span>)</span><br><span class="line">cost = int(record[SHARES]) * float(record[PRICE])</span><br></pre></td></tr></table></figure></p>
+<p>切片对象 a 有<code>a.start</code>，<code>a.stop</code>，    <code>a.step</code>属性：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = slice(<span class="number">5</span>, <span class="number">50</span>, <span class="number">2</span>)</span><br><span class="line">a.start  <span class="comment"># 5</span></span><br><span class="line">a.stop   <span class="comment"># 50</span></span><br><span class="line">a.step   <span class="comment"># 2</span></span><br></pre></td></tr></table></figure></p>
+<p>切片对象的<code>indices(size)</code>方法把它映射到一个确定大小的序列上，返回一个三元组 <code>(start, stop, step)</code>，所有值都会被合适的缩小以满足边界限制，从而避免出现IndexError异常：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = slice(<span class="number">5</span>, <span class="number">50</span>, <span class="number">2</span>)</span><br><span class="line">s = <span class="string">'HelloWorld'</span></span><br><span class="line">a.indices(len(s))   <span class="comment"># (5, 10, 2)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(*a.indices(len(s))):</span><br><span class="line">    <span class="keyword">print</span> (s[i])</span><br><span class="line"><span class="comment"># W r d</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-12-collections-Counter统计出现次数"><a href="#1-12-collections-Counter统计出现次数" class="headerlink" title="1.12 collections.Counter统计出现次数"></a>1.12 <code>collections.Counter</code>统计出现次数</h2><p>用<code>collections.Counter</code> 类的<code>most_common()</code>方法可以返回次数最多的前 m 个元素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">words = [</span><br><span class="line">	<span class="string">'look'</span>, <span class="string">'into'</span>, <span class="string">'my'</span>, <span class="string">'eyes'</span>, <span class="string">'look'</span>, <span class="string">'into'</span>, <span class="string">'my'</span>, <span class="string">'eyes'</span>, <span class="string">'the'</span>, <span class="string">'eyes'</span>, <span class="string">'the'</span>, <span class="string">'eyes'</span>, <span class="string">'the'</span>, <span class="string">'eyes'</span>, <span class="string">'my'</span></span><br><span class="line">]</span><br><span class="line">word_counts = Counter(words)</span><br><span class="line">top_three = word_counts.most_common(<span class="number">3</span>)</span><br><span class="line"><span class="keyword">print</span> (top_three)</span><br><span class="line"><span class="comment"># Outputs [('eyes', 5), ('the', 3), ('my', 3)]</span></span><br></pre></td></tr></table></figure></p>
+<p>底层实现上，Counter 对象就是一个字典，将元素映射到它出现的次数上。如果想增加计数，可以用简单的加法，<strong>也可以用<code>update()</code>方法</strong>。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">morewords = [<span class="string">'why'</span>, <span class="string">'are'</span>, <span class="string">'you'</span>, <span class="string">'not'</span>, <span class="string">'looking'</span>, <span class="string">'in'</span>, <span class="string">'my'</span>, <span class="string">'eyes'</span>]</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> morewords:</span><br><span class="line">    word_counts[word] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">word_counts.update(morewords)</span><br></pre></td></tr></table></figure></p>
+<p><code>Counter</code>实例一个鲜为人知的特性是它们可以很容易的和数学运算操作相结合：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = Counter(words) <span class="comment"># Counter(&#123;'eyes': 8, 'the': 5, 'look': 4&#125;)</span></span><br><span class="line">b = Counter(morewords)  <span class="comment"># Counter(&#123;'eyes': 1, 'the': 4, 'look': 6&#125;)</span></span><br><span class="line">c = a + b  <span class="comment"># Counter(&#123;'eyes': 9, 'the': 9, 'look': 10&#125;)</span></span><br><span class="line">d = a - b  <span class="comment"># Counter(&#123;'eyes': 7, 'the': 1&#125;)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-13-通过关键字排序字典列表"><a href="#1-13-通过关键字排序字典列表" class="headerlink" title="1.13 通过关键字排序字典列表"></a>1.13 通过关键字排序字典列表</h2><p>用<code>operator</code>模块的<code>itemgetter</code>函数实现，例如要从数据库中检索网站会员信息列表：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line">rows = [</span><br><span class="line">    &#123;<span class="string">'fname'</span>: <span class="string">'Brian'</span>, <span class="string">'lname'</span>: <span class="string">'Jones'</span>, <span class="string">'uid'</span>: <span class="number">1003</span>&#125;,</span><br><span class="line">    &#123;<span class="string">'fname'</span>: <span class="string">'David'</span>, <span class="string">'lname'</span>: <span class="string">'Beazley'</span>, <span class="string">'uid'</span>: <span class="number">1002</span>&#125;,</span><br><span class="line">    &#123;<span class="string">'fname'</span>: <span class="string">'John'</span>, <span class="string">'lname'</span>: <span class="string">'Cleese'</span>, <span class="string">'uid'</span>: <span class="number">1001</span>&#125;,</span><br><span class="line">    &#123;<span class="string">'fname'</span>: <span class="string">'Big'</span>, <span class="string">'lname'</span>: <span class="string">'Jones'</span>, <span class="string">'uid'</span>: <span class="number">1004</span>&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">rows_by_fname = sorted(rows, key=itemgetter(<span class="string">'fname'</span>))</span><br><span class="line">rows_by_uid = sorted(rows, key=itemgetter(<span class="string">'uid'</span>))</span><br></pre></td></tr></table></figure></p>
+<p><code>itemgetter()</code>函数也支持多个keys，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rows_by_ifname = sorted(rows, key=itemgetter(&apos;lname&apos;, &apos;fname&apos;))</span><br></pre></td></tr></table></figure></p>
+<p><code>itemgetter()</code>也可以用lambda表达式代替，但<code>itemgetter()</code>要更快一点，<code>itemgetter()</code>也可以用在<code>min()</code>和<code>max()</code>中：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rows_by_fname = sorted(rows, key=<span class="keyword">lambda</span> r: r[<span class="string">'fname'</span>])</span><br><span class="line">rows_by)lfname = sorted(rows, key=<span class="keyword">lambda</span> r: (r[<span class="string">'lname'</span>], f[<span class="string">'fname'</span>])</span><br><span class="line"></span><br><span class="line">min(rows, key=itemgetter(<span class="string">'uid'</span>))</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-14-排序不支持原生比较的对象"><a href="#1-14-排序不支持原生比较的对象" class="headerlink" title="1.14 排序不支持原生比较的对象"></a>1.14 排序不支持原生比较的对象</h2><p>【方法一：sorted() 函数 key 参数】内置的 sorted() 函数有一个关键字参数key，可传入一个callable对象给它，这个 callable 对象对每个传入的对象返回一个值，这个值会被 sorted 用来排序。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted(users, key=<span class="keyword">lambda</span> u: u.user_id)</span><br></pre></td></tr></table></figure></p>
+<p>【方法二：operator.attrgetter()】通常会运行地快点，还能同时允许多个字段进行比较。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> attrgetter</span><br><span class="line">sorted(users, key=attrgetter(<span class="string">'user_id'</span>))</span><br><span class="line">min(users, key=attrgetter(<span class="string">'user_id'</span>))</span><br><span class="line">by_name = sorted(users, key=attrgetter(<span class="string">'last_name'</span>, <span class="string">'first_name'</span>))</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-15-通过某个字段将记录分组"><a href="#1-15-通过某个字段将记录分组" class="headerlink" title="1.15 通过某个字段将记录分组"></a>1.15 通过某个字段将记录分组</h2><p>对一个字典或实例的序列，如果想根据某个特定的字段来分组迭代访问，可以先按指定的字段排序，然后用<code>itertools.groupby()</code>函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> groupby</span><br><span class="line"></span><br><span class="line">rows.sort(key=itemgetter(<span class="string">'data'</span>))</span><br><span class="line"><span class="keyword">for</span> data, items <span class="keyword">in</span> groupby(rows, key=itemgetter(<span class="string">'data'</span>)):</span><br><span class="line">    <span class="keyword">print</span> (data)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> items:</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">' '</span>, i)</span><br></pre></td></tr></table></figure></p>
+<p><code>groupby()</code>函数扫描整个序列并且查找<strong>连续相同</strong>值（或根据指定key函数返回值相同）的元素序列。在每次迭代的时候，会返回一直值和一个迭代对象，这个迭代器对象可以生成元素值全部等于上面那个值的组中的所有对象。</p>
+<p>因为<code>groupby()</code>只检查连续的元素，所以一定要先根据指定的字段将数据排序。</p>
+<p>所以如果对内存的占用不是很关心，可以用<code>defaultdict()</code>构建多值字典，会比先排序再用<code>groupby()</code>函数迭代要快一些。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

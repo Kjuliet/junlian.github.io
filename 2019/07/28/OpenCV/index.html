@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        OpenCV - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境"><span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenCV模块"><span class="toc-text">OpenCV模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#色彩空间Color-Space"><span class="toc-text">色彩空间Color Space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#像素空间运算"><span class="toc-text">像素空间运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ROI与泛洪填充"><span class="toc-text">ROI与泛洪填充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模糊操作"><span class="toc-text">模糊操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高斯模糊"><span class="toc-text">高斯模糊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#边缘保留滤波EPF"><span class="toc-text">边缘保留滤波EPF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图像直方图histogram"><span class="toc-text">图像直方图histogram</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        OpenCV
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-28 11:27:32</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br><span class="line"></span><br><span class="line"><span class="comment">#openCV扩展模块，包括场景文字检测，深度学习，人脸识别，图像拼接，OCR(Optical Character Recognition，光学字符识别)集成的库的功能。</span></span><br><span class="line">pip install opencv-contrib-python</span><br><span class="line">		 </span><br><span class="line">pip install pytesseract  <span class="comment">#谷歌开源的OCR的引擎，可做验证码识别</span></span><br></pre></td></tr></table></figure>
+<h3 id="OpenCV模块"><a href="#OpenCV模块" class="headerlink" title="OpenCV模块"></a>OpenCV模块</h3><blockquote>
+<p>基础模块：</p>
+<ul>
+<li>读写模块：视频读写Video I/O，图像编解码Imagecodecs</li>
+<li>处理模块：Core，像素级别的运算和操作</li>
+<li>Image processing </li>
+<li>High-level GUI：如窗口和图像显示</li>
+</ul>
+<p>功能模块</p>
+<ul>
+<li>视频分析</li>
+<li>2D特征提取</li>
+<li>机器学习</li>
+<li>异构与并行计算</li>
+<li>图像拼接</li>
+<li>超分辨</li>
+<li>相机矫正与三维重建</li>
+<li>分割与匹配</li>
+<li>深度神经网络</li>
+<li>三维可视化</li>
+<li>对象检测</li>
+</ul>
+</blockquote>
+<p><strong>图像</strong><br>结构化存储的数据信息<br>属性：通道数目（色彩空间转换），高宽，像素数据，位图深度（图像类型）</p>
+<p><strong>OpenCV支图像加载与存储</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_image_info</span><span class="params">(image)</span>:</span></span><br><span class="line">    print(type(image))      <span class="comment"># &lt;class 'numpy.ndarray'&gt;</span></span><br><span class="line">    print(image.shape)      <span class="comment"># (768, 1366, 3) (长像素点，宽，通道数)</span></span><br><span class="line">    print(image.size)       <span class="comment"># 3147264 : = 768*1366*3</span></span><br><span class="line">    print(image.dtype)      <span class="comment"># uint8:三个像素的每个通道所占位数</span></span><br><span class="line">    pixel_data = np.array(image)</span><br><span class="line">    print(pixel_data)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">video_demo</span><span class="params">()</span>:</span></span><br><span class="line">    capture = cv.VideoCapture(<span class="number">0</span>)         <span class="comment">#0代表打开电脑摄像头</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">        ret,frame = capture.read()      <span class="comment"># ret返回值，frame视频中的每一帧</span></span><br><span class="line">        frame = cv.flip(frame,<span class="number">1</span>)        <span class="comment"># flip镜像翻转，左右调换</span></span><br><span class="line">        cv.imshow(<span class="string">"video"</span>,frame)        <span class="comment"># 循环显示每一帧</span></span><br><span class="line">        c = cv.waitKey(<span class="number">50</span>)              <span class="comment"># 50ms</span></span><br><span class="line">        <span class="keyword">if</span> c == <span class="number">27</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">src = cv.imread(<span class="string">"F:\\documents\\Firefox\\LALA\\1521214728135.jpg"</span>)  <span class="comment"># 读入图像,路径不能包含中文</span></span><br><span class="line">cv.namedWindow(<span class="string">"input image"</span>,cv.WINDOW_AUTOSIZE)	<span class="comment">#创建GUI</span></span><br><span class="line">cv.imshow(<span class="string">"input image"</span>,src)						<span class="comment">#显示窗口</span></span><br><span class="line">get_image_info(src)</span><br><span class="line">gray = cv.cvtColor(src,cv.COLOR_BGR2GRAY)                            <span class="comment"># 灰度图像</span></span><br><span class="line">cv.imwrite(<span class="string">"E:\\program\\Pycharm\\example\\result.png"</span>,gray)         <span class="comment"># 保存图片</span></span><br><span class="line">video_demo()</span><br><span class="line">cv.waitKey(<span class="number">0</span>)					<span class="comment">#等下一个用户响应操作</span></span><br><span class="line">cv.destroyAllWindows()			<span class="comment">#释放内存</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Numpy数组</strong></p>
+<blockquote>
+<p>遍历数组像素<br>修改像素点值<br>data  dtype  size  shape  len<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取图像的像素点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">access_pixels</span><span class="params">(image)</span>:</span></span><br><span class="line">    print(image.shape)</span><br><span class="line">    height= image.shape[<span class="number">0</span>]</span><br><span class="line">    width = image.shape[<span class="number">1</span>]</span><br><span class="line">    channels = image.shape[<span class="number">2</span>]       <span class="comment"># blue,green,red</span></span><br><span class="line">    print(<span class="string">"height : %s, width: %s,channels : %s"</span> % (height,width,channels))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#遍历图像中每个像素点</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> range(height):</span><br><span class="line">        <span class="keyword">for</span> col <span class="keyword">in</span> range(width):</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> range(channels):</span><br><span class="line">                pv = image[row,col,c]</span><br><span class="line">                image[row,col,c] = <span class="number">255</span> - pv       <span class="comment">#像素取反，慢...</span></span><br><span class="line">    cv.imshow(<span class="string">"pixels_demo"</span>,image)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inverse</span><span class="params">(image)</span>:</span>         <span class="comment"># 像素快速取反，用OpenCV自带的API</span></span><br><span class="line">    dst = cv.bitwise_not(image)</span><br><span class="line">    cv.imshow(<span class="string">"inverse demo"</span>,dst)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建图像</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_image</span><span class="params">()</span>:</span></span><br><span class="line">    img= np.zeros([<span class="number">400</span>,<span class="number">400</span>,<span class="number">3</span>],np.uint8)         <span class="comment">#8位的图</span></span><br><span class="line">    img[:,:,<span class="number">0</span>] = np.ones([<span class="number">400</span>,<span class="number">400</span>]) * <span class="number">255</span>       <span class="comment">#蓝色的图</span></span><br><span class="line">    cv.imshow(<span class="string">"new image"</span>,img)</span><br><span class="line"></span><br><span class="line">    <span class="string">'''   </span></span><br><span class="line"><span class="string">    img = np.zeros([400,400,1],np.uint8)        #单通道图：灰度图</span></span><br><span class="line"><span class="string">    img[:,:,0] = np.ones([400,400]) * 210</span></span><br><span class="line"><span class="string">    cv.imshow("1 channel image",img)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    img = np.ones([400,400,1],np.uint8)        #用1初始化图像，单通道图：灰度图</span></span><br><span class="line"><span class="string">    img = img * 210</span></span><br><span class="line"><span class="string">    cv.imshow("1 channel image",img)</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    m1 = np.ones([<span class="number">3</span>,<span class="number">3</span>],np.float32)        <span class="comment">#二维图像：灰度图，建议用float类型，防止截断，事后转int</span></span><br><span class="line">    <span class="comment">#m1 = np.array([[1,2,3],[4,5,6],[7,8,9]],np.int32)</span></span><br><span class="line">    m1.fill(<span class="number">122.388</span>)</span><br><span class="line">    print(m1)</span><br><span class="line">    cv.imshow(<span class="string">"m1 image"</span>,m1)</span><br><span class="line">    m2 = m1.reshape([<span class="number">1</span>,<span class="number">9</span>])                <span class="comment"># 转换矩阵形状</span></span><br><span class="line">    print(m2)</span><br><span class="line"></span><br><span class="line">src = cv.imread(<span class="string">"F:\\documents\\Firefox\\LALA\\1521214728135.jpg"</span>)  <span class="comment"># 读入图像</span></span><br><span class="line"></span><br><span class="line">t1 = cv.getTickCount()</span><br><span class="line"><span class="comment">#access_pixels(src)</span></span><br><span class="line">inverse(src)</span><br><span class="line">t2 = cv.getTickCount()</span><br><span class="line">time = (t2 - t1) / cv.getTickFrequency()</span><br><span class="line">print(<span class="string">"time1 : %s ms"</span> % (time * <span class="number">1000</span>))                            <span class="comment"># 运行时间</span></span><br><span class="line"></span><br><span class="line">create_image()</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br><span class="line">cv.destroyAllWindows()</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="色彩空间Color-Space"><a href="#色彩空间Color-Space" class="headerlink" title="色彩空间Color Space"></a>色彩空间Color Space</h3><blockquote>
+<p>RGB：<br>HSV：Hue(色调，标准360，OpenCV180)，Saturation饱和度0-255，Value0-255，表达颜色方便，好找色。<br>HIS：Hue，Saturation，亮度Intensity<br>HCV：Hue，Chroma，Value，安卓相机驱动获得的图片原始格式，安卓开发。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#色彩空间相互转换API</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">color_space_demo</span><span class="params">(image)</span>:</span></span><br><span class="line">    gray = cv.cvtColor(image,cv.COLOR_BGR2GRAY)</span><br><span class="line">    cv.imshow(<span class="string">"gray"</span>,gray)</span><br><span class="line">    hsv = cv.cvtColor(image,cv.COLOR_BGR2HSV)  <span class="comment"># RGB转HSV</span></span><br><span class="line">    cv.imshow(<span class="string">"hsv"</span>,hsv)</span><br><span class="line">    yuv = cv.cvtColor(image,cv.COLOR_BGR2YUV)  <span class="comment"># RGB转YUV</span></span><br><span class="line">    cv.imshow(<span class="string">"yuv"</span>,yuv)</span><br></pre></td></tr></table></figure>
+<p><strong>追踪视频中有颜色的物体：</strong>cv.inRange(hsv,lowerb,upperb)</p>
+<p></p><p style="text-align:center"><b>主色 HSV 范围</b></p><br>| &nbsp; | 黑 | 灰 | 白 | 红 | 橙 | 黄 | 绿 | 青 | 蓝 | 紫|<br>| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |<br>| hmin | 0 | 0 | 0 | 0/156 | 11 | 26 | 35 | 78 | 100/78 |125|<br>| hmax | 180 | 180 | 180 | 10/180 | 25 | 34 | 77 | 99 | 124/110 |155|<br>| smin | 0 | 0 | 0 | 43 | 43 | 43 | 43 | 43 | 43 | 43 |<br>| smax | 255 | 43 | 30 | 255 | 255 | 255 | 255 | 255 | 255 |255|<br>| vmin | 0 | 46 | 221 | 46 | 46 | 46 | 46 | 46 | 46 | 46 |<br>| vmax | 46 | 220 | 255 | 255 | 255 | 255 | 255 | 255 | 255 |255|<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#inRange</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extrace_object_demo</span><span class="params">()</span>:</span></span><br><span class="line">    capture = cv.VideoCapture(<span class="string">"E:/video_01.mp4"</span>)</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">        ret,frame = capture.read()</span><br><span class="line">        <span class="keyword">if</span> ret == <span class="literal">False</span>:            <span class="comment"># 没有返回内容</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        hsv = cv.cvtColor(frame,cv.COLOR_BGR2HSV)            <span class="comment">#转换成HSV色彩空间</span></span><br><span class="line">        <span class="comment"># 追踪有颜色的对象</span></span><br><span class="line">        <span class="comment"># 获取视频中某颜色的物体，如绿色的盘子，用hsv中绿色的三个低值和三个高值，范围查表</span></span><br><span class="line">        lower_hsv = np.array([<span class="number">37</span>,<span class="number">43</span>,<span class="number">46</span>])</span><br><span class="line">        upper_hsv = np.array([<span class="number">77</span>,<span class="number">255</span>])</span><br><span class="line">        mask = cv.inRange(hsv,lowerb=lower_hsv,upperb=upper_hsv)    <span class="comment">#获取结果为二值图像,黑白</span></span><br><span class="line">        dst = cv.bitwise_and(frame,frame,mask=mask)  <span class="comment"># 显示绿色</span></span><br><span class="line">        <span class="comment"># mask掩模，感兴趣区内图像值保持不变,而区外图像值都为0。 </span></span><br><span class="line">        cv.imshow(<span class="string">"video"</span>,frame)</span><br><span class="line">        cv.imshow(<span class="string">"mask"</span>,dst)</span><br><span class="line">        c = cv.waitKey(<span class="number">40</span>)</span><br><span class="line">        <span class="keyword">if</span> c == <span class="number">27</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure><p></p>
+<p><strong>通道分离与合并</strong><br>读入图像的RGB三通道可以分离合并：cv.split()，cv.merge()<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">src = cv.imread(<span class="string">"F:\\documents\\Firefox\\LALA\\1521214728135.jpg"</span>)  <span class="comment"># 读入图像</span></span><br><span class="line">b,g,r = cv.split(src)       <span class="comment"># 三个通道分离</span></span><br><span class="line">cv.imshow(<span class="string">"blue"</span>,b)         <span class="comment"># b,g,r三个通道分别显示</span></span><br><span class="line">src = cv.merge([b,g,r])     <span class="comment"># 三通道合并</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="像素空间运算"><a href="#像素空间运算" class="headerlink" title="像素空间运算"></a>像素空间运算</h3><p><strong>算术运算</strong><br>加减乘除，如调节亮度，调整对比度</p>
+<blockquote>
+<p> 标准差越小，对比度越小，标准差小于某阈值可判断图像中是否有信息。<br>方差为零，可以丢掉了，最多是张常量表<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 算数运算</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_demo</span><span class="params">(m1,m2)</span>:</span></span><br><span class="line">    dst = cv.add(m1,m2)             </span><br><span class="line">    <span class="comment"># dst = cv.subtract(m1,m2)</span></span><br><span class="line">    <span class="comment"># dst = cv.divide(m1,m2)</span></span><br><span class="line">    <span class="comment"># dst = cv.multiply(m1,m2)</span></span><br><span class="line">    cv.imshow(<span class="string">"add_demo"</span>, dst)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">others</span><span class="params">(m1,m2)</span>:</span></span><br><span class="line">    M1 = cv.mean(m1)                <span class="comment"># 三个通道各自的均值</span></span><br><span class="line">    M2,dev2 = cv.meanStdDev(m2)     <span class="comment"># 三个通道的均值和标准差</span></span><br><span class="line">    <span class="comment"># h, w = src1.shape[:2]         # 图像高和宽</span></span><br><span class="line">    print(M1)</span><br><span class="line">    print(M2)</span><br><span class="line">    print(dev2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调节图片的对比度和亮度</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">contrast_brightness_demo</span><span class="params">(image,c,b)</span>:</span></span><br><span class="line">    h,w,ch = image.shape</span><br><span class="line">    blank = np.zeros([h,w,ch],image.dtype)      <span class="comment"># 与image大小相同的全黑的空白图像</span></span><br><span class="line">    dst = cv.addWeighted(image,c,blank,<span class="number">1</span>-c,b)   <span class="comment"># c对比度，b亮度</span></span><br><span class="line">    cv.imshow(<span class="string">"con-bri-demo"</span>,dst)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>逻辑运算</strong><br>与或非，如遮罩层控制<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logic_demo</span><span class="params">(m1,m2)</span>:</span></span><br><span class="line">    <span class="comment"># dst = cv.bitwise_and(m1,m2)         # 与，遮罩</span></span><br><span class="line">    <span class="comment"># dst = cv.bitwise_or(m1,m2)          # 或</span></span><br><span class="line">    dst = cv.bitwise_not(m1)            <span class="comment"># 非，按位取反</span></span><br><span class="line">    cv.imshow(<span class="string">"logic demo"</span>,dst)</span><br></pre></td></tr></table></figure></p>
+<h3 id="ROI与泛洪填充"><a href="#ROI与泛洪填充" class="headerlink" title="ROI与泛洪填充"></a>ROI与泛洪填充</h3><p><strong>ROI(Region of Interest)</strong></p>
+<blockquote>
+<p>通过Numpy提取。<br>选择出的对图像上感兴趣的区域，形状可调整。<br>应用：给原图某位置粘一只小鸭子···python</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">src = cv.imread(<span class="string">"E:\\program\\Pycharm\\example\\LOGO_Black.png"</span>)</span><br><span class="line">cv.imshow(<span class="string">"image1"</span>, src)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ROI操作</span></span><br><span class="line">face = src[<span class="number">50</span>:<span class="number">250</span>,<span class="number">100</span>:<span class="number">300</span>]          <span class="comment">#提取出图像区域</span></span><br><span class="line">cv.imshow(<span class="string">"face"</span>,face)                          </span><br><span class="line">gray = cv.cvtColor(face,cv.COLOR_BGR2GRAY)      <span class="comment"># 变灰</span></span><br><span class="line">backface = cv.cvtColor(gray,cv.COLOR_GRAY2BGR)  <span class="comment"># 灰转BGR通道</span></span><br><span class="line">src[<span class="number">50</span>:<span class="number">250</span>,<span class="number">100</span>:<span class="number">300</span>] = backface                  <span class="comment"># 把原图该区域变灰</span></span><br><span class="line">cv.imshow(<span class="string">"gray face"</span>,src)</span><br><span class="line"></span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br><span class="line">cv.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><strong>泛洪填充</strong></p>
+<blockquote>
+<p>图形对象自动填充，从一个点开始一直填充，直到遇到边界。</p>
+<p>常见填充有两种方法，基于递归的算法和基于扫描项的算法，一般最快的是基于扫描项的算法，多数为unit8</p>
+<p>FLOODFILL_FIXED_RANGE：改变图像，泛洪填充<br>FLOODFILL_MASK_ONLY：不改变图像？只填充遮罩层本身，遮罩层为0就填充，不为0不会填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 彩色填充</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fill_color_demo</span><span class="params">(image)</span>:</span></span><br><span class="line">    copyImg = image.copy()</span><br><span class="line">    h,w = image.shape[:<span class="number">2</span>]</span><br><span class="line">    mask = np.zeros([h+<span class="number">2</span>,w+<span class="number">2</span>],np.uint8)     <span class="comment"># 必须这样！！openCV要求mask必须这样，</span></span><br><span class="line">                                            <span class="comment"># 填充时扫描进行水平方向垂直方向移动</span></span><br><span class="line">                                            <span class="comment"># 当它从(0,0)点开始找的时候，没移一位都要保证周围像素被处理</span></span><br><span class="line">    cv.floodFill(copyImg,mask,(<span class="number">30</span>,<span class="number">30</span>),(<span class="number">0</span>,<span class="number">255</span>,<span class="number">255</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>),(<span class="number">50</span>,<span class="number">50</span>,<span class="number">50</span>),cv.FLOODFILL_FIXED_RANGE)</span><br><span class="line">    cv.imshow(<span class="string">"fill_color_demo"</span>,copyImg)</span><br><span class="line">    <span class="comment">#cv.floodFill(copyImg, mask, 种子位置, 填充颜色, 填充的最低像素值（种子位置的像素-100），最高为+50（在这个范围内的像素才会被填充），填充方式彩色填充)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 二值填充，如果它觉得那个位置被填充了，就不会管</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fill_binary</span><span class="params">()</span>:</span></span><br><span class="line">    image = np.zeros([<span class="number">400</span>,<span class="number">400</span>,<span class="number">3</span>],np.uint8)  <span class="comment"># 每个通道的像素各占一字节</span></span><br><span class="line">    image[<span class="number">100</span>:<span class="number">300</span>,<span class="number">100</span>:<span class="number">300</span>,:] = <span class="number">255</span></span><br><span class="line">    cv.imshow(<span class="string">"fill_binary"</span>,image)</span><br><span class="line"></span><br><span class="line">    mask = np.ones([<span class="number">402</span>,<span class="number">402</span>,<span class="number">1</span>],np.uint8)    <span class="comment">#mask必须单通道，初始化为1！</span></span><br><span class="line">    mask[<span class="number">101</span>:<span class="number">301</span>,<span class="number">101</span>:<span class="number">301</span>] = <span class="number">0</span></span><br><span class="line">    cv.floodFill(image,mask,(<span class="number">200</span>,<span class="number">200</span>),(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>),cv.FLOODFILL_MASK_ONLY)     <span class="comment"># 不为1的区域才会被填充!</span></span><br><span class="line">    cv.imshow(<span class="string">"filled binary"</span>,image)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="模糊操作"><a href="#模糊操作" class="headerlink" title="模糊操作"></a>模糊操作</h3><blockquote>
+<p>模糊操作基本原理</p>
+<ul>
+<li>基于离散卷积</li>
+<li>定义好每个卷积核，奇数，有中心，边缘会有像素没有被处理</li>
+<li>不同卷积核得到不同的卷积效果</li>
+<li>模糊是卷积的一种表象</li>
+</ul>
+</blockquote>
+<p><strong>均值模糊</strong></p>
+<blockquote>
+<p>应用：图像去噪，随机噪声<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#均值模糊</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">blur_demo</span><span class="params">(image)</span>:</span></span><br><span class="line">    dst = cv.blur(image,(<span class="number">5</span>,<span class="number">5</span>))      <span class="comment"># 卷积核大小(5,5),(1,5)在垂直方向模糊，(5,1)在水平方向模糊</span></span><br><span class="line">                                    <span class="comment"># 底层用积分图计算，不存在空间复杂度，不随着卷积核增大而降低效率</span></span><br><span class="line">    cv.imshow(<span class="string">"blur_demo"</span>,dst)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>中值模糊</strong></p>
+<blockquote>
+<p>应用：图像去噪，<strong>椒盐噪声</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#中值模糊</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">median_blur_demo</span><span class="params">(image)</span>:</span></span><br><span class="line">    dst = cv.medianBlur(image,<span class="number">5</span>)</span><br><span class="line">    cv.imshow(<span class="string">"median_blur_demo"</span>,dst)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>自定义模糊</strong></p>
+<blockquote>
+<p>利用自定义的核，除了可以进行模糊，还可以进行<strong>锐化</strong>！更有立体感，增加细节。</p>
+<p> 卷积核定义原则：</p>
+<ul>
+<li>奇数</li>
+<li>不是奇数的话最好总和加起来等于1，或等于0</li>
+<li>总和等于0：做边缘、梯度</li>
+<li>总和等于1：做增强等<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#自定义模糊</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">custom_blur_demo</span><span class="params">(image)</span>:</span></span><br><span class="line">    kernel = np.ones([<span class="number">5</span>,<span class="number">5</span>],np.float32) / <span class="number">25</span>   <span class="comment"># /25防止溢出,每个像素0-255</span></span><br><span class="line">    kernel = np.array([[<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>],[<span class="number">-1</span>,<span class="number">5</span>,<span class="number">-1</span>],[<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>]],np.float32) / <span class="number">9</span>  <span class="comment"># 锐化</span></span><br><span class="line">    dst = cv.filter2D(image,<span class="number">-1</span>,kernel=kernel)</span><br><span class="line">    cv.imshow(<span class="string">"median_blur_demo"</span>,dst)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="高斯模糊"><a href="#高斯模糊" class="headerlink" title="高斯模糊"></a>高斯模糊</h3><blockquote>
+<p>均值模糊的扩展，基于<strong>权重</strong>的模糊。</p>
+<p>比均值模糊在去噪上效果更好。<br>虽然非常模糊，但考虑了每个像素的权重，保留了图像的主要特征。</p>
+<p>应用：</p>
+<ul>
+<li>高斯模糊对<strong>高斯噪声</strong>有抑制作用</li>
+<li>做图像高斯导数，微分，一阶二阶······Harris角点检测<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dst = cv.GaussianBlur(src,(<span class="number">0</span>,<span class="number">0</span>),<span class="number">15</span>)</span><br><span class="line"><span class="comment"># 参数设(0,0),模糊用15，参数设(5,5),后面的15不起作用</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p><strong>添加高斯随机噪声</strong></p>
+<blockquote>
+<p> 加速手段，提高计算效率：</p>
+<ul>
+<li>浮点数在计算中最耗时，转换为整数</li>
+<li>实际中高斯滤波，都会把二维分为一维来处理。比如把3<em>3二维转换为先1</em>3再3*1的一维，把9次乘法1次除法，变为6次乘法2次除法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#确保在0-255之间</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">clamp</span><span class="params">(pv)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> pv &gt; <span class="number">255</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">255</span></span><br><span class="line">    <span class="keyword">if</span> pv &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> pv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加高斯噪声</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian_noise</span><span class="params">(image)</span>:</span></span><br><span class="line">    h,w,c = image.shape</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> col <span class="keyword">in</span> range(w):</span><br><span class="line">            s = np.random.normal(<span class="number">0</span>,<span class="number">20</span>,<span class="number">3</span>)    <span class="comment"># 高斯随机数获取,归一化后的随机数,3个</span></span><br><span class="line">            b = image[row,col,<span class="number">0</span>]            <span class="comment"># 蓝色</span></span><br><span class="line">            g = image[row,col,<span class="number">1</span>]            <span class="comment"># 绿色</span></span><br><span class="line">            r = image[row,col,<span class="number">2</span>]            <span class="comment"># 红色</span></span><br><span class="line">            image[row,col,<span class="number">0</span>] = clamp(b + s[<span class="number">0</span>])</span><br><span class="line">            image[row,col,<span class="number">1</span>] = clamp(g + s[<span class="number">1</span>])</span><br><span class="line">            image[row,col,<span class="number">2</span>] = clamp(r + s[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    cv.imshow(<span class="string">"noise image"</span>,image)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="边缘保留滤波EPF"><a href="#边缘保留滤波EPF" class="headerlink" title="边缘保留滤波EPF"></a>边缘保留滤波EPF</h3><blockquote>
+<p>EPF：Eege Preserved Filter<br>OpenCV api</p>
+</blockquote>
+<p><strong>高斯双边</strong></p>
+<blockquote>
+<p>高斯模糊基于权重，只考虑像素空间的分布，是像素间的距离，没有考虑<strong>像素值之间的差异</strong>，而差异很大的地方往往是边缘。</p>
+<p>在值差异很大的地方，只模糊值相近的部分，在边缘值差异大的地方忽略。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 高斯双边</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bi_demo</span><span class="params">(image)</span>:</span></span><br><span class="line">    dst = cv.bilateralFilter(image,<span class="number">0</span>,<span class="number">100</span>,<span class="number">15</span>)        <span class="comment">#(image,d是distance,输入的话从d计算sigmaSpace计算，一般设为0，从sigmaSpace计算d</span></span><br><span class="line">                                                    <span class="comment"># sigmaColor一般取大一点，目的是把小的差异模糊掉，去噪声，不输入的话从sigmaSpace计算Color</span></span><br><span class="line">                                                    <span class="comment"># sigmaSpace一般取小一点，核比较小，核大计算量大，保留差异 )</span></span><br><span class="line">    cv.imshow(<span class="string">"bi demo"</span>,dst)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>均值迁移：</strong>有类似<strong>油画</strong>的效果<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dst = cv.pyrMeanShiftFiltering(image,<span class="number">10</span>,<span class="number">50</span>)     <span class="comment">#(image,sp是空间的Space设小模糊，sr设大边缘保留</span></span><br><span class="line">                                                    <span class="comment"># 均值迁移对边缘容易过度模糊，有类似油画的效果</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="图像直方图histogram"><a href="#图像直方图histogram" class="headerlink" title="图像直方图histogram"></a>图像直方图histogram</h3><blockquote>
+<p><strong>环境：</strong>pip install matplotlib</p>
+<p><strong>参数：</strong>$Bin \&nbsp; size = \frac{图像中不同像素值的个数}{Bin的数目}$</p>
+<p>例如对14位的图像，创建256个bin直方图，横坐标划分成256份，每份大小64： $Bin \&nbsp; size = \frac{2^{14}}{256}=64$</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不讲道理的直方图</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_demo</span><span class="params">(image)</span>:</span></span><br><span class="line">    plt.hist(image.ravel(),<span class="number">256</span>,[<span class="number">0</span>,<span class="number">256</span>])     <span class="comment">#image是多维数组，image.ravel()统计频次，分256个bin,范围[0,256]</span></span><br><span class="line">    plt.show(<span class="string">"直方图"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像的直方图</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_hist</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="comment"># 图像的三个通道</span></span><br><span class="line">    color = (<span class="string">'blue'</span>,<span class="string">'green'</span>,<span class="string">'red'</span>)</span><br><span class="line">    <span class="comment"># 绘制每个颜色对应的直方图</span></span><br><span class="line">    <span class="keyword">for</span> i,color <span class="keyword">in</span> enumerate(color):         <span class="comment"># 从容器中迭代</span></span><br><span class="line">        hist = cv.calcHist([image],[i],<span class="literal">None</span>,[<span class="number">256</span>],[<span class="number">0</span>,<span class="number">256</span>])</span><br><span class="line">        plt.plot(hist,color = color)</span><br><span class="line">        plt.xlim([<span class="number">0</span>,<span class="number">256</span>])</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> <strong>应用：</strong></p>
+<ul>
+<li>灰度图像的阈值分割</li>
+<li>图像主题内容与背景分离</li>
+<li>基于颜色的图像检索以及图像分类。</li>
+<li>调节对比度</li>
+<li>对比图像相似度</li>
+</ul>
+</blockquote>
+<p><strong>调节对比度</strong></p>
+<blockquote>
+<p>有<strong>全图</strong>的直方图均衡化和<strong>局部</strong>直方图均衡化两种。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;假设有灰度级255的图像，但是都是属于［100，110］的灰度，图像对比度就很低，应该尽可能拉到整个［0，255］</p>
+<p>全图均衡化会导致<strong>对比度过度增强</strong>。<br>OpenCV中直方图均衡化都是<strong>基于灰度</strong>图像的。</p>
+</blockquote>
+<p>全图的直方图均衡化，图像增强方法之一<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直方图均衡化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">equalHist</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="comment"># 彩色图片转换为灰度图片</span></span><br><span class="line">    gray = cv.cvtColor(image,cv.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 直方图均衡化，自动调整图像的对比度，让图像变得清晰</span></span><br><span class="line">    dst = cv.equalizeHist(gray)</span><br><span class="line">    cv.imshow(<span class="string">"equalHist"</span>,dst)</span><br></pre></td></tr></table></figure></p>
+<p><strong>局部直方图均衡化</strong><br>把整个图像分成许多小块，如按(8,8)为一小块，对每个小块进行均衡化，这种方法对于非单一、存在多峰的图像直方图的图像比较实用。</p>
+<p>CLAHE：CL限制对比度AHE自适应直方图均衡<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 局部直方图均衡化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">clahe</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="comment"># 彩色图片转换为灰度图片</span></span><br><span class="line">    gray = cv.cvtColor(image,cv.COLOR_BGR2GRAY)</span><br><span class="line">    <span class="comment"># cliplimit：灰度值</span></span><br><span class="line">    <span class="comment"># tilegridsize：图像切割成块，每块的大小</span></span><br><span class="line">    clahe = cv.createCLAHE(clipLimit=<span class="number">2.0</span>,tileGridSize=(<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">    dst = clahe.apply(gray)</span><br><span class="line">    cv.imshow(<span class="string">"clahe"</span>,dst)</span><br></pre></td></tr></table></figure></p>
+<p><strong>对比图像相似度</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_bgr_hist</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="comment"># 创建bgr三通道直方图</span></span><br><span class="line">    h,w,c = image.shape</span><br><span class="line">    bgrHist = np.zeros([<span class="number">16</span>*<span class="number">16</span>*<span class="number">16</span>,<span class="number">1</span>],np.float32)</span><br><span class="line">    bsize = <span class="number">256</span> / <span class="number">16</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> col <span class="keyword">in</span> range(w):</span><br><span class="line">            b = image[row,col,<span class="number">0</span>]</span><br><span class="line">            g = image[row,col,<span class="number">1</span>]</span><br><span class="line">            r = image[row,col,<span class="number">2</span>]</span><br><span class="line">            index = np.int(b / bsize) * <span class="number">16</span> * <span class="number">16</span> + np.int(g / bsize) * <span class="number">16</span> + np.int(r / bsize)</span><br><span class="line">            bgrHist[np.int(index),<span class="number">0</span>] = bgrHist[np.int(index),<span class="number">0</span>] + <span class="number">1</span>   <span class="comment"># 统计频率</span></span><br><span class="line">    <span class="keyword">return</span> bgrHist</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hist_compare</span><span class="params">(image1,image2)</span>:</span></span><br><span class="line">    hist1 = create_bgr_hist(image1)</span><br><span class="line">    hist2 = create_bgr_hist(image2)</span><br><span class="line">    <span class="comment"># 巴氏距离比较，距离越小越相似</span></span><br><span class="line">    match1 = cv.compareHist(hist1,hist2,cv.HISTCMP_BHATTACHARYYA)</span><br><span class="line">    <span class="comment"># 相关性比较，相关性越大越相似</span></span><br><span class="line">    match2 = cv.compareHist(hist1,hist2,cv.HISTCMP_CORREL)</span><br><span class="line">    <span class="comment"># 卡方比较，越大越不相似</span></span><br><span class="line">    match3 = cv.compareHist(hist1,hist2,cv.HISTCMP_CHISQR)</span><br><span class="line">    print(<span class="string">"巴氏距离：%s 相关性：%s 卡方：%s"</span>%(match1,match2,match3))</span><br></pre></td></tr></table></figure></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

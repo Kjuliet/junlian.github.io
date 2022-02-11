@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        YOLO v1 (CVPR, 2016) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-实现方法"><span class="toc-text">1. 实现方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-输出含义"><span class="toc-text">2. 输出含义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-YOLO-损失函数"><span class="toc-text">3.  YOLO 损失函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-YOLO-特点"><span class="toc-text">4. YOLO 特点</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        YOLO v1 (CVPR, 2016)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-12 01:31:03</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#物体检测" title="物体检测">物体检测</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="https://arxiv.org/abs/1506.02640" target="_blank" rel="noopener">You Only Look Once: Unified, Real-Time Object Detection</a><br>作者：Joseph Redmon, Santosh Divvala, Ross Girshick, Ali Farhadi</p>
+<p>目标检测算法大致分为两大类：</p>
+<ul>
+<li>Two-stage 的 RCNN系列：先产生候选区域，再进行CNN分类，主要通过region proposal产生大量可能包含目标物体的potential bounding box，再用分类器判断每个bounding box里面是否包含物体，以及物体所属类别的confidence；精度高，速度慢，Faster R-CNN都要5fps；</li>
+<li>One-stage 的 YOLO 系列，对输入图像，直接一次性输出类别和相应位置，速度快，精度低。</li>
+</ul>
+<p>YOLO 的思想是把目标检测当回归任务来做。用一个神经网络，直接从一整张图像中回归出bounding box的位置，及其所属类别。</p>
+<p>因为YOLO是在一个神经网络里完成的，所以可以用end to end来优化物体检测性能。</p>
+<h4 id="1-实现方法"><a href="#1-实现方法" class="headerlink" title="1. 实现方法"></a>1. 实现方法</h4><p>网络整体结构基于GoogleNet改进的：<br><img src="./Screen Shot 2019-08-26 at 8.10.19 PM.png" alt="Alt text"></p>
+<ul>
+<li>将图像resize到448*448作为神经网络输入</li>
+<li>通过网络得到bounding box坐标，box包含物体的confidence和probabilities。</li>
+<li>进行非极大值抑制，筛选boxes</li>
+</ul>
+<p><strong>检测过程</strong><br>将输入图像分成S<em>S的栅格，每个栅格负责检测<em>*<code>中心落在该栅格</code></em></em>中的物体，即：</p>
+<ul>
+<li>如果一个物体的中心在某个栅格内，那么这个栅格负责预测这个物体；</li>
+<li>每个栅格需要预测 B 个bounding box值（坐标+宽高）以及每个bounding box值预测的confidence score，confidence scores反映了模型对于这个栅格的预测效果：该栅格是否包含物体，以及这个box的坐标预测的有多准。论文中B = 2；也就是每个bounding box有5个预测值：（1） 坐标x,y：代表预测的bounding box的中心与栅格边界的相对值；（2）坐标w,h：代表预测的bounding box的width，height相对于整幅图像width,height的比例；（3）confidence score为predicted bounding box与ground truth box之间的IoU</li>
+<li>假设object种类个数有C类，那每个栅格需要预测C个条件概率值。</li>
+</ul>
+<p>例如分成 7x7的栅格，输出为7x7x30，每个栅格对应一个30维的向量，前10位对应bounding box的预测，每个bounding box有5个预测值，一共有两个bounding box；再加上20类预测值，即 5+5+20 = 30.</p>
+<p>每个栅格负责预测一种物体（有小物体时会有问题），但每个栅格可以预测多个不同形状的bounding box，可以更准确地定位出物体。</p>
+<p><strong>测试过程</strong><br>在测试时，每个栅格预测的class信息和bounding box 预测的confidence 信息相乘，得到每个bounding box的class-specific confidence score，所以每个栅格最终输出 B列概率值，一个框一个：</p>
+<script type="math/tex; mode=display">P_r(Class_i | Object) \times P_r(Object) \times IOU_{pred}^{truth} = P_{(Class_i)} \times IOU_{pred}^{truth}</script><p>设置阈值过滤掉得分低的 boxes，剩下的送入 NMS，得到最终的检测结果。</p>
+<h4 id="2-输出含义"><a href="#2-输出含义" class="headerlink" title="2. 输出含义"></a>2. 输出含义</h4><p>因为YOLO 把检测问题当作回归问题解决，所以最好把坐标、宽高等输出都定义在0-1之间。</p>
+<p>每个栅格预测 B个(x, y, w, h, confidence) 和 C 个条件概率，假设图片高$h_i$，宽$w_i$，对于第$(x_{col}, y_{row})$ 的栅格，假设它预测的bounding box 的宽和高分别为$w_b, h_b$，中心坐标是 $(x_c, y_c)$：</p>
+<p><strong>$(x,y)$表示bounding box 的中心相对于栅格边界的相对比例</strong>：<br>即需要满足:</p>
+<script type="math/tex; mode=display">x = \frac{( x_c - x_{col} \frac{w_i}{S} ) }{\frac{w_i}{S}}</script><p>所以：</p>
+<script type="math/tex; mode=display">x = \frac{x_c}{w_i} S - x_{col}</script><script type="math/tex; mode=display">y = \frac{y_c}{h_i} S - y_{row}</script><p><strong>$(w, b)$ 是bounding box相对于整个图片的比例</strong></p>
+<script type="math/tex; mode=display">w = \frac{w_b}{w_i}</script><script type="math/tex; mode=display">h = \frac{h_b}{h_i}</script><p><strong>Confidence</strong><br>Confidence 的计算由两部分组成，一是栅格内是否有目标，二是bounding box的准确度：</p>
+<script type="math/tex; mode=display">Confidence = P_r(Object) \time IOU_{pred}^{truth}</script><p>如果栅格内有物体，则$P_r(Object) = 1$，此时置信度等于 IOU，如果栅格内没有物体，则$P_r(Object) = 0$，置信度为 0 。</p>
+<p><strong>C 类的条件概率</strong><br>表示该栅格存在物体且属于第 i 类的概率：</p>
+<script type="math/tex; mode=display">P_r(Class_i | Object)</script><p>Class 信息时针对每个栅格的，confidence信息是针对每个bounding box的。</p>
+<h4 id="3-YOLO-损失函数"><a href="#3-YOLO-损失函数" class="headerlink" title="3.  YOLO 损失函数"></a>3.  YOLO 损失函数</h4><p>包括 bounding box 的损失、confidence 损失 和 分类损失，如果简单粗暴地三部分直接求和，会存在几个问题：<br>（1）8维 的位置误差和20维的分类误差一样重要显然不合理；解决的办法是更重视 8 维的坐标预测，用$\lambda_{coord}$给位置损失赋予更大的loss 权重。<br>（2）每个栅格不一定都包含object，如果没有object，confidence为0，这样在优化模型的时候可能会让梯度跨度太大，会导致网络不稳定甚至发散。解决办法是用 $\lambda_{noobj}$ 平衡，$\lambda_{noobj}$ 对没有object的单个栅格赋予小的loss权重。<br>（3）对不同大小的bounding box 预测，如果bounding box 较小，预测值偏一点的影响比bounding box较大时的影响大。为了缓和小的偏差对小物体影响较大这个问题，论文对bounding box的宽高都开根号。</p>
+<p>一个栅格预测了多个bounding box，我们希望每个bounding box 专门负责预测某个object，所以采用的方法是box predictor 的 specialization，就是看当前预测的bounding box 和 ground truth box 中哪个IoU 大，就负责哪个。</p>
+<p>最后的损失函数为以下三部分之和：</p>
+<ol>
+<li><p>Bounding box 损失：</p>
+<script type="math/tex; mode=display">\lambda _{coord} \sum \limits_{i=0}^{S^2} \sum\limits _{j=0}{B} \mathbb 1 _{i,j}^{obj} [(x_i - \hat x_i)^2 + (y_i -\hat y_i)^2] + \lambda_{coord} \sum \limits _{i=0}^{S^2} \sum\limits_{j=0}^{B} \mathbb 1_{i,j}^{obj} [(\sqrt {w_i} - \sqrt{\hatw_i})^2 + (\sqrt {h_i} - \sqrt{\hat h_i})^2]</script><p>小的偏差对小物体影响较大，对bounding box的宽高都开根号时为了减少这个影响，但没有根本解决问题。</p>
+</li>
+<li><p>Confidence 损失：</p>
+<script type="math/tex; mode=display">\sum \limits _{i=0}^{S^2} \mathbb{1}{i,j}^{obj}(C_i - \hat C_i)^2 + \lambda_{noobj}\sum\limits_{j=0}^{B} \mathbb 1_{i,j}^{noobj} [(C_i - \hat C_i)^2</script></li>
+<li><p>分类损失：</p>
+<script type="math/tex; mode=display">\sum \limits_{i=0}^{S^2} \mathbb{1}{i}^{obj}\sum\limits_{c\in classes}(p_i(c) - \hat p_i(c))^2</script></li>
+</ol>
+<p>只有当某个栅格中有object时，才会对分类错误进行惩罚；<br>只有当某个box predictor对某个ground truth box 负责的时候，才会对box 的coordinate error 进行惩罚。</p>
+<h4 id="4-YOLO-特点"><a href="#4-YOLO-特点" class="headerlink" title="4. YOLO 特点"></a>4. YOLO 特点</h4><p><strong>YOLO优点</strong><br>1.快；<br>2.避免背景错误，即在背景上预测出不存在的物体FP的情况；<br>3.能够学到物体的泛化特征，学到更加抽象的物体的特征，使其能够迁移到艺术等领域。</p>
+<p><strong>YOLO缺点</strong></p>
+<ol>
+<li>容易产生定位错误；尤其是大小物体的处理上。</li>
+<li>对于非常规的物体形状或比例，YOLO检测效果并不理想，泛化能力偏弱；</li>
+<li>精度不够高；采用了下采样层，网络中学到的物体特征并不精细，会影响监测效果。</li>
+<li>对小物体检测效果不好，尤其是密集的小物体，因为一个栅格只能预测2个物体。虽然每个栅格可以预测 B 个bounding box，但最终只选择IOU最高的bounding box 作为物体检测输出，即每个栅格只预测一个物体。当物体占比小，每个格子包含多个物体时，只能检测出其中的一个。</li>
+<li>对相互靠的很近的物体效果不好，因为一个栅格只预测了两个框。并且只属于一类。</li>
+</ol>
+<p><strong>对置信度低的能不能用传统检测方法提取特征检测</strong></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

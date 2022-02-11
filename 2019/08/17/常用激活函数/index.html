@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        常用激活函数 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-用途"><span class="toc-text">1. 用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-常用激活函数及性质"><span class="toc-text">2. 常用激活函数及性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-sigmoid"><span class="toc-text">2. 1 sigmoid</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-tanh-hyperbolic-tangent"><span class="toc-text">2. 2 tanh (hyperbolic tangent)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-ReLU"><span class="toc-text">2.3 ReLU</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-Leaky-ReLU"><span class="toc-text">2.4 Leaky ReLU</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-PReLU"><span class="toc-text">2.5 PReLU</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-ELU-Exponential-Linear-Units"><span class="toc-text">2.5 ELU (Exponential Linear Units)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Softmax"><span class="toc-text">Softmax</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        常用激活函数
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-17 00:16:34</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#深度学习" title="深度学习">深度学习</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>在多层神经网络中，上层节点的输出和下层节点的输入之间有一个函数关系，这个函数就是激活函数。</p>
+<h3 id="1-用途"><a href="#1-用途" class="headerlink" title="1. 用途"></a>1. 用途</h3><p>如果多层神经网络中没有激活函数，那么不管网络有多少层，输出永远是输入的线性组合，相当于原始的感知机，等于没有隐藏层。通过引入非线性的激活函数，增加网络的表达能力。</p>
+<h3 id="2-常用激活函数及性质"><a href="#2-常用激活函数及性质" class="headerlink" title="2. 常用激活函数及性质"></a>2. 常用激活函数及性质</h3><h4 id="2-1-sigmoid"><a href="#2-1-sigmoid" class="headerlink" title="2. 1 sigmoid"></a>2. 1 sigmoid</h4><script type="math/tex; mode=display">f(x)=\frac{1}{1+e^{-x}}</script><p>$f(x)$ 对 x 的导数：</p>
+<script type="math/tex; mode=display">f'(x) = \frac{e^{-x}}{(1+e^{-x})^2} = f(x)(1-f(x))</script><p>取对数后函数 $log f(x)$ 和 $log(1-f(x))$ 的导函数分别是：</p>
+<script type="math/tex; mode=display">log'f(x) = 1-f(x), log'(1-f(x))=-f(x)</script><p>因此sigmoid 常作为二分类问题的输出层激活函数，单个样本的损失函数为对数似然函数：</p>
+<script type="math/tex; mode=display">Loss(x_i, y_i)=-y_i \cdot log(f(x)) - (1-y_i) \cdot log(1-f(x))</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>sigmoid 图像</th>
+<th>sigmoid导数图像</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="Figure1.png" alt></td>
+<td><img src="Figure2.png" alt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>输出有界，能够把连续的输入映射为0到1之间的输出，如果输入是很大的负数，输出为0；如果是很大的正数，输出为1. <strong>可以用来做二分类，也叫Logistic 函数</strong></li>
+<li>当神经网络深度加深时，反向传播时发生梯度消失的概率很大。观察上面 Sigmoid的导数图像，假设神经网络权重初始化为[0, 1]之间，梯度从后往前传播时，每传递一层，梯度值都会减小为原来的 0.25 倍，<strong>如果网络非常深，那么梯度回传到前面的隐藏层时会接近于0，称为梯度消失。</strong>当网络权重初始化为1到正无穷大时，会出现梯度爆炸现象。</li>
+<li>Sigmoid 的输出不是0均值的，产生的后果是，如果$x &gt; 0$，$f=w^Tx+b$，<strong>对$w$求局部梯度都会为正，这样反向传播时$w$要么都往正方向更新，要么都往负方向更新</strong>，使得收敛缓慢。</li>
+<li>求解公式中含有<strong>幂运算</strong>，网络规模很大时计算量很大。</li>
+</ul>
+<h4 id="2-2-tanh-hyperbolic-tangent"><a href="#2-2-tanh-hyperbolic-tangent" class="headerlink" title="2. 2 tanh (hyperbolic tangent)"></a>2. 2 tanh (hyperbolic tangent)</h4><script type="math/tex; mode=display">tanh(x)=\frac{sinhx}{coshx}=\frac{e^x-e^{-x}}{e^x+e^{-x}}</script><p>$tanh(x)$ 对x的导数：<br>记 $a= e^x, b=e^{-x}$，因为$(\frac{\mu}{v})’ = \frac{\mu ‘ v - \mu v’}{v^2}$，$\mu=(a-b)$，$v=(a+b)$</p>
+<script type="math/tex; mode=display">(a-b)' = (e^x - e^{-x})'=e^x+e^{-x}=a+b</script><script type="math/tex; mode=display">(a+b)'=(e^x + e^{-x})' = e^x - e^{-x}=a-b</script><script type="math/tex; mode=display">(\frac{e^x-e^{-x}}{e^x+e^{-x}})' = (\frac{a-b}{a+b})' = \frac{(a-b)' (a+b) - (a-b) (a+b)'}{(a+b)^2}=\frac{(a+b)^2-(a-b)^2}{(a+b)^2}</script><p>所以：</p>
+<script type="math/tex; mode=display">tanh(x)'=1-tanh(x)^2</script><p>$tanh(x)$ 和$tanh(x)’$的图像如下：<br><img src="Figure3.png" alt></p>
+<p>$tanh(z)$ 是 Sigmoid 的变体，取值范围是[-1, 1], Sigmoid 取值范围 [0, 1]<br><strong>解决了 Sigmoid 函数不是 0 均值的问题，但是仍存在梯度消失和幂运算问题</strong></p>
+<h4 id="2-3-ReLU"><a href="#2-3-ReLU" class="headerlink" title="2.3 ReLU"></a>2.3 ReLU</h4><script type="math/tex; mode=display">f(x)=max(0, x)</script><p><img src="Figure4.png" alt></p>
+<ul>
+<li>在正区间解决了梯度消失问题，计算速度非常快，只需要判断输入是否大于0，收敛速度远快于sigmoid和tanh；</li>
+<li>输出不是0均值；并不是全区间可导;</li>
+<li>存在Dead ReLU问题，即某些神经元可能永远不会被激活，使得相应的参数永远不会被更新。 <strong>尤其是learning rate 很大时</strong>，因为一次梯度更新的幅度非常大，导致某些ReLU节点的权重调整得太大，这个神经元就再也不会对后续数据有激活现象了，它的梯度就永远都会是0。</li>
+</ul>
+<h4 id="2-4-Leaky-ReLU"><a href="#2-4-Leaky-ReLU" class="headerlink" title="2.4 Leaky ReLU"></a>2.4 Leaky ReLU</h4><script type="math/tex; mode=display">f(x)=max(\alpha x, x)</script><p>为了解决Dead ReLU问题，提出将ReLU的前半段设为 $\alpha x$。</p>
+<h4 id="2-5-PReLU"><a href="#2-5-PReLU" class="headerlink" title="2.5 PReLU"></a>2.5 PReLU</h4><script type="math/tex; mode=display">f(x) = a * min(x,0) + max(x, 0)</script><p>a 是在channel或global上可训练的参数；常用是初始化为0.25，channel 之间设为不共享。</p>
+<h4 id="2-5-ELU-Exponential-Linear-Units"><a href="#2-5-ELU-Exponential-Linear-Units" class="headerlink" title="2.5 ELU (Exponential Linear Units)"></a>2.5 ELU (Exponential Linear Units)</h4><script type="math/tex; mode=display">x > 0时，f(x)=x</script><script type="math/tex; mode=display">x \le 0时，f(x)=\alpha (e^x - 1)</script><p><img src="Figure5.png" alt><br>不会有Dead ReLU问题，输出接近0均值，但计算量比ReLU大。</p>
+<h4 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h4><p>用于多分类输出，与sigmoid 的区别是：</p>
+<ul>
+<li>sigmoid 是将一个实数映射到（0，1）区间，用来做二分类；而softmax 是把k维的向量映射成一个和为1的向量，可以做多分类任务。</li>
+<li>Softmax 是 sigmoid 的扩展，当类别数为2时，softmax 只预测其中一个类别的概率，与logistic 回归一致。</li>
+<li>可以通过多个sigmoid回归叠加实现多分类，此时输出的类别并不是互斥的；但softmax做多分类时，类于类之间是互斥的，一个输入只能被归为一类。</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

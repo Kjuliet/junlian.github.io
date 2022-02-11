@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Object Detection - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-Detection"><span class="toc-text">Object Detection</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用深度学习做物体检测"><span class="toc-text">用深度学习做物体检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Densebox"><span class="toc-text">Densebox</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UnitBox"><span class="toc-text">UnitBox</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EAST-自然场景文本检测"><span class="toc-text">EAST 自然场景文本检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#YOLO"><span class="toc-text">YOLO</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Image-Segmentation"><span class="toc-text">Image Segmentation</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Object Detection
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-31 21:23:28</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#Detection" title="Detection">Detection</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h3><p><strong>评估指标Evaluation Criteria</strong></p>
+<blockquote>
+<p>多标签图像分类：mAP mean Average Precision</p>
+<p>1.计算平均精度Average Precision</p>
+<ul>
+<li>训练模型后得到所有测试样本的confidence score，每一类的confidence score保存到一个文件中，假设共有20个测试样本，对于每个的样本有table 1{id，confidence score，ground truth label}</li>
+<li>对confidence score排序table 2{id，confidence score，ground truth label}。</li>
+<li><p>计算precision和recall：<br>$Precision=\frac{TP}{TP+FP}$<br>$Recall=\frac{TP}{TP+FN}$<br>准确率/查准率为选出来的里面有多少relevant的，召回率/查全率是实际relevant的里面有多少被选出来了Precision和Recall从两个角度衡量分类系统的准确率，需同时考虑，尤其是不平衡分类问题</p>
+<p>例如我们想得到top-5的结果，选出来的样本就是table 2的前五行，TP是指其中ground truth label为1的，FP是ground truth label为0的；confidence score排在top-5以外的15个元素就是FN和TN，FN是其中为1的，TN是为0的。因此可得Precision和Recall。</p>
+</li>
+<li><p>但我们通常不是只通过top-5衡量，而是需要知道从top-1到top-N(所有测试样本个数，此处为20)对应的precision和recall。随着选定的样本越来越多，recall会越来越高，precision整体有下降趋势，把recall当横坐标，precision当纵坐标，得到precision-recall曲线。</p>
+</li>
+<li><p>计算AP 方法一：首先设定一组阈值[0，0.1，0.2，…，1]，对与大于每一个阈值的recall(如recall&gt;0.3)，都会得到一个相应的最大的precision，即precision-recall曲线上，recall&gt;0.3范围下曲线的最高点。这样得到11个precision，对11个precision求平均值即为AP，称为11-point interpolated average precision<br>计算AP 方法二：假设N个样本中有M个正例，得到M个recall值[1/M，2/M，…，M/M]，对每个recall值r，计算出recall&gt;r的最大precision，然后对这M个precision值求平均得AP。</p>
+</li>
+</ul>
+<p>2.计算mAP mean Average Precision<br>按以上步骤计算每一类的AP，接着对所有类的AP求平均值，得mAP</p>
+</blockquote>
+<h4 id="用深度学习做物体检测"><a href="#用深度学习做物体检测" class="headerlink" title="用深度学习做物体检测"></a>用深度学习做物体检测</h4><p><strong>滑动窗口Sliding window</strong><br>列出所有的windows，从数以百万计的候选窗口中挑出包含目标物的图像，只有候选窗口足够多，才能保证模型的Recall。</p>
+<p><strong>检测框架</strong><br>目前检测框架主要有两种：<br>1.one-stage： Densebox, YOLO (YOLO v2), SSD, Retina Net ，速度快，但识别精度没有two-stage高，因为用一个分类器很难既把负样本抑制掉，又把目标分类好。<br>2.two-stage：: RCNN (Fast RCNN, Faster RCNN), RFCN, FPN, MaskRCNN </p>
+<h4 id="Densebox"><a href="#Densebox" class="headerlink" title="Densebox"></a>Densebox</h4><p>@(计算机视觉)DenseBox: Unifying Landmark Localization with End to End Object Detection, Huang etc, 2015</p>
+<p>一套端对端的多任务全卷积模型，基于全卷积网络的物体检测算法，回归物体出现的置信度以及它的相对位置。</p>
+<p>为了能够更好地处理遮挡严重的物体，提高小物体的召回率，在检测的网络中引入了上采样层，并融合浅层网络得到的特征，得到更大尺寸的输出层。</p>
+<p>为了对训练样本进行筛选，降低误检，使用了Online Hard Negative Mining的策略。</p>
+<p>对DenseBox进行优化，让原来的检测网络引出多个分支，大大降低了图像金字塔的规模。</p>
+<p>将输出特征映射转换为边界框，对阈值上的所有边界框应用非最大抑制。</p>
+<p><strong>没有Anchor候选区域：</strong>GT分配<br>把GT中的子圆标记为正值，当两个GT高度重叠时行不通，子圆圈的大小设置影响很大，大幅的脸会增加注意/损失度</p>
+<p><strong>损失采样：</strong>用所有的 pos / negative点计算类损失</p>
+<p><strong>问题</strong></p>
+<ol>
+<li>L2 loss (二维空间距离)对于尺度变化不稳健，大脸的人脸框明显比小脸的准，但因为脸太大，导致loss反而比较小。（UnitBox）</li>
+<li>GT分配问题，无法处理人群情况（SSD）</li>
+<li>定位误差相对较大（two-stage detector）</li>
+<li>FP误报率高（two-stage detector）</li>
+</ol>
+<h4 id="UnitBox"><a href="#UnitBox" class="headerlink" title="UnitBox"></a>UnitBox</h4><p><strong>IOU Loss Layer</strong></p>
+<blockquote>
+<p>预测的四个值不是人脸框的坐标，而是坐标与中心点的差值。</p>
+<p>Ground truth：    $\widetilde{x}=(\widetilde{x_t},\widetilde{x_b},\widetilde{x_l},\widetilde{x_r})$<br>Prediction：        $x=(x_t,x_b,x_l,x_r)$</p>
+<p>$l_2  loss = ||Ground truth - Prediction||_{2}^{2}$<br>$LoU loss=-ln\frac{Intersection(Ground truth,Prediction)}{Union(Ground truth,Prediction)}$ （面积比）<br><img src="./20160922155820325.jpg" alt="Alt text"><br><img src="./1521629996201.png" alt="Alt text"></p>
+</blockquote>
+<p><strong>端到端网络</strong><br>输出和输入尺寸一致，因此UnitBox是在循环计算每一个像素的loss<br>用线性插值和crop操作，保证输出输入大小一致</p>
+<p><strong>UnitBox网络</strong><br>在VGG-16模型基础上，去掉了全连接层，变成带有两个分支的全卷积网络，一支是pixel级别的bounding box差值坐标，一支是分类得分。</p>
+<p>输入有三部分：原始图片，描述一个像素是否落入ground truth的分类得分图，描述与ground truth四条边距离的包围框误差坐标图。</p>
+<p>分类得分用的是sigmoid交叉熵loss，可以和LoU loss分开训练也可以联合训练。</p>
+<p>最终定位人脸，选定一个阈值，用一个椭圆在分类得分图上框出一个人脸，选择中心坐标，找到对应的bounding box。</p>
+<h4 id="EAST-自然场景文本检测"><a href="#EAST-自然场景文本检测" class="headerlink" title="EAST 自然场景文本检测"></a>EAST 自然场景文本检测</h4><p>@EAST: An Efficient and Accurate Scene Text Detector, Zhou etc, CVPR 2017 </p>
+<p>可以预测图像中的任意方向和四边形形状的文字或文本行</p>
+<p>高效主要体现在对一些过程的消除，通过单个神经网络消除分词等不必要的中间步骤。</p>
+<p>参考了DenseBox的架构，采用FCN网络，同时在多个通道中进行特征层的输出与几何的生成。</p>
+<p>采用了两种几何对象，rotated box (RBOX) and quadrangle (QUAD)，通过这两种实现对多方向场景文本的检测。</p>
+<p>采用了Locality-Aware NMS来对生成的几何进行过滤。</p>
+<p>对中文的检测效果不是很好，源代码公布。</p>
+<h4 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h4><p>@You Only Look Once: Unified, Real-Time Object Detection, Redmon etc, CVPR 2016</p>
+<blockquote>
+<p>将图像resize到448*448作为神经网络输入<br>通过网络得到bounding box坐标，box包含物体的confidence和probabilities。<br>进行非极大值一只，筛选boxes</p>
+</blockquote>
+<p>YOLO将物体检测当作一个回归问题处理，用一个神经网络，直接从一整张图像中预测出bounding box的坐标，box中包含物体的confidence和probabilities。y</p>
+<p>因为YOLO是在一个神经网络里完成的，所以可以用end to end来优化物体检测性能。</p>
+<p><strong>YOLO之前的物体检测方法</strong><br>主要通过region proposal区域建议产生大量可能包含目标物体的potential bounding box，在用分类器判断每个bounding box里面是否包含物体，以及物体所属类别的probability或confidence。</p>
+<p><strong>YOLO优点</strong><br>1.快。<br>2.避免背景错误。即在背景上预测出不存在的物体FP的情况<br>3.能够学到物体的泛化特征。学到更加抽象的物体的特征，使其能够迁移到艺术等领域。</p>
+<p><strong>YOLO缺点</strong><br>1.容易产生定位错误。<br>2.精度不够高。<br>3.对小物体检测效果不好，尤其是密集的小物体，因为一个栅格只能预测2个物体。</p>
+<p><strong>检测过程</strong><br>将输入图像分成S<em>S的栅格，每个栅格负责检测<em>*<code>中心落在该栅格</code></em></em>中的物体。</p>
+<p>每个栅格预测B个bounding boxes，以及这些bounding boxes的confidence scores，这些confidence scores反映了模型对于这个栅格的预测：该栅格是否包含物体，以及这个box的坐标预测的有多准。</p>
+<blockquote>
+<p><strong>YOLO对每个bounding box有5个预测值：</strong><br>坐标x,y：代表预测的bounding box的中心与栅格边界的相对值<br>坐标w,h：代表预测的bounding box的width，height相对于整幅图像width,height的比例。<br>confidence score为predicted bounding box与ground truth box之间的IoU</p>
+</blockquote>
+<p><strong>对置信度低的能不能用传统检测方法提取特征检测</strong></p>
+<h3 id="Image-Segmentation"><a href="#Image-Segmentation" class="headerlink" title="Image Segmentation"></a>Image Segmentation</h3>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

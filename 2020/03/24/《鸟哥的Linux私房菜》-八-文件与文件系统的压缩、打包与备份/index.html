@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        《鸟哥的Linux私房菜》 八 文件与文件系统的压缩、打包与备份 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-压缩指令"><span class="toc-text">1 压缩指令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-gzip"><span class="toc-text">1.1 gzip</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-gzip-指令"><span class="toc-text">1.1.1 gzip 指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-用-zcat-zmore-zless-读取压缩文件的内容"><span class="toc-text">1.1.2 用 zcat/zmore/zless 读取压缩文件的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-用-zgrep-查找压缩文件的内容"><span class="toc-text">1.1.2 用 zgrep 查找压缩文件的内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-bzip2"><span class="toc-text">1.2 bzip2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-bzip2-cdkzv-文件名"><span class="toc-text">1.2.1 bzip2 [cdkzv#] 文件名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-用-bzcat-bzmore-bzless-bzgrep读取-查找bz2压缩文件内容"><span class="toc-text">1.2.2 用 bzcat/bzmore/bzless/bzgrep读取/查找bz2压缩文件内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-xz"><span class="toc-text">1.3 xz</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-xz-ltcdkv-文件名"><span class="toc-text">1.3.1 xz [-ltcdkv#] 文件名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-读取-查找xz压缩文件用xzcat-xzmore-xzless-xzgrep"><span class="toc-text">1.3.2 读取/查找xz压缩文件用xzcat/xzmore/xzless/xzgrep</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-打包指令-tar"><span class="toc-text">2 打包指令 tar</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-打包与压缩"><span class="toc-text">2.1 打包与压缩</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-打包目录下所有文件"><span class="toc-text">2.1.1 打包目录下所有文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-除目录下某些文件外打包目录"><span class="toc-text">2.1.2 除目录下某些文件外打包目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-仅备份比某个时刻新的文件"><span class="toc-text">2.1.3 仅备份比某个时刻新的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-打包到特殊装置"><span class="toc-text">2.1.4 打包到特殊装置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-用tar完成cp操作"><span class="toc-text">2.1.5 用tar完成cp操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-查看"><span class="toc-text">2.2 查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-解压缩"><span class="toc-text">2.3 解压缩</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-解压整个压缩包文件"><span class="toc-text">2.3.1 解压整个压缩包文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-仅解压单一文件"><span class="toc-text">2.3.2 仅解压单一文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-系统备份"><span class="toc-text">3 系统备份</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-备份过程"><span class="toc-text">3.1 备份过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-备份数据复原系统后的-SELinux-问题"><span class="toc-text">3.2 备份数据复原系统后的 SELinux 问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-XFS-文件系统的备份与还原"><span class="toc-text">4 XFS 文件系统的备份与还原</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-xfsdump-备份XFS-文件系统"><span class="toc-text">4.1 xfsdump 备份XFS 文件系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-xfsrestore-还原XFS-文件系统备份"><span class="toc-text">4.2 xfsrestore 还原XFS 文件系统备份</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-光盘写入工具"><span class="toc-text">5 光盘写入工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-mkisofs-建立映像文件"><span class="toc-text">5.1  mkisofs 建立映像文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-建立不可开机的一般数据光盘映像文件"><span class="toc-text">5.1.1 建立不可开机的一般数据光盘映像文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-wodim-光盘刻录工具"><span class="toc-text">5.2 wodim 光盘刻录工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-1-查询刻录机的-BUS-位置"><span class="toc-text">5.2.1 查询刻录机的 BUS 位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-2-进行-CD-DVD-的刻录"><span class="toc-text">5.2.2 进行 CD/DVD 的刻录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-其他常见压缩和备份工具"><span class="toc-text">6 其他常见压缩和备份工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-dd"><span class="toc-text">6.1 dd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-cpio"><span class="toc-text">6.2 cpio</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1-备份"><span class="toc-text">6.2.1 备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-2-还原"><span class="toc-text">6.2.2 还原</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-3-查看"><span class="toc-text">6.2.3 查看</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《鸟哥的Linux私房菜》 八 文件与文件系统的压缩、打包与备份
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-24 07:12:17</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#Linux" title="Linux">Linux</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>文件里有很多并不是完全填满的空间，压缩就是将这些空间填满，让整个文件占用的容量下降，以此来提高磁盘利用率，在网络数据传输中解放更多带宽，有的压缩程序还可以进行容量限制，将大型文件分片，变成数个小型文件方便小存储设备携带。计算机系统都用 bytes 单位计量，但计算机最小的计量单位是 bits，1 bytes = 8 bits，如果记录数字 “1”，只会占最右边的 1 个bit，其他 7 个 bits 会自动填 0，通过一些复杂的计算方式将这些没有用到的空间丢出来，让文件占用的空间变小，就属于压缩技术。另外，还有一种压缩技术是将重复的数据进行统计，例如数据是 “1111…1111” 共 100 个 1， 那么压缩技术会记录为 “100 个 1”。</p>
+<p>将压缩后的文件还原回来称为 “解压缩”，压缩后的文件与原文件占用磁盘空间大小的比例，称为 “压缩比”</p>
+<h1 id="1-压缩指令"><a href="#1-压缩指令" class="headerlink" title="1 压缩指令"></a>1 压缩指令</h1><p>Linux 不同压缩指令所用的压缩技术不同，所以解压缩前，需要知道该文件是哪种压缩指令制作的。虽然 Linux 的扩展名与文件的属性没有绝对关系，但为了方便判断还是加了参考性的扩展名，常见的有：</p>
+<ul>
+<li><code>*.Z</code> ：compress 程序压缩的文件。不常用；</li>
+<li><code>*.zip</code> ：zip 程序压缩的文件。由 windows 常用的 zip 来；</li>
+<li><code>*.gz</code> ：gzip 程序压缩的文件。由 GNU 开发，后来 GNU 由开发出了 bzip2 和 xz 这几个压缩比更好的压缩指令；</li>
+<li><code>*.bz2</code> ：bzip2 程序压缩的文件；</li>
+<li><code>*.xz</code> ：xz 程序压缩的文件；</li>
+<li><code>*.tar</code> ：tar 程序打包的数据，并没有压缩过。通常上面的指令仅针对一个文件压缩解压缩，为了避免每次都要压缩解压缩一大堆文件，所以有了打包软件 tar，可以将很多文件甚至目录打包成一个文件；</li>
+<li><code>*.tar.gz</code> ：tar 程序打包的文件，且经过了 gzip 的压缩。GNU 将整个 tar 和压缩功能结合；</li>
+<li><code>*.tar.bz2</code> ：tar 程序打包的文件，且经过了 bzip2 的压缩；</li>
+<li><code>*.tar.xz</code> ：tar 程序打包的文件，且经过了 xz 的压缩</li>
+</ul>
+<p><code>compress</code> 这个老老指令几乎没人用了，如果有 <code>compress</code> 建立出来的 <code>.Z</code> 文件，可以用 <code>znew</code> 将该文件转成 gzip 格式。</p>
+<h2 id="1-1-gzip"><a href="#1-1-gzip" class="headerlink" title="1.1 gzip"></a>1.1 gzip</h2><h3 id="1-1-1-gzip-指令"><a href="#1-1-1-gzip-指令" class="headerlink" title="1.1.1 gzip 指令"></a>1.1.1 <code>gzip</code> 指令</h3><p><code>gzip</code> 是目前应用度最广的压缩指令，可以解压 <code>compress</code>、<code>zip</code> 和 <code>gzip</code> 等压缩过的文件，指令用法如下：<br><code>gzip [-cdtv#] 文件名</code></p>
+<ul>
+<li><code>-c</code> ：将原本要转成压缩文件的数据，变成文字类型从屏幕输出，可通过 <code>&gt;</code> 做数据流重导向来处理，将原本应该由屏幕输出的数据，转成输出到文件而不是屏幕；</li>
+<li><code>-d</code> ：解压缩的参数；</li>
+<li><code>-t</code> ：检验压缩文件的一致性，查看文件是否有错误；</li>
+<li><code>-v</code> ：显示原文件，压缩文件的压缩比等信息；</li>
+<li><code>-#</code> ：# 为数字，代表压缩等级，-1 最快，但压缩比最差，-9 最慢，但压缩比最好，默认是 -6。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">压缩</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ gzip -v services</span><br><span class="line">services:	 61.4% -- replaced with services.gz</span><br><span class="line"><span class="comment"># 压缩率 61.4%，越高越好</span></span><br><span class="line"><span class="comment"># 压缩比 = 压缩后/压缩前，越小越好</span></span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ ll /etc/services services.gz</span><br><span class="line">-rw-r--r-- 1 root   root   19183 Dec 26  2016 /etc/services</span><br><span class="line">-rw-r--r-- 1 ubuntu ubuntu  7441 Mar 25 06:32 services.gz</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ ls</span><br><span class="line">services.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ gzip -d services.gz</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ ls</span><br><span class="line">services</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ ll -d services /etc/services</span><br><span class="line">-rw-r--r-- 1 root   root   19183 Dec 26  2016 /etc/services</span><br><span class="line">-rw-r--r-- 1 ubuntu ubuntu 19183 Mar 25 06:32 services</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩时设置压缩等级为用最佳压缩比压缩，并同时保留原文件和压缩文件，注意 &gt; 后的文件名要自己写，注意最好遵循压缩文件名要求的格式。</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ gzip -9 -c services &gt; services.gz</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ ls</span><br><span class="line">services  services.gz</span><br><span class="line"><span class="comment"># 如果没加 -c</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ gzip -9 services &gt; services.gz</span><br><span class="line">gzip: services.gz already exists; <span class="keyword">do</span> you wish to overwrite (y or n)? n</span><br><span class="line">	not overwritten</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ ls</span><br><span class="line">services  services.gz</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ rm services.gz</span><br></pre></td></tr></table></figure>
+<p>用 <code>gzip</code> 压缩后<strong>原文件被压缩文件替换后就不再存在了</strong>，同样用 <code>gzip -d</code> 解压缩后压缩文件就被原文件替换了。另外，用 <code>gzip</code>压缩的文件在 Windows 系统中，可以被 WinRAR/7zip 这个软件解压缩。</p>
+<h3 id="1-1-2-用-zcat-zmore-zless-读取压缩文件的内容"><a href="#1-1-2-用-zcat-zmore-zless-读取压缩文件的内容" class="headerlink" title="1.1.2 用 zcat/zmore/zless 读取压缩文件的内容"></a>1.1.2 用 <code>zcat/zmore/zless</code> 读取压缩文件的内容</h3><p>因为压缩前的原文件是文本文件，所以可以用  <code>zcat/zmore/zless</code> 读取：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ zcat services.gz</span><br><span class="line"><span class="comment"># Network services, Internet style</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">......</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-1-2-用-zgrep-查找压缩文件的内容"><a href="#1-1-2-用-zgrep-查找压缩文件的内容" class="headerlink" title="1.1.2 用 zgrep 查找压缩文件的内容"></a>1.1.2 用 <code>zgrep</code> 查找压缩文件的内容</h3><p>对查询备份中的文本文件数据相当有用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从压缩文件中，找出 http 关键字所在的行</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ zgrep -n <span class="string">'http'</span> services.gz</span><br><span class="line">7:<span class="comment"># Updated from http://www.iana.org/assignments/port-numbers and other</span></span><br><span class="line">8:<span class="comment"># sources like http://www.freebsd.org/cgi/cvsweb.cgi/src/etc/services .</span></span><br><span class="line">53:http		80/tcp		www		<span class="comment"># WorldWideWeb HTTP</span></span><br><span class="line">138:https		443/tcp				<span class="comment"># http protocol over TLS/SSL</span></span><br><span class="line">419:http-alt	8080/tcp	webcache	<span class="comment"># WWW caching service</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-2-bzip2"><a href="#1-2-bzip2" class="headerlink" title="1.2 bzip2"></a>1.2 <code>bzip2</code></h2><p><code>bzip2</code> 比 <code>gzip</code> 的压缩比更好，运行时间比<code>gzip</code>更高，是为了取代 <code>gzip</code> 而来的，用法和 <code>gzip</code> 几乎相同：</p>
+<h3 id="1-2-1-bzip2-cdkzv-文件名"><a href="#1-2-1-bzip2-cdkzv-文件名" class="headerlink" title="1.2.1 bzip2 [cdkzv#] 文件名"></a>1.2.1 <code>bzip2 [cdkzv#] 文件名</code></h3><ul>
+<li><code>-c</code> ：将压缩过程产生的数据输出到屏幕上；</li>
+<li><code>-d</code> ：解压缩参数；</li>
+<li><code>-k</code> ：保留源文件；</li>
+<li><code>-z</code> ：压缩参数，默认值；</li>
+<li><code>-v</code> ：显示原文件，压缩文件的压缩比等信息；</li>
+<li><code>-#</code> ：压缩等级，-9 压缩比最佳，-1 最快。</li>
+</ul>
+<h3 id="1-2-2-用-bzcat-bzmore-bzless-bzgrep读取-查找bz2压缩文件内容"><a href="#1-2-2-用-bzcat-bzmore-bzless-bzgrep读取-查找bz2压缩文件内容" class="headerlink" title="1.2.2 用 bzcat/bzmore/bzless/bzgrep读取/查找bz2压缩文件内容"></a>1.2.2 用 <code>bzcat/bzmore/bzless/bzgrep</code>读取/查找bz2压缩文件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bzcat 压缩文件名.bz2</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-xz"><a href="#1-3-xz" class="headerlink" title="1.3 xz"></a>1.3 <code>xz</code></h2><p><code>xz</code> 比 <code>bzip2</code> 压缩比更高，运行时间比<code>bzip2</code> 更高，用法几乎一样。可以用<code>time</code>指令对比三个指令的运行时间，如果时间是重要成本，那么 <code>gzip</code> 比较合适：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ time gzip -c services &gt; services.g</span><br><span class="line"></span><br><span class="line">real	0m0.002s</span><br><span class="line">user	0m0.002s</span><br><span class="line">sys	0m0.000s</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ time bzip2 -c services &gt; services.bz2</span><br><span class="line"></span><br><span class="line">real	0m0.004s</span><br><span class="line">user	0m0.003s</span><br><span class="line">sys	0m0.000s</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ time xz -c services &gt; services.xz</span><br><span class="line"></span><br><span class="line">real	0m0.018s</span><br><span class="line">user	0m0.009s</span><br><span class="line">sys	0m0.009s</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-3-1-xz-ltcdkv-文件名"><a href="#1-3-1-xz-ltcdkv-文件名" class="headerlink" title="1.3.1 xz [-ltcdkv#] 文件名"></a>1.3.1 <code>xz [-ltcdkv#] 文件名</code></h3><ul>
+<li><code>-l</code> ：列出已存在的压缩文件的相关信息，如压缩前后容量等；</li>
+<li><code>-t</code> ：测试压缩文件的完成性，检查是否有错误。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ xz -l services.xz</span><br><span class="line">Strms  Blocks   Compressed Uncompressed  Ratio  Check   Filename</span><br><span class="line">    1       1      7,052 B     18.7 KiB  0.368  CRC64   services.xz</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-3-2-读取-查找xz压缩文件用xzcat-xzmore-xzless-xzgrep"><a href="#1-3-2-读取-查找xz压缩文件用xzcat-xzmore-xzless-xzgrep" class="headerlink" title="1.3.2 读取/查找xz压缩文件用xzcat/xzmore/xzless/xzgrep"></a>1.3.2 读取/查找xz压缩文件用<code>xzcat/xzmore/xzless/xzgrep</code></h3><h1 id="2-打包指令-tar"><a href="#2-打包指令-tar" class="headerlink" title="2 打包指令 tar"></a>2 打包指令 <code>tar</code></h1><p>将多个文件或目录包成一个大文件的指令，称为“打包指令”，<code>zip</code>、<code>bzip2</code> 和 <code>xz</code> 在对目录进行压缩时，会将目录中所有文件“分别”进行压缩，而不是将所有文件包成一个文件。一般称仅打包的文件“tarfile”，打包加压缩的文件称为“tarball”。</p>
+<h2 id="2-1-打包与压缩"><a href="#2-1-打包与压缩" class="headerlink" title="2.1 打包与压缩"></a>2.1 打包与压缩</h2><h3 id="2-1-1-打包目录下所有文件"><a href="#2-1-1-打包目录下所有文件" class="headerlink" title="2.1.1 打包目录下所有文件"></a>2.1.1 打包目录下所有文件</h3><p><code>tar [-z|-j|-J][pPcv] [-f 待建立的打包文件名] 被打包文件名</code></p>
+<ul>
+<li><code>-z</code> ：通过 gzip 压缩，此时压缩文件名最好为 *.tar.gz；</li>
+<li><code>-j</code> ：通过 bzip2 压缩，压缩文件名最好为 *.tar.bz2；</li>
+<li><code>-J</code> ：通过 xz 压缩，压缩文件名最好为 *.tar.xz；</li>
+<li><code>-p</code> ：保留备份数据原本的权限和属性，常用于备份重要文件；</li>
+<li><code>-P</code> ：保留绝对路径，即允许备份数据中含有根目录存在；</li>
+<li><code>-c</code> ：建立打包文件，可搭配 <code>-v</code> 来察看过程中被打包的文件名；</li>
+<li><code>-v</code> ：将正在压缩处理的文件名显示出来；</li>
+<li><code>-f</code> ：tar 不会主动产生建立的打包文件名，需要自定义，扩展名很重要。<code>f</code>后要紧跟文件名，如果写成<code>-jvfc filename</code> 产生的文件名会变成 c。</li>
+</ul>
+<p>有事没事备份一下 /etc 这个目录是件好事：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo time tar -zpcv -f etc.tar.gz /etc</span><br><span class="line">......</span><br><span class="line">/etc/ld.so.conf.d/libc.conf</span><br><span class="line">/etc/ld.so.conf.d/x86_64-linux-gnu.conf</span><br><span class="line">0.08user 0.03system 0:00.16elapsed 72%CPU (0avgtext+0avgdata 3520maxresident)k</span><br><span class="line">40inputs+1328outputs (0major+454minor)pagefaults 0swaps</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ ll -h etc.tar.gz</span><br><span class="line">-rw-r--r-- 1 root root 662K Mar 28 06:28 etc.tar.gz</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo du -sm /etc</span><br><span class="line">6	/etc</span><br><span class="line"><span class="comment"># 实际 /etc 目录占有6MB，打包后662K</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-1-2-除目录下某些文件外打包目录"><a href="#2-1-2-除目录下某些文件外打包目录" class="headerlink" title="2.1.2 除目录下某些文件外打包目录"></a>2.1.2 除目录下某些文件外打包目录</h3><p>用 <code>--exclude</code> 选项：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -jcv -f 打包后新文件名 --exclude=tmp/services.* --exclude=其他不需要打包文件 待打包目录1 待打包目录2</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果指令太长想要两行输入，可以在断行处加反斜杠  并立刻按下 [enter]，就能在第二行输入了。</p>
+</blockquote>
+<h3 id="2-1-3-仅备份比某个时刻新的文件"><a href="#2-1-3-仅备份比某个时刻新的文件" class="headerlink" title="2.1.3 仅备份比某个时刻新的文件"></a>2.1.3 仅备份比某个时刻新的文件</h3><p>用 <code>--newer-mtime</code> 或 <code>--newer</code>选项，用 <code>--newer</code> 时，表示后续日期包括 mtime 和 ctime，而 <code>--newer-mtime</code> 仅包括 mtime。这个指令可以进行差异文件的记录与备份，每次备份时，只需要备份上次备份的时间点后更新的文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ ll /etc/passwd</span><br><span class="line">-rw-r--r-- 1 root root 1608 Aug  9  2018 /etc/passwd</span><br><span class="line"></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ tar -jcv -f etc.newer.then.passwd.tar.bz2 --newer-mtime=<span class="string">"2018/08/09"</span> /etc/*</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">tar: /etc/vmware-tools/guestproxy-ssl.conf: file is unchanged; not dumped</span><br><span class="line">/etc/vmware-tools/scripts/</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印出结尾不是 / 的文件名：</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ tar -jtv -f etc.newer.then.passwd.tar.bz2 | grep -v <span class="string">'/$'</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-1-4-打包到特殊装置"><a href="#2-1-4-打包到特殊装置" class="headerlink" title="2.1.4 打包到特殊装置"></a>2.1.4 打包到特殊装置</h3><p><code>tar</code> 除了可以打包成文件外，还可以将文件打包到磁带机等特殊装置。磁带机备份在企业应用中是很常见的工作，由于是一次性读写设备，因此不能用类似 <code>cp</code> 的指令来复制，想要把 /etc 备份到磁带机 /dev/st0 时，可以用 <code>tar</code> 来解决：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cv -f /dev/st0 /etc</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-1-5-用tar完成cp操作"><a href="#2-1-5-用tar完成cp操作" class="headerlink" title="2.1.5 用tar完成cp操作"></a>2.1.5 用<code>tar</code>完成<code>cp</code>操作</h3><p>通过标准输入输出的数据流重导向和管线命令，将待处理文件一边打包一边解压缩到目标目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line">tar -cvf - /etc | tar -xvf -</span><br><span class="line"><span class="comment"># 为了不让中间文件存在，打包的输出文件和解包的输入文件命名相同都为-，加上|后可以把-想成是在内存中的一个缓冲区装置。</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="2-2-查看"><a href="#2-2-查看" class="headerlink" title="2.2 查看"></a>2.2 查看</h2><p><code>tar [-z|-j|-J][tv] [-f 已存在的tar文件]</code><br>-<code>-t</code> ：查看打包文件的内容中含有哪些文件名，重点在查看文档名；</p>
+<ul>
+<li><code>-v</code> ：还会详细的文件权限/属性信息，如果只想知道文件名，则不需要加 v；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出详细的权限和属性</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ tar -ztv -f etc.tar.gz</span><br><span class="line">......</span><br><span class="line">-rw-r--r-- root/root        44 2016-01-27 22:17 etc/ld.so.conf.d/libc.conf</span><br><span class="line">-rw-r--r-- root/root       100 2018-04-17 04:14 etc/ld.so.conf.d/x86_64-linux-gnu.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只列出文件名</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ tar -zt -f etc.tar.gz</span><br><span class="line">......</span><br><span class="line">etc/ld.so.conf.d/libc.conf</span><br><span class="line">etc/ld.so.conf.d/x86_64-linux-gnu.conf</span><br></pre></td></tr></table></figure>
+<p>注意备份后的文件名都没有了根目录，原因是为了安全。用 <code>tar -jtvf</code> 看到的所有文件名就是解压缩后的实际文件名，如果在 /tmp 目录下解压， 当没有根目录时，解压缩后的文件名是 /tmp/etc/xxx，如果有根目录，解压缩后的文件名就是绝对路径！会把/etc下的数据覆盖掉！如果确定是需要用备份数据还原到根目录，可以加上 <code>-P</code> 选项：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -jpPcv -f etc.and.username.tar.bz2 /etc</span><br><span class="line"><span class="comment"># 文件名内的根目录就会存在</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="2-3-解压缩"><a href="#2-3-解压缩" class="headerlink" title="2.3 解压缩"></a>2.3 解压缩</h2><p><code>tar [-z|-j|-J][xv] [-f 已存在的tar文件] [-C 目录]</code></p>
+<ul>
+<li><code>x</code> ：解打包或解压缩，<code>-c</code>、<code>-t</code>和<code>-x</code>不能同时出现在一串指令中；</li>
+<li><code>C</code> ：如果要在特定目录解压缩，用这个选项指定。</li>
+</ul>
+<h3 id="2-3-1-解压整个压缩包文件"><a href="#2-3-1-解压整个压缩包文件" class="headerlink" title="2.3.1 解压整个压缩包文件"></a>2.3.1 解压整个压缩包文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将文件解开到指定目录 tmp</span></span><br><span class="line"><span class="comment"># cd 到 tmp目录后解压缩</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~/tmp$ tar -zxv -f ../etc.tar.gz</span><br><span class="line"><span class="comment"># -C 选项指定</span></span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ tar -zxv -f etc.tar.gz -C tmp</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-2-仅解压单一文件"><a href="#2-3-2-仅解压单一文件" class="headerlink" title="2.3.2 仅解压单一文件"></a>2.3.2 仅解压单一文件</h3><p>如果只想打开打包文件内的一个文件，先用 <code>-ztv</code> 找到要解压的文件名，查找时可以用 <code>grep</code> 摘取关键词，然后用 <code>-f 压缩包文件名 待打开文件名</code> 打开；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ tar -ztv -f etc.tar.gz | grep <span class="string">'shadow'</span></span><br><span class="line">-rw-r----- root/shadow     621 2018-08-08 20:19 etc/gshadow-</span><br><span class="line">-rw-r----- root/shadow     890 2020-02-27 08:16 etc/shadow-</span><br><span class="line">-rw-r----- root/shadow     890 2020-02-27 08:24 etc/shadow</span><br><span class="line">-rw-r----- root/shadow     629 2018-08-09 10:24 etc/gshadow</span><br><span class="line">ubuntu@VM-0-10-ubuntu:~$ tar -zxv -f etc.tar.gz etc/shadow</span><br><span class="line">etc/shadow</span><br></pre></td></tr></table></figure></p>
+<h1 id="3-系统备份"><a href="#3-系统备份" class="headerlink" title="3 系统备份"></a>3 系统备份</h1><h2 id="3-1-备份过程"><a href="#3-1-备份过程" class="headerlink" title="3.1 备份过程"></a>3.1 备份过程</h2><p>一般系统比较重要的目录有：</p>
+<ul>
+<li>/etc/ 配置文件</li>
+<li>/home/ 用户的家目录</li>
+<li>/var/spool/mail/ 系统中所有账号的邮件信箱</li>
+<li>/var/spool/cron/ 所有账号的工作排成的配置文件</li>
+<li>/root 系统管理员的家目录</li>
+</ul>
+<p>其中 /home/loop* 不需要备份，/root 下的压缩文件也不需要备份，不建议将备份数据放到 /root 目录下，假设要将其放到 /backups 中，该目录应该仅允许 root 有权限进入。每次备份的文件名不同，要方便辨认新旧版本。备份过程如下：</p>
+<ol>
+<li><p>建立要放置备份数据的目录，设置权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /backups</span><br><span class="line">chmod 700 /backups</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用<code>tar</code>建立备份文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-10-ubuntu:~$ sudo tar -jcv -f /backups/backup_system_20200331.tar.bz2 \</span><br><span class="line">&gt; --exclude=/root/*.bz2 --exclude=/root/*.gz --exclude=/home/loop* \</span><br><span class="line">&gt; /etc /home /var/spool/mail /var/spool/cron /root</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="3-2-备份数据复原系统后的-SELinux-问题"><a href="#3-2-备份数据复原系统后的-SELinux-问题" class="headerlink" title="3.2 备份数据复原系统后的 SELinux 问题"></a>3.2 备份数据复原系统后的 SELinux 问题</h2><p>如果要以备份数据回填到原本的系统中，必须特别注意复原后的系统的 SELinux 问题，尤其是在 /etc 等系统文件上。SELinux 是特别的细部权限设定，可能会让系统无法存取某些配置文件内容，影响系统的正常使用权限。</p>
+<p>例如当用备份数据复原系统后发现无法正常登入，大部分原因是因为 /etc/shadow 这个密码文件的 SELinux 类型在还原时被更改了，系统的登入程序无法顺利存取。</p>
+<p>有如下几种解决方式：</p>
+<ul>
+<li>在第一次复原系统后，不要立即重新启动，先用 <code>restorecon -Rv /etc</code> 自动修复一下 SELinux 类型；</li>
+<li>通过各种方式登入系统后，建立 /.autorelabel 文件，重启后会自动修复 SELinux 的类型，并会再次重启，之后就正常了；</li>
+<li>通过各种救援方式登入系统，修改 /etc/selinux/config 文件，将 SELinux 改成 permissive 模式，重启系统。</li>
+</ul>
+<h1 id="4-XFS-文件系统的备份与还原"><a href="#4-XFS-文件系统的备份与还原" class="headerlink" title="4 XFS 文件系统的备份与还原"></a>4 XFS 文件系统的备份与还原</h1><p>tar 可以对目录树系统进行备份与还原，但不能对整个文件系统进行备份与还原。对 XFS 文件系统，可以用 <code>xfsdump</code> 和 <code>xfsrestore</code> 。</p>
+<h2 id="4-1-xfsdump-备份XFS-文件系统"><a href="#4-1-xfsdump-备份XFS-文件系统" class="headerlink" title="4.1 xfsdump 备份XFS 文件系统"></a>4.1 <code>xfsdump</code> 备份XFS 文件系统</h2><p><code>xfsdump</code> 可以进行文件系统的完整备份 (full backup) 和累积备份 (Incremental backup) ，第一次备份一定是完整备份，在 xfsdump 中定义为 level0，第二次备份时 level1 会比较当前文件与 level0 的差异，只备份变化过的文件，以此类推进行累积备份。各个 level 记录文件存放在 /var/lib/xfsdump/inventory 中。</p>
+<p><code>xfsdump</code> 使用限制：</p>
+<ul>
+<li>只能备份已挂载的文件系统；</li>
+<li>必须使用 root 权限；</li>
+<li>只能备份 XFS 文件系统；</li>
+<li>不支持特定目录的备份，如 /etc，因此 /etc 不是一个独立的文件系统；</li>
+<li>备份的数据只能被 <code>xdsrestore</code> 解析；</li>
+<li>不同备份两个具有相同 UUID 的文件系统，因为 <code>xfsdump</code> 是通过文件系统的 UUID 来分辨各个备份档的。</li>
+</ul>
+<p><strong>选项指令：</strong><br><code>xfsdump [-L S_label] [-M M_label] [-l #] [-f 备份数据] 待备份数据</code> </p>
+<ul>
+<li><code>-L</code> ：每次备份的 session 标头，可以填写针对此文件系统的简易说明；</li>
+<li><code>-M</code> ：存储媒体的标头，可以填写此媒体的简易说明。可以不加 <code>-M</code> 和 <code>-L</code>，但是会进入互动模式，要求 「enter」；</li>
+<li><code>-l</code> ：指定等级，有 0～9 共十个，预设为0，即完整备份；</li>
+<li><code>-f</code> ：产生的文件，可以是 /dev/st0 等装置文件名或其他一般文件名；</li>
+</ul>
+<p>使用了 <code>xfsdump</code> 后会在 /var/lib/xfsdump/inventory 内产生文件，存储备份的相关信息，包括文件系统、时间、session ID 等，作为下次备份的一个参考依据。</p>
+<p><code>xfsdump -I</code><br><code>-I</code> ：用 <code>-I</code> 可以从 /var/lib/xfsdump/inventory 列目前备份的信息；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确定是否是独立的文件系统，「待备份文件系统」是挂载点，假设为 /boot</span></span><br><span class="line">df -h /boot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一次备份为完整备份，备份的文件名记录为 /srv/boot.dump</span></span><br><span class="line">xfsdump -l 0 -L boot_all -M boot_all -f /srv/boot.dump /boot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后续累积备份</span></span><br><span class="line"><span class="comment"># 查看文件系统往次备份信息</span></span><br><span class="line">xfsdump -I</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立差异备份文件</span></span><br><span class="line">xfsdump -l 1 -L boot_2 -M boot_2 -f /srv/boot.dump1 /boot</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-xfsrestore-还原XFS-文件系统备份"><a href="#4-2-xfsrestore-还原XFS-文件系统备份" class="headerlink" title="4.2 xfsrestore 还原XFS 文件系统备份"></a>4.2 <code>xfsrestore</code> 还原XFS 文件系统备份</h2><ol>
+<li>用 <code>xfsrestore -I</code> 查看 <code>xfsdump</code> 后的备份数据内容，和 <code>xfsdump -I</code> 一样，到 /var/lib/xfsdump/inventory/ 中找数据，查询重点是找出哪个文件是哪个挂载点，备份文件是什么 level 的，重点是 session label；</li>
+<li><p>单一文件全系统复原 <code>xfsrestore [-f 备份文件] [-L Session_label] [-s] 待复原目录</code>，复原 level 0 的文件系统，将文件系统整个复原到最原本的状态，只要知道 level 0 的 session label 就可以。复原时原本待复原目录里面的东西没有被删除，同名的文件会被覆盖，其他文件会被保留。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xfsrestore -f /srv/boot.dump -L boot_all /boot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只复原某一个文件或目录时，加 -s 选项和参数即可</span></span><br><span class="line">xfsrestore -f /srv/boot.dump -L boot_all -s grub2 /boot</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过累积备份文件复原系统 <code>xfsrestore [-f 备份文件] -r 待复原目录</code>，备份数据按 level 0 -&gt; level 1 -&gt; 顺序复原到系统内。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfsrestore -f /srv/boot.dump1 -r /boot</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>互动模式复原 <code>xfsrestore [-f 备份文件] -i 待复原目录</code>。如果想要仅还原部分数据，但根本不知道备份档里面有啥文件，或者要复原的文件数量太多时，可以通过 -i 进入互动界面：</p>
+</li>
+</ol>
+<h1 id="5-光盘写入工具"><a href="#5-光盘写入工具" class="headerlink" title="5 光盘写入工具"></a>5 光盘写入工具</h1><p>归档常用 DVD/CD，通常先用 <code>mkisofs</code>  指令来将需要备份的数据建成一个映像文件 iso，然后用 ‘cdrecord’ 指令将该映像文件刻录到光盘或 DVD 中。</p>
+<h2 id="5-1-mkisofs-建立映像文件"><a href="#5-1-mkisofs-建立映像文件" class="headerlink" title="5.1  mkisofs 建立映像文件"></a>5.1  <code>mkisofs</code> 建立映像文件</h2><h3 id="5-1-1-建立不可开机的一般数据光盘映像文件"><a href="#5-1-1-建立不可开机的一般数据光盘映像文件" class="headerlink" title="5.1.1 建立不可开机的一般数据光盘映像文件"></a>5.1.1 建立不可开机的一般数据光盘映像文件</h3><p>要想将数据刻录到 DVD 中，要先将数据报成一个映像文件，才可以写入 DVD 片中：<br><code>mkisofs [-o 映像文件] [-Jrv] [-V vol] [-m file] 待备份文件 -graft-point isodir=systemdir ...</code><br><code>-o</code> ：生成的映像文件名；<br><code>-J</code> ：生成比较兼容 windows 系统的文件名结构，可使文件名长度增加64个 unicode 字符；<br><code>-r</code> ：通过 Rock Ridge 产生支持 Unix/Linux 的文件数据，可记录较多的信息，如 UID/GID等。一般数据光盘的格式为 iso9660，这种格式一般只支持旧版的DOS文件名，即文件名8个字符，扩展名3个字符，能够记录的信息很少；<br><code>-v</code> ：显示建立 ISO 文件的过程；<br><code>-V</code> ：建立 Volume，有点像 Windows 里看到的 C、D title 的东西；<br><code>-m</code> ：排除文件，后面接的文件不备份到映像档中，可以使用通配符 *；<br><code>-graft-point</code> ：转嫁或移植。一般默认所有要被加到映像文件中的文件都会被放置到映像文件的根目录，这样刻录后文件分类很不方便，而且出现命名相同的文件会导致有些数据无法被包含进来，用 <code>-graft-point</code> 选项通过 <code>映像文件中的目录所在 = 实际 Linux 文件系统的目录所在</code> 来定义位于映像文件中的目录，如 `-graft-point /linux/etc = /etc’ 表示将 /etc 内的所有数据备份到映像文件中的 /linux/etc 目录中；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mkisofs -r -V <span class="string">'linex_file'</span> -o /tmp/system.img -m /root/etc -graft-point /root=/root /home=/home /etc=/etc</span><br><span class="line">mount -o loop /tmp/system.img /mnt</span><br><span class="line">ll /mnt</span><br><span class="line">unmount /mnt</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">### 5.1.2 建立可开机光盘映像文件</span></span><br><span class="line">要建立一键安装的安装光盘，就要先修改原版的光盘映像文件，改成可以自动加载某些程序的流程，让这片光盘放入主机光驱后，只要利用光盘片来开机，就直接自动化安装系统。对已生成的 image 文件，修改数据的过程如下：</span><br><span class="line">```bash</span><br><span class="line">isoinfo -d -i xxxxx.iso</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载光盘到 /mnt, 将所有数据完整复制到 /srv/newed 目录</span></span><br><span class="line">mount xxxxxx.iso /mnt</span><br><span class="line">mkdir /srv/newed</span><br><span class="line">rsync -a /mnt /srv/newed  </span><br><span class="line"><span class="comment"># rsync 可以完整的复制所有的权限属性等数据，也能够进行镜像处理</span></span><br><span class="line"><span class="comment"># 在 /srv/newed 里面进行各项修改行为，准备建立 ISO 文件</span></span><br><span class="line">ll /srv/newed/isolinux/</span><br><span class="line"><span class="comment"># 开机的型号数据等boot.cat, 开机管理程序 isolinux.bin, Linux核心文件 vmlinuz 等</span></span><br><span class="line"><span class="built_in">cd</span> /srv/newed</span><br><span class="line">mkisofs -o /custom.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -V <span class="string">'CentOS 7 x86_64'</span> -boot-load-size 4 -boot-info-table -R -J -v -T .</span><br><span class="line"><span class="comment"># 得到的 custom.img 文件就是光盘刻录后可以直接开机的映像文件</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="5-2-wodim-光盘刻录工具"><a href="#5-2-wodim-光盘刻录工具" class="headerlink" title="5.2 wodim 光盘刻录工具"></a>5.2 <code>wodim</code> 光盘刻录工具</h2><p>旧版 CentOS 7 用 <code>cdrecord</code> 完成光盘刻录，新版的用 <code>wodim</code> 文字界面指令来刻录，为了兼容 <code>wodim</code> 也有连结到 <code>cdrecord</code>：</p>
+<h3 id="5-2-1-查询刻录机的-BUS-位置"><a href="#5-2-1-查询刻录机的-BUS-位置" class="headerlink" title="5.2.1 查询刻录机的 BUS 位置"></a>5.2.1 查询刻录机的 BUS 位置</h3><p>由于早期的刻录机都使用 SCSI 接口，因此查询刻录机要配合着 SCSI 接口的认定来处理。查询刻录机的方式为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll /dev/sr0 <span class="comment"># 是否是一般 Linux 光驱文件名</span></span><br><span class="line">wodim --device dev=/dev/sr0 <span class="comment"># 查看是否是正统的 ASUS 光驱，如果是虚拟机内的虚拟光驱 (QEMU DVD-ROM)，则无法装入真正的光盘</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="5-2-2-进行-CD-DVD-的刻录"><a href="#5-2-2-进行-CD-DVD-的刻录" class="headerlink" title="5.2.2 进行 CD/DVD 的刻录"></a>5.2.2 进行 CD/DVD 的刻录</h3><ol>
+<li><p>如果是可重复读写的DVD，先抹除光盘的原始内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wodim -v dev=/dev/sr0 blank=[fast|all]</span><br><span class="line">-v ：在 运行过程中显示过程</span><br><span class="line">black=[fast|all] ：抹除可重复写入的 CD/DVD-RW，用 fast 较快，all 较完整</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>刻录，写入 CD/DVD 时可使用的常见选项：<br><code>-data</code> ：指定后面的文件以数据格式写入，不是以 CD 音轨（-audio）方式写入；<br><code>speed=X</code> ：指定刻录速度，表示40 倍速 CD 可用 speed=40 ，DVD 则用 speed=4；<br><code>-eject</code> ：刻录完毕后自动退出光盘；<br><code>fs=Ym</code> ：指定缓冲存储器的大小，可用来将映像文件先暂存在缓冲存储器，预设为 4m，建议可以增设到 8m，得视刻录机而定；</p>
+<p> 针对 DVD 的选项功能：<br><code>driveropts=burnfree</code> ：打开 Buffer Underrun Free 模式的写入功能；<br><code>-sao</code> ：支持 DVD/RW 的格式。</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wodim -v dev=/dev/sr0 speed=4 -dummy -eject /tmp/system.img</span><br></pre></td></tr></table></figure>
+<ol>
+<li>刻录完毕后，测试挂载，检验内容：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sr0/mnt</span><br><span class="line">df -h /mnt</span><br><span class="line">ll /mnt</span><br><span class="line">umount /mnt</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果要格式化 DVD+RW<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wodim -v dev=/dev/sr0 -format</span><br><span class="line">-format ：仅针对 DVD+RW 这种格式的 DVD 而已</span><br></pre></td></tr></table></figure></p>
+<h1 id="6-其他常见压缩和备份工具"><a href="#6-其他常见压缩和备份工具" class="headerlink" title="6 其他常见压缩和备份工具"></a>6 其他常见压缩和备份工具</h1><h2 id="6-1-dd"><a href="#6-1-dd" class="headerlink" title="6.1 dd"></a>6.1 <code>dd</code></h2><p><code>dd</code> 不仅可以制作一个文件，还可以备份，因为 <code>dd</code> 可以读取磁盘装置的内容，几乎是直接读取扇区 sector，然后将整个装置备份成一个文件。但是用 <code>dd</code> 备份很笨，会一个扇区一个扇区去读/写，而且即使没有用到的扇区也会备份，它不管是否认识文件系统，单纯有啥记录啥，例如：</p>
+<ol>
+<li><p>将 /etc/passwd 备份到 /tmp/passed.back 中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="keyword">if</span>=/etc/passwd of=/tmp/passwd.back</span><br><span class="line"><span class="comment"># 可以通过 bs="block_size" 设定 bs，默认是512 bytes 为一个单位，打印出的 4+1 表示有4个完整的 512 bytes 和一个未满 512 bytes 的block</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将刻录完的光驱内容，再次备份成映像文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="keyword">if</span>=/dev/sr0 of=/tmp/system.iso</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果不想用 DVD，而是想用 USB 来作为开机媒体，可以将映像文件写入 USB 磁盘：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lsblk /dev/sda <span class="comment"># 查看是否是disk，以及磁盘大小</span></span><br><span class="line">dd <span class="keyword">if</span>=/tmp/system.iso of=/dev/sda</span><br><span class="line">mount /dev/sda /mnt</span><br><span class="line">ll /mnt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>备份 /boot 整个文件系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df -h /boot <span class="comment"># 查看挂载的文件系统和备份容量，假如打印出的 Filesystem 为 /dev/vda2</span></span><br><span class="line">dd <span class="keyword">if</span>=/dev/vda2 of=/tmp/vda2.img</span><br><span class="line">ll -h /tmp/vda2.img  <span class="comment"># 备份后的文件容量会和整颗磁盘的最大量一样</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意在挂载新建的文件系统时要理解下每种文件系统的挂载要求，比如要先清洗 XFS 文件系统内的 log，重新给予一个不一样的 UUID，还有为了让系统继续利用后续没有用到的磁盘空间，要理解下 xfs_growfs</p>
+<ol>
+<li>建立两个一摸一样的磁盘，包括 UUID，MBR 与 partition table，都不需要分区与格式化:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="keyword">if</span>=/dev/sda of=dev/sdb</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="6-2-cpio"><a href="#6-2-cpio" class="headerlink" title="6.2 cpio"></a>6.2 <code>cpio</code></h2><p><code>cpio</code> 可以备份任何东西，包括装置设备文件，但它不会主动去找文件来备份，所以一般来说需要配合类似 <code>find</code> 等可以找到文件名的指令来告诉 <code>cpio</code> 该备份的数据在哪，过程中涉及到数据流重导向，因为 <code>cpio</code> 会将整个数据显示在屏幕上，所以可以通过 &gt; 将这些屏幕的数据重新导向到一个新的文件，还原就是将备份文件读进来 &lt; 处理。</p>
+<p>系统里的 /boot/initramfs-xxx 就是使用 <code>cpio</code> 建立的。</p>
+<h3 id="6-2-1-备份"><a href="#6-2-1-备份" class="headerlink" title="6.2.1 备份"></a>6.2.1 备份</h3><p><code>cpio -ovcB &gt; [filedevice]</code></p>
+<ul>
+<li><code>-o</code> ：将数据 copy 输出到文件或装置上；</li>
+<li><code>-v</code> ：显示存储过程中的文件名；</li>
+<li><code>-c</code> ：用一种较新的 portable format 方式存储；</li>
+<li><code>-B</code> ：预设 Blocks 是 512 bytes，可以增设到 5120 bytes，让大文件的存储速度加快；</li>
+</ul>
+<p>将 /boot 下所有文件备份到 /tmp/boot.cpio 中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过 find 找到 boot 底下所有文件和目录，然后通过管线将文件名传给 cpio 进行处理</span></span><br><span class="line"><span class="built_in">cd</span> /</span><br><span class="line"><span class="comment"># 注意千万不要是绝对路径，因为 cpio 不管给的是绝对路径还是相对路径文件名，如果以绝对路径 / 开头，未来解开时一定会覆盖掉原来的 /boot，太危险了！</span></span><br><span class="line">find boot -pint</span><br><span class="line">find boot| cpio -ocvB &gt; /tmp/boot.cpio</span><br><span class="line">file /tmp/boot.cpio</span><br></pre></td></tr></table></figure></p>
+<p>将系统的数据完整备份到磁带机上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / | cpio -ocvB &gt; /dev/st0</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-2-2-还原"><a href="#6-2-2-还原" class="headerlink" title="6.2.2 还原"></a>6.2.2 还原</h3><p><code>cpio -vcidu &lt; [filedevice]</code></p>
+<ul>
+<li><code>-i</code> ：将数据从文件或装置 copy 到系统中；</li>
+<li><code>-d</code> ：自动建立目录，使用 cpio 备份的数据内容不一定会在同一层目录，因此要让 cpio 在还原时可以建立新目录；</li>
+<li><code>-u</code> ：自动用较新的文件覆盖较旧的文件；</li>
+</ul>
+<p>将备份文件在 /root/ 目录下展开<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">cpio -idvc &lt; /tmp/boot.cpio</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-2-3-查看"><a href="#6-2-3-查看" class="headerlink" title="6.2.3 查看"></a>6.2.3 查看</h3><p><code>cpio -ivct &lt; [filedevice]</code></p>
+<ul>
+<li><code>-t</code> ：需要与 <code>-i</code> 配合，用来查看以 <code>cpio</code> 建立的文件或装置的内容。</li>
+</ul>
+<blockquote>
+<p><strong>卸除 /home</strong><br>由于 /home 这个 partition 是用户只要登入就会使用的，因此必须要先注销所有一般用户，然后在 tty2 直接以 root 登入系统，不要使用一般账号登入后 <code>su</code>  转到 root，才可以卸除 /home</p>
+</blockquote>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Non-local (CVPR, 2018) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Non-local-定义"><span class="toc-text">1. Non-local 定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-与普通conv和recurrent的区别"><span class="toc-text">1.1 与普通conv和recurrent的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-与-FC-的区别"><span class="toc-text">1.2 与 FC 的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-g-的选择"><span class="toc-text">1.3  $g()$ 的选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-f-的选择"><span class="toc-text">1.4 $f()$ 的选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-和self-attention-对比"><span class="toc-text">1.5 和self-attention 对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Non-local-Block"><span class="toc-text">2. Non-local Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-使用bottleneck减少计算量"><span class="toc-text">2.1 使用bottleneck减少计算量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-使用下采样"><span class="toc-text">2.2 使用下采样</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Non-local (CVPR, 2018)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-31 11:02:37</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="https://arxiv.org/abs/1711.07971v1" target="_blank" rel="noopener">Non-local Neural Networks</a><br>作者：Xiaolong Wang, Ross Girshick, Abhinav Gupta, Kaiming He</p>
+<p>为解决卷积网络中的long range dependencies问题，论文设计了non-local module来维持更多的信息，它会计算特征所有位置的加权和，这个位置不只有空间位置，还可以是时间，所以non-local还可以用在与序列视频相关的任务上，还很容易和现有模型结合。</p>
+<p>卷积是对局部领域内的特征值进行加权求和，是典型的local操作，对于图像上有一定距离的两个像素之间的联系，或者视频里两帧之间的联系，再或者一段话中不同词之间的联系，普通的卷积和循环网络是做不到的，Non-local 的目的就是要捕获这种长距离依赖，它在计算某个位置的特征时，会考虑所有位置特征的加权，包括空间的，时间的或者时空的。实验证明这种方法在很多计算机视觉的任务上都有效果，比如视频分类、图像识别物体检测、物体分割、姿态估计等任务。</p>
+<h3 id="1-Non-local-定义"><a href="#1-Non-local-定义" class="headerlink" title="1. Non-local 定义"></a>1. Non-local 定义</h3><p>在网络中Non-local计算方式：</p>
+<script type="math/tex; mode=display">y_i = \frac{1}{C(x)} \sum\limits_{j} f(x_i, x_j)g(x_j) \tag{1}</script><p>$x$ 是特征、图片、视频、序列等类型的输入，输出 $y$ 的大小和输入相同，$f(x_i, x_j)$ 是当前位置的像素点和所有可能关联的位置 $j$ 之间的两两关系，它的大小衡量了 $j$ 对 $i$ 的影响大小，$g(x_j)$ 是输入信号在 $j$ 上的特征值，论文实验显示f 和 g 不同的选择对结果的影响不大，说明 non-local本身的行为才是提升的主要原因。$C(x)$ 是归一化参数。</p>
+<h4 id="1-1-与普通conv和recurrent的区别"><a href="#1-1-与普通conv和recurrent的区别" class="headerlink" title="1.1 与普通conv和recurrent的区别"></a>1.1 与普通conv和recurrent的区别</h4><ul>
+<li>普通的conv操作，比如kernel size = 3 时，相当于（1）式中 $i-1 \le j \le i+1$ ；</li>
+<li>recurrent 相当于(1)式中 $j = i or j = i-1$ ;  </li>
+</ul>
+<h4 id="1-2-与-FC-的区别"><a href="#1-2-与-FC-的区别" class="headerlink" title="1.2 与 FC 的区别"></a>1.2 与 FC 的区别</h4><ul>
+<li>Non-local 的输出值是受到输入值之间的关系的影响，会保留位置的相关性，而FC 学习的权重是输入到输出的映射，输入值之间 $x_i$ 和 $x_j$ 的关系不会影响输出，缺少了位置上的相关信息；</li>
+<li>Non-local 没有输入大小的限制，得到的输出大小等于输入，而fc需要固定大小的输入和输出；</li>
+<li>fc 通常在网络的最后使用，non-local 是一个更灵活的block，可以很容易插入浅层的网络，和conv层搭配使用。</li>
+</ul>
+<h4 id="1-3-g-的选择"><a href="#1-3-g-的选择" class="headerlink" title="1.3  $g()$ 的选择"></a>1.3  $g()$ 的选择</h4><p>论文为了简化，$g()$选择线性变换：</p>
+<script type="math/tex; mode=display">g(x_j) = W_g x_j</script><p>其中$W_g$ 是通过 1x1 的卷积学到的权重。</p>
+<h4 id="1-4-f-的选择"><a href="#1-4-f-的选择" class="headerlink" title="1.4 $f()$ 的选择"></a>1.4 $f()$ 的选择</h4><p>关于 $f()$ 的选择论文讨论的几种不同的形式：</p>
+<ul>
+<li><p>高斯函数：</p>
+<script type="math/tex; mode=display">f(x_i, x_j) = e^{x_i^Tx_j)</script><p>其中 $x_i^Tx_j$ 是点乘相似度，归一化参数 $C(x) = \sum\limits_j f(x_i, x_j)$</p>
+</li>
+<li><p>Embedded 高斯，把x映射到特征空间，在embedding空间计算相似度：</p>
+<script type="math/tex; mode=display">f(x_i, x_j) = e^{\theta(x_i)^T \phi (x_j)}</script><p>其中 $\theta(x_i) = W_{\theta}x_i$， $\phi(x_j) = W_\phi x_j$ 是两个embedding，归一化参数 $C(x) = \sum\limits_j f(x_i, x_j)$ </p>
+</li>
+<li><p>embedding 点乘相似度：</p>
+<script type="math/tex; mode=display">f(x_i, x_j) = \theta (x_i)^T \phi (x_j)</script><p>归一化参数 $C(x) = N$ ，N 是x的个数，不是 f 的和，因为输入的size是变化的，所以把输入size 用作归一化参数。和embedded高斯的区别主要是是否做 softmax。</p>
+</li>
+<li><p>Concatenation</p>
+<script type="math/tex; mode=display">f(x_i, x_j) = ReLU(w_f ^T [\theta (x_i), \phi (x_j)])</script><p>$[\theta (x_i), \phi (x_j)]$ 表示把 $\theta (x_i)$ 和 $\phi (x_j)$ concat起来，再用 $w_f$ 把concat 的向量转换为标量， $C(x) = N$ 。<br>self-attention</p>
+</li>
+</ul>
+<h4 id="1-5-和self-attention-对比"><a href="#1-5-和self-attention-对比" class="headerlink" title="1.5 和self-attention 对比"></a>1.5 和self-attention 对比</h4><p>self-attention 就是 non-local 中 $f(x)$ 用 embedded Gaussian 的特殊情况，对位置 i ， $\frac{1}{C(x)} f(x_i, x_j)$ 就是计算所有 j 的softmax，即：</p>
+<script type="math/tex; mode=display">y = softmax(x^T W_\theta ^TW_\phi x)g(x)</script><p>和self-attention不同的是，论文发现attention 的形式对当前关注的任务并不是必须的。所以$f()$可以选择其他形式，如 embedding 点乘相似度 或 Concatenation 。</p>
+<h3 id="2-Non-local-Block"><a href="#2-Non-local-Block" class="headerlink" title="2. Non-local Block"></a>2. Non-local Block</h3><p>用式（1）构成 non-local block：</p>
+<script type="math/tex; mode=display">z_i = W_z y_i + x_i</script><p>$+x_i$ 的设计使得在加入 non-local block 时不需要改变原有的结构，当 $W_z = 0$ 时网络和原始结构完全一样，block结构如下图：<br><img src="Figure1.png" alt> </p>
+<h3 id="2-1-使用bottleneck减少计算量"><a href="#2-1-使用bottleneck减少计算量" class="headerlink" title="2.1 使用bottleneck减少计算量"></a>2.1 使用bottleneck减少计算量</h3><p>把 $W_g, W_\theta, W_\phi$ 的channel 数目减为输入x channel 的一半，$W_z$ 再放大到输入的channel数，形成一个 bottleneck，能够减少一半的计算量。</p>
+<h3 id="2-2-使用下采样"><a href="#2-2-使用下采样" class="headerlink" title="2.2 使用下采样"></a>2.2 使用下采样</h3><p>先将 x 经过一个max pooling 进行下采样得到 $\hat x$，把式(1) 中的输入 x 改为 x 下采样之后的 $\hat x$ ， 使得计算更加稀疏，可以减少 1/4 的 $f(x_i, x_j)$ 的计算量。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

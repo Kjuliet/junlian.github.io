@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        梯度下降优化算法 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-常用优化算法"><span class="toc-text">1. 常用优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-SGD"><span class="toc-text">1.1 SGD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Momentum"><span class="toc-text">1.2 Momentum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-NAG-Nesterov-Accelerated-Gradient"><span class="toc-text">1.3 NAG (Nesterov Accelerated Gradient)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-AdaGrad"><span class="toc-text">1.4 AdaGrad</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-AdaDelta-RMSProp"><span class="toc-text">1.5 AdaDelta /  RMSProp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-Adam"><span class="toc-text">1.6 Adam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-Nadam"><span class="toc-text">1.7 Nadam</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-指数移动平均值的偏差修正"><span class="toc-text">2.  指数移动平均值的偏差修正</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-有Adam-Nadom为什么还用SDG"><span class="toc-text">3. 有Adam/Nadom为什么还用SDG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Adam-可能不收敛"><span class="toc-text">3.1  Adam 可能不收敛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Adam-可能错过全局最优解"><span class="toc-text">3.2 Adam 可能错过全局最优解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Adam-SGD-组合策略"><span class="toc-text">4. Adam + SGD 组合策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-学习率设置"><span class="toc-text">4.1 学习率设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-切换"><span class="toc-text">4.2 切换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-优化算法常用tricks"><span class="toc-text">5. 优化算法常用tricks</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        梯度下降优化算法
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-20 15:29:30</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#深度学习" title="深度学习">深度学习</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="1-常用优化算法"><a href="#1-常用优化算法" class="headerlink" title="1. 常用优化算法"></a>1. 常用优化算法</h2><p><strong>优化算法框架：</strong><br><strong>待优化参数</strong>：$w$<br><strong>目标函数</strong>：$f(w)$<br><strong>初始学习率</strong>：$\alpha$<br>每个epoch迭代优化，对第 $t$ 个epoch：<br>（1）计算目标函数关于当前参数的梯度：</p>
+<script type="math/tex; mode=display">g_t = \triangledown f(w_t)</script><p>（2）根据历史梯度计算一阶动量和二阶动量：</p>
+<script type="math/tex; mode=display">m_t=\phi(g_1, g_2,...,g_t)</script><script type="math/tex; mode=display">V_t = \psi(g_1, g_2, ..., g_t)</script><p>（3）计算当前时刻的下降梯度：</p>
+<script type="math/tex; mode=display">\eta_t=\alpha \cdot \frac{m_t}{\sqrt{V_t}}</script><p>（4）根据下降梯度进行更新：</p>
+<script type="math/tex; mode=display">w_{t+1}=w_t - \eta_t</script><h3 id="1-1-SGD"><a href="#1-1-SGD" class="headerlink" title="1.1 SGD"></a>1.1 SGD</h3><p>SGD 中没有动量，即：</p>
+<script type="math/tex; mode=display">m_t=g_t</script><script type="math/tex; mode=display">V_t=I^2</script><script type="math/tex; mode=display">\psi=\alpha \cdot g_t</script><p> 问题：下降速度慢，会在局部最优的沟壑里面来回震荡，会收敛到局部最优点。</p>
+<h3 id="1-2-Momentum"><a href="#1-2-Momentum" class="headerlink" title="1.2 Momentum"></a>1.2 Momentum</h3><p>SDG with momentum，为了解决SGD下降速度慢的问题，Momentum 在梯度下降的过程中加入了惯性，下坡的时候如果是陡坡，就利用惯性让它跑的快一点。SGDM 是在SGD的基础上引入了一阶动量：</p>
+<script type="math/tex; mode=display">m_t = \beta_1 \cdot m_{t-1} + (1-\beta_1)\cdot g_t</script><p>一阶动量是各个时刻梯度方向的指数移动平均值，在数值上约等于最近 $1/(1-\beta_1)$个时刻的梯度向量和的平均值。也就是说，t 时刻下降的方向，不仅由当前点的梯度方向决定，还会受此前累计额下降方向决定。</p>
+<p>$\beta_1$的经验值是0.9，意味着当前的下降方向主要是此前累计的下降方向，并且略微偏向当前时刻的下降方向。</p>
+<h3 id="1-3-NAG-Nesterov-Accelerated-Gradient"><a href="#1-3-NAG-Nesterov-Accelerated-Gradient" class="headerlink" title="1.3 NAG (Nesterov Accelerated Gradient)"></a>1.3 NAG (Nesterov Accelerated Gradient)</h3><p>SGD 还有一个问题就是它容易困在局部最优的沟壑来回震荡，NAG是在SGD 和momentum的基础上改进了对当前梯度值的计算，思路是既然时刻 t 的下降方向主要由累计动量决定，那不如先看看如果跟着累积动量走了一步，那个时候再怎么走，所以 NAG 在计算当前位置的梯度时，实际计算的是按照此前累积动量走了一步，那个时候的下降方向：</p>
+<script type="math/tex; mode=display">g_t = \triangledown f(w_t - \alpha \cdot m_{t-1}/\sqrt{V_{t-1}})</script><p>然后用它和历史累积动量相结合，计算步骤2中当前时刻的累积动量。</p>
+<h3 id="1-4-AdaGrad"><a href="#1-4-AdaGrad" class="headerlink" title="1.4 AdaGrad"></a>1.4 AdaGrad</h3><p>SGD、Momentum 和 NAG 都是以相同的学习率更新每个参数，但网络里有大量的参数，每个参数更新的频率是不一样的，对于那些经常被更新的参数，它从之前大量的样本中学到了很多信息，本身累积融合了大量的信息，我们其实不希望单个样本对它的影响太大；而对于那些不经常被更新的参数，他们学到的知识很少，所以希望能从每个偶然出现的样本身上多学一点，体现在学习率上就是学习率大一点，即Adaptive。</p>
+<p>历史更新的频率用二阶动量度量，它等于到目前为止所有梯度值的平方和：</p>
+<script type="math/tex; mode=display">V_t = \sum\limits_{\tau =1}^t g_{\tau}^2</script><script type="math/tex; mode=display">\eta_t=\alpha \cdot \frac{m_t}{\sqrt{V_t}}</script><p>二阶动量的引入，意味着优化算法能够“自适应学习率”，学习率由$\alpha$ 变成了 $\alpha / \sqrt{V_t}$，一般会在分母上加一个很小的正平滑项防止分母为0，这样起到的作用就是参数更新的越频繁，二阶动量就越大，学习率越小。</p>
+<p>AdaGrad 在稀疏数据场景下表现非常好，但它也有问题，就是$\sqrt{V_t}$ 是单调递增，学习率单调递减，会一直减到0，使训练过程提前结束，后面即使有数据进来，也不会再更新了。</p>
+<h3 id="1-5-AdaDelta-RMSProp"><a href="#1-5-AdaDelta-RMSProp" class="headerlink" title="1.5 AdaDelta /  RMSProp"></a>1.5 AdaDelta /  RMSProp</h3><p>为解决AdaGrad在学习率上会单调递减到 0 的问题，AdaDelta 用了另一种计算二阶动量的方法，就是不再累积所有历史梯度，而是只关注过去最近的一段时间窗口的下降梯度，所以叫Delta。计算的思路就是用指数移动平均值，代表过去一段时间的平均值：</p>
+<script type="math/tex; mode=display">V_t = \beta_2 \cdot V_{t-1} + (1-\beta_2)g_t^2</script><p>它避免了二阶动量持续累积，导致训练提前结束的问题。</p>
+<h3 id="1-6-Adam"><a href="#1-6-Adam" class="headerlink" title="1.6 Adam"></a>1.6 Adam</h3><p>Adam 是前面方法的集大成者，把一阶动量和二阶动量都加了进来，即Adaptive + Momentum，两个超参$\beta_1、\beta_2$，一个控制一阶动量一个控制二阶动量：</p>
+<script type="math/tex; mode=display">m_t = \beta_1 \cdot m_{t-1} + (1-\beta_1)\cdot g_t</script><script type="math/tex; mode=display">V_t = \beta_1 \cdot V_{t-1} + (1-\beta_2) \cdot g_t^2</script><h3 id="1-7-Nadam"><a href="#1-7-Nadam" class="headerlink" title="1.7 Nadam"></a>1.7 Nadam</h3><p>是 Nesterov + Adam：</p>
+<script type="math/tex; mode=display">g_t = \triangledown f(w_t - \alpha \cdot m_{t-1}/\sqrt{V_t})</script><script type="math/tex; mode=display">m_t = \beta_1 \cdot m_{t-1} + (1-\beta_1)\cdot g_t</script><script type="math/tex; mode=display">V_t = \beta_1 \cdot V_{t-1} + (1-\beta_2) \cdot g_t^2</script><h2 id="2-指数移动平均值的偏差修正"><a href="#2-指数移动平均值的偏差修正" class="headerlink" title="2.  指数移动平均值的偏差修正"></a>2.  指数移动平均值的偏差修正</h2><p>一阶动量和二阶动量按照指数移动平均值计算时，两个超参的经验值是$\beta_1=0.9, \beta_2 = 0.999$，初始化是 $m_0=0, V_0=0$，按上面的公式计算时，初期的估计是有问题的， $m_t$ 和 $V_t$ 都会接近于 0，所以用下面的方法进行误差修正：</p>
+<script type="math/tex; mode=display">\tilde m_t = m_t/(1-\beta_1^t)</script><script type="math/tex; mode=display">\tilde V_t = V_t/(1-\beta_2^t)</script><h2 id="3-有Adam-Nadom为什么还用SDG"><a href="#3-有Adam-Nadom为什么还用SDG" class="headerlink" title="3. 有Adam/Nadom为什么还用SDG"></a>3. 有Adam/Nadom为什么还用SDG</h2><p>Adam/Nadam 与 SDG ，可以用单反和傻瓜相机/智能手机类比，一般人用傻瓜相机/智能手机的傻瓜式操作就可以拍到不错的照片，但专业摄影师还是更喜欢用单反，自己调节光圈、快门、ISO、白平衡等等，因为在特定的场景下，要拍出最好的效果，还是需要理解光线和器材。同理，Adam 和 Nadam 相当于在SGD 的基础上增加了学习率的自适应控制，如果不想自己做精细的调优，那Adam最便于直接上手，但它明显不一定能够适应所有的场合，如果能深入理解数据，可以自己控制优化迭代的各类参数，就很可能得到更好的效果。</p>
+<p>理解数据对于设计算法很重要，哪种算法比较有效，要看数据是否合胃口。Adam 虽然简化了调参，但并没有一劳永逸解决问题。</p>
+<h3 id="3-1-Adam-可能不收敛"><a href="#3-1-Adam-可能不收敛" class="headerlink" title="3.1  Adam 可能不收敛"></a>3.1  Adam 可能不收敛</h3><p>SGD 没有用二阶动量，学习率是恒定的，实际训练中会用学习率衰减的策略，所以学习率是递减的。AdaGrad 的二阶动量单调递增，学习率也是递减的，所以这两类算法学习率最终都会收敛到0，模型也得以收敛。</p>
+<p>但AdaDelta 和 Adam不一样，它的二阶动量是固定时间窗口内的累积，每个窗口内的数据可能会发生巨变，使得二阶动量并不是单调变化，而是时大时小，在训练后期引起学习率震荡，导致模型无法收敛。</p>
+<p>这个问题有一个修正的方法是，对二阶动量的变化进行控制，避免它上下波动：</p>
+<script type="math/tex; mode=display">V_t = max(\beta_2 \cdot V_{t-1} + (1-\beta_2)g_t^2, V_{t-1})</script><p>这样修改后，保证了 $||V_t|| \ge ||V_{t-1}||$，使学习率单调递减。</p>
+<h3 id="3-2-Adam-可能错过全局最优解"><a href="#3-2-Adam-可能错过全局最优解" class="headerlink" title="3.2 Adam 可能错过全局最优解"></a>3.2 Adam 可能错过全局最优解</h3><p>在神经网络这样一个维度极高的空间里，非凸的目标函数会有无数个高地和洼地，有的高峰引入动量后很可能被越过，有些高原可能探索了很多次都出不来，就停止了训练。</p>
+<p>有论文发现Adam的收敛速度比SGD快，但收敛的结果没有SGD的好，分析是因为后期Adam的学习率太低影响收敛，所以在对Adam学习率的下界进行控制后，发现效果变好了。</p>
+<p>所以一个改进的方法是前期用Adam让模型快速收敛，后期用SGD，慢慢找最优解。</p>
+<h2 id="4-Adam-SGD-组合策略"><a href="#4-Adam-SGD-组合策略" class="headerlink" title="4. Adam + SGD 组合策略"></a>4. Adam + SGD 组合策略</h2><p>前期用Adam让模型快速收敛，后期用SGD需要解决两个问题：</p>
+<ul>
+<li>什么时候切换优化算法：如果太晚Adam已经跑到盆地，SDG也跑不出来；</li>
+<li>切换到 SGD 怎么设置学习率</li>
+</ul>
+<h3 id="4-1-学习率设置"><a href="#4-1-学习率设置" class="headerlink" title="4.1 学习率设置"></a>4.1 学习率设置</h3><p>Adam 的下降方向是：</p>
+<script type="math/tex; mode=display">\eta_t^{Adam} = \frac{\alpha}{\sqrt{V_t}} \cdot m_t</script><p>SGD 的下降方向是：</p>
+<script type="math/tex; mode=display">\eta_t^{SGD} = \alpha{SGD} \cdot g_t</script><p>$\eta_t^{SGD}$可分解为$\eta_t^{Adam}$方向及其正交方向之和，在$\eta_t^{Adam}$方向上的投影表示SGD在Adam算法决定的下降方向上的前进距离，在正交方向上的投影表示SGD在自己选择的修正方向上前进的距离。</p>
+<p>SGD 首先沿着$\eta_t^{SGD}$方向走一步，走完 Adam 未走完的路，然后在其正交方向走另一步，即：</p>
+<script type="math/tex; mode=display">SDG在\eta_t^{SGD}上的投影 = \eta_t^{SGD}</script><p>所以学习率为：</p>
+<script type="math/tex; mode=display">\alpha_t^{SGD} = ((\eta_t^{Adam})^T\eta_t^{Adam})/((\eta_t^{Adam})^T g_t)</script><p>为减少噪声影响，用移动平均值来修正对学习率的估计$\beta_2$就是Adam中的 $\beta_2$：</p>
+<script type="math/tex; mode=display">\lambda_t^{SGD} = \beta_2 \cdot \lambda_{t-1}^{SGD} + (1-\beta_2) \cdot \alpha_t^{SGD}</script><script type="math/tex; mode=display">\tilde \lambda_t^{SGD} = \lambda_t^{SGD}/(1-beta_2^t)</script><h3 id="4-2-切换"><a href="#4-2-切换" class="headerlink" title="4.2 切换"></a>4.2 切换</h3><p>每次迭代都要计算一下SGD的学习率，当SGD学习率的移动平均值基本不变的时候：</p>
+<script type="math/tex; mode=display">|\tilde \lambda_t^{SGD} - \alpha_t^{SGD}| < \epsilon</script><h2 id="5-优化算法常用tricks"><a href="#5-优化算法常用tricks" class="headerlink" title="5. 优化算法常用tricks"></a>5. 优化算法常用tricks</h2><ul>
+<li>模型稀疏，优先考虑自适应学习率的算法；</li>
+<li>考虑不同算法的组合，比如先用Adam 再用 SGD;</li>
+<li>数据集要充分打散，在用自适应学习率算法时可以避免某些特征集中出现，导致有时学习过度，有时学习不足，使得下降方向出现偏差；</li>
+<li>训练过程中持续监控训练数据：保证模型充分训练，即下降方向正确，且学习率足够高；</li>
+<li>监控验证数据上的目标函数值、评价指标的变化情况：防止过拟合；</li>
+<li>制定合适的学习率衰减策略：如定期衰减，每过n个epoch就衰减一次；或根据精度或AUC的指标监控，当指标不变或下跌时，就降低学习率。</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

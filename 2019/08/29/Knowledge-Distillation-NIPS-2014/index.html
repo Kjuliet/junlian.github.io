@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Knowledge Distillation (NIPS, 2014) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-概念"><span class="toc-text">1. 概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-温度系数-T"><span class="toc-text">1.1 温度系数 T</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-soft-target-和-hard-target"><span class="toc-text">1.2 soft target 和 hard target</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-用法"><span class="toc-text">2. 用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-teacher权重先大后小"><span class="toc-text">2.1 teacher权重先大后小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-teacher-student-联合训练"><span class="toc-text">2.2 teacher student 联合训练</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-相关实验"><span class="toc-text">3. 相关实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-自蒸馏"><span class="toc-text">3.1 自蒸馏</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Knowledge Distillation (NIPS, 2014)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-29 22:32:55</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#深度学习" title="深度学习">深度学习</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h3><p>之所以叫蒸馏、温度系数，是因为这个过程很像用很高的温度，把数据关键的结构信息（分布信息）从数据中蒸馏分离出来，再在同样的温度下将蒸馏出来的数据分布融合进新模型，恢复温度让他们充分融合。可以从迁移学习Transfer Learning、模型压缩Model Compression角度理解蒸馏。</p>
+<p>teacher的推理性能要优于student，模型容量则无限制，期望上teahcer精度越高，越有利于 student 的学习。</p>
+<h4 id="1-1-温度系数-T"><a href="#1-1-温度系数-T" class="headerlink" title="1.1 温度系数 T"></a>1.1 温度系数 T</h4><p>在计算 softmax 时加入了温度系数 T，T 越大所有类的分布越平缓越 “软”，目标的分布更加均匀。为什么要让分布概率变得平缓，如果每次登山都要背一个很大的包，虽然这个过程很辛苦，但是当有一天取下这个包，再登山的时候就会感觉很轻松，可以比别人登得更高。温度系数就相当于这个包。在student 的softmax加一个参数T之后，错误的分类经过softmax 之后输出会变大，正确的分类输出会变小，这就相当于人为地加大了训练的难度，学完之后再把T重新设为1，分类会接近大网络的分类效果。</p>
+<h4 id="1-2-soft-target-和-hard-target"><a href="#1-2-soft-target-和-hard-target" class="headerlink" title="1.2 soft target 和 hard target"></a>1.2 soft target 和 hard target</h4><ul>
+<li>soft target：带有温度系数T的student，要尽量接近加入温度系数T的teacher softmax 的分布；</li>
+<li>hard target：尽可能正确地按 ground truth 分类。</li>
+</ul>
+<h3 id="2-用法"><a href="#2-用法" class="headerlink" title="2. 用法"></a>2. 用法</h3><p>一种选择时用ground truth修正teacher生成的软目标，但是实验发现更好的方法是同时学习ground truth 和 teacher，将两个不同的目标函数加权平均。在学习 teacher 时用的是交叉熵，此时  student 和 teacher 的softmax 是使用相同的温度系数T计算的。在学习ground truth时student 的温度系数设为 1，在把两部分加起来时，gt 的权重设置比teacher 的权重低。</p>
+<p>因为在用teacher 时产生的梯度大小是 $\frac{1}{T^2}$, 所以在使用时把gt+teacher的目标乘以$T^2$ 可以确保软硬目标的相对贡献基本保持不变。</p>
+<p><strong>（1）student 、teacher加温度系数的softmax:</strong></p>
+<script type="math/tex; mode=display">s\_softmax_{(i)} = \frac{e^{\frac{z_i}{T}}}{\sum_j e^{\frac{z_j}{T}}}</script><script type="math/tex; mode=display">t\_softmax_{(i)} = \frac{e^{\frac{z_i}{T}}}{\sum_j e^{\frac{z_j}{T}}}</script><p><strong>（2）student 和 ground truth 求交叉熵：</strong></p>
+<script type="math/tex; mode=display">loss1 = -log(s\_softmax_{(gt\_idx)} )</script><p><strong>（3）student 和 teacher 求交叉熵 (n 分类)：</strong></p>
+<script type="math/tex; mode=display">loss2 = -\frac{1}{n}\sum\limits_{i=1}^n (s\_softmax{(i)} * log(t\_softmax{(i)}))</script><p><strong>（4）最终的 loss 等于两部分的加权：</strong></p>
+<script type="math/tex; mode=display">loss = loss1 + 10\times loss2</script><h4 id="2-1-teacher权重先大后小"><a href="#2-1-teacher权重先大后小" class="headerlink" title="2.1 teacher权重先大后小"></a>2.1 teacher权重先大后小</h4><p>其中loss2的加权系数越大，student 越依赖于teacher，在训练初期很有必要，有助于让 student 更轻松的学习简单样本，但训练后期需要适当减小loss2的比重，让真实label帮助学习困难样本。</p>
+<h4 id="2-2-teacher-student-联合训练"><a href="#2-2-teacher-student-联合训练" class="headerlink" title="2.2 teacher student 联合训练"></a>2.2 teacher student 联合训练</h4><p>teacher 和 student 也可以联合训练，此时teacher 的暗知识及学习方式都会影响 student 的学习，具体如下（式中三项分别为teacher softmax输出的交叉熵loss、 student softmax输出的交叉熵loss、以及teacher 输出与 student softmax输出的交叉熵loss）。</p>
+<h3 id="3-相关实验"><a href="#3-相关实验" class="headerlink" title="3. 相关实验"></a>3. 相关实验</h3><h4 id="3-1-自蒸馏"><a href="#3-1-自蒸馏" class="headerlink" title="3.1 自蒸馏"></a>3.1 自蒸馏</h4><p>利用自蒸馏来分析半监督学习中利用预标注信息的效果。多标签分类任务中，各类别的标注比例不同，在正常训练中，未标注的数据不计算loss。自蒸馏是说自己当自己的teacher，利用训好的teacher预标注信息，这相当于给各类别增加了训练数据。</p>
+<p>实验设置：teacher是用groundtruth训练好的resnet50模型，student是完全相同的resnet50，student在训练时有标注则用groundtruth，无标注则用teacher的预标注信息。<br>实验结果：效果总体有所提升，但不是很明显，效果有限。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

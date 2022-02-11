@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        排列组合 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-加法原理、乘法原理"><span class="toc-text">1. 加法原理、乘法原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-排列问题"><span class="toc-text">2. 排列问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-组合问题"><span class="toc-text">3. 组合问题</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        排列组合
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-17 18:39:32</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#数学" title="数学">数学</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="1-加法原理、乘法原理"><a href="#1-加法原理、乘法原理" class="headerlink" title="1. 加法原理、乘法原理"></a>1. 加法原理、乘法原理</h3><p>分类计数原理：做一件事，有$n$ 类方法，第1类中有$m_1$种不同方法，第2类中有$m_2$种方法，…，第n类中有$m_n$种方法，那么完成这件事共有$N=m_1+m_2+…+m_n$种方法。<br>分步计数原理：做一件事，有$n$ 个步骤，第1步有$m_1$种不同方法，第2步有$m_2$种方法，…，第n步有$m_n$种方法，那么完成这件事共有$N=m_1\times m_2 \times … \times m_n$种方法。</p>
+<h3 id="2-排列问题"><a href="#2-排列问题" class="headerlink" title="2. 排列问题"></a>2. 排列问题</h3><p>从 n 个不同元素中取出 $m(m \le n)$ 个元素的所有不同排列的个数，叫做从 n 个不同元素中取出 m 个元素的排列数，记为 $A_n^m$。</p>
+<p>按照分步乘法原理，取第一个有 n 种取法，第二个有 $(n-1)$ 种取法，…，第 m 个有 $(n-m+1)$种取法：</p>
+<script type="math/tex; mode=display">A_n^m = n(n-1)(n-2)...(n-m+1)=\frac{n!}{(n-m)!}, n,m \ in N^* \ 0! = 1</script><p>【性质1】 $A_n^m = nA_{n-1}^{m-1}$，先安排某个特定位置，再安排其他位置。<br>【性质2】 $A_n^m = mA_{n-1}^{m-1}+A_{n-1}^m$，某个特定元素的排列有$mA_{n-1}^{m-1}$，不含特定元素的排列有 $A_{n-1}^m$</p>
+<p>\begin{equation}<br>\begin{split}<br>mA_{n-1}^{m-1}+A_{n-1}^m &amp;= \frac{m(n-1)!}{(n-m)!} + \frac{(n-1)!}{(n-m-1)!} \\<br>&amp;=\frac{m(n-1)!+(n-m)(n-1)!}{(n-m)!} \\<br>&amp;= \frac{n!}{(n-m)!}<br>\end{split}<br>\end{equation}</p>
+<h3 id="3-组合问题"><a href="#3-组合问题" class="headerlink" title="3. 组合问题"></a>3. 组合问题</h3><p>从 n 个不同元素中取出 $m(m \le n)$ 个元素的所有不同组合的个数，叫做从 n 个不同元素中取出 m 个元素的组合数，记为 $C_n^m$。</p>
+<p>排列问题$A_n^m$可看作两个步骤：第一步从n个元素中抽m个出来，先不排序，即组合问题 $C_n^m$，第二步把抽出的m个元素排序，即全排列$A_m^m$：根据分步乘法原理第一步第二步相乘得$A_n^m$</p>
+<script type="math/tex; mode=display">A_n^m = C_n^mA_m^m</script><script type="math/tex; mode=display">C_n^m = \frac{A_n^m}{A_m^m} =\frac{n!}{m!(n-m)!}</script><script type="math/tex; mode=display">C_n^0=C_n^n=1</script><p>【性质1】$C_n^m=C_n^{n-m}$<br>【递推公式】$C_n^m = C_{n-1}^{m}+C_{n-1}^{m-1}$</p>
+<p>对某一特定元素，最后取出的m个元素里要么有该元素，即$C_{n-1}^{m-1}$，表示已经取了一个，从剩下的n-1个元素中再取m-1个元素；要么没有，即$C_{n-1}^{m}$，表示一个都没取，还需要从n-1个元素中取m个。</p>
+<p><strong>组合数求和公式</strong></p>
+<script type="math/tex; mode=display">C_n^0+C_n^1+C_n^2+...+C_n^n=2^n</script><p>左边表示从n个元素中随便取出不定个数，也就是对任意一个球，都有2种情况，要么选，要么不选，也就是右边的$2^n$</p>
+<p>【二项式定理】</p>
+<script type="math/tex; mode=display">(a+b)^n=\sum\limits_{k=0}^nC_n^ka^{n-k}b^k</script>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        学习率衰减策略 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Warmup"><span class="toc-text">1. Warmup</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-分段常数衰减"><span class="toc-text">1. 分段常数衰减</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-指数衰减"><span class="toc-text">2. 指数衰减</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-多项式衰减"><span class="toc-text">3.  多项式衰减</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-余弦衰减"><span class="toc-text">4. 余弦衰减</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-倒数衰减"><span class="toc-text">5. 倒数衰减</span></a>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        学习率衰减策略
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-29 08:22:34</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#深度学习" title="深度学习">深度学习</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h4 id="1-Warmup"><a href="#1-Warmup" class="headerlink" title="1. Warmup"></a>1. Warmup</h4><p>ResNet中提到的一种学习率预热的方法，在训练开始的时候先选择用一个较小的学习率，训练一些epoches后，再改为预先设置的学习率训练。</p>
+<p>因为刚开始训练时权重是随机初始化的，这个时候如果用一个较大的学习率，学习过程会很不稳定，用Warmup可以使开始训练的几个epoches学习率较小，等模型慢慢相对稳定后再选择预先设置的学习率进行训练，使模型收敛速度更快。</p>
+<p>改进。。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># &lt;1&gt; Warmup Learning Rate</span><br><span class="line">def get_warmup_lr(clock: TrainClock):</span><br><span class="line">    if clock.epoch &lt; 10:</span><br><span class="line">        lr = 1e-4 * (clock.epoch+1)</span><br><span class="line">    elif clock.epoch &lt; 60:</span><br><span class="line">        lr = 1e-3</span><br><span class="line">    elif clock.epoch &lt; 100:</span><br><span class="line">        lr = 1e-4</span><br><span class="line">    else:</span><br><span class="line">        lr = 5e-5</span><br><span class="line">    return lr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># &lt;2&gt; Step-size Decay Learning Rate</span><br><span class="line"> base_lr = 1e-3</span><br><span class="line">def get_stepsize_lr(clock: TrainClock):</span><br><span class="line">    lr = config.base_lr * (0.1 ** (clock.epoch // config.step_size))</span><br><span class="line">    return lr</span><br></pre></td></tr></table></figure>
+<h3 id="1-分段常数衰减"><a href="#1-分段常数衰减" class="headerlink" title="1. 分段常数衰减"></a>1. 分段常数衰减</h3><p>分段常数衰减<br>在事先定义好的训练次数区间上，设置不同的学习率常数。刚开始学习率大一些，之后越来越小，区间的设置需要根据样本量调整，一般样本量越大区间间隔应该越小。</p>
+<h3 id="2-指数衰减"><a href="#2-指数衰减" class="headerlink" title="2. 指数衰减"></a>2. 指数衰减</h3><p>学习率是跟当前的训练轮次指数相关的。<br>自然指数衰减是指数衰减的一种特殊情况，学习率也是跟当前的训练轮次指数相关，只不过以 e 为底数。</p>
+<h3 id="3-多项式衰减"><a href="#3-多项式衰减" class="headerlink" title="3.  多项式衰减"></a>3.  多项式衰减</h3><p>定义一个初始的学习率，一个最低的学习率，按照设置的衰减规则，学习率从初始学习率逐渐降低到最低的学习率，并且可以定义学习率降低到最低的学习率之后，是一直保持使用这个最低的学习率，还是到达最低的学习率之后再升高学习率到一定值，然后再降低到最低的学习率（反复这个过程）。</p>
+<h3 id="4-余弦衰减"><a href="#4-余弦衰减" class="headerlink" title="4. 余弦衰减"></a>4. 余弦衰减</h3><p>余弦函数相关，形状也大体上是余弦形状。</p>
+<h3 id="5-倒数衰减"><a href="#5-倒数衰减" class="headerlink" title="5. 倒数衰减"></a>5. 倒数衰减</h3><p>是一个变量的大小与另一个变量的大小成反比的关系，具体到神经网络中就是学习率的大小跟训练次数有一定的反比关系。</p>
+<p>人工智能的决胜不在技术，真的决胜在商业能力，是否能够弥补技术从业者在商业上的短版。技术的追赶可以用资本的方式去吸引，但是商务的能力，如果晚别人一步，很可能就错失了时间窗口，建立不了规模效应，让一个非常好的技术浪费掉或者被迫被别人买走。</p>
+<p>任何一项新兴技术在发展落地的过程中都将经历3个阶段，第一个阶段是技术驱动，又一拨人开始从事这个技术，他们持续钻研，是科学家，工程师，研发人员带动的；第二个阶段是应用驱动，当技术已经研究得差不多的时候，会出现某些应用，可以在垂直的领域当中开花结果，这个主要由工程师带动，第三个阶段是商业模式驱动，已经有一个商业模式被研发出来了，这个时候产品、技术已经到了成熟期，可以以有效的商业模式，带来批量的增长。</p>
+<p>当前主要是卡在第二个阶段</p>
+<p>业务主要集中在安防，</p>
+<p>Focal loss 主要是为了解决one-stage目标检测中正负样本比例严重失衡的问题，降低大量简单负样本在训练中所占权重，可以当作一种难样本挖掘策略</p>
+<p>Focal loss是在交叉熵损失函数上进行了改进。交叉熵在大量简单样本的迭代过程中学习过程会很慢，Focus loss改为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+L_{focus\_loss} = \left \{
+\begin{array}
+-(1-y')^Y log y' & y=1 \\
+-y'^Y log(1-y') & y=0
+\end{array}
+\right .
+\end{equation}</script><p>$\gamma &gt; 0$ 可以减少简单样本分类的损失，使其更关注于错分的难样本。</p>
+<p>例如gamma为2，对于正类样本而言，预测结果为0.95肯定是简单样本，所以（1-0.95）的gamma次方就会很小，这时损失函数值就变得更小。而预测概率为0.3的样本其损失相对很大。对于负类样本而言同样，预测0.1的结果应当远比预测0.7的样本损失值要小得多。对于预测概率为0.5时，损失只减少了0.25倍，所以更加关注于这种难以区分的样本。这样减少了简单样本的影响，大量预测概率很小的样本叠加起来后的效应才可能比较有效。</p>
+<p>此外，加入平衡因子alpha，用来平衡正负样本本身的比例不均：文中alpha取0.25，即正样本要比负样本占比小，这是因为负例易分。</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+L_{focus\_loss} = \left \{
+\begin{array}
+-\alpha (1-y')^Y log y' & y=1 \\
+-(1-\alpha)y'^Y log(1-y') & y=0
+\end{array}
+\right .
+\end{equation}</script><p>只添加alpha虽然可以平衡正负样本的重要性，但是无法解决简单与困难样本的问题。</p>
+<p>gamma调节简单样本权重降低的速率，当gamma为0时即为交叉熵损失函数，当gamma增加时，调整因子的影响也在增加。实验发现gamma为2是最优。</p>
+<p> 1.牛顿法：是通过求解目标函数的一阶导数为0时的参数，进而求出目标函数最小值时的参数。</p>
+<p>　　　　　　　收敛速度很快。</p>
+<p>　　　　　　　海森矩阵的逆在迭代过程中不断减小，可以起到逐步减小步长的效果。</p>
+<p>　　　　　　　缺点：海森矩阵的逆计算复杂，代价比较大，因此有了拟牛顿法。</p>
+<p>　　2.梯度下降法：是通过梯度方向和步长，直接求解目标函数的最小值时的参数。</p>
+<p>　　　　　　　　　越接近最优值时，步长应该不断减小，否则会在最优值附近来回震荡。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

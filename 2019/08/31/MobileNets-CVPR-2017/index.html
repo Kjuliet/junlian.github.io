@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        MobileNets (CVPR, 2017) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-depthwise-separable-convolutions"><span class="toc-text">1. depthwise separable convolutions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-宽度因子和分辨率因子"><span class="toc-text">2. 宽度因子和分辨率因子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-宽度因子-width-multiplier-alpha"><span class="toc-text">2.1 宽度因子 width multiplier $\alpha$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-分辨率因子-resolution-multiplier-beta"><span class="toc-text">2.2 分辨率因子 resolution multiplier $\beta$</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-训练细节和实验结果"><span class="toc-text">3. 训练细节和实验结果</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        MobileNets (CVPR, 2017)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-31 13:20:41</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#backbone" title="backbone">backbone</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="https://arxiv.org/abs/1704.04861" target="_blank" rel="noopener">MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications</a><br>MobileNets是用深度可分离卷积 depthwise separable convolutions 构建的轻量级网络。对于移动、车载应用，需要将模型小型化，使模型的计算量存储空间能耗能够被这些应用接受。</p>
+<p>depthwise卷积是减少了传统卷积的冗余信息，是更稀疏的表达，可以通过调整两个超参数（宽度因子width muiltiplier 和 分辨率因子 resolution multiplier ）来构建复杂度小，速度快，能够满足嵌入式设备要求的模型。</p>
+<h2 id="1-depthwise-separable-convolutions"><a href="#1-depthwise-separable-convolutions" class="headerlink" title="1. depthwise separable convolutions"></a>1. depthwise separable convolutions</h2><p>对于传统卷积，假设输入是M x H x W，kernel size为D x D，输出channel数为N，那么一个卷积核的计算量为 $D \times D \times M \times H \times W$</p>
+<p>depthwise 卷积是先用一组通道数为1的二维的卷积核，每次只处理一个输入通道，卷积核的数量和输入通道数相同。逐个通道卷积处理完后，再经过三维的1x1的卷积核：<br><img src="Figure1.png" alt><br>在计算量上，用一组二维 的DxD 卷积核逐个对通道卷积的计算量为 $D\times D \times H \times W \times M$ ；之后三维的1x1卷积核的计算量是 $H \times W \times M \times N$ ，两部分合起来的计算量是：</p>
+<script type="math/tex; mode=display">D\times D \times H \times W \times M + H \times W \times M \times N</script><p>相比传统卷积：</p>
+<script type="math/tex; mode=display">\frac{D\times D \times H \times W \times M + H \times W \times M \times N}{D \times D \times M \times H \times W \times N} = \frac{D^2 + N}{ND^2} = \frac{1}{D^2} + \frac{1}{N}</script><p>也就是说，当输入是3x112x112，kernel size为3x3，卷积核数量是128时，depthwise卷积+1x1conv只有传统卷积计算量的11.89%</p>
+<p>depthwise 卷积和1x1卷积在网络结构中作为两个独立的模块，每部分输出都加了BN 和 ReLU：<br><img src="Figure2.png" alt></p>
+<p>MobileNet 中的参数量和计算量的分布：<br><img src="Figure3.png" alt></p>
+<h2 id="2-宽度因子和分辨率因子"><a href="#2-宽度因子和分辨率因子" class="headerlink" title="2. 宽度因子和分辨率因子"></a>2. 宽度因子和分辨率因子</h2><p>通过宽度因子和分辨率因子，可以用最小的改动来获得更小更快的模型，以满足对运行速度和内存有极端要求的应用。</p>
+<p>用宽度因子和分辨率因子调整后是需要重新训练网络的。</p>
+<h3 id="2-1-宽度因子-width-multiplier-alpha"><a href="#2-1-宽度因子-width-multiplier-alpha" class="headerlink" title="2.1 宽度因子 width multiplier $\alpha$"></a>2.1 宽度因子 width multiplier $\alpha$</h3><p>$\alpha$ 取值范围 $(, 1]$ ，常用取值为1、0.75、0.5、0.25，作用于网络的通道数，可以有效把计算量和参数量减少约 $\alpha$ 的平方倍，使用了 $\alpha$ 的depth wise + 1x1 卷积核的计算量为：</p>
+<script type="math/tex; mode=display">D\times D \times H \times W \times \alpha M + H \times W \times \alpha M \times \alpha N</script><p><img src="Figure5.png" alt></p>
+<h3 id="2-2-分辨率因子-resolution-multiplier-beta"><a href="#2-2-分辨率因子-resolution-multiplier-beta" class="headerlink" title="2.2 分辨率因子 resolution multiplier $\beta$"></a>2.2 分辨率因子 resolution multiplier $\beta$</h3><p>$\beta$ 取值范围 $(, 1]$ ，作用于网络输入数据的大小，每个模块产生的特征图都变小，使用了 $\beta$ 的depth wise + 1x1 卷积核的计算量为：</p>
+<script type="math/tex; mode=display">D\times D \times \beta H \times \beta W \times \alpha M + \beta H \times \beta W \times \alpha M \times \alpha N</script><p><img src="Figure4.png" alt></p>
+<h2 id="3-训练细节和实验结果"><a href="#3-训练细节和实验结果" class="headerlink" title="3. 训练细节和实验结果"></a>3. 训练细节和实验结果</h2><ul>
+<li>MobileNet 参数量较少，所以不用weight decay 或用较小的weight decay；</li>
+<li>因为网络较小不会有严重过拟合问题，所以没有做很多数据增强的工作。</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

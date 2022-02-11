@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        细粒度图像分类 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基于attention的方法"><span class="toc-text">1. 基于attention的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-SCDA-2017"><span class="toc-text">1.1 SCDA (2017)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-RA-CNN-CVPR-2017"><span class="toc-text">1.2 RA-CNN (CVPR, 2017)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-局部区域定位对齐"><span class="toc-text">2. 局部区域定位对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-多网络集合"><span class="toc-text">3. 多网络集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Subset-feature-learning-networks-CVPR-2015"><span class="toc-text">3.1 Subset feature learning networks (CVPR, 2015)</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        细粒度图像分类
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-06 16:18:28</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>细粒度分类的目的是对大类进行子类的划分。和通用图像分类任务相比，细粒度图像分类任务的难点在于相近子类类间差异可能很微小，而同一子类可能由于姿态、背景、遮挡、视角以及拍摄角度的不同，导致类内差异很大。比如同一种鸟的姿势、背景和视角变化很大，而不同鸟之间的区分性差异仅在于喙、翅膀这些微小的区域。</p>
+<p>应用：车辆识别，濒危物种保护，植物识别 …</p>
+<p>因为细粒度图像分类的重要信息一般在一些很小的局部区域，所以大部分算法是先定位到目标对象和局部区域，然后提取局部区域特征训练，最后结合目标对象和局部区域的预测来完成分类。</p>
+<p>方法主要分为强监督和弱监督两种，强监督模型在训练时，除了类别的标签外，还需要 bounding box 和 part annotation 的人工标注信息。强监督的分类精度比较高，但标注成本太高，所以现在在细粒度图像分类中的趋势是弱监督模型，只用图像级的类别标签，有些弱监督模型的性能已经可以取得强监督模型分类精度。</p>
+<p>弱监督模型主要分以下四类：</p>
+<ul>
+<li>直接用 CNN 进行细粒度图像分类；</li>
+<li>局部区域定位对齐：用 CNN 提取特征，定位对象的不同部分并对齐，再进行细粒度图像分类；</li>
+<li>子集网络集合：对高度相似的细粒度分类，用多个神经网络区分；</li>
+<li>基于attention：找到最有辨别力的区域进行分类。</li>
+</ul>
+<h2 id="1-基于attention的方法"><a href="#1-基于attention的方法" class="headerlink" title="1. 基于attention的方法"></a>1. 基于attention的方法</h2><h3 id="1-1-SCDA-2017"><a href="#1-1-SCDA-2017" class="headerlink" title="1.1 SCDA (2017)"></a>1.1 SCDA (2017)</h3><p>论文：<a href="https://arxiv.org/pdf/1604.04994.pdf" target="_blank" rel="noopener">Selective Convolutional Descriptor Aggregation for<br>Fine-Grained Image Retrieval</a></p>
+<p>SCDA 先将图像输入预训练的模型，得到全连接层前的卷积特征 $h \times w \times c$ 。对该特征在channel方向上求和得到 $h \times w$ 的2D tensor，称为 aggregation map。之所以这样做，直观的解释是物体出现的位置在特征的多数通道上都会被激活，所以在channel上累加之后，可以把这个位置的响应累积起来。然后用这 $h \times w$ 个值计算出一个均值 $\bar \alpha$ ，原 $h \times w$ 中大于 $\bar \alpha$ 的就保留，小于 $\bar \alpha$ 的丢掉。以这种方式 SCDA 在无位置标签监督的条件下完成物体的定位，再根据定位结果选择卷积特征，分别做Average Pooling 和 Max Pooling，再级联起来组成最终的特征表示。</p>
+<h3 id="1-2-RA-CNN-CVPR-2017"><a href="#1-2-RA-CNN-CVPR-2017" class="headerlink" title="1.2 RA-CNN (CVPR, 2017)"></a>1.2 RA-CNN (CVPR, 2017)</h3><p>论文：<a href="http://openaccess.thecvf.com/content_cvpr_2017/papers/Fu_Look_Closer_to_CVPR_2017_paper.pdf" target="_blank" rel="noopener">Look Closer to See Better: Recurrent Attention Convolutional Neural Network<br>for Fine-grained Image Recognition</a><br>微软亚研院的细粒度分类文章，作者认为 region detection 和 fine-grained feature learning 可以相互强化，所以提出RA-CNN用相互强化的方法学习 discriminative region attention 和 region-based feature representation。</p>
+<p>RA-CNN 是一个叠加网络，输入是全图像和多尺度的细粒度局部区域，包括三个scale的子网络，每个子网络的网络结构一样，各包含一个分类网络和一个APN (Attention Proposal Network) 网络。<br>对于输入图片，先用第一个 scale 子网络的分类网络来取特征，然后APN 基于分类网络提取的特征，训练得到 attention区域后，裁剪放大，作为第二个 scale 子网络的输入。同样的过程经过三次就可以得到 3 个scale 子网络的输出结果，由粗到细地生成 region attention，最后将不同 scale 网络的结果进行融合。<br><img src="Figure1.png" alt> </p>
+<p><strong>APN 网络</strong><br>APN 网络有两个FC，输出channel 为3，假设检测出来的 attention 区域是正方形，则三个channel 分别对应attention 区域中心点坐标 $t_x$ ， $t_y$  和正方形边长的一半 $t_l$ 。</p>
+<p><strong>Loss</strong><br>loss 包括scale内的正确分类损失 intra-scale classification loss 和scale 间相邻尺度之间的成对排序损失 inter-scale ranking loss 两项，其中inter-scale ranking loss 是希望后面scale网络的预测比相邻的前一个更准：<br>$L_{rank}(p_t^{(s)}, p_t^{(s+1)}) = max\{0, p_t^{(s)} - p_t^{(s+1)} + margin\}$</p>
+<p><strong>分类</strong><br>分类时将不同 scale 子网络得到的fc堆叠起来，连一个fc，通过softmax作为最后的分类结果。<br><img src="Figure2.png" alt> </p>
+<h2 id="2-局部区域定位对齐"><a href="#2-局部区域定位对齐" class="headerlink" title="2. 局部区域定位对齐"></a>2. 局部区域定位对齐</h2><p>局部区域对齐对因姿势、视角变化导致的类内差异增大的情况很重要。首先定位局部区域，然后进行局部区域对齐，最后在对齐的局部区域上提取特征进行分类。</p>
+<h2 id="3-多网络集合"><a href="#3-多网络集合" class="headerlink" title="3. 多网络集合"></a>3. 多网络集合</h2><h3 id="3-1-Subset-feature-learning-networks-CVPR-2015"><a href="#3-1-Subset-feature-learning-networks-CVPR-2015" class="headerlink" title="3.1 Subset feature learning networks (CVPR, 2015)"></a>3.1 Subset feature learning networks (CVPR, 2015)</h3><p>论文：Subset feature learning for fine-grained category classification<br>模型包括两部分：<br>-（1）与目标数据集同域的大规模数据集上训练，然后在目标数据集上微调的域通用网络；<br>-（2）将视觉上相似的对象聚类为 K 个子集，训练多个CNN学习更容易区分视觉上相似的每个子集的特征。</p>
+<p>这种方法的核心问题是，对一张图像，如果确定用哪一个子集对它进行分类。所以会有一个子集选择器CNN（K 个输出的softmax），来选择和输入图像相关度最高的网络进行预测。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

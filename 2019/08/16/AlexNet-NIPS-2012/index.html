@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        AlexNet (NIPS, 2012) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络结构"><span class="toc-text">网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReLU-Rectified-Linear-Unit"><span class="toc-text">ReLU (Rectified Linear Unit)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#常用激活函数"><span class="toc-text">常用激活函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Local-Response-Normalization"><span class="toc-text">Local Response Normalization</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        AlexNet (NIPS, 2012)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-16 22:36:17</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#backbone" title="backbone">backbone</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：ImageNet Classification with Deep Convolutional Neural Networks<br>文中提到的模型在ImageNet LSVRC-2010 的ImageNet数据集（高分辨率图像1.2million，共1000个类别）上top-1错误率37.5%，top-5错误率17.0%，AlexNet 有60million个参数，650,000个神经元，<strong>五层卷积加三层全连接层，最后softmax输出1000个通道对应1000个类别，用了 dropout 来降低 fc 层过拟合。</strong>模型的变体是LSVRC-2012的冠军，top-5错误率15.3%。</p>
+<p><strong>论文实验表示深度会对网络性能有影响</strong>。</p>
+<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>结构图里分上下两个部分，分别对应两个GPU中的计算，每块GPU中网络的结构类似。网络共 8 层，包括 5 层卷积，3 层全连接。<br><img src="Figure2.png" alt><br>卷积层1：输入224 x 224 x 3 的图像，kernel size $ = 11 \times 11 \times 3$，stride =  4，padding = 0，卷机核数量即输出channel数为 96，所以</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>层数</th>
+<th>输入shape</th>
+<th>操作</th>
+<th>输出shape</th>
+<th>操作</th>
+<th>输出shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>卷积层1</td>
+<td>224 x 224 x 3 (图像)</td>
+<td>卷积: <br> kernel size = 11 x 11 x 3<br> kernel num = 96 <br> stride = 4 <br> padding = 0</td>
+<td>55 x 55 x 96</td>
+<td>1.Local Response Normalized<br>2.MaxPooling(size=(3x3),stride=2,padding=0)</td>
+<td>27 x 27 x 96</td>
+</tr>
+<tr>
+<td>卷积层2</td>
+<td>27 x 27 x 96</td>
+<td>卷积: <br> kernel size = 5 x 5 x 96<br> kernel num = 256 <br> stride = 1 <br> padding = 2</td>
+<td>27 x 27 x 256</td>
+<td>1.Local Response Normalized<br>2.MaxPooling(size=(3x3),stride=2,padding=0)</td>
+<td>13 x 13 x 256</td>
+</tr>
+<tr>
+<td>卷积层3</td>
+<td>13 x 13 x 256</td>
+<td>卷积: <br> kernel size = 3 x 3 x 256<br> kernel num = 384 <br> stride = 1 <br> padding = 1</td>
+<td>13 x 13 x 384</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>卷积层4</td>
+<td>13 x 13 x 384</td>
+<td>卷积: <br> kernel size = 3 x 3 x 384<br> kernel num = 384 <br> stride = 1 <br> padding = 1</td>
+<td>13 x 13 x 384</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>卷积层5</td>
+<td>13 x 13 x 384</td>
+<td>卷积: <br> kernel size = 3 x 3 x 384<br> kernel num = 256 <br> stride = 1 <br> padding = 1</td>
+<td>13 x 13 x 256</td>
+<td>MaxPooling(size=(3x3),stride=2,padding=0)</td>
+<td>6 x 6 x 256</td>
+</tr>
+<tr>
+<td>FC层678</td>
+<td>6 x 6 x 256</td>
+<td>67层神经元个数4096,8层softmax 1000<br> RELU <br> Dropout</td>
+<td>1 x 1000</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>卷积操作shape计算：</strong></p>
+<ul>
+<li>输出大小： $output = \frac{ input + 2 * padding - kernel_size } {stride} + 1$ </li>
+<li>卷积后大小不变：$kernel_size = 2 \times padding + 1, stride = 1$</li>
+<li>卷积后大小变为原来的一半 ( MaxPooling ) ：$kernel_size=3\times 3, stride=2，padding=0$</li>
+</ul>
+<h3 id="ReLU-Rectified-Linear-Unit"><a href="#ReLU-Rectified-Linear-Unit" class="headerlink" title="ReLU (Rectified Linear Unit)"></a>ReLU (Rectified Linear Unit)</h3><h4 id="常用激活函数"><a href="#常用激活函数" class="headerlink" title="常用激活函数"></a>常用激活函数</h4><p><strong>sigmoid</strong></p>
+<script type="math/tex; mode=display">f(x)=\frac{1}{1+e^{-x}}</script><p><strong>tanh</strong></p>
+<script type="math/tex; mode=display">tanh(x)=\frac{sinhx}{coshx}=\frac{e^x-e^{-x}}{e^x+e^{-x}}</script><p><strong>ReLU</strong></p>
+<script type="math/tex; mode=display">f(x)=max(0, x)</script><p>计算梯度时更快。</p>
+<h3 id="Local-Response-Normalization"><a href="#Local-Response-Normalization" class="headerlink" title="Local Response Normalization"></a>Local Response Normalization</h3><p>在用激活函数将神经元的输出做非线性映射时，tanh 和 sigmoid 会映射到一个范围内，但ReLU的值域没有区间，所以需要对ReLU的结果进行归一化，即Local Response Normalization:</p>
+<script type="math/tex; mode=display">b_{x,y}^i = \frac{a_{x,y}^i}{(k+\alpha \sum\limits_{j=max(0, i-n/2)}^{min(N-1,i+n/2)}(a_{x,y}^j)^2)^\beta}</script><p>$a_{x,y}^i$ 表示ReLU第i 个kernel的(x, y) 位置的输出，n 表示 $a_{x,y}^i$ 的邻居数，即有几个kenel和$a_{x,y}^i$所属的kenel相邻，N 表示 Kernel 总个数。LRN 的计算就是先找到与 $a_{x,y}^i$ 相邻的 n 个kernel map上对应的(x,y)位置的值，即$a_{x,y}^j$，把这些值平方再求和，然后乘系数 $\alpha$，加 k，求$\beta$ 次幂，作为归一化的分母:<br><img src="Figure3.png" alt></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

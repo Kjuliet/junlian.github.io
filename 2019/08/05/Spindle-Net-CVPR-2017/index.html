@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Spindle Net (CVPR, 2017) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Spindle Net (CVPR, 2017)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-05 21:07:47</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#Person Re-identification" title="Person Re-identification">Person Re-identification</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="http://openaccess.thecvf.com/content_cvpr_2017/papers/Zhao_Spindle_Net_Person_CVPR_2017_paper.pdf" target="_blank" rel="noopener">http://openaccess.thecvf.com/content_cvpr_2017/papers/Zhao_Spindle_Net_Person_CVPR_2017_paper.pdf</a></p>
+<p>代码、数据：<a href="https://github.com/yokattame/SpindleNet">https://github.com/yokattame/SpindleNet</a></p>
+<p>这篇论文的出发点是利用人体结构信息辅助行人重识别，提出Spindle Net结构，用人体关节点信息将人体分为七个区域，引导多阶段的树形结构的神经网络完成特征学习。论文提出的方法有分两步，首先通过RPN(Region Proposal Network)生成七个人体的子区域，包括头肩、上身、下身三个宏观子区域，和左臂、右臂、左腿、右腿四个微观子区域。 接着利用生成的人体区域信息指导Spindle Net训练，Spindle Net训练过程中先用Feature Extraction Network(FEN) 提取出一个全局特征向量和七个子区域的特征向量，然后用 FFN(Feature Fusion Network) 将全局特征向量和子区间特征向量融合，得到最终的特征向量。匹配效果如下图。</p>
+<p>research-video &gt; Spindle Net: Person Re-identification with Human Body Region Guided Feature Decomposition and Fusion &gt; spindleNet_1.png</p>
+<p>用RPN(Region Proposal Network)生成子区域。具体分为两步，第一步是输入一张图片，定位出14个人体关节点；第二步根据得到的 14 个关节点位置信息划分出 7 个子区域，划分方式如下图，将14个点放入7个集合，分别求每个集合中关节点在x、y方向上的最大值和最小值。</p>
+<p>research-video &gt; Spindle Net: Person Re-identification with Human Body Region Guided Feature Decomposition and Fusion &gt; spindleNet_2.png</p>
+<p>得到 7 个子区域后输入Spindle Net指导训练。用Feature Extraction Network(FEN) 提取特征过程中网络分三个阶段，三个宏观子区域在第二阶段通过ROI pooling加入，四个微观子区域在第三阶段加入，最终得到一个全局特征向量和七个子区域的特征向量。然后用 FFN(Feature Fusion Network) 将全局特征向量和子区间特征向量逐步融合，输出一个最终的特征向量。Spindle网路结构如下图。</p>
+<p>research-video &gt; Spindle Net: Person Re-identification with Human Body Region Guided Feature Decomposition and Fusion &gt; spindleNet_3.png</p>
+<p>作者在CUHK03数据集和Market-1501数据集上的测试结果如下：</p>
+<p>research-video &gt; Spindle Net: Person Re-identification with Human Body Region Guided Feature Decomposition and Fusion &gt; 屏幕快照 2018-11-25 下午5.32.00.png</p>
+<p>research-video &gt; Spindle Net: Person Re-identification with Human Body Region Guided Feature Decomposition and Fusion &gt; 屏幕快照 2018-11-25 下午5.32.23.png</p>
+<p>research-video &gt; Spindle Net: Person Re-identification with Human Body Region Guided Feature Decomposition and Fusion &gt; 屏幕快照 2018-11-25 下午5.31.16.png</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

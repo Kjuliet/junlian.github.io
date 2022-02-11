@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        YOLO v2 (CVPR, 2017) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch-Normalization"><span class="toc-text">Batch Normalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#High-resolution-classifier"><span class="toc-text">High resolution classifier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolution-with-anchor-boxes"><span class="toc-text">Convolution with anchor boxes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dimension-clusters-维度聚类"><span class="toc-text">Dimension clusters (维度聚类)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接位置预测"><span class="toc-text">直接位置预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#细粒度特征"><span class="toc-text">细粒度特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-Scale-Training"><span class="toc-text">Multi-Scale Training</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Draknet19"><span class="toc-text">Draknet19</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#联合训练算法"><span class="toc-text">联合训练算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Hierachical-classification"><span class="toc-text">Hierachical classification</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#过采样COCO"><span class="toc-text">过采样COCO</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        YOLO v2 (CVPR, 2017)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-12 01:31:42</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#目标检测" title="目标检测">目标检测</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="https://arxiv.org/abs/1612.08242" target="_blank" rel="noopener">YOLO9000: Better, Faster, Stronger </a><br>作者：Joseph Redmon, Ali Farhadi<br>YOLOv2 是希望提升recall，在保持分类准确度的同时提高定位的准确度。</p>
+<h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h3><p>给每一个卷积层加了Batch Normalization，使得mAP 提高了2%，加入BN后去掉了Dropout也没有过拟合。</p>
+<h3 id="High-resolution-classifier"><a href="#High-resolution-classifier" class="headerlink" title="High resolution classifier"></a>High resolution classifier</h3><p>业界的检测方法都是先在ImageNet上对分类器进行预训练，从Alexnet 开始，大多数的分类器的图片都小于256 * 256，而 YOLO 从 224 x 224 增大到了 448 x 448，为了适应新的分辨率，YOLO v2 以448 x 448的分辨率先在ImageNet上微调了10个epoch，让网络在新的分辨率上调整了filter，还调优了用于检测的 Resulting Network，最后通过高分辨率 mAP 提升了 4%。</p>
+<h3 id="Convolution-with-anchor-boxes"><a href="#Convolution-with-anchor-boxes" class="headerlink" title="Convolution with anchor boxes"></a>Convolution with anchor boxes</h3><p>YOLO v1 是直接预测 Bounding Boxes 的坐标值，Faster R-CNN 是预测 Anchor Box 偏移值，作者发现相比预测坐标值，预测偏移量能够简化问题，让网络更容易学习。所以去掉了YOLO v1的全连接层，用Anchor Boxes 来预测 Bounding Boxes，YOLO v2去掉了一个池化层，让卷积层的输出有更高的分辨率，将输入图像的尺寸由 448 x 448 改为了 416 x 416，下采样时卷积层设为 32，最终输出的时一个13x13的特征图。因为图片中的物体倾向于出现在图片的中心位置，特别是比较大的物体，所以用一个单独位于图片中心的框来预测这些物体</p>
+<p>加入Anchor Box后模型的精度稍有下降，但是预测出了更多的框，recall 提高到了88%，mAP 69.2%</p>
+<h3 id="Dimension-clusters-维度聚类"><a href="#Dimension-clusters-维度聚类" class="headerlink" title="Dimension clusters (维度聚类)"></a>Dimension clusters (维度聚类)</h3><p>之前Anchor Box的尺寸是手动选择的，优化的方式是在训练集的 Bounding Boxes 上跑一个k-means聚类来找到比较好的值。因为我们希望IOU的分数，而这个分数依赖于Box的大小，所以距离度量用的是：</p>
+<script type="math/tex; mode=display">d(box, centroid) = 1-IOU(box, centrioid)</script><p>当K=9时 Avg IOU 显著提高，说明使用聚类是有效果的，论文在模型复杂度和high recall之间权衡后选择的聚类数为 K = 5。</p>
+<h3 id="直接位置预测"><a href="#直接位置预测" class="headerlink" title="直接位置预测"></a>直接位置预测</h3><p>用 Anchor Box会让模型变得不稳定，尤其是在最开始的几次迭代中，主要是在预测Box的位置时不稳定。按照YOLO v1的 方法，Ground Truth 的值是介于0到1之间的。所以为了让网络的结果落在这个范围内，YOLO v2用了一个Logistic Activation限制预测结果让数值变得参数化，更容易学习更稳定。</p>
+<p>对每个栅格，会预测出5个Bounding Boxes，每个Bounding Box有 5 个坐标值$t_x, t_y, t_w, t_h, t_0$，假设某个栅格对图片左上角的偏移量时$c_x, c_y$，Bounding Boxes 原始的宽度和高度是$p_w, p_h$，则预测结果是：</p>
+<script type="math/tex; mode=display">b_x = \sigma(t_x) + c_x</script><script type="math/tex; mode=display">b_y = \sigma(t_y) + c_y</script><script type="math/tex; mode=display">b_w = p_we^{t_w}</script><script type="math/tex; mode=display">b_h = p_he^{t_h}</script><script type="math/tex; mode=display">P_r(object) \times IOU(b, object) = \simga (t_0)</script><p>加入Dimension clusters和 Direct location prediction后YOLO比其他Anchor Box的版本提高了将近5%。</p>
+<h3 id="细粒度特征"><a href="#细粒度特征" class="headerlink" title="细粒度特征"></a>细粒度特征</h3><p>YOLO v2的特征图大小是13x13，这种细粒度的特征不仅对检测大物体是足够的，对小物体的定位也有好处。Faster-RCNN 和 SSD都用了不同尺寸的特征图来获得不同范围的分辨率，而YOLO v2是通过一个Passthrough Layer来获得分辨率为26 x 26的特征，通过把相邻的特征堆积在不同的channel，将高分辨率和低分辨率的特征联系起来，类似于Resnet里的Identity Mapping，从而把26x26x512变成13x13x2048。然后在扩展后的特征上加检测器，获得细粒度的特征信息，提升了YOLO 1% 的性能。</p>
+<h3 id="Multi-Scale-Training"><a href="#Multi-Scale-Training" class="headerlink" title="Multi-Scale Training"></a>Multi-Scale Training</h3><p>为了让YOLO v2能运行在不同尺寸的图片上，YOLO v2每迭代几次都会改变网络参数，每10个Batch会随机选一个新的图片尺寸，因为下采样参数是32，所以选择的图片尺寸都是32的倍数，最小320x320，最大608x608，网络会自动改变尺寸继续训练。</p>
+<p>这一策略是的网络对不同的输入尺寸都能有很好的预测效果，实验发现输入图片较小时速度比较快，图片大时精度比较高，所以使用时可以自行权衡。</p>
+<h3 id="Draknet19"><a href="#Draknet19" class="headerlink" title="Draknet19"></a>Draknet19</h3><p>YOLO v1是基于GoogleNet，完成一个向前传播需要85.2亿次运算，VGG-16需要306.9亿次，但YOLO精度比VGG-16略低。</p>
+<p>YOLO v2 的模型是Darknet19，有19个卷积层和5个maxpooling层。有点类似VGG，用3x3的filter，每次池化后都增加一杯Channel数，用的是global average pooling，加入了Batch Bormalization。一张图片只需要55.8亿次运算，在ImageNet上Top-1准确度72.9%，top-5 91.2%。</p>
+<h3 id="联合训练算法"><a href="#联合训练算法" class="headerlink" title="联合训练算法"></a>联合训练算法</h3><p>YOLO9000 的速度比 FasterR-CNN，SSD 快，可以实时地检测超过 9000 种物体类别，用到了 WordTree来混合检测集和识别集中的数据。</p>
+<p>Detection Datasets 中图片数较小，类别标签的信息很少，Classification Datasets 有大量的图片和丰富的类别信息。论文提出一种联合训练算法，它能够把这两种数据集混合到一起，通过分层的方法对物体分类，从而用海量的分类数据集来扩充检测数据集。</p>
+<p>联合训练算法的基本思路是，同时用检测数据集和分类数据集训练物体检测器，用检测数据集学习物体的位置信息，用分类数据集增加类别数，提高鲁棒性。YOLO9000就是用这种方法训练，用的分类数据集是ImageNet，检测数据集是COCO，有9000类的分类信息。</p>
+<p>训练时如果是检测数据集的图片，就用完整的loss训练，如果是分类数据集的图片和分类标签，则只用分类部分的loss训练。</p>
+<p>检测数据集只有“猫”、“狗”等粗粒度的标记信息，而分类数据集有更细粒度的“哈士奇”“金毛”等类别标签，所以要想同时训练，需要用一种一致性的方法融合这些标签。<br>分类问题大多用softmax，意味着类别之间要相互独立，而检测数据集的类别“狗”和分类数据集的“哈士奇”“金毛”之间是不相互独立的。所以论文采用一种<strong>多标签的模型</strong>来混合数据集，即假设一个对象和一有多个分类标签。</p>
+<h4 id="Hierachical-classification"><a href="#Hierachical-classification" class="headerlink" title="Hierachical classification"></a>Hierachical classification</h4><p>WordNet 的结构不是树型结构，而是一个directed graph，因为“狗”既属于“犬科”有属于“家畜”，而“犬科”和“家畜”在WordNet中又是同义的，所以不能用树形。</p>
+<p>为了构建WordTree，论文首先检查ImageNet中出现的名次，然后在WordNet中找到这些名词后，找到这些名词到达他们根节点的路径，所有根节点都为实体对象。在WordNet中，大多数同义词只有一个路径，所以首先把这条路径的词全都加到分层树中，再迭代地检查剩下的名词，添加的原则是取最短路径加入树中，以此来使加入的名词尽可能少。</p>
+<p>某一节点的概率，等于这一节点到根节点的整条路径的所有概率的乘积。</p>
+<p>之前ImageNet分类是用一个大的softmax分类，现在只需要对同一概念下的同义词进行softmax分类。</p>
+<p>这种结构的优点是，对未知的物体分类时，性能降低的很小，比如看到一张狗的照片，但不知道是哪种狗，模型就以高置信度预测为狗，而以地执行度出狗的其他种类。</p>
+<h4 id="过采样COCO"><a href="#过采样COCO" class="headerlink" title="过采样COCO"></a>过采样COCO</h4><p>训练的时候用WordTree混合了COCO检测数据集和ImageNet中的Top9000类，混合后有9418个类。因为ImageNet的数据集太大，作者通过过采样COCOl来平衡两个数据集之间的数据量，使得COCO 和 ImageNet的数据量比例变为1:4。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

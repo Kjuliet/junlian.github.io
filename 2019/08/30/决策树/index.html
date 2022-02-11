@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        决策树 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-决策树理解"><span class="toc-text">1. 决策树理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-决策树学习"><span class="toc-text">2. 决策树学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-特征选择"><span class="toc-text">2.1 特征选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-信息增益-Information-Gain"><span class="toc-text">2.1.1 信息增益 Information Gain</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-信息增益比"><span class="toc-text">2.1.2 信息增益比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-决策树生成"><span class="toc-text">3. 决策树生成</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-ID3算法"><span class="toc-text">3.1 ID3算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-C4-5-算法"><span class="toc-text">3.2 C4.5 算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-决策树剪枝"><span class="toc-text">4. 决策树剪枝</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-CART-算法"><span class="toc-text">5. CART 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-CART-生成"><span class="toc-text">5.1 CART 生成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-回归树生成：最小二乘法"><span class="toc-text">5.1.1 回归树生成：最小二乘法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-分类树生成"><span class="toc-text">5.1.2 分类树生成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2-1-基尼指数"><span class="toc-text">5.1.2.1 基尼指数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2-2-CART-生成算法"><span class="toc-text">5.1.2.2 CART 生成算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-CART-剪枝"><span class="toc-text">5.2 CART 剪枝</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        决策树
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-30 07:44:07</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#机器学习" title="机器学习">机器学习</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>决策树模型是树形结构，可用于分类和回归。分类决策树由结点（有两种结点，一种是内部结点，表示一个特征/属性，一种是叶结点，表示一个类）和有向边组成，表示基于特征对实例进行分类的过程。优点是分类速度快，可读性强。</p>
+<h2 id="1-决策树理解"><a href="#1-决策树理解" class="headerlink" title="1. 决策树理解"></a>1. 决策树理解</h2><p>可以认为是 if-then 集合，由根节点到叶结点的每一条路径构建一条规则，路径上的内部结点的特征对应着规则的条件，叶结点对应规则的结论，决策树的路径的重要性质是<strong>互斥且完备</strong>，也就是每个实例有且仅有一条路径覆盖。</p>
+<p>也可以认为是定义在特征空间和类空间划分上的条件概率分布。将特征空间划分成互不相交的单元或区域，并在每个单元定义一个类的概率分布，构成一个条件概率分布，决策树的一条路径对应于划分中的一个单元。各叶结点（单元）上的条件概率往往偏向于某一个类，即属于某一类的概率较大，决策树分类时强行将该实例分到条件概率大的那一类中。</p>
+<p>用决策树进行分类时，从根节点开始，对实例的某一特征进行测试，根据测试结果把实例分配到其子结点，每一个子结点对应着该特征的一个取值，这样递归地对实例进行测试并分配，直到到达叶结点，将实例分到叶结点的类中。</p>
+<h2 id="2-决策树学习"><a href="#2-决策树学习" class="headerlink" title="2. 决策树学习"></a>2. 决策树学习</h2><p>决策树学习通常包括 3 个步骤：特征选择、决策树的生成和决策树的修剪。</p>
+<p>决策树学习的本质是从训练数据集中归纳出一组分类规则，要找到一个与训练集矛盾较小且泛化能力很好的决策树。损失函数通常是<strong>正则化的极大似然函数</strong>，因为从所有可能的决策树中选取最优决策树是NP完全问题，所以一般采用启发式学习算法，递归地选择最优特征，并根据该特征对训练数据进行分割，使得对每个子数据集有一个最好的分类。得到的决策树是<strong>次最优</strong>的。</p>
+<p>生成的决策树对训练数据集有很好的分类能力，但对未知的测试数据不一定很好，即可能发生过拟合。所以需要对已生成的树自下而上进行剪枝，让树变简单增加其泛化能力。就是去掉过于细分的叶结点，将其父节点改为新的叶结点。</p>
+<p>如果特征数量很多，在决策树开始学习的时候需要对特征进行选择，只留下对训练数据有足够分类能力的特征。</p>
+<p>决策树的生成对应于模型的局部选择，决策树的剪枝对应于模型的全局选择，也就是说生成时只考虑局部最优，剪枝时考虑全局最优。</p>
+<h3 id="2-1-特征选择"><a href="#2-1-特征选择" class="headerlink" title="2.1 特征选择"></a>2.1 特征选择</h3><p>特征选择是决定用哪个特征来划分特征空间，选取对训练数据有分类能力的特征，可以提高决策树学习效率。如果用一个特征进行分类的结果和随机分类的结果没什么差别，这个特征就是没有分类能力的。通常特征选择的准则是信息增益或信息增益比。</p>
+<h4 id="2-1-1-信息增益-Information-Gain"><a href="#2-1-1-信息增益-Information-Gain" class="headerlink" title="2.1.1 信息增益 Information Gain"></a>2.1.1 信息增益 Information Gain</h4><p><strong>熵 entropy</strong> 是随机变量不确定性的度量，设X的概率分布为：</p>
+<script type="math/tex; mode=display">P(X=x_i) = p_i, i=1,2,...,n</script><p>则随机变量的熵为：</p>
+<script type="math/tex; mode=display">H(p) = -\sum\limits_{i=1}^n p_i logp_i</script><script type="math/tex; mode=display">0 \le H(p) \le logn\tag{1}</script><p>证明（1）：当$p=\frac{1}{n}$的时候熵最大：</p>
+<script type="math/tex; mode=display">H(p)=-(\frac{1}{n}log\frac{1}{n}+\frac{1}{n}log\frac{1}{n}+...)=-(\frac{1}{n}log(\frac{1}{n^n}))=logn</script><p>对数通常以2为底或以e为底，对应的熵的单位分别是比特(bit)和纳特(nat)，熵的定义与X的取值无关，只依赖于 X 的分布。熵越大，随机变量不确定性越大，当随机变量只取两个值，即</p>
+<script type="math/tex; mode=display">P(X=1)=p, P(X=0)=1-p, \ 0\le p \le 1</script><p>熵为：</p>
+<script type="math/tex; mode=display">H(p) = -plog_2(p) - (1-p)log_2(1-p)</script><p>当p=0或p=1时$H(p)=0$，完全没有不确定性，当$p=0.5$时，$H(p)=1$，熵的取值最大，不确定性最高。</p>
+<p><strong>条件熵$H(Y|X)$</strong> 表示在已知随机变量X的条件下，随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望：</p>
+<script type="math/tex; mode=display">H(Y|X) = \sum\limits_{i=1}^n P(X=x_i) H(Y|X=x_i)</script><p>熵和条件熵中的概率由数据估计（极大似然估计）得到时，对应的熵和条件熵分别称为经验熵 empirical entropy 和经验条件熵 empirical conditional entropy，如果有0概率，令$0log0=0$。</p>
+<p><strong>信息增益</strong>表示得知特征X的信息使得类Y的不确定性减少的程度，特征A对训练数据集D的信息增益$g(D|A)$定义为集合 D 的经验熵 $H(D)$     与特征 A 给定条件下D的经验条件熵 $H(D|A)$ 之差：</p>
+<script type="math/tex; mode=display">g(D, A) = H(D) - H(D|A)</script><p>一般称熵$H(Y)$与条件熵$H(Y|X)$之差称为<strong>互信息</strong>mutual information，信息增益等价于训练数据集中<strong>类与特征的互信息</strong>。</p>
+<p><strong>信息增益的算法：</strong><br>输入：训练数据集D和特征A<br>输出：特征A对训练数据集D的信息增益 $g(D, A)$<br>（1）计算数据集D的经验熵 $H(D)$</p>
+<script type="math/tex; mode=display">H(D) = -\sum_{k=1}^{K}\frac{|C_k|}{|D|}log_2\frac{|C_k|}{|D|}</script><p>（2）计算特征A对数据集D的经验条件熵 $H(D|A)$，特征A的取值将数据集划分为$D_1, D_2, …, D_n$</p>
+<script type="math/tex; mode=display">H(D|A)=\sum_{i=1}^n\frac{|D_i|}{|D|}H(D_i) = -\sum_{i=1}^n\frac{|D_i|}{|D|}\sum_{k=1}^K\frac{|D_{ik}|}{|D_i|}\log_2\frac{|D_{ik}|}{|D_i|}</script><p>（3）计算信息增益 $g(D, A)$</p>
+<script type="math/tex; mode=display">g(D, A) = H(D) - H(D|A)</script><h3 id="2-1-2-信息增益比"><a href="#2-1-2-信息增益比" class="headerlink" title="2.1.2 信息增益比"></a>2.1.2 信息增益比</h3><p>用信息增益来选择划分训练集的特征，会偏向于选择取值较多的特征，因为$D_i$越多，$H(D_i)$就越小。特征选择的另一准则信息增益$g_R(D, A)$比就是为了对这一问题进行校正：</p>
+<script type="math/tex; mode=display">g_R(D,A)=\frac{g(D, A)}{H_A(D)}</script><script type="math/tex; mode=display">H_A(D)=-\sum_{i=1}^n\frac{|D_i|}{|D|}log_2\frac{|D_i|}{|D|}</script><p>特征取值越多，$H_A(D) &lt; logn$ 越偏大。</p>
+<h1 id="3-决策树生成"><a href="#3-决策树生成" class="headerlink" title="3. 决策树生成"></a>3. 决策树生成</h1><h2 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h2><p><strong>ID3算法在各个节点上用信息增益准则选择特征，只有树的生成，很容易过拟合。</strong>具体方法是，从根节点开始，对节点计算所有可能的特征的信息增益，选信息增益最大的特征作为节点的特征，由该特征的不同取值建立子结点，再对子结点递归地调用以上方法构建决策树，直到所有特征的信息增益均很小或没有特征可以选择为止。<strong>相当于用极大似然法进行概率模型的选择。</strong></p>
+<p><strong>ID3 算法：</strong><br>输入：训练数据集D，特征集 A，阈值 $\epsilon$;<br>输出：决策树 T；<br>（1）若 D 中所有实例都属于同一类 $C_k$，则 T 为单节点树，并将类$C_k$ 作为该节点的类标记，返回 T（所以在不考虑剪枝的条件下，决策树不一定用完了所有特征）；<br>（2）若 $A = \emptyset$，则 T 为单结点树，并将 D 中实例数最大的类 $C_k$ 作为该节点的类标记，返回 T；<br>（3）否则，计算 A 中各特征对 D 的信息增益，选择信息增益最大的特征 $A_g$；<br>（4）如果 $A_g$ 的信息增益小于阈值 $\epsilon$，则置 T 为单结点树，并将 D 中实例数量最大的类 $C_k$ 作为该结点的类标记，返回 T；<br>（5）否则，对 $A_g$ 的每一可能值 $a_i$ ，依 $A_g=a_i$ 将 D 分割为若干非空子集 $D_i$，将 $D_i$ 中实例数最大的类作为标记，构建子结点，由结点及其子结点构成树 T，返回 T；<br>（6）对第 i 个子结点，以 $D_i$ 为训练集，以 $A-\{A_g\}$为特征集，递归地调用步（1）～（5）得到子树 $T_i$，返回$T_i$</p>
+<h2 id="3-2-C4-5-算法"><a href="#3-2-C4-5-算法" class="headerlink" title="3.2 C4.5 算法"></a>3.2 C4.5 算法</h2><p>C4.5 对ID3进行了改进，<strong>在生成过程中用信息增益比来选择特征</strong>。</p>
+<p><strong>C4.5 算法：</strong><br>输入：训练数据集 D，特征集 A，阈值 $\epsilon$；<br>输出：决策树 T；<br>（1）如果 D 中所有实例属于同一类 $C_k$，则置 T 为单结点树，并将$C_k$作为该结点的类，返回T；<br>（2）如果 $A=\emptyset$，则置 T 为单结点树，并将 D 中实例数最大的类 $C_k$作为该结点的类，返回 T；<br>（3）否则，计算A中各特征对 D 的信息增益比，选择信息增益比最大的特征 $A_g$；<br>（4）如果$A_g$的信息增益比小于阈值$\epsilon$，则置T为单结点树，并将 D 中实例数最大的类 $C_k$作为该结点的类，返回 T；<br>（5）否则，对 $A_g$ 的每一可能值 $a_i$，依 $A_g=a_i$ 将将 D 分割为若干非空子集 $D_i$，将 $D_i$ 中实例最大的类作为标记，构建子结点，由结点及其子结点构成树 T，返回T；<br>（6）对结点 i，以 $D_i$ 为训练集，以 $A-\{A_g\}$ 为特征集，递归地调用步（1）～（5）得到子树 $T_i$，返回 $T_i$。</p>
+<h1 id="4-决策树剪枝"><a href="#4-决策树剪枝" class="headerlink" title="4. 决策树剪枝"></a>4. 决策树剪枝</h1><p>对已生成的决策树进行简化的过程称为剪枝 (pruning)，剪枝是为了解决过拟合问题，它从已生成的树上裁掉一些子树或叶结点，并将其根节点或父结点作为新的叶结点，从而简化分类树模型。</p>
+<p><strong>决策树生成学习局部的模型，决策树剪枝学习整体的模型。</strong><br>决策树的剪枝往往通过极小化决策树整体的损失函数来实现，设树 T 的叶结点个数为 $|T|$，t 是树 T 的叶结点，该叶结点有 $N_t$ 个样本点，其中 $k$ 类的样本点有 $N_{tk}$ 个，$k=1,2,…,K$，$H_t(T)$ 为单个叶结点 t 上的经验熵，$\alpha \gt 0$ 为参数，则决策树学习的损失函数定义为：</p>
+<script type="math/tex; mode=display">C_\alpha(T) = \sum_{t=1}^{|T|} N_t H_t(T) +\alpha|T| \tag{2}</script><script type="math/tex; mode=display">H_t(T)=-\sum_{k}\frac{N_{tk}}{N_t}log\frac{N_{tk}}{N_t}</script><p>式（2）右边第1项可以写为：</p>
+<script type="math/tex; mode=display">C(T)=\sum_{t=1}^{|T|}N_tH_t(T)=-\sum_{t=1}^{|T|}\sum_{k=1}^{K}N_{tk}log\frac{N_{tk}}{N_t}</script><script type="math/tex; mode=display">C_\alpha(T)=C(T)+\alpha|T|</script><p>第一项$C(T)$表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，体现在公式熵是希望单个叶结点上的样本点越少越好，结点内熵越小越好；<br>第二项$|T|$表示模型复杂度，希望叶结点的个数越少越好，参数$\alpha \gt 0$ 控制两者之间的影响。</p>
+<p>剪枝就是当 $\alpha$ 确定时，选择损失函数最小的子树。当 $\alpha$ 确定，子树越大，往往与训练数据的拟合越好，但模型复杂度越高。</p>
+<p><strong>树剪枝算法</strong><br>式（2）定义的损失函数的极小化等价于正则化的极大似然估计：<br>输入：生成算法产生的整个树 T，参数 $\alpha$<br>输出：修剪后的子树 $T_\alpha$<br>（1）计算每个结点的经验熵；<br>（2）递归地从树的叶结点向上回缩。设一组叶结点回缩到其父结点之前与之后的整体树分别为 $T_B$ 和 $T_A$，其对应的损失函数值分别是 $C_\alpha(T_B)$ 与 $C_\alpha(T_A)$，如果$C_\alpha(T_A) \lt C_\alpha(T_B)$，则进行剪枝，即将父结点变成新的叶结点。<br>（3）返回（2）直到不能继续为止，得到损失函数最小的子树$T_\alpha$。</p>
+<p>步骤（2）中只考虑两个树的损失函数之差，其计算可以在局部进行，所以决策树的剪枝算法可以由一种动态规划的算法实现？</p>
+<h1 id="5-CART-算法"><a href="#5-CART-算法" class="headerlink" title="5. CART 算法"></a>5. CART 算法</h1><p>分类与回归树 Classification and regression tree (CART) 模型由特征选择、树的生成和剪枝组成，可以用于分类也可以用于回归。CART 是在给定输入随机变量 X 条件下，输出随机变量 Y 的<strong>条件概率分布</strong>的学习方法。</p>
+<p>CART 假设决策树是二叉树，内部结点特征的取值为“是”或“否”，左分支是取值为”是”的分支，右分支为取值为”否”的分支，这样的决策树等价于递归地二分每个特征，将输入空间即特征空间划分为有限个单元，并在这些单元上确定预测的概率分布，也就是在输入给定的条件下，输出的条件概率分布。</p>
+<p>CART 算法由两步组成：<br>（1）决策树生成：基于训练数据集生成决策树，生成的决策树要尽量大；<br>（2）决策树剪枝：用<strong>验证数据集</strong>对已生成的树进行剪枝，并选择最优子树，这时用损失函数最小作为剪枝的标准。</p>
+<h2 id="5-1-CART-生成"><a href="#5-1-CART-生成" class="headerlink" title="5.1 CART 生成"></a>5.1 CART 生成</h2><p>递归地选择特征构建二叉决策树，特征选择时<strong>回归树用平方误差最小化准则，分类树用基尼指数 (Gini index) 最小化准则。</strong></p>
+<h3 id="5-1-1-回归树生成：最小二乘法"><a href="#5-1-1-回归树生成：最小二乘法" class="headerlink" title="5.1.1 回归树生成：最小二乘法"></a>5.1.1 回归树生成：最小二乘法</h3><p>假设输出变量 Y 是连续变量，一颗回归树对应着输入空间 / 特征空间的一个划分以及在划分单元上的输出值。假设已将输入空间划分为 M 个单元 $R_1, R_2, …, R_M$，并且在每个单元$R_m$上有一个固定的输出值$c_m$，则回归数模型可表示为：</p>
+<script type="math/tex; mode=display">f(x)=\sum\limits_{m=1}^M c_m I(x\in R_m)</script><p>当输入空间的划分确定时，用平方误差$\sum\limits_{x_i \in R_m}(y_i - f(x_i))^2$表示回归树对于训练数据的预测误差，平方误差最小就是求解每个单元上的最优输出值，单元$R_m$上的$c_m$的最优值$\hat c_m$ 是$R_m$上的所有输入实例$x_i$对应的输出$y_i$的均值，即：</p>
+<script type="math/tex; mode=display">\hat c_m = ave(y_t | x_i \in R_m)</script><p>用启发式的方法对输入空间进行划分，选择第 j 个变量 $x^{(j)}$ 和它取的值 s，作为切分变量和切分点，定义两个区域：</p>
+<script type="math/tex; mode=display">R_1(j, s)=\{x|x^{(j)} \lt s\}</script><script type="math/tex; mode=display">R_2(j, s)=\{x|x^{(j)} > s\}</script><p>然后找最优切分变量 j 和 最优切分点 s，即求解：</p>
+<script type="math/tex; mode=display">\mathop{min}\limits _{j,s}\big[\mathop{min}\limits_{c_1}\sum\limits _{x_i \in R_1(j, s)} (y_i-c_i)^2 + \mathop{min}\limits _{c_2}\sum\limits _{x_i \in R_2(j, s)}(y_i - c_2)\big]</script><p>对固定输入变量 j 可以找到最优切分点 s：</p>
+<script type="math/tex; mode=display">\hat c_1 = ave(y_i | x_i \in R_1(j, s))</script><script type="math/tex; mode=display">\hat c_2 = ave(y_i | x_i \in R_2(j, s))</script><p>遍历所有输入变量，找到最优的切分变量 j，构成一个对 (j, s)，依此将输入空间划分为两个区域，接着对每个区域重复上述划分过程，直到满足停止条件为止。这样的回归树称为最小二乘回归树。</p>
+<p><strong>回归树生成算法：最小二乘法</strong><br>输入：训练数据集 D<br>输出：回归树 $f(x)$<br>在 D 所在的输入空间中，递归地将每个区域划分为两个子区域并决定每个子区域上的输出值，构建二叉决策树：<br>（1）选择最优切分变量 j 与切分点 s，遍历变量 j ，对固定的切分变量 j  扫描切分点 s，选择使下式达到最小值的对$(j, s)$：</p>
+<script type="math/tex; mode=display">\mathop{min}\limits_{j,s}\big[\mathop{min}\limits_{c_1} \sum\limits_{x_i \in R_1(j, s)} (y_i-c_i)^2+\mathop{min}\limits_{c_2}\sum\limits_{x_i \in R_2(j, s)}(y_i-c_2)^2\big]</script><p>（2）用选定的 $(j, s)$划分区域并决定相应的输出值：</p>
+<script type="math/tex; mode=display">R_1(j, s) = \{x|x^{(j)} \lt s\}, R_2(j, s) = \{x | x^{(j)} > s\}</script><script type="math/tex; mode=display">\hat c_m = \frac{1}{N_m}\sum\limits_{x_i \in R_m(j, s)} y_i, x \in R_m, m=1,2</script><p>（3）继续对两个子区域调用步骤（1）（2）直到满足停止条件；<br>（4）将输入空间划分成M个区域 $R_1, R_2. …. R_m$，生成决策树：</p>
+<script type="math/tex; mode=display">f(x)=\sum\limits_{m=1}^M \hat c_mI(x\in R_m)</script><h3 id="5-1-2-分类树生成"><a href="#5-1-2-分类树生成" class="headerlink" title="5.1.2 分类树生成"></a>5.1.2 分类树生成</h3><p>分类树用基尼指数选择最优特征，同时决定该特征的最优二值切分点。</p>
+<h4 id="5-1-2-1-基尼指数"><a href="#5-1-2-1-基尼指数" class="headerlink" title="5.1.2.1 基尼指数"></a>5.1.2.1 基尼指数</h4><p>分类中假设有 $K$ 个类，样本点属于第 k 类的概率为 $p_k$，则概率分布的基尼指数定义为：</p>
+<script type="math/tex; mode=display">Gini(p)=\sum\limits_{k=1}^K p_k(1-p_k)=1-\sum\limits_{k=1}^Kp_k^2</script><p>对于二分类问题，若样本点属于第一个类的概率是 $p$，则概率分布的基尼指数为：</p>
+<script type="math/tex; mode=display">Gini(p)=2p(1-p)</script><p>对给定的样本集合D，其基尼指数为：</p>
+<script type="math/tex; mode=display">Gini(D) = 1- \sum\limits_{k=1}^K(\frac{|C_k|}{|D|})^2</script><p>如果样本集合D根据特征A是否取某一可能值$a$被分割成$D_1$和$D_2$两部分，即：</p>
+<script type="math/tex; mode=display">D_1=\{(x, y) \in D|A(x) = a\}, D_2 = D-D_1</script><p>则在特征A的条件下，集合D的基尼指数定义为：</p>
+<script type="math/tex; mode=display">Gini(D, A) = \frac{|D_1|}{|D|}Gini(D_1)+\frac{|D_2|}{|D|}Gini(D_2)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D, A)表示经$A=a$分割后集合D的不确定性，基尼指数越大，样本集合的不确定性也越大。</p>
+<p>基尼指数和熵之半$H(p)/2$ 的曲线很相近，都可以近似地代表分类误差率。</p>
+<h4 id="5-1-2-2-CART-生成算法"><a href="#5-1-2-2-CART-生成算法" class="headerlink" title="5.1.2.2 CART 生成算法"></a>5.1.2.2 CART 生成算法</h4><p>输入：训练数据集D，停止计算条件；<br>输出：CART 决策树<br>根据训练数据集，从根节点开始，递归地对每个结点进行以下操作，构建二叉决策树：<br>（1）设结点的训练数据集为D，计算现有特征对该数据集的基尼指数。对每个特征A，对其可能取的每个值 a，根据样本点对 $A=a$的测试为“是”或“否”将D分为$D_1$和$D_2$两部分，计算基尼指数；<br>（2）在所有可能的特征 A 以及他们所有可能的切分点 a 中，选择基尼指数最小的特征及其对应的切分点作为最优特征和最优切分点，依最优特征与最优切分点，从现结点生成两个子结点，将训练数据集依特征分配到两个子结点中。<br>（3）对两个子结点递归地调用（1）（2），直到满足停止条件。</p>
+<h2 id="5-2-CART-剪枝"><a href="#5-2-CART-剪枝" class="headerlink" title="5.2 CART 剪枝"></a>5.2 CART 剪枝</h2><p>CART 剪枝由两步组成：</p>
+<ul>
+<li>从底端开始不断剪枝直到根结点，形成一个子树序列$\{T_0, T_1, …, T_n\}$；</li>
+<li>通过交叉验证法在独立的验证集上对子树序列进行测试，从中选择最优子树。</li>
+</ul>
+<p><strong>剪枝，形成子树序列</strong><br>剪枝过程中计算子树的损失函数：</p>
+<script type="math/tex; mode=display">C_\alpha(T) = C(T) + \alpha|T|</script><p>T 为任意子树，$C(T)$ 为对训练数据的预测误差，如基尼指数，$|T|$为子树的叶结点个数，$\alpha \ge 0$ 是参数，权衡训练数据的拟合程度与模型的复杂程度。</p>
+<p>对固定的 $\alpha$，一定可以找到使损失误差最小的子树，将 $\alpha$ 从小增大，$0 = \alpha_0 \lt \alpha_1 \lt … \lt \alpha_n \lt +\infty$，产生一系列的区间$[\alpha_i, \alpha_{i+1}), i=0, 1, …, n$，剪枝得到的子树序列对应着区间 $\alpha \in [\alpha_i, \alpha_{i+1})$的最优子树序列$\{T_0, T_1, …, T_n\}$，序列中的子树是嵌套的。</p>
+<p>具体的，从整体树 $T_0$ 开始剪枝，对$T_0$的任意内部结点$t$，以$t$为单接待您树的损失函数是：</p>
+<script type="math/tex; mode=display">C_\alpha(t)=C(t) + \alpha</script><p>以 t 为根结点的子树 $T_t$ 的损失函数是：</p>
+<script type="math/tex; mode=display">C_\alpha(T_t) = C(T_t) + \alpha |T_t|</script><p>当 $\alpha = 0$及$\alpha$充分小时，有：</p>
+<script type="math/tex; mode=display">C_\alpha(T_t) \lt C_\alpha(t)</script><p>当$\alpha$增大时，在某一$\alpha$有：</p>
+<script type="math/tex; mode=display">C_\alpha(T_t) = C_\alpha(t)</script><p>当 $\alpha$ 再增大，$C_\alpha(T_t)$会大于$C_\alpha(t)$，即当：</p>
+<script type="math/tex; mode=display">\alpha = \frac{C(t) - C(T_t)}{|T_t| - 1}</script><p>时，$T_t$ 和 $t$ 有相同的损失函数值，而 t 的结点少，因此t 比 $T_t$ 更可取，对$T_t$进行裁剪。</p>
+<p>所以对$T_0$中每一个内部结点 $t$，计算：</p>
+<script type="math/tex; mode=display">g(t) = \frac{C(t) - C(T_t)}{|T_t| - 1}</script><p>表示剪枝后整体损失函数减少的程度。在$T_0$中减去$g(t)$最小的$T_t$，将得到的子树作为$T_1$，同时将最小的$g(t)$设为$\alpha_1$，$T_1$为区间$[\alpha_1, \alpha_2)$的最优子树。</p>
+<p>这样剪下去直到得到根节点，过程中不断增加$\alpha$的值，产生新的区间。</p>
+<p><strong>交叉验证选取最优子树</strong><br>用独立的验证集，测试子树序列中各子树的平方误差或基尼指数，选平方误差或基尼指数最小的作为最优决策树。每颗子树对应一个参数$\alpha$，当最优子树$T_k$确定时，对应的$\alpha_k$ 也确定了，即得到最优决策树 $T_\alpha$</p>
+<p>综上所述，CART剪枝算法：<br>输入：CART 算法生成的决策树 $T_0$<br>输出：最优决策树 $T_\alpha$<br>（1）设 $k=0, T=T_0$<br>（2）设 $\alpha = +\infty$<br>（3）自下而上地对各内部结点 t 计算$C(T_t)$，$|T_t|$以及<script type="math/tex">g(t) = \frac{C(T_t)-C(t)}{|T_t|-1}</script></p>
+<script type="math/tex; mode=display">\alpha = min(\alpha, g(t))</script><p>（4）对$g(t) = \alpha$ 的内部结点$t$进行剪枝，并对叶结点 $t$ 以多数表决法决定其类，得到树$T$。<br>（5）设$k=k+1，\alpha_k = \alpha, T_k = T$<br>（6）如果$T_k$不是由根节点及两个叶结点构成的树，则回到步骤（2），否则令$T_k = T_n$<br>（7）采用交叉验证法在子树序列$T_0, T_1, …, T_n$中选择最优子树$T_\alpha$</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Learning a Deep ConvNet for Multi-label Classification with Partial Labels (CVPR, 2019) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、标注策略对比"><span class="toc-text">一、标注策略对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Partial-BCE-loss"><span class="toc-text">二、Partial-BCE loss</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、用Graph-Neural-Network-GNN-给类别间的语义关系建模"><span class="toc-text">三、用Graph Neural Network(GNN) 给类别间的语义关系建模</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、用curriculum-learning-预测-missing-labels"><span class="toc-text">四、用curriculum learning 预测 missing labels</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Learning a Deep ConvNet for Multi-label Classification with Partial Labels (CVPR, 2019)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-05 20:58:09</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="https://arxiv.org/pdf/1902.09720.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1902.09720.pdf</a>  （CVPR-2019）</p>
+<p>论文提出一种可以用partial labels数据训练的多标签分类模型，允许训练数据每张图只标注部分label。主要工作三部分：</p>
+<p>（1）对比了不同标注策略，发现在所有图像上partially annotation，比在小数据集上fully annotation的结果好。</p>
+<p>（2）在用partial labels训练的过程中引入了一个挖掘标签的比例信息分类loss，这个loss可以自动根据输入图片上已知的标签比例进行调整，所以也适用于全标签数据集。</p>
+<p>（3）对比了几个基于curriculum learning 的策略来预测缺失标签。建立了基于GNNs的label预测模型。</p>
+<h2 id="一、标注策略对比"><a href="#一、标注策略对比" class="headerlink" title="一、标注策略对比"></a>一、标注策略对比</h2><p>对比了三种数据标注策略：</p>
+<p>（1）Partial labels，所有数据集都标注了label，只不过每个样本只标记了一部分label。生成方法是在全label标注的Pascal VOC 2007， MS COCO 和 NUS-WIDE三个数据集上，将label随机丢掉得到missing labels 占比从0%到90%的partial labels数据。</p>
+<p>（2）半监督学习的数据，有一部分数据集标注了所有label，而其他数据集label全没有标注。</p>
+<p>（3）噪声数据，标注所有label，但存在标注错误，与弱监督学习数据相似。</p>
+<p>结论：1. partial label 优于 complete image labels 优于 noisy labels，横坐标表示clean labels比例。可能的原因是partial labels 在训练时可以看到更多的数据，提高了泛化能力。2. 只用少量的clean labels 比包含incorrect labels的大量数据效果好，只用20%的clean partial labels的效果比80%clean labels + 20%wrong labels的效果好。 </p>
+<p>research-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 下午6.12.21.png</p>
+<p>research-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 下午6.17.59.png</p>
+<h2 id="二、Partial-BCE-loss"><a href="#二、Partial-BCE-loss" class="headerlink" title="二、Partial-BCE loss"></a>二、Partial-BCE loss</h2><p>Partial-BCE loss 会根据每个样本的已知label比例信息动态调节loss值，忽略标记值为unknown的label，在normalized时比的不是总分类数，loss 定义如下：</p>
+<p>research-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-13 下午5.44.54.png</p>
+<p>是y中已知标签的比例，是与图像已知标签比例有关的 normalization function，在标准BCE loss 中， = 1。</p>
+<p>g(p_y)=\alpha p_y^\gamma + \beta<br>当全标签标记时， and 超参设置，时，相当于用已知标签的类别数做normalizing，而不是所有分类数C。论文中参数设置： （当g(0.1) = 1，partial-BCE相当于BCE，实验效果最差）</p>
+<p>结论：BCE loss 调整前后结果对比，label 缺失时 partial-BCE 比 BCE在mAP上高1到4个点</p>
+<p>research-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 下午6.21.48.png</p>
+<h2 id="三、用Graph-Neural-Network-GNN-给类别间的语义关系建模"><a href="#三、用Graph-Neural-Network-GNN-给类别间的语义关系建模" class="headerlink" title="三、用Graph Neural Network(GNN) 给类别间的语义关系建模"></a>三、用Graph Neural Network(GNN) 给类别间的语义关系建模</h2><p>用Graph Neural Network 从可见/不可见的partial labels 中挖掘label的语义关系，建立了基于curriculum learning的缺失label 预测模型。</p>
+<p>GNN<br>GNN 的输入是图G = {V, E}， 是结点v的相邻结点集， 是与时间 t 有关的结点隐藏状态。</p>
+<p>每个节点v用相邻点的信息更新自己的状态，更新分为两步，message update 和 hidden state update，message update 和当前隐藏状态 和 相邻结点集 有关，；hidden state update 和前一次隐藏状态 和 结点前一个状态的message有关，</p>
+<p>多标签分类GNN<br>用在多标签分类任务中，GNN的一个结点代表一个类，边代表类之间的关系，论文用了全连接图。结点的hidden state用ConvNet的输出初始化。Message update function 和 Hidden state update function分别是：</p>
+<p>research-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 上午11.22.57.pngresearch-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 上午11.23.06.png</p>
+<p>是multi-layer perception (MLP)，开始时用初始化的输入, 然后在所有相邻结点上平均。GRU Gated Recurrent Unit 更新过程：</p>
+<p>research-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 上午11.36.31.pngresearch-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 上午11.39.18.png</p>
+<h2 id="四、用curriculum-learning-预测-missing-labels"><a href="#四、用curriculum-learning-预测-missing-labels" class="headerlink" title="四、用curriculum learning 预测 missing labels"></a>四、用curriculum learning 预测 missing labels</h2><p>论文对比发现， curriculum-based 预测策略比将所有missing label全部预测出来投入训练的效果好，后者一次性引入了太多label noise。</p>
+<p>最后用的curriculum learning 策略是基于self-paced 模型（SPL (Self-paced Learning) 认为简单样本就是模型很容易预测正确的样本，每一次迭代都选择简单的样本来更新模型的参数。通过引入不同的self-paced functions 使SPL适应与不同的学习目标），优化的目标函数是：</p>
+<p>research-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 下午12.53.38.png</p>
+<p> 是类别c的loss， 是指示第i 个样本标签是否被选择的向量，表示第i个样本的第c个label被选择，0表示未被选择。选择的是curriculum learning 方法。</p>
+<p>w和v每次只优化一个。训练模型过程是最开始只用标注的clean partial labels训练，然后将learning model生成的“easy”弱标签加入训练集一起训练模型。Curriculum 算法：</p>
+<p>research-video &gt; Learning a Deep ConvNet for Multi-label Classification with Partial Labels_2 &gt; 屏幕快照 2019-03-12 下午1.09.29.png</p>
+<p>missing label 预测策略 （实验：弱监督对比实验——属性缺失label 补全策略）<br>预测策略包括两点：1. 满足什么条件时才预测（如何衡量一个样本的难易度）；2. 预测值是什么</p>
+<p>（1）Score threshold strategy，用ConvNet的分类分数作为样本难易的标准，当样本分类得分大于阈值时，learning model 才会预测其missing label，即当 或  时才与预测missing label，预测值为  </p>
+<p>（2）Score proportion strategy，在每个minibatch中选择固定比例的missing label进行补全。先将分类score降序排序，选择missing label中的 top- 进行预测标注。</p>
+<p>（3）Predict only positive labels，考虑到数据标注不平衡，只预测策略（1）中的判断为positive的缺失label，即</p>
+<p>（4）Ensemble score threshold strategy，在（1）的基础上加了并列的模型来估计分类结果的置信度，将每个模型得出的分类score求平均作为最后的置信度，所以预测的条件和预测的结果都是多个并列模型的平均值：</p>
+<p>v_{ic} = \mathbb{1}[E(I^{(i)}_c \ge \theta)] + \mathbb{1}[E(I^{(i)}_c \le -\theta)]<br>是并列模型在各类别上的得分均值，预测值是</p>
+<p>（5）Bayesian uncertainly strategy （论文采用的方法，）</p>
+<p>用bayesian uncertainty 代替分类score，uncertainty 小代表样本简单，相当于使用classification scores的方差来代替classification scores。</p>
+<p>v_{ic} = \mathbb{1}[U(I^{(i)}_c \le \theta)]</p>
+<p>结论：1. threshold strategy 比 proportion strategy效果好。2. 多个模型并列相比单个模型并没有显著提升。3. 只预测positive labels效果最不好。4. Bayesian uncertainly strategy效果最好。5. GNN对Bayesian uncertainly strategy影响很大，增大了模型对超参 的鲁棒性。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

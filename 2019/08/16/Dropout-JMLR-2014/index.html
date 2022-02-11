@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Dropout (JMLR, 2014) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dropout-动机"><span class="toc-text">Dropout 动机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dropout-用法"><span class="toc-text">Dropout 用法</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Dropout (JMLR, 2014)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-16 18:55:46</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：Dropout: A Simple Way to Prevent Neural Networks from Overfitting<br>作者：Nitish Srivastava，Geoffrey Hinton，Alex Krizhevsky，Ilya Sutskever，Ruslan Salakhutdinov</p>
+<p>Dropout 是指训练过程中，按照一定的概率随机把网络中的神经元暂时丢掉，使得每一个mini-batch都在训练不同的网络，可以有效防止过拟合。</p>
+<p>神经网络有两个问题：（1）训练费时；（2）容易过拟合。为了解决过拟合的问题，可以采用训练多个模型再做组合的 ensemble 方法，但训练多个模型又很费时，Dropout 可以很好地解决这个问题，每次做完Dropout，相当于从原始网络中找到了一个更瘦的网络。<br><img src="Figure1.png" alt></p>
+<h3 id="Dropout-动机"><a href="#Dropout-动机" class="headerlink" title="Dropout 动机"></a>Dropout 动机</h3><p>论文作者对dropout的动机有一个类比：用无性繁殖和有性繁殖类比dropout，自然界中中大型动物一般是有性繁殖，也就是后代的基因从父母两方各继承一半。对于优秀基因，无性繁殖可以大段大段地保留，而有性繁殖会把基因拆了又拆，破坏了大段基因的联合适应性，所以看起来无性繁殖似乎更加合理，但自然选择毕竟没有选择无性繁殖，所以我们假设，<strong>基因的力量在于其混合的能力，而不是单个基因的能力</strong>。</p>
+<p>做一个比喻，比如要搞恐怖袭击，有两种方案：<br>（1）集中50个人，密切分工搞一次大爆破；<br>（2）把50个人分成10个组，每组5人分头行动，随便怎么搞成功一次就算。</p>
+<p>显然第二种成功的机率更大，类似的，有性繁殖的方式不仅可以把优秀的基因传下来，还降低了基因之间的联合适应性，把复杂的大段基因的联合适应性变成一个个小段基因的联合适应性，dropout起到的效果也是类似的，它强迫每个神经元，让他学着和随机挑出来的其他神经元一起工作时都能达到很好的效果，减弱了神经元之间的联合适应性，增强了泛化能力。</p>
+<p>植物和微生物大多采用无性繁殖，因为他们的生存环境变化很小，适应环境的能力不需要太强，所以保留大段优秀的基因适应当前的环境就够了。而高等动物需要随时适应新环境，基因间联合适应单元变小能提高生存的概率。</p>
+<h3 id="Dropout-用法"><a href="#Dropout-用法" class="headerlink" title="Dropout 用法"></a>Dropout 用法</h3><p><strong>没加dropout时每个单元的计算是:</strong></p>
+<script type="math/tex; mode=display">z_i^{l+1}=w_i^{l+1}y^l + b_i^{l+1}</script><script type="math/tex; mode=display">y_i^{l+1} =f(z_i^{l+1})</script><p><strong>训练时加入dropout后，每个单元出现的概率是p，所以计算时加了一步概率：</strong></p>
+<script type="math/tex; mode=display">r_j^l \sim Bernoulli(p)</script><script type="math/tex; mode=display">\widetilde y^l = r^l * y^l</script><script type="math/tex; mode=display">z_i^{l+1}=w_i^{l+1}\widetilde y^l + b_i^{l+1}</script><script type="math/tex; mode=display">y_i^{l+1} =f(z_i^{l+1})</script><p><img src="Figure3.png" alt><br><strong>测试时，每个单元都会出现，且每个单元的参数都要先乘一个 $p$。</strong><br><img src="Figure2.png" alt></p>
+<p><strong>Dropout 参数$p$的选择：</strong></p>
+<ul>
+<li>Dropout 用在隐藏层时，$p = 0.5$ 的时候效果最好，因为此时dropout随机生成的网络结构最多。</li>
+<li>用在input输入上时，可以当作一种添加噪声的方法，此时 $p$ 应设为更接近1的数，使输入变化不会太大。</li>
+</ul>
+<p><strong>如果要pretrain，在用Dropout时，要把所有参数都乘以$1/p$</strong><br><strong>dropout由固定值变为一个区间，可以提高效果。</strong><br>要区分不同的类别，也就是让学到的特征区分度比较大，在数据量足够的情况下不会发生过拟合，但数据量较小时，<strong>可以通过增加稀疏性，来增加特征的区分度。</strong></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

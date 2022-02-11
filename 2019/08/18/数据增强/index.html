@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        数据增强 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据增强"><span class="toc-text">数据增强</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-安装"><span class="toc-text">1. 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-增强设置"><span class="toc-text">2. 增强设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-iaa-Sequential"><span class="toc-text">2.1 iaa.Sequential()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-iaa-someOf"><span class="toc-text">2.2 iaa.someOf()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-iaa-OneOf"><span class="toc-text">2.3 iaa.OneOf()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-iaa-Sometimes"><span class="toc-text">2.4 iaa.Sometimes()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-iaa-WithColorspace"><span class="toc-text">2.5 iaa.WithColorspace()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-iaa-WithChannels"><span class="toc-text">2.6 iaa.WithChannels()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-iaa-Noop"><span class="toc-text">2.7 iaa.Noop()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-iaa-Lambda"><span class="toc-text">2.8 iaa.Lambda()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-有监督增强方法"><span class="toc-text">3. 有监督增强方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-单样本空间几何变换"><span class="toc-text">3.1 单样本空间几何变换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-翻转"><span class="toc-text">2.1.1 翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-裁剪"><span class="toc-text">2.1.2 裁剪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-缩放"><span class="toc-text">2.1.3 缩放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-4-旋转"><span class="toc-text">2.1.4 旋转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-5-平移"><span class="toc-text">2.1.5 平移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-6-仿射变换"><span class="toc-text">2.1.6 仿射变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-7-四点透视变换"><span class="toc-text">2.1.7 四点透视变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-8-分段仿射变换"><span class="toc-text">2.1.8 分段仿射变换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-单样本像素内容变换"><span class="toc-text">2.2 单样本像素内容变换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-亮度"><span class="toc-text">2.2.1 亮度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-对比度"><span class="toc-text">2.2.2 对比度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-灰度"><span class="toc-text">2.2.3 灰度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-4-噪声"><span class="toc-text">2.2.4 噪声</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-5-模糊"><span class="toc-text">2.2.5 模糊</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-颜色扰动"><span class="toc-text">2.2.3 颜色扰动</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-多样本插值"><span class="toc-text">2.3 多样本插值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-Synthetic-Minority-Over-sampling-Technique"><span class="toc-text">2.3.1 Synthetic Minority Over-sampling Technique</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-Mixup"><span class="toc-text">2.3.2 Mixup</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-无监督数据增强"><span class="toc-text">3. 无监督数据增强</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-生成模型"><span class="toc-text">3.1 生成模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-AutoAugmentation"><span class="toc-text">3.2 AutoAugmentation</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        数据增强
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-18 12:21:10</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h1><p>项目地址：<a href="https://github.com/aleju/imgaug">https://github.com/aleju/imgaug</a></p>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><p>（1）安装依赖包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install six numpy scipy Pillow matplotlib scikit-image opencv-python imageio Shapely</span><br></pre></td></tr></table></figure></p>
+<p>（2）安装 imgaug：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install imgaug </span><br><span class="line"><span class="comment"># 或 pip install git+https://github.com/aleju/imgaug.git 安装最新版本</span></span><br></pre></td></tr></table></figure></p>
+<p>（3）使用数据增强训练的流程：</p>
+<ul>
+<li>定义数据增强序列；</li>
+<li>读入图片进行数据增强；</li>
+<li>用增强后的图片训练；<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> imgaug.augmenters <span class="keyword">as</span> iaa</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_on_images</span><span class="params">(imgs)</span>:</span></span><br><span class="line">    ...</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_batch</span><span class="params">(img_info)</span>:</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment"># 返回(N, h, w, c) 的numpy array </span></span><br><span class="line">    <span class="comment"># 或返回list, 每项(h, w, c)，图像大小可能不同</span></span><br><span class="line">    <span class="keyword">return</span> image_list</span><br><span class="line">    </span><br><span class="line">augmentor = iaa.Sequential([</span><br><span class="line">    iaa.Crop(percent=([<span class="number">0.0</span>, <span class="number">0.05</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>])),</span><br><span class="line">    iaa.Multiply((<span class="number">0.5</span>, <span class="number">1.5</span>)),</span><br><span class="line">    iaa.GaussianBlur(sigma=(<span class="number">0.0</span>, <span class="number">1.0</span>)),</span><br><span class="line">    iaa.Affine(rotate=(<span class="number">-15</span>, <span class="number">15</span>)),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">imgs = img_load(img_info)</span><br><span class="line">imgs = augmentor(images=imgs)</span><br><span class="line">train_on_images(imgs)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-增强设置"><a href="#2-增强设置" class="headerlink" title="2. 增强设置"></a>2. 增强设置</h2><h3 id="2-1-iaa-Sequential"><a href="#2-1-iaa-Sequential" class="headerlink" title="2.1 iaa.Sequential()"></a>2.1 iaa.Sequential()</h3><p>产生一个处理图片的Sequential：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">augmentor = iaa.Sequential([</span><br><span class="line">    iaa.Crop(percent=([<span class="number">0.0</span>, <span class="number">0.05</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>])),</span><br><span class="line">    iaa.Multiply((<span class="number">0.5</span>, <span class="number">1.5</span>)),</span><br><span class="line">    iaa.GaussianBlur(sigma=(<span class="number">0.0</span>, <span class="number">1.0</span>)),</span><br><span class="line">    iaa.Affine(rotate=(<span class="number">-15</span>, <span class="number">15</span>)),</span><br><span class="line">], random_order=<span class="literal">False</span>,  <span class="comment"># 每个batch是否用不同顺序增强</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2-iaa-someOf"><a href="#2-2-iaa-someOf" class="headerlink" title="2.2 iaa.someOf()"></a>2.2 iaa.someOf()</h3><p>每次只从Augmentor列表选 n 或 n-m 个变换，不能固定选某个：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">augmentor = iaa.SomeOf(</span><br><span class="line">	(<span class="number">1</span>, <span class="number">3</span>), <span class="comment"># 每次用1-3个方法增强 / (1, None)用1到多个 / 1表示用1个</span></span><br><span class="line">	[iaa.Crop(percent=([<span class="number">0.0</span>, <span class="number">0.05</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>])),</span><br><span class="line">    iaa.Multiply((<span class="number">0.5</span>, <span class="number">1.5</span>)),</span><br><span class="line">    iaa.GaussianBlur(sigma=(<span class="number">0.0</span>, <span class="number">1.0</span>)),</span><br><span class="line">    iaa.Affine(rotate=(<span class="number">-15</span>, <span class="number">15</span>)),</span><br><span class="line">    ], random.order=<span class="literal">False</span>, </span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-3-iaa-OneOf"><a href="#2-3-iaa-OneOf" class="headerlink" title="2.3 iaa.OneOf()"></a>2.3 iaa.OneOf()</h3><p>每次只选一个：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">augmentor = iaa.OneOf(</span><br><span class="line">	...</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-4-iaa-Sometimes"><a href="#2-4-iaa-Sometimes" class="headerlink" title="2.4 iaa.Sometimes()"></a>2.4 iaa.Sometimes()</h3><p>batch 中一部分图片用某几种Augmenters，其他图片用另外几种Augmenters：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">augmentor = iaa.Sometimes(p=<span class="number">0.5</span>,</span><br><span class="line">			  then_list=<span class="literal">None</span>,</span><br><span class="line">			  else_list=<span class="literal">None</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-5-iaa-WithColorspace"><a href="#2-5-iaa-WithColorspace" class="headerlink" title="2.5 iaa.WithColorspace()"></a>2.5 iaa.WithColorspace()</h3><p>先把图像从一个颜色空间变换到指定的另一个空间，在那个颜色空间变换后，再变换回原来的颜色空间：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">augmentor = iaa.WithColorspace(to_colorspace=<span class="string">"HSV"</span>,  <span class="comment"># RGB, BGR, GRAY, CIE, YCrCb, HSV, HLS, Lab, Luv</span></span><br><span class="line">				   from_colorspace=<span class="string">'RGB'</span>,</span><br><span class="line">				   [...]</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-6-iaa-WithChannels"><a href="#2-6-iaa-WithChannels" class="headerlink" title="2.6 iaa.WithChannels()"></a>2.6 iaa.WithChannels()</h3><p>选部分Channel进行变换，变换后把该Channel放回去：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">augmentor = iaa.WithChannels(channels=<span class="literal">None</span>,  <span class="comment"># int / int list</span></span><br><span class="line">			  [...]</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-7-iaa-Noop"><a href="#2-7-iaa-Noop" class="headerlink" title="2.7 iaa.Noop()"></a>2.7 iaa.Noop()</h3><p>不进行任何变换</p>
+<h3 id="2-8-iaa-Lambda"><a href="#2-8-iaa-Lambda" class="headerlink" title="2.8 iaa.Lambda()"></a>2.8 iaa.Lambda()</h3><p>自定义变换函数：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func_images</span><span class="params">()</span>:</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> images</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func_keypoints</span><span class="params">()</span>:</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> keypoints_on_images</span><br><span class="line">augmentor = iaa.Lambda(func_images=func_images,  <span class="comment"># 对每张图片的变换函数</span></span><br><span class="line">					   func_keypoints=func_keypoints,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-有监督增强方法"><a href="#3-有监督增强方法" class="headerlink" title="3. 有监督增强方法"></a>3. 有监督增强方法</h2><p><strong>增强因子B：</strong>数据做离散增强后增长的倍数</p>
+<h3 id="3-1-单样本空间几何变换"><a href="#3-1-单样本空间几何变换" class="headerlink" title="3.1 单样本空间几何变换"></a>3.1 单样本空间几何变换</h3><p>只选择图像的一部分，或者做像素的空间重分布，没有改变图像本身的内容。</p>
+<h4 id="2-1-1-翻转"><a href="#2-1-1-翻转" class="headerlink" title="2.1.1 翻转"></a>2.1.1 翻转</h4><ol>
+<li><code>iaa.Fliplr(0.5)</code>：水平镜面翻转，参数为每张图片翻转概率</li>
+<li><code>iaa.Flipud()</code>：上下翻转</li>
+</ol>
+<h4 id="2-1-2-裁剪"><a href="#2-1-2-裁剪" class="headerlink" title="2.1.2 裁剪"></a>2.1.2 裁剪</h4><p>随机从图像中选择一部分裁剪出来，一般会调整成圆图像大小</p>
+<ol>
+<li><code>iaa.CropAndPad()</code>：crop裁剪 或 pad填充：</li>
+</ol>
+<ul>
+<li>px / percent：px和percent二选一，为负时表示crop, 为正表示pad, 用int或int list，或4元素的元组(top, right, bottom, left),原色可以是int/int tuple/int list；</li>
+<li>pad_mode：可选constant,edge,linear_ramp, maximum, median, minimum, reflect, symmetric, wrap；</li>
+<li>pad_cval：当pad_mode=’constant’时填充的值，float,int,tuple,list；</li>
+<li>keep_size：经过crop和padding后，是否再缩放回原来的大小</li>
+</ul>
+<ol>
+<li><code>iaa.Pad()</code>：同 iaa.CropAndPad() 接受positive value</li>
+<li><code>iaa.Crop()</code>：同 iaa.CropAndPad() 接受negative value，如<code>iaa.Crop(percent=([0.0, 0.05], [0.0, 0.1], [0.0, 0.1], [0.0, 0.1]))</code></li>
+</ol>
+<h4 id="2-1-3-缩放"><a href="#2-1-3-缩放" class="headerlink" title="2.1.3 缩放"></a>2.1.3 缩放</h4><p>放大或缩小图像尺寸，大多数会按照原始尺寸对放大后的图像进行裁剪，缩小时需要对图像边界之外的内容做假设。</p>
+<ol>
+<li><code>iaa.Scale()</code>：把图像缩放到某一大小。</li>
+</ol>
+<h4 id="2-1-4-旋转"><a href="#2-1-4-旋转" class="headerlink" title="2.1.4 旋转"></a>2.1.4 旋转</h4><p>顺时针或逆时针旋转，注意最好旋转 90 / 180度，否则会出现尺度问题，B=2/4</p>
+<h4 id="2-1-5-平移"><a href="#2-1-5-平移" class="headerlink" title="2.1.5 平移"></a>2.1.5 平移</h4><p>将图像沿x或y方向移动，需要对背景做假设，因为平移时有一部分图像是空的，因为图片中物体可能出现在任意位置，所以平移增强方法很有用。</p>
+<h4 id="2-1-6-仿射变换"><a href="#2-1-6-仿射变换" class="headerlink" title="2.1.6 仿射变换"></a>2.1.6 仿射变换</h4><p>同时做裁剪、旋转、转换等多重操作。</p>
+<ol>
+<li><code>iaa.Affine()</code>：放射变换，包括 translation平移，Rotation 旋转，zoom 放缩，shear 错切，通过<code>cval</code>和<code>mode</code>指定放射变换生成的新的像素点的值，用<code>offer</code> 指定插值方法。</li>
+</ol>
+<ul>
+<li>scale：图像缩放因子，1 不缩放，0.5 缩小为原图一半，x, y 可指定不同的缩放比例；</li>
+<li>translate_percent：正负表示平移方向，大小表示平移比例，0不平移，0.5平移50%；</li>
+<li>translate_px：按像素点平移；</li>
+<li>rotate：旋转角度，0-360度，正负表示方向；</li>
+<li>shear：错切的程度，0-360度，正负表示方向；</li>
+<li><p>order：插值顺序，</p>
+<ul>
+<li>0：最近邻插值，快；</li>
+<li>1：双线性插值，快，默认；</li>
+<li>2：双二次插值，不推荐；</li>
+<li>3：双三次插值，比较慢；</li>
+<li>4：Bi-quartic，特别慢；</li>
+<li>5：Bi-quintic，特别慢；</li>
+<li>ia.ALL：每次从所有插值方法中随机选。</li>
+</ul>
+</li>
+<li><p>mode：指定空白处的填充方式：</p>
+<ul>
+<li>constant：常量填充；</li>
+<li>edge：边缘填充；</li>
+<li>symmetric：镜面对称填充；</li>
+</ul>
+</li>
+<li><p>cval：</p>
+<ul>
+<li>int / float / tuple：当mode=constant时指定填充常量值；</li>
+<li>ia.ALL：从 [0, 255] 之间随机选一个值填充。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">iaa.Affine(</span><br><span class="line">	scale=<span class="number">1.0</span>,</span><br><span class="line">	translate_percent=<span class="literal">None</span>,</span><br><span class="line">	rotate=<span class="number">0.0</span>,</span><br><span class="line">    shear=<span class="number">0.0</span>,</span><br><span class="line">    order=<span class="number">1</span>,</span><br><span class="line">    cval=<span class="number">0</span>,</span><br><span class="line">    mode=<span class="string">'constant'</span>,</span><br><span class="line">    name=<span class="literal">None</span>, deterministic=<span class="literal">False</span>, random_state=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-7-四点透视变换"><a href="#2-1-7-四点透视变换" class="headerlink" title="2.1.7 四点透视变换"></a>2.1.7 四点透视变换</h4><p><code>iaa.PiecewiseAffine()</code>：随机设置网格点，移动网格点周围的像素使得局部扭曲；</p>
+<h4 id="2-1-8-分段仿射变换"><a href="#2-1-8-分段仿射变换" class="headerlink" title="2.1.8 分段仿射变换"></a>2.1.8 分段仿射变换</h4><p>在图像上放置一个规则的点网格，根据正态分布的样本数量移动这些点及周围的图像区域。</p>
+<h3 id="2-2-单样本像素内容变换"><a href="#2-2-单样本像素内容变换" class="headerlink" title="2.2 单样本像素内容变换"></a>2.2 单样本像素内容变换</h3><p>变化更多样，改变了像素内容</p>
+<h4 id="2-2-1-亮度"><a href="#2-2-1-亮度" class="headerlink" title="2.2.1 亮度"></a>2.2.1 亮度</h4><p><code>iaa.Multiply()</code>：每个像素点乘一个值使得图片更亮或者更暗：<code>iaa.Multiply((0.5, 1.5))</code></p>
+<h4 id="2-2-2-对比度"><a href="#2-2-2-对比度" class="headerlink" title="2.2.2 对比度"></a>2.2.2 对比度</h4><p><code>iaa.ContrasNormalization()</code>：对比度：<code>iaa.ContrastNormalization(alpha=1.0, per_channel=False)</code></p>
+<h4 id="2-2-3-灰度"><a href="#2-2-3-灰度" class="headerlink" title="2.2.3 灰度"></a>2.2.3 灰度</h4><p><code>iaa.Grayscale()</code>：变灰度图：<code>iaa.Grayscale(alpha=0,from_colorspace=&#39;RGB&#39;)</code></p>
+<h4 id="2-2-4-噪声"><a href="#2-2-4-噪声" class="headerlink" title="2.2.4 噪声"></a>2.2.4 噪声</h4><p>为了消除高频特征的影响，随机加入噪声数据消除这些特征，噪声类型有高斯、椒盐等</p>
+<ol>
+<li><code>iaa.Convolve()</code>：对图像做卷积，matrix 参数是卷积矩阵：</li>
+<li><code>iaa.Sharpen()</code>：锐化：<code>iaa.Sharpen(alpha=0,lightness=1)</code></li>
+<li><code>iaa.Emboss()</code>：浮雕效果：<code>iaa.Emboss(alpha=0, strength=1)</code></li>
+</ol>
+<h4 id="2-2-5-模糊"><a href="#2-2-5-模糊" class="headerlink" title="2.2.5 模糊"></a>2.2.5 模糊</h4><ol>
+<li><code>iaa.GaussianBlur(sigma=(0.0, 1.0))</code>：高斯扰动，</li>
+</ol>
+<ul>
+<li>sigma：高斯变换的标准差，float/float tuple，常见0不扰动，3强扰动</li>
+</ul>
+<ol>
+<li><code>iaa.AverageBlur(k=1)</code>：取最近邻像素的均值扰动：</li>
+</ol>
+<ul>
+<li>k：int / int tuple，窗口大小，当 k 为 int tuple 时，如果每个元素也是tuple，则分别表示height和width窗口大小不同。</li>
+</ul>
+<ol>
+<li><code>iaa.MedianBlur(k=1)</code>：用最近邻中位数扰动：k 参数同上</li>
+</ol>
+<h4 id="2-2-3-颜色扰动"><a href="#2-2-3-颜色扰动" class="headerlink" title="2.2.3 颜色扰动"></a>2.2.3 颜色扰动</h4><ol>
+<li><code>iaa.ChangeColorspace()</code>：改变颜色空间，<code>iaa.ChangeColorspace(to_colorspace=&#39;HSV&#39;,from_colorspace=&#39;RGB&#39;, alpha=1.0)</code></li>
+</ol>
+<ul>
+<li>Alpha：int, float, tuple，覆盖旧的色彩空间时，新颜色空间的Alpha值，</li>
+</ul>
+<p><code>iaa.EdgeDetect()</code>：边缘检测，<code>iaa.Emboss(alpha=0)</code></p>
+<h3 id="2-3-多样本插值"><a href="#2-3-多样本插值" class="headerlink" title="2.3 多样本插值"></a>2.3 多样本插值</h3><h4 id="2-3-1-Synthetic-Minority-Over-sampling-Technique"><a href="#2-3-1-Synthetic-Minority-Over-sampling-Technique" class="headerlink" title="2.3.1 Synthetic Minority Over-sampling Technique"></a>2.3.1 Synthetic Minority Over-sampling Technique</h4><p>近邻样本 $(x_n, y_n)$ 插值:</p>
+<script type="math/tex; mode=display">(x_{new}, y_{new}) = (x, y) + rand(0-1) * ((x_n - x), (y_n - y))</script><h4 id="2-3-2-Mixup"><a href="#2-3-2-Mixup" class="headerlink" title="2.3.2 Mixup"></a>2.3.2 Mixup</h4><p><a href="https://arxiv.org/abs/1710.09412" target="_blank" rel="noopener">mixup: Beyond Empirical Risk Minimization (ICLR, 2018)</a><br>图像和标签都进行线性插值，对图像、语音、GAN 等问题都有效：</p>
+<script type="math/tex; mode=display">(x_n, y_n) = \lambda(x_i, y_i) + (1-\lambda)(x_j, y_j)</script><h2 id="3-无监督数据增强"><a href="#3-无监督数据增强" class="headerlink" title="3. 无监督数据增强"></a>3. 无监督数据增强</h2><h3 id="3-1-生成模型"><a href="#3-1-生成模型" class="headerlink" title="3.1 生成模型"></a>3.1 生成模型</h3><p>生成器和判别器对抗学习，生成器学习真实数据的概率分布。</p>
+<h3 id="3-2-AutoAugmentation"><a href="#3-2-AutoAugmentation" class="headerlink" title="3.2 AutoAugmentation"></a>3.2 AutoAugmentation</h3><p>不同的任务需要不同的数据增强方法，AutoAugmentation 就是学习一个已有的数据增强方法的组合，</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

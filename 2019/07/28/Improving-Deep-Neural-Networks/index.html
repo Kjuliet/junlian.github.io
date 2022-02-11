@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Improving Deep Neural Networks - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Setting-up-Machine-Learning-Application"><span class="toc-text">Setting up Machine Learning Application</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Train-Dev-Test-sets"><span class="toc-text">Train/Dev/Test sets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bias-Variance"><span class="toc-text">Bias/Variance</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Recipe-for-High-bias"><span class="toc-text">Recipe for High bias</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Recipe-for-High-variance"><span class="toc-text">Recipe for High variance</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Regularizing-neural-network"><span class="toc-text">Regularizing neural network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#L2-regularization"><span class="toc-text">$L2$ regularization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#For-Logistic-regression"><span class="toc-text">For Logistic regression</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#For-Neural-network"><span class="toc-text">For Neural network</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Why-regularization-reduces-overfitting"><span class="toc-text">Why regularization reduces overfitting</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dropout-regularization"><span class="toc-text">Dropout regularization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Implement-Inverted-dropout"><span class="toc-text">Implement: Inverted dropout</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Why-dropout-work"><span class="toc-text">Why dropout work</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Downside-of-drop-out"><span class="toc-text">Downside of drop out</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-augmentation"><span class="toc-text">Data augmentation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Early-stopping"><span class="toc-text">Early stopping</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setting-up-optimization-problem"><span class="toc-text">Setting up optimization problem</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Normalizing-training-sets"><span class="toc-text">Normalizing training sets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vanishing-Exploding-gradients"><span class="toc-text">Vanishing/Exploding gradients</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Reason"><span class="toc-text">Reason</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Weight-initialization"><span class="toc-text">Weight initialization</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-check"><span class="toc-text">Gradient check</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Numerical-approximation-of-gradients"><span class="toc-text">Numerical approximation of gradients</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gradient-checking-implementation"><span class="toc-text">Gradient checking implementation</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optimization-algorithms"><span class="toc-text">Optimization algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mini-batch-gradient-descent"><span class="toc-text">Mini-batch gradient descent</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Batch-vs-mini-batch"><span class="toc-text">Batch vs. mini-batch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Training-with-mini-batch"><span class="toc-text">Training with mini batch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Choosing-mini-batch-size"><span class="toc-text">Choosing mini-batch size</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exponentially-weighted-averages"><span class="toc-text">Exponentially weighted averages</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Implementing"><span class="toc-text">Implementing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bias-correction"><span class="toc-text">Bias correction</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Momentum"><span class="toc-text">Momentum</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Basic-idea"><span class="toc-text">Basic idea</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Implementation-details"><span class="toc-text">Implementation details</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RMSprop"><span class="toc-text">RMSprop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adam-optimization"><span class="toc-text">Adam optimization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-rate-decay"><span class="toc-text">Learning rate decay</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Local-optima"><span class="toc-text">Local optima</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyperparameter-tuning"><span class="toc-text">Hyperparameter tuning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sampling-at-random"><span class="toc-text">Sampling at random</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Appropriate-scale"><span class="toc-text">Appropriate scale</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Re-test-hyperparameters-occasionally"><span class="toc-text">Re-test hyperparameters occasionally</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Go-about-searching"><span class="toc-text">Go about searching</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Babysitting-one-model"><span class="toc-text">Babysitting one model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Training-many-models-in-parallel"><span class="toc-text">Training many models in parallel</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch-Normalization"><span class="toc-text">Batch Normalization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Normalizing-activations"><span class="toc-text">Normalizing activations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fitting-Batch-Norm-into-a-neural-network"><span class="toc-text">Fitting Batch Norm into a neural network</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Why-does-Batch-Norm-work"><span class="toc-text">Why does Batch Norm work</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Batch-Norm-as-regularization"><span class="toc-text">Batch Norm as regularization</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multi-class-classification"><span class="toc-text">Multi-class classification</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax-Regression"><span class="toc-text">Softmax Regression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Loss-function"><span class="toc-text">Loss function</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Improving Deep Neural Networks
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-28 11:25:41</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#Deep Learning" title="Deep Learning">Deep Learning</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="Setting-up-Machine-Learning-Application"><a href="#Setting-up-Machine-Learning-Application" class="headerlink" title="Setting up Machine Learning Application"></a>Setting up Machine Learning Application</h2><h3 id="Train-Dev-Test-sets"><a href="#Train-Dev-Test-sets" class="headerlink" title="Train/Dev/Test sets"></a>Train/Dev/Test sets</h3><p><strong>Development set: </strong> </p>
+<ul>
+<li>Test different algorithms on it and see which algorithm works better.</li>
+<li>Need to be big enough for us to evaluate different algorithm choices and quickly decide which one is doing better.</li>
+</ul>
+<p><strong>Test set</strong></p>
+<ul>
+<li>Given final classifier, test set give us a pretty confident estimate of how well it’s doing.</li>
+</ul>
+<p><strong>Not having a test set might be okey. (Only dev set.)</strong></p>
+<p><strong>Previous era of machine learning</strong><br>70/30 train test splits.<br>60/20/20 train dev test splits</p>
+<p><strong>Modern big data era</strong><br><img src="./1539512105862.png" alt="Alt text"></p>
+<p><strong>Make sure dev and test come from same distribution</strong><br><img src="./1539512532059.png" alt="Alt text"></p>
+<h3 id="Bias-Variance"><a href="#Bias-Variance" class="headerlink" title="Bias/Variance"></a>Bias/Variance</h3><p>By looking at algorithm’s error on the training set and  dev set, we can diagnose whether it has problems of high bias or high variance.</p>
+<p><img src="./1539513151436.png" alt="Alt text"><br><strong>Human level</strong> performance gets nearly 0% error.<br><strong>Optimal error / base error</strong> nearly 0%</p>
+<p><strong>Basic recipe for machine learning</strong></p>
+<h4 id="Recipe-for-High-bias"><a href="#Recipe-for-High-bias" class="headerlink" title="Recipe for High bias"></a>Recipe for High bias</h4><ul>
+<li>Bigger network, more hidden layers or more hidden units.</li>
+<li>Train longer.</li>
+<li>More advanced optimization algorithms.</li>
+<li>New network architechture that’s better suiled for this problem.</li>
+</ul>
+<p>After we get a low bias, are there a variance problem?</p>
+<h4 id="Recipe-for-High-variance"><a href="#Recipe-for-High-variance" class="headerlink" title="Recipe for High variance"></a>Recipe for High variance</h4><ul>
+<li>Get more data.</li>
+<li>Regularization to reduce overfitting.</li>
+<li>More appropriate neural network architecture.</li>
+</ul>
+<p><strong>Need the bias variance tradeoff?</strong><br>Pick a network, or get more data, we now have tools to just drive down bias or variance, without really hurting the other thing that much.</p>
+<h2 id="Regularizing-neural-network"><a href="#Regularizing-neural-network" class="headerlink" title="Regularizing neural network"></a>Regularizing neural network</h2><h3 id="L2-regularization"><a href="#L2-regularization" class="headerlink" title="$L2$ regularization"></a>$L2$ regularization</h3><h4 id="For-Logistic-regression"><a href="#For-Logistic-regression" class="headerlink" title="For Logistic regression"></a>For Logistic regression</h4><p>The most common type of regularization.<br><img src="./1539516169546.png" alt="Alt text"></p>
+<p><strong>$L1$ regularization</strong><br>In practice, $L1$ regularization make model sparse(w稀疏)</p>
+<p>$\lambda$ : regularization parameter</p>
+<ul>
+<li>Set it using dev set, try a variety of values and see what does the best.</li>
+<li>So $\lambda$ is hyper parameter we might have to tune.</li>
+</ul>
+<p><strong>Only $w$</strong><br>$w$ is usually a high dimensional parameter vector, especially with a high variance problem. Maybe w just has a lot of parameters, so we aren’t fitting all the parameters well.</p>
+<h4 id="For-Neural-network"><a href="#For-Neural-network" class="headerlink" title="For Neural network"></a>For Neural network</h4><p><img src="./1539516533139.png" alt="Alt text"><br><strong>Frobenius norm of the matrix</strong><br>The sum of square of elements of a matrix.</p>
+<p><strong>Implement gradient descent</strong><br><img src="./1539517229454.png" alt="Alt text"></p>
+<p>Whatever the matrix w is, we are going to make it a little bit smaller. </p>
+<p>This is why L2 norm regularization is also called weight decay. Because it’s just like the </p>
+<h4 id="Why-regularization-reduces-overfitting"><a href="#Why-regularization-reduces-overfitting" class="headerlink" title="Why regularization reduces overfitting"></a>Why regularization reduces overfitting</h4><ol>
+<li>$\lambda$大会使权重w的值接近于0, 使得隐藏单元的影响减少。</li>
+<li>$g(z)$ will be roughly linear, more linear…linear + linear is linear network<br><img src="./1539517993270.png" alt="Alt text"></li>
+</ol>
+<p><strong>Cose function J now has new definition</strong><br>If  we plot the old definition of J, we might <code>not see a decrease monotonically</code>.<br><img src="./1539518184912.png" alt="Alt text"></p>
+<h3 id="Dropout-regularization"><a href="#Dropout-regularization" class="headerlink" title="Dropout regularization"></a>Dropout regularization</h3><p>Set some probability of eliminating a node in neural network.</p>
+<p><img src="./1539518407032.png" alt="Alt text"><br><img src="./1539518443888.png" alt="Alt text"><br>One example on this much diminished network.</p>
+<p>Then on different examples, we would toss a set of coins again and keep a different set of nodes.</p>
+<p>So we are training a much smaller network on each example.</p>
+<h4 id="Implement-Inverted-dropout"><a href="#Implement-Inverted-dropout" class="headerlink" title="Implement: Inverted dropout"></a>Implement: Inverted dropout</h4><p><strong>keep-prob</strong>=  0.8<br>$d^3$ the dropout vector for the layer 3<br><img src="./1539519094579.png" alt="Alt text"></p>
+<p><strong>a3 /= keep-prob</strong><br>This is what’s called the inverted dropout technique.<br>It ensures that the expected value of a3 remains the same. </p>
+<p><strong>No drop out when making predictions at test time</strong><br><img src="./1539519212492.png" alt="Alt text"></p>
+<p><strong>Vary key prop by layer</strong><br><img src="./1539520157712.png" alt="Alt text"></p>
+<p>We can also apply drop out to the input layer.</p>
+<h4 id="Why-dropout-work"><a href="#Why-dropout-work" class="headerlink" title="Why dropout work"></a>Why dropout work</h4><ol>
+<li>Small network</li>
+<li>Can’t rely on any one feature, so have to spread out weights. This will tend to have an effect of shrinking the squared norm of the weights.</li>
+</ol>
+<h4 id="Downside-of-drop-out"><a href="#Downside-of-drop-out" class="headerlink" title="Downside of drop out"></a>Downside of drop out</h4><p>The cost function is no longer well-defined.<br>It’s harder to double check. So we loss plot/graph debugging tool.</p>
+<h3 id="Data-augmentation"><a href="#Data-augmentation" class="headerlink" title="Data augmentation"></a>Data augmentation</h3><ul>
+<li>反转</li>
+<li>放缩</li>
+<li>扭曲</li>
+</ul>
+<h3 id="Early-stopping"><a href="#Early-stopping" class="headerlink" title="Early stopping"></a>Early stopping</h3><p><img src="./1539520570509.png" alt="Alt text"><br><strong>Downside</strong><br>After optimizing the cost function J, we also wanted to not over-fit. </p>
+<p>But now, We no longer can work on these two problems independently. </p>
+<p>Because by stopping gradient decent early, we are not doing a great job reducing the cost function J.</p>
+<p>So instead of using different tools to solve the two problems, we are using one that kind of mixes the two.</p>
+<blockquote>
+<p><strong>Orthogonalization正交</strong>: You want to be able to think about one task at a time.</p>
+</blockquote>
+<h2 id="Setting-up-optimization-problem"><a href="#Setting-up-optimization-problem" class="headerlink" title="Setting up optimization problem"></a>Setting up optimization problem</h2><h3 id="Normalizing-training-sets"><a href="#Normalizing-training-sets" class="headerlink" title="Normalizing training sets"></a>Normalizing training sets</h3><p>减均值，除以方差<br><img src="./1539521351150.png" alt="Alt text"></p>
+<p><img src="./1539521512460.png" alt="Alt text"></p>
+<h3 id="Vanishing-Exploding-gradients"><a href="#Vanishing-Exploding-gradients" class="headerlink" title="Vanishing/Exploding gradients"></a>Vanishing/Exploding gradients</h3><p>Derivatives or slopes can sometimes get either very big or very small.</p>
+<h4 id="Reason"><a href="#Reason" class="headerlink" title="Reason"></a>Reason</h4><p><img src="./1539521993808.png" alt="Alt text"></p>
+<p>In the <strong>very deep</strong> network, The <strong>weights W</strong> :</p>
+<ul>
+<li>Just a little bit bigger than one or the identity matrix, the activations can explode.</li>
+<li>Just a little bit less than identity, the activations will decrease exponentially.</li>
+</ul>
+<p><strong>Partly solve:</strong> carefully choice of how to initialize the weights.</p>
+<h4 id="Weight-initialization"><a href="#Weight-initialization" class="headerlink" title="Weight initialization"></a>Weight initialization</h4><p>In order to make z not blow up and not become too small, the larger n is, we want the small w to be.<br><img src="./1539522628259.png" alt="Alt text"></p>
+<p>初始化的方法与activation function 有关。</p>
+<h3 id="Gradient-check"><a href="#Gradient-check" class="headerlink" title="Gradient check"></a>Gradient check</h3><p>A test which can help us save tons of time, and make sure that we implementation of back prop is correct. </p>
+<h4 id="Numerical-approximation-of-gradients"><a href="#Numerical-approximation-of-gradients" class="headerlink" title="Numerical approximation of gradients"></a>Numerical approximation of gradients</h4><p><img src="./1539522940447.png" alt="Alt text"><br>The two-sided difference formula is much more accurate.</p>
+<h4 id="Gradient-checking-implementation"><a href="#Gradient-checking-implementation" class="headerlink" title="Gradient checking implementation"></a>Gradient checking implementation</h4><p><img src="./1539523356160.png" alt="Alt text"><br><img src="./1539523531826.png" alt="Alt text"></p>
+<p><strong>Notes</strong><br><img src="./1539523748269.png" alt="Alt text"></p>
+<p>The last one means that the implemetation of gradient descent is correct when w and b are close to 0.</p>
+<h2 id="Optimization-algorithms"><a href="#Optimization-algorithms" class="headerlink" title="Optimization algorithms"></a>Optimization algorithms</h2><h3 id="Mini-batch-gradient-descent"><a href="#Mini-batch-gradient-descent" class="headerlink" title="Mini-batch gradient descent"></a>Mini-batch gradient descent</h3><p>To train neural network much faster.</p>
+<h4 id="Batch-vs-mini-batch"><a href="#Batch-vs-mini-batch" class="headerlink" title="Batch vs. mini-batch"></a>Batch vs. mini-batch</h4><p><img src="./1539525571217.png" alt="Alt text"></p>
+<h4 id="Training-with-mini-batch"><a href="#Training-with-mini-batch" class="headerlink" title="Training with mini batch"></a>Training with mini batch</h4><p> <code>One epoch</code> of training:  <strong>epoch</strong> means a single pass through the training set<br> <img src="./1539525825082.png" alt="Alt text"></p>
+<p>On every iteration we are training on a different training set.<br><img src="./1539526045986.png" alt="Alt text"></p>
+<h4 id="Choosing-mini-batch-size"><a href="#Choosing-mini-batch-size" class="headerlink" title="Choosing mini-batch size"></a>Choosing mini-batch size</h4><p><strong>Too large</strong></p>
+<ul>
+<li>mini-batch size = m: batch gradient descent</li>
+<li>It takes too much time.</li>
+</ul>
+<p><strong>Too small</strong></p>
+<ul>
+<li>mini-batch size = 1: <strong>stochastic随机 gradient descent</strong></li>
+<li>Lose almost all speed up from vectorization.</li>
+<li>The noisiness can be ameliorated改进 or can be reduced by just using a smaller learning rate<br><img src="./1539526826534.png" alt="Alt text"></li>
+</ul>
+<p><strong>In practice it’ll be in-between mini-batch size </strong>, not too big / small.<br><img src="./1539526894783.png" alt="Alt text"></p>
+<h3 id="Exponentially-weighted-averages"><a href="#Exponentially-weighted-averages" class="headerlink" title="Exponentially weighted averages"></a>Exponentially weighted averages</h3><p>一般比直接取前n个数的算术平均好</p>
+<p><img src="./1539529158900.png" alt="Alt text"></p>
+<p><strong>Higher</strong> value of $\beta$:</p>
+<ul>
+<li>The plot is much <strong>smoother</strong>, because it averaging over more data. </li>
+<li>But it <strong>adapts more slowly</strong> when the temperature changes.<br><img src="./1539529127260.png" alt="Alt text"></li>
+</ul>
+<p><strong>Exponentially</strong><br><img src="./1539529593754.png" alt="Alt text"></p>
+<h4 id="Implementing"><a href="#Implementing" class="headerlink" title="Implementing"></a>Implementing</h4><p><img src="./1539529778237.png" alt="Alt text"></p>
+<h4 id="Bias-correction"><a href="#Bias-correction" class="headerlink" title="Bias correction"></a>Bias correction</h4><p><strong>Problem: </strong>$v_2$ will be much less than $\theta_1$ or $\theta_2$, So it is not a very good estimate of the first two day.<br><img src="./1539530629163.png" alt="Alt text"></p>
+<p><strong>For most implementations, people don’t bother to implement bias corrections.</strong> Because most people would rather just wait that initial period and have a slightly more biased estimate and go from there.</p>
+<h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><h4 id="Basic-idea"><a href="#Basic-idea" class="headerlink" title="Basic idea"></a>Basic idea</h4><p>The basic idea is to compute an exponentially weighted average of gradients, and then use that gradient to update weights instead.</p>
+<ul>
+<li><strong>On the vertical axis</strong>, we want learning to be a bit slower, because those oscillations振荡.</li>
+<li><strong>On the horizontal axis</strong>, we want faster learning.</li>
+</ul>
+<p>So we implement gradient descent with momentum.<br><img src="./1539533171633.png" alt="Alt text"></p>
+<ul>
+<li>Momentum terms: as the velocity  速率</li>
+<li>Derivative terms: acceleration 加速度</li>
+</ul>
+<h4 id="Implementation-details"><a href="#Implementation-details" class="headerlink" title="Implementation details"></a>Implementation details</h4><p><img src="./1539533417626.png" alt="Alt text"></p>
+<p>In some paper:<br><img src="./1539533755007.png" alt="Alt text"><br>It affects the learning rate $\alpha$</p>
+<h3 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h3><p>Root mean square prop<br><img src="./1539535893239.png" alt="Alt text"></p>
+<p>Derivatives are much larger in the vertical direction than in the horizontal direction. So <strong>the slope is very large in the b direction.</strong>相对来说，b梯度大于w梯度</p>
+<h3 id="Adam-optimization"><a href="#Adam-optimization" class="headerlink" title="Adam optimization"></a>Adam optimization</h3><p><strong>Adaptive Moment Estimation</strong><br>Adam optimization algorithm is basically taking momentum and RMSprop and putting them together.</p>
+<p>In Adam, we implement bias correction.<br><img src="./1539536346037.png" alt="Alt text"></p>
+<p><strong>Hyperparameters choice</strong><br><img src="./1539536500396.png" alt="Alt text"><br>Moment: $\beta_1, \beta_2$</p>
+<h3 id="Learning-rate-decay"><a href="#Learning-rate-decay" class="headerlink" title="Learning rate decay"></a>Learning rate decay</h3><p><strong>Problem:</strong><br><img src="./1539536602477.png" alt="Alt text"></p>
+<p><strong>decay-rate</strong><br><img src="./1539536783789.png" alt="Alt text"></p>
+<p><strong>Other methods</strong></p>
+<ul>
+<li>Using some formula</li>
+<li>Manually controlling $\alpha$<br><img src="./1539536990518.png" alt="Alt text"></li>
+</ul>
+<h3 id="Local-optima"><a href="#Local-optima" class="headerlink" title="Local optima"></a>Local optima</h3><p>Over high dimensional spaces(weights w), most points of <strong>zero gradient</strong> in a cost function are <strong>saddle points</strong></p>
+<p><strong>Problem of plateaus</strong><br>The plateaus停滞时期 can really slow down learning rate. The derivative is close to zero for a long time.<br><img src="./1539537460965.png" alt="Alt text"></p>
+<h2 id="Hyperparameter-tuning"><a href="#Hyperparameter-tuning" class="headerlink" title="Hyperparameter tuning"></a>Hyperparameter tuning</h2><h3 id="Sampling-at-random"><a href="#Sampling-at-random" class="headerlink" title="Sampling at random"></a>Sampling at random</h3><p>Sampling at random over the range of hyperparameters.<br>(1) Random sampling and adequate search, <strong>Don’t use a grid!</strong><br><img src="./1539569258329.png" alt="Alt text"></p>
+<ul>
+<li>In grid, we have 5</li>
+<li>By random, we have 25<br>(2) Implementing a <strong>coarse to fine search process</strong><br><img src="./1539569228849.png" alt="Alt text"></li>
+</ul>
+<h3 id="Appropriate-scale"><a href="#Appropriate-scale" class="headerlink" title="Appropriate scale"></a>Appropriate scale</h3><p><strong>Problem1: </strong>Searching for learning rate $\alpha$.<br>About 90% of the values we sample would be between 0.1 and 1. So we are using 90% of the resources to search between 0.1 and 1, and only 10% of the resources to search between 0.0001 and 0.1</p>
+<p><strong>Sample on the log scale</strong><br>We can implement sampling on this logarithmic scale.<br><img src="./1539570036570.png" alt="Alt text"></p>
+<p><strong>Promble 2: </strong>Hyperparameters for exponentially weighted averages<br><img src="./1539570949830.png" alt="Alt text"></p>
+<p>When $\beta$ is close to 1, the sensitivity of the results we get changes, even with very small changes to $beta$, will have a huge impact on algorithm.</p>
+<p>It causes we sample more densely in the region of when $\beta$ is close to 1</p>
+<p>Alternatively, when $1-\beta$ is close to 0, we can be more efficient in terms of how we distribute the samples, to explore the space of possible outcomes more efficiently.</p>
+<h3 id="Re-test-hyperparameters-occasionally"><a href="#Re-test-hyperparameters-occasionally" class="headerlink" title="Re-test hyperparameters occasionally"></a>Re-test hyperparameters occasionally</h3><p> <strong>Cross-fertilization孕育</strong><br>Among different applications domains, looking for inspiration for cross-fertilization</p>
+<p><strong>Re-evaluate occasionally</strong></p>
+<ul>
+<li>Intuitions do get stale陈旧.</li>
+<li>Re-evaluate hyperparameters at least once every several months.</li>
+</ul>
+<h3 id="Go-about-searching"><a href="#Go-about-searching" class="headerlink" title="Go about searching"></a>Go about searching</h3><h4 id="Babysitting-one-model"><a href="#Babysitting-one-model" class="headerlink" title="Babysitting one model"></a>Babysitting one model</h4><ul>
+<li>Huge data set but not a lot of computational resources.</li>
+<li>Train only one model or a very small number of models at a time</li>
+<li>Be kind of babysitting the model one day at a time even as it’s training over a course of many days.</li>
+<li>Watching performance and patiently nudging the learning rate up or down.</li>
+</ul>
+<h4 id="Training-many-models-in-parallel"><a href="#Training-many-models-in-parallel" class="headerlink" title="Training many models in parallel"></a>Training many models in parallel</h4><ul>
+<li>Having some setting of the hyperparameters and just let it run by itself, maybe several days.</li>
+<li>At the same time, starting up a different model with a different setting of the hyperparameters.</li>
+</ul>
+<p><img src="./1539577430258.png" alt="Alt text"></p>
+<h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h3><p>Batch norm applies normalization process not just to the input layer, but to the values even deep in some <strong>hidden layer</strong>.</p>
+<ul>
+<li>Making hyperparameter search problem much easier.</li>
+<li>Making neural network much more robust.</li>
+<li>A much bigger range of hyperparameters that work.</li>
+<li>Enable to much more easily train even very deep network.</li>
+</ul>
+<h4 id="Normalizing-activations"><a href="#Normalizing-activations" class="headerlink" title="Normalizing activations"></a>Normalizing activations</h4><p><strong>Normalizing inputs</strong> to speed up learning<br><img src="./1539577818501.png" alt="Alt text"></p>
+<p>For any <strong>hidden layer</strong>, we can normalize $a^{[L]}$ to train $w^{[L]}$, $b^{[L]}$ faster.</p>
+<p>In practice, normalizing $z^{[L]}$ is done much more often.</p>
+<p><strong>Implementing Batch Norm in a single layer</strong><br>The hidden units have mean 0 and variance 1.<br><img src="./1539579201326.png" alt="Alt text"></p>
+<p>Sometimes it makes sense for hidden units to have a <strong>different distribution with $\gamma$,$\beta$</strong> For example, to take advantage of the nonlinearity of the sigmoid function rather than have all values be in linear regime.</p>
+<h4 id="Fitting-Batch-Norm-into-a-neural-network"><a href="#Fitting-Batch-Norm-into-a-neural-network" class="headerlink" title="Fitting Batch Norm into a neural network"></a>Fitting Batch Norm into a neural network</h4><p><img src="./1539579467176.png" alt="Alt text"><br><strong>Working with mini-batches</strong><br><img src="./1539579891437.png" alt="Alt text"><br>The calculation on a is based on current single mini-batch.</p>
+<p>If we are using Batch Norm, $b$ is going to get subtracted out.</p>
+<p><strong>Implementing gradient descent</strong><br><img src="./1539579990913.png" alt="Alt text"></p>
+<p><strong>Batch Norm at test time</strong><br><img src="./1539584119738.png" alt="Alt text"></p>
+<h4 id="Why-does-Batch-Norm-work"><a href="#Why-does-Batch-Norm-work" class="headerlink" title="Why does Batch Norm work"></a>Why does Batch Norm work</h4><p><strong>Learning on shifting input distribution</strong><br><img src="./1539583614521.png" alt="Alt text"></p>
+<p><code>Covariate shift</code>: You have learned some X to Y mapping, if the distribution of X changes, then we might need to retrain learning algorithm.</p>
+<p><strong>This is a problem with neural networks</strong><br><img src="./1539583804793.png" alt="Alt text"></p>
+<p>These hidden unit values are changing all the time, so it’s suffering from the problem of covariate shift.</p>
+<h4 id="Batch-Norm-as-regularization"><a href="#Batch-Norm-as-regularization" class="headerlink" title="Batch Norm as regularization"></a>Batch Norm as regularization</h4><p><img src="./1539583981767.png" alt="Alt text"></p>
+<h2 id="Multi-class-classification"><a href="#Multi-class-classification" class="headerlink" title="Multi-class classification"></a>Multi-class classification</h2><h3 id="Softmax-Regression"><a href="#Softmax-Regression" class="headerlink" title="Softmax Regression"></a>Softmax Regression</h3><p><img src="./1539584295272.png" alt="Alt text"><br><img src="./1539584523985.png" alt="Alt text"></p>
+<h3 id="Loss-function"><a href="#Loss-function" class="headerlink" title="Loss function"></a>Loss function</h3><p><img src="./1539584629305.png" alt="Alt text"></p>
+<p><strong>Gradient descent with softmax</strong><br><img src="./1539585084525.png" alt="Alt text"></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

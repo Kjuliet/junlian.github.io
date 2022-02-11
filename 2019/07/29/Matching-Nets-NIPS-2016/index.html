@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        Matching Nets (NIPS, 2016) - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Motivation"><span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Novelty"><span class="toc-text">Novelty</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Model"><span class="toc-text">Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Attention-Kernel-a"><span class="toc-text">Attention Kernel $a$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练策略"><span class="toc-text">训练策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验"><span class="toc-text">实验</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Matching Nets (NIPS, 2016)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-29 20:21:15</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#计算机视觉" title="计算机视觉">计算机视觉</a>
+        <span>/</span>
+        
+        <a class="tag" href="/junlian.github.io/tags/#One-shot Learning" title="One-shot Learning">One-shot Learning</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>论文：<a href="https://arxiv.org/pdf/1606.04080.pdf" target="_blank" rel="noopener">Matching Networks for One Shot Learning</a><br>作者：Oriol Vinyals，Charles Blundell，Timothy Lillicrap，Koray Kavukcuoglu，Daan Wierstra</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>人类可以从很少的样本学到新的概念，比如一个小孩在书上看了长颈鹿的图片，之后见到一个动物就可以判断出它是不是长颈鹿。对之前从未见过的类别，如何能让模型从一个标注样本中快速学会识别新类，就是One-shot learning问题。</p>
+<p>论文基于 metric learning和用external memories增强模型两种方法，将训练集组织为 support set + test example 的形式输入模型，类似于测试时的输入，support set里都是带标签图片，test example无标签，support set里只有一张图片和test example类别相同，训练的目标是将test example划分到正确的类。</p>
+<p>深度学习方法是<strong>参数模型</strong>，论文认为深度学习方法需要大量标注数据且学习速度慢是因为其参数性，模型需要慢慢把训练样本的知识学进参数里；与参数模型相对比的<strong>非参数模型</strong>，能够把新样本快速归类，而且不会忘掉之前学到的知识，比如<strong>nearest neighbors</strong>方法，不需要任何训练，但<strong>性能依赖于metric的选择</strong>。论文的目的是<strong>结合参数模型和非参数模型</strong>的特点，让模型既能快速从新样本中学习，又能在通用样本上有很好的泛化性能。</p>
+<h2 id="Novelty"><a href="#Novelty" class="headerlink" title="Novelty"></a>Novelty</h2><ol>
+<li>提出基于attention 和 memory 的 Matching Nets (MN)，能够从少量新样本中加快学习；</li>
+<li>在训练方法上将训练输入数据组织成测试时的形式，即support set + test example，让训练过程模拟测试环境来。</li>
+</ol>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>作者从sequence to sequence with attention，memory networks 和 pointer networks中受到启发，这些方法用attention机制将有用信息存储在memory matrix中，也就是对P(B|A) 进行建模，A 和/或 B 在seq2seq模型中是sequence，在本论文中是set，相当于<strong>把one-shot learning 问题装进了set-to-set 的框架</strong>。</p>
+<p><img src="Figure1.jpg" alt></p>
+<p>我们希望给定一个包含 $k$ 个带标签样本的support set $S={(x_i, y_i)}_{i=1}^k$ 和 一个无标签的test example $\hat x$ , 分类器能将 $\hat x$ 划分到 $y$ 的某一类 $\hat y$ 中，$\hat x$ 的类别预测结果就是 $P(\hat y|\hat x, S) = arg max_y P(y|\hat x, S)$ ，所以模型就是对 $\hat y$ 建模：</p>
+<script type="math/tex; mode=display">\hat y = \sum_{i=1}^k a(\hat x,x_i)y_i</script><p>$x_i$, $y_i$ 是support set $S$ 里的标签已知样本，$a$ 是attention kernel 。上式可以看作是support set中所有label的线性组合。 对于离 $\hat x$ 最远的 $b$ 个 $x_i$， $a(\hat x,x_i) = 0$ 。<br>对上式的理解有两种方式：<br>（1）可以看作是 <strong>带attention的’k-b’-nearest neighbours</strong> ，是KDE和KNN的结合；<br>（2）如果把 $y_i$ 当作和 $x_i$ 有关的 memories，上式可以理解为是一种<strong>associative memory</strong>，当给定一个输入，我们根据记忆指出它是哪一类。和其他attentional memory mechanisms不同的是这个模型本质是非参数的。</p>
+<h3 id="Attention-Kernel-a"><a href="#Attention-Kernel-a" class="headerlink" title="Attention Kernel $a$"></a>Attention Kernel $a$</h3><p> $a(\hat x,x_i) $ 的训练是先对 $\hat x$ 和 $x_i$ 分别用CNN进行embedding得到 $f(\hat x)$ 和 $g(x_i)$ ，论文中$f()$ = $g()$ ，然后做内积得cosine 距离  $c(f(\hat x), g(x_i))$ ，也就是Matching Networks的 “Matching”，再加一个softmax：</p>
+<script type="math/tex; mode=display">a(\hat x,x_i) = \frac{e^{c(f(\hat x), g(x_i))}}{\sum _{j=1}^k e^{c(f(\hat x), g(x_j)}}</script><h3 id="训练策略"><a href="#训练策略" class="headerlink" title="训练策略"></a>训练策略</h3><p>对one-shot learning的训练集，从中选出Label set $L$，如 $L=$ {cats, dogs}，然后基于 $L$ sample 出 support set $S$ 和 一个batch $B$ , $S$ 和 $B$ 都带标签，Matching Net 学习目标是最小化 batch $B$ 的预测误差。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>作者在视觉任务和语言模型上都做了实验，在Omniglot 数据集上的结果比用Siamese Net做one-shot learning的结果更好：<br><img src="Table1.jpg" alt><br><img src="Table2.jpg" alt><br><img src="Table3.jpg" alt></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

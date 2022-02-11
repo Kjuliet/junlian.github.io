@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        SQL 查询语句语法 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL-查询语言"><span class="toc-text">SQL 查询语言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#select"><span class="toc-text">select</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DISTINCT-返回去重的值"><span class="toc-text">DISTINCT 返回去重的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WHERE-子句"><span class="toc-text">WHERE 子句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AND-和-OR"><span class="toc-text">AND 和 OR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ORDER-BY-子句"><span class="toc-text">ORDER BY 子句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#INSERT-INTO-语句"><span class="toc-text">INSERT INTO 语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPDATE-语句"><span class="toc-text">UPDATE 语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DELETE-语句"><span class="toc-text">DELETE 语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TOP-子句"><span class="toc-text">TOP 子句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LIKE-操作符"><span class="toc-text">LIKE 操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IN-操作符"><span class="toc-text">IN 操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BETWEEN…AND操作符"><span class="toc-text">BETWEEN…AND操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Alias-别名"><span class="toc-text">Alias 别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JOIN-INNER-JOIN"><span class="toc-text">JOIN / INNER JOIN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LEFT-JOIN"><span class="toc-text">LEFT JOIN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RIGHT-JOIN"><span class="toc-text">RIGHT JOIN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FULL-JOIN"><span class="toc-text">FULL JOIN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UNION-操作符"><span class="toc-text">UNION 操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SELECT-INTO-语句"><span class="toc-text">SELECT INTO 语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PRIMARY-KEY"><span class="toc-text">PRIMARY KEY</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GROUP-BY"><span class="toc-text">GROUP BY</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        SQL 查询语句语法
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-06-03 23:16:20</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/junlian.github.io/tags/#SQL" title="SQL">SQL</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="SQL-查询语言"><a href="#SQL-查询语言" class="headerlink" title="SQL 查询语言"></a>SQL 查询语言</h1><h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名<span class="number">1</span>, 列名<span class="number">2</span> <span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表名</span><br></pre></td></tr></table></figure>
+<h2 id="DISTINCT-返回去重的值"><a href="#DISTINCT-返回去重的值" class="headerlink" title="DISTINCT 返回去重的值"></a>DISTINCT 返回去重的值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> 列名 <span class="keyword">FROM</span> 表名</span><br></pre></td></tr></table></figure>
+<h2 id="WHERE-子句"><a href="#WHERE-子句" class="headerlink" title="WHERE 子句"></a>WHERE 子句</h2><p>有条件地从表中选取数据：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名 <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 列 运算符 值</span><br></pre></td></tr></table></figure></p>
+<p>可在 WHERE 子句中使用的运算符：</p>
+<ul>
+<li><code>=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;&gt;</code>/<code>!=</code>不等于、<code>&lt;=</code>、<code>&gt;=</code>；</li>
+<li><code>BETWEEN</code>：在某个范围内；</li>
+<li><code>LIKE</code>：搜索某种模式</li>
+</ul>
+<p>条件值如果是文本值，加单引号表示；如果是数值，不用加引号，如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">Users</span> <span class="keyword">WHERE</span> age&gt;<span class="number">20</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">Users</span> <span class="keyword">WHERE</span> city=<span class="string">'Beijing'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="AND-和-OR"><a href="#AND-和-OR" class="headerlink" title="AND 和 OR"></a>AND 和 OR</h2><p>在 WHERE 子句中可用 AND 和 OR 结合多个条件：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">Users</span> <span class="keyword">WHERE</span> city=<span class="string">'Beijing'</span> <span class="keyword">AND</span> age&gt;<span class="number">20</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">Users</span> <span class="keyword">WHERE</span> city=<span class="string">'Beijing'</span> <span class="keyword">OR</span> age&gt;<span class="number">20</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">Users</span> <span class="keyword">WHERE</span> (city=<span class="string">'Beijing'</span> <span class="keyword">OR</span> age&gt;<span class="number">20</span>) <span class="keyword">AND</span> gender=<span class="string">'male'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="ORDER-BY-子句"><a href="#ORDER-BY-子句" class="headerlink" title="ORDER BY 子句"></a>ORDER BY 子句</h2><p>根据指定的列对结果集进行排序，默认按升序，如果希望用降序，可以添加 <code>DESC</code>关键字<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> User_name, Age <span class="keyword">FROM</span> <span class="keyword">USERS</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Age</span><br><span class="line"><span class="keyword">SELECT</span> User_name, Age <span class="keyword">FROM</span> <span class="keyword">USERS</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> User_name, Age <span class="comment"># 以字母顺序显示User_name，对相同的User_name，以Age数字顺序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> User_name, Age <span class="keyword">FROM</span> <span class="keyword">USERS</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Age <span class="keyword">DESC</span></span><br><span class="line"><span class="keyword">SELECT</span> User_name, Age <span class="keyword">FROM</span> <span class="keyword">USERS</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> User_name <span class="keyword">DESC</span>, Age <span class="keyword">ASC</span> <span class="comment"># 逆序显示User_name, 正序显示Age</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="INSERT-INTO-语句"><a href="#INSERT-INTO-语句" class="headerlink" title="INSERT INTO 语句"></a>INSERT INTO 语句</h2><p>用于向表格中插入新行<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名称 <span class="keyword">VALUES</span> (值<span class="number">1</span>, 值<span class="number">2</span>,...)</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">USERS</span> <span class="keyword">VALUES</span> (<span class="string">'Juliet'</span>,<span class="string">'Female'</span>,<span class="number">26</span>)</span><br></pre></td></tr></table></figure></p>
+<p>也可以指定所要插入数据的列：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名称 (列<span class="number">1</span>, 列<span class="number">2</span>,...) <span class="keyword">VALUES</span> (值<span class="number">1</span>, 值<span class="number">2</span>,...)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">USERS</span> (User_name, Age) <span class="keyword">VALUES</span> (<span class="string">'Juliet'</span>,<span class="number">26</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="UPDATE-语句"><a href="#UPDATE-语句" class="headerlink" title="UPDATE 语句"></a>UPDATE 语句</h2><p>用于修改表中的数据<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 表名称 <span class="keyword">SET</span> 列名 = 新值 <span class="keyword">WHERE</span> 列名 = 某值</span><br></pre></td></tr></table></figure></p>
+<p>更新某一行中的一列<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 表名称 <span class="keyword">SET</span> Gender = <span class="string">'Female'</span> WHRER User_name = <span class="string">'Juliet'</span></span><br></pre></td></tr></table></figure></p>
+<p>更新某一行中的若干列<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">USERS</span> <span class="keyword">SET</span> Gender = <span class="string">'Female'</span>, Age = <span class="number">26</span> <span class="keyword">WHERE</span> User_name = <span class="string">'Juliet'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="DELETE-语句"><a href="#DELETE-语句" class="headerlink" title="DELETE 语句"></a>DELETE 语句</h2><p>删除表中的行<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名称 <span class="keyword">WHERE</span> 列名 = 某值</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">USERS</span> WHRER User_name = <span class="string">'Juliet'</span></span><br></pre></td></tr></table></figure></p>
+<p>在不删除表的情况下删除所有行，此时表的结构、属性和索引都是完整的<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line"><span class="keyword">DELETE</span> * <span class="keyword">FROM</span> 表名</span><br></pre></td></tr></table></figure></p>
+<h2 id="TOP-子句"><a href="#TOP-子句" class="headerlink" title="TOP 子句"></a>TOP 子句</h2><p>返回 TOP number / Top percent条记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="built_in">number</span>|<span class="keyword">percent</span> 列名<span class="number">1</span>,列名<span class="number">2</span> <span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">2</span> * <span class="keyword">FROM</span> <span class="keyword">USERS</span> <span class="comment"># top 2</span></span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">50</span> <span class="keyword">PERCENT</span> * <span class="keyword">FROM</span> <span class="keyword">USERS</span> <span class="comment"># top 50%</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="LIKE-操作符"><a href="#LIKE-操作符" class="headerlink" title="LIKE 操作符"></a>LIKE 操作符</h2><p>用于在 WHERE 子句中搜索列中的指定模式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名<span class="number">1</span>, 列名<span class="number">2</span>,...</span><br><span class="line"><span class="keyword">FROM</span> 表名称</span><br><span class="line"><span class="keyword">WHERE</span> 列名 <span class="keyword">LIKE</span> pattern</span><br></pre></td></tr></table></figure>
+<p>可以与 LIKE 连用的通配符：</p>
+<ul>
+<li><code>%</code> ：代替零个或多个字符，如 <code>J%</code> 表示以 J 开头的字符串，<code>%J</code> 表示以 J 结尾的字符串，<code>%J%</code>包含 J 的字符串；</li>
+<li><code>_</code> ：仅代替一个字符；</li>
+<li><code>[charlist]</code> ：字符列中任何单一字符；</li>
+<li><code>[^charlist] / [!charlist]</code> ：不在字符列中的任一单一字符；</li>
+<li>可以通过 <code>NOT</code> 关键字，选出不满足指定模式的项，如名字中不包含 J 的人<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">USERS</span></span><br><span class="line"><span class="keyword">WHERE</span> User_name <span class="keyword">NOT</span> <span class="keyword">LIKE</span> <span class="string">'%J%'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">USERS</span></span><br><span class="line"><span class="keyword">WHERE</span> User_name <span class="keyword">LIKE</span> <span class="string">'[JAD]%'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="IN-操作符"><a href="#IN-操作符" class="headerlink" title="IN 操作符"></a>IN 操作符</h2><p>允许在 WHERE 子句中规定多个值<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名<span class="number">1</span>, 列名<span class="number">2</span>,...</span><br><span class="line"><span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">WHERE</span> 列名 <span class="keyword">IN</span> (值<span class="number">1</span>, 值<span class="number">2</span>, ...)</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">USERS</span></span><br><span class="line"><span class="keyword">WHERE</span> User_name <span class="keyword">IN</span> (<span class="string">'Juliet'</span>, <span class="string">'Kang'</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="BETWEEN…AND操作符"><a href="#BETWEEN…AND操作符" class="headerlink" title="BETWEEN…AND操作符"></a>BETWEEN…AND操作符</h2><p>用于 WHERE 子句中，BETWEEN…AND 会选取介于两个值之间的数据范围，这些值可以是文本、数值、或日期。注意不同数据库BETWEEN…AND实现方法不同，有的包含边界，有的不包含，用时需要确定你的数据库是怎么处理边界的。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名<span class="number">1</span>,列名<span class="number">2</span>,...</span><br><span class="line"><span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">WHERE</span> 列名</span><br><span class="line"><span class="keyword">BETWEEN</span> 值<span class="number">1</span> <span class="keyword">AND</span> 值<span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>如果想表达范围之外的内容，可用 <code>NOT</code> 操作符：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">Users</span></span><br><span class="line"><span class="keyword">WHERE</span> User_name</span><br><span class="line"><span class="keyword">NOT</span> <span class="keyword">between</span> <span class="string">'Amy'</span> <span class="keyword">AND</span> <span class="string">'Juliet'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Alias-别名"><a href="#Alias-别名" class="headerlink" title="Alias 别名"></a>Alias 别名</h2><p>用于给 列名和表名指定别名<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定表名</span></span><br><span class="line"><span class="keyword">SELECT</span> 列名<span class="number">1</span> <span class="keyword">FROM</span> 表名 <span class="keyword">AS</span> 别名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定列名</span></span><br><span class="line"><span class="keyword">SELECT</span> 列名 <span class="keyword">AS</span> 别名 <span class="keyword">FROM</span> 表名</span><br></pre></td></tr></table></figure></p>
+<p>假设有Users 和 Videos 两个表，分别指定别名为 “u” 和 “v”<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> u.User_name, v.Video_name</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">Users</span> <span class="keyword">AS</span> u, Videos <span class="keyword">AS</span> v</span><br><span class="line"><span class="keyword">WHERE</span> u.User_name=<span class="string">'Juliet'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="JOIN-INNER-JOIN"><a href="#JOIN-INNER-JOIN" class="headerlink" title="JOIN / INNER JOIN"></a>JOIN / INNER JOIN</h2><p>根据两个或多个表中列之间的关系查询数据。数据库中的表可通过键将彼此联系起来，主键（Primary Key）是一个或多个列的组合，主键的每一行的值都是唯一的。这样可以在不重复过滤每个表中的所有数据的情况下，把表间数据交叉捆绑在一起。当 A 表的主键是 B 表的外键，就可以通过该列把 A 和 B 两个表联系起来。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名</span><br><span class="line"><span class="keyword">FROM</span> 表名<span class="number">1</span></span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> 表名<span class="number">2</span></span><br><span class="line"><span class="keyword">ON</span> 表名<span class="number">1.</span>列名n=表名<span class="number">2.</span>列名n</span><br></pre></td></tr></table></figure>
+<p>如果 Users 中的行在 Videos 中没有匹配，则不会列出这些行：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Users.UserName, Videos.VideoName, Videos.Author</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">Users</span></span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> Videos</span><br><span class="line"><span class="keyword">ON</span> Users.uid = Videos.uid</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Users.UserName</span><br></pre></td></tr></table></figure></p>
+<h3 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT JOIN"></a>LEFT JOIN</h3><p>LEFT JOIN 会从左表 table1 中返回所有行，即使右表中没有匹配<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名(s)</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.列名n=table2.列名m</span><br></pre></td></tr></table></figure></p>
+<h3 id="RIGHT-JOIN"><a href="#RIGHT-JOIN" class="headerlink" title="RIGHT JOIN"></a>RIGHT JOIN</h3><p>RIGHT JOIN 会从右表table 2 中返回所有行，即使在左表中没有匹配<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名(s)</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.列名=table2.列名</span><br></pre></td></tr></table></figure></p>
+<h3 id="FULL-JOIN"><a href="#FULL-JOIN" class="headerlink" title="FULL JOIN"></a>FULL JOIN</h3><p>FULL JOIN 会从返回 table1 和 table2 中的所有行，即使在其中一个表中没有匹配<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名(s)</span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">FULL</span> <span class="keyword">JOIN</span> table2</span><br><span class="line"><span class="keyword">ON</span> table1.列名=table2.列名</span><br></pre></td></tr></table></figure></p>
+<h2 id="UNION-操作符"><a href="#UNION-操作符" class="headerlink" title="UNION 操作符"></a>UNION 操作符</h2><p>用于合并两个或多个 SELECT 语句的结果集，UNION 内部的 SELECT 语句必须拥有相同数量的列，且列的顺序相同，数据类型相似。UNION 结果集中的列名与第一个 SELECT 语句的列名相同<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名(s) <span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> 列名(s) <span class="keyword">FROM</span> table2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有的美国视频和中国视频</span></span><br><span class="line"><span class="keyword">SELECT</span> Video <span class="keyword">FROM</span> Videos_US</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> Video <span class="keyword">FROM</span> Videos_China</span><br></pre></td></tr></table></figure></p>
+<p>UNION     默认不允许重复，如果允许重复，用 <code>UNION ALL</code><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名(s) <span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> 列名(s) <span class="keyword">FROM</span> table2</span><br></pre></td></tr></table></figure></p>
+<h2 id="SELECT-INTO-语句"><a href="#SELECT-INTO-语句" class="headerlink" title="SELECT INTO 语句"></a>SELECT INTO 语句</h2><p>从一个表中选取数据，然后把数据插入另一表中，常用于备份表或用于对记录进行存档<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份</span></span><br><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">INTO</span> Users_backup</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">Users</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择列插入新表</span></span><br><span class="line"><span class="keyword">SELECT</span> 列名<span class="number">1</span>, 列名<span class="number">2</span> </span><br><span class="line"><span class="keyword">INTO</span> new_table [<span class="keyword">IN</span> externaldatabase]</span><br><span class="line"><span class="keyword">FROM</span> old_table</span><br><span class="line"></span><br><span class="line"><span class="comment"># 向另一个数据库中拷贝表，可以用 WHERE、JOIN等选取</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">Users</span> <span class="keyword">IN</span> <span class="string">'Backup.mdb'</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">Users</span></span><br><span class="line"><span class="keyword">WHERE</span> Gender=<span class="string">'Female'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">Users</span> <span class="keyword">IN</span> <span class="string">'Backup.mdb'</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">Users</span></span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> Videos</span><br><span class="line"><span class="keyword">ON</span> Users.uid=Videos.uid</span><br></pre></td></tr></table></figure></p>
+<h2 id="PRIMARY-KEY"><a href="#PRIMARY-KEY" class="headerlink" title="PRIMARY KEY"></a>PRIMARY KEY</h2><p>在表已存在的情况下定义 PRIMARY KEY<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">Users</span></span><br><span class="line"><span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span> (Uid)</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">Users</span></span><br><span class="line"><span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span> (Uid, Vid)</span><br></pre></td></tr></table></figure></p>
+<h2 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h2><p>结合合计函数，根据一个或多个列对结果集进行分组<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名, aggregate_function(列名)</span><br><span class="line"><span class="keyword">FROM</span> 表名</span><br><span class="line"><span class="keyword">WHERE</span> 列名 运算符 值</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> 列名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例如查找每个用户看过的所有视频</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">User</span>, <span class="keyword">SUM</span>(Finished) <span class="keyword">FROM</span> Videos</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">User</span></span><br></pre></td></tr></table></figure></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

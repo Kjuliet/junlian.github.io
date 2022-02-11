@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        深度学习框架 - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-MegDL-全家桶"><span class="toc-text">1. MegDL 全家桶</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MegBrain"><span class="toc-text">MegBrain</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Brain-生态链"><span class="toc-text">Brain++ 生态链</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-用MegSkull定义模型"><span class="toc-text">2. 用MegSkull定义模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MegDL-图的基本概念"><span class="toc-text">MegDL 图的基本概念</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-MegDL-训练"><span class="toc-text">3. MegDL 训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-debug-技巧"><span class="toc-text">4. debug 技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-常用的tensor-操作："><span class="toc-text">4.1 常用的tensor 操作：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-Tensor-的shape-和-partial-shape的区别："><span class="toc-text">4.2 Tensor 的shape 和 partial_shape的区别：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-用GroupNode-让网络结构有层级"><span class="toc-text">4.3 用GroupNode 让网络结构有层级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-用Tensorboard"><span class="toc-text">4.4 用Tensorboard</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-用npk-model-manip-看网络的统计信息"><span class="toc-text">4.5 用npk-model-manip 看网络的统计信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-用NetworkVisitor-对网络进行修改"><span class="toc-text">4.6 用NetworkVisitor 对网络进行修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-载入pre-trained的模型"><span class="toc-text">4.7 载入pre-trained的模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-8-share-weights"><span class="toc-text">4.8 share weights</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-9-加入Weight-Decay"><span class="toc-text">4.9 加入Weight Decay</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-10-做checkpoint"><span class="toc-text">4.10 做checkpoint</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-11-常见错误与debug"><span class="toc-text">4.11 常见错误与debug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-9-验证精度远低于训练精度"><span class="toc-text">4.9 验证精度远低于训练精度</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        深度学习框架
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-30 22:46:26</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="1-MegDL-全家桶"><a href="#1-MegDL-全家桶" class="headerlink" title="1. MegDL 全家桶"></a>1. MegDL 全家桶</h3><p><strong>MegDL = MegBrain + MegSkull + MegHair + NeuPeak</strong></p>
+<ul>
+<li>MegBrain：类似 TensorFlow C++ core，数值计算的引擎，Engine</li>
+<li>MegSkull：类似 TensorFlow Python封装，Cars</li>
+<li>MegHair：类似 keras，pipeline to run model，Road</li>
+<li>NeuPeak：类似 keras，Experiment Orchestration，得看地图</li>
+</ul>
+<h4 id="MegBrain"><a href="#MegBrain" class="headerlink" title="MegBrain"></a>MegBrain</h4><p>MegBrain Core 是用C++实现的，外面加了一层MegBrain Python Wrapper。</p>
+<h4 id="Brain-生态链"><a href="#Brain-生态链" class="headerlink" title="Brain++ 生态链"></a>Brain++ 生态链</h4><ul>
+<li>nori</li>
+<li>dpflow</li>
+<li>rlaunch / rrun</li>
+</ul>
+<h3 id="2-用MegSkull定义模型"><a href="#2-用MegSkull定义模型" class="headerlink" title="2. 用MegSkull定义模型"></a>2. 用MegSkull定义模型</h3><p>定义模型的“逻辑”，以及一部分运行时的行为，更关心“逻辑”：</p>
+<ul>
+<li>逻辑：输入长什么样，模型结构长什么样，进行了什么样的操作，Loss 怎么算</li>
+<li>运行时行为：做多卡训练时Input tensor 怎么样拆分到多卡上，即计算节点(如GPU)，什么时候把各个卡的结果汇总。</li>
+</ul>
+<h4 id="MegDL-图的基本概念"><a href="#MegDL-图的基本概念" class="headerlink" title="MegDL 图的基本概念"></a>MegDL 图的基本概念</h4><p><strong>Tensor</strong>：网络中的一切数据，包括输入、参数和特征图，等价于数学上的概念；<br><strong>Variable Node (VarNode)：</strong>包含 tensor 的节点，是数据的容器，被操作的对象；<br><strong>Operator Node (OprNode)：</strong></p>
+<ul>
+<li>网络中所有的动词，对数据进行的操作，比如conv，+，shape_of…</li>
+<li>一般有至少一个输入的 VarNode</li>
+<li>有至少一个输出的VarNode<br><strong>Computation Graph: </strong> 由 Operator Nodes 和 Variable Nodes 组成的网络。</li>
+</ul>
+<p>基于图计算的模型逻辑：<br><img src="./1566991592132.png" alt="Alt text"></p>
+<p>MegBrain 图的特点：</p>
+<ul>
+<li>绝大多数 Operator 是无副作用的，没有内部状态的纯函数，无内部状态是指operator内部没有参数，比如FullyConneted有x, w, b三个外部输入，它的内部是没有参数的。但也有个别反例，如BatchNormalization, GaussianRNG</li>
+<li>网络的状态保存在参数 ParamProvider、常量 ConstProvider对应的Variable Node中；</li>
+<li>Operator 具有前向计算规则和求导规则，可以自动求全图有关系的任意两点的导数。</li>
+</ul>
+<p>一个模型从定义到运行经过了如下阶段：</p>
+<ul>
+<li>构建阶段：Operator 组合定义一个图，varnode 可以自动推导，一般不需要手动声明；</li>
+<li>编译阶段：选择若干个输出节点，编译计算图，涉及到图优化、分配device，分配内存；？？</li>
+<li>执行阶段：输入数据，计算输出</li>
+</ul>
+<p>只有定义阶段是python 控制的，执行阶段python难以直接控制！</p>
+<p>声明式 vs 指令式<br>MegDL 使用声明式逻辑，先定义好计算规则，最后输入数据，得到输出，类似于 theano, tf<br><img src="./1566994300280.png" alt="Alt text"></p>
+<p>指令式逻辑，给定输入数据，一步一变换，最后得到输出。如torch，pytorch，缺点是执行效率低，没有办法做预先的优化<br><img src="./1566994304896.png" alt="Alt text"></p>
+<p>网络中间变量均由以下三种<strong>数据容器</strong>经过 Operator 变换而成：</p>
+<ul>
+<li>DataProvider：网络的输入节点，在声明时必须指定shape，求值时必须赋值，相当于 tf 的placeholder；</li>
+<li>ParamProvider：网络参数的容器，训练时会使用优化器调整数值，相当于tf的Variable；</li>
+<li>ConstProvider：网络中的常量</li>
+</ul>
+<p>MegBrain默认使用(n, c, h, w) 的Layout，全世界只有tensorflow默认使用 (n, h, w, c)的Layout</p>
+<p>Wight decay??</p>
+<h3 id="3-MegDL-训练"><a href="#3-MegDL-训练" class="headerlink" title="3. MegDL 训练"></a>3. MegDL 训练</h3><ul>
+<li><ol>
+<li>定义网络结构</li>
+</ol>
+<ul>
+<li>network = Network(outputs = [y], loss = loss)</li>
+</ul>
+</li>
+<li><ol>
+<li>生成训练数据</li>
+</ol>
+<ul>
+<li>minibatch_generator()</li>
+<li>yield {‘data’: }</li>
+</ul>
+</li>
+<li><ol>
+<li>训练</li>
+</ol>
+<ul>
+<li>图编译，把定义好的网络编译成一个可执行的function,每次把数据输进去的时候，它就会进行梯度下降，优化，device=’gpu0’，func_maker.make_func(loss_var = net.loss_var)；optimizer.Momentum()</li>
+<li>图执行：out=train_func(**minibatch)，从数据集里拿到数据，优化。</li>
+</ul>
+</li>
+<li><ol>
+<li>测试</li>
+</ol>
+<ul>
+<li>编译：classify = Function().compile(net.outputs[0])，建立一个Function对象，选择网络输出的点，complie一下，得到一个callable的function，然后把输入数据扔进去。</li>
+<li>执行：classify(np.array([0.5, 0.3]))</li>
+<li>编译并执行：pred = net.outputs; pred.eval(data=np.array([0.5, 0.3])) 得到一个varnode，通过eval()把数据喂进去也是可以的，其实eval()就是上面两句的语法行，每次调用都会编译执行前两部。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-debug-技巧"><a href="#4-debug-技巧" class="headerlink" title="4. debug 技巧"></a>4. debug 技巧</h3><h4 id="4-1-常用的tensor-操作："><a href="#4-1-常用的tensor-操作：" class="headerlink" title="4.1 常用的tensor 操作："></a>4.1 常用的tensor 操作：</h4><ul>
+<li>基本运算：$+, -, <em>, /, %, *</em>, @$ @是矩阵乘</li>
+<li>逻辑运算：$&gt;, &lt;, \le, \ge, \ne, eq$ 比较实际值要用eq，==比较的是python对象</li>
+<li>索引：$[]$, set_sub, AdvancedIndexing</li>
+<li>统计信息：min, max, mean, sum, prod</li>
+<li>维度变换类：dimshuffle, reshape, add_axis, T, broadcast, shape</li>
+</ul>
+<h4 id="4-2-Tensor-的shape-和-partial-shape的区别："><a href="#4-2-Tensor-的shape-和-partial-shape的区别：" class="headerlink" title="4.2 Tensor 的shape 和 partial_shape的区别："></a>4.2 Tensor 的shape 和 partial_shape的区别：</h4><ul>
+<li>每个varnode x 都有partial_shape和shape两个属性；</li>
+<li>x.partial_shape 是根据其依赖的DataProvider声明的尺寸推导得到的，是一个python 可读的数组；</li>
+<li>x.shape是一个符号变量(varnode)，表示张量的实际尺寸，只有在执行阶段得到实际的输入数据时才有值；</li>
+<li>MegBrain在运行时不检查输入尺寸，只要输入数据和网络变换在数学上是成立的就能运行，例如conv对图像空间大小不要求，对通道数量有要求；</li>
+<li>网络中应尽量使用shape，一般用partial_shape辅助调试；</li>
+<li>取batch_size时，因为多卡数据划分，必须用x.shape[0]</li>
+</ul>
+<h4 id="4-3-用GroupNode-让网络结构有层级"><a href="#4-3-用GroupNode-让网络结构有层级" class="headerlink" title="4.3 用GroupNode 让网络结构有层级"></a>4.3 用GroupNode 让网络结构有层级</h4><p>相当于tensorflow中的variable_scope，只有用GroupNode 做好分级的网络才能被良好地可视化。</p>
+<h4 id="4-4-用Tensorboard"><a href="#4-4-用Tensorboard" class="headerlink" title="4.4 用Tensorboard"></a>4.4 用Tensorboard</h4><ul>
+<li>查看网络结构：npk-model-visualize model.py</li>
+<li>查看训练曲线：<code>meghair.train.tensorboard.TensorBoardLogger</code>，支持的类型：<ul>
+<li>Scalar</li>
+<li>Image</li>
+<li>Histogram</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-5-用npk-model-manip-看网络的统计信息"><a href="#4-5-用npk-model-manip-看网络的统计信息" class="headerlink" title="4.5 用npk-model-manip 看网络的统计信息"></a>4.5 用npk-model-manip 看网络的统计信息</h4><p>npk-model-manip model.py info</p>
+<h4 id="4-6-用NetworkVisitor-对网络进行修改"><a href="#4-6-用NetworkVisitor-对网络进行修改" class="headerlink" title="4.6 用NetworkVisitor 对网络进行修改"></a>4.6 用NetworkVisitor 对网络进行修改</h4><ul>
+<li>对已经建好的图进行修改：<ul>
+<li>删除节点、增加节点、替换节点</li>
+</ul>
+</li>
+<li>常用操作<ul>
+<li>replace_vars / replace_oprs / replace_{vars, oprs}_inplace</li>
+<li>all_params</li>
+<li>all_data_providers</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-7-载入pre-trained的模型"><a href="#4-7-载入pre-trained的模型" class="headerlink" title="4.7 载入pre-trained的模型"></a>4.7 载入pre-trained的模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">net = io.load_network(<span class="string">'resnet50_cnn.mdl'</span>)</span><br><span class="line">states = net.loss_outputs_visitor.all_stateful_opr_states_dict</span><br><span class="line">net1.loss_outputs_visitor.set_all_stateful_opr_from(states)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">neupeak.model.param_init.set_opr_states_from_network</span><br></pre></td></tr></table></figure>
+<h4 id="4-8-share-weights"><a href="#4-8-share-weights" class="headerlink" title="4.8 share weights"></a>4.8 share weights</h4><ul>
+<li>如果 varnode A，B 的shape相同，可以在batch维度上concat后，通过相同的operator；</li>
+<li>使用operator构造函数中的W=con1a.param_manager[‘w’];</li>
+<li>使用replace_vars，把重复的param都替换为同一个。</li>
+</ul>
+<h4 id="4-9-加入Weight-Decay"><a href="#4-9-加入Weight-Decay" class="headerlink" title="4.9 加入Weight Decay"></a>4.9 加入Weight Decay</h4><p>错误用法：把weight的L2加入loss，但是这种方法在多卡训练时每张卡上的weight被重复计算，相当于weight_decay增倍。<br>正确方法：loss = O.WeightDecay(loss, {‘*:W’:1e-3})</p>
+<h4 id="4-10-做checkpoint"><a href="#4-10-做checkpoint" class="headerlink" title="4.10 做checkpoint"></a>4.10 做checkpoint</h4><ul>
+<li>Load：<code>meghair.utils.io.load_network</code></li>
+<li>Save：<code>meghair.utils.io.dump</code></li>
+</ul>
+<h4 id="4-11-常见错误与debug"><a href="#4-11-常见错误与debug" class="headerlink" title="4.11 常见错误与debug"></a>4.11 常见错误与debug</h4><p>执行阶段错误：</p>
+<ul>
+<li>出现NaN：除零，Log(0)，Sqrt(-1) 等；</li>
+<li>shape 乘二除二concat时候shape对不上，奇偶数问题。</li>
+<li>各类shape错误；<br>使用ipython、opr.eval() 进行临时测试<br>用O.CallbackInjector查看中间值<br>从最后一层往前监控 param / gradient rms/ histogram</li>
+</ul>
+<h4 id="4-9-验证精度远低于训练精度"><a href="#4-9-验证精度远低于训练精度" class="headerlink" title="4.9 验证精度远低于训练精度"></a>4.9 验证精度远低于训练精度</h4><p>用了BN？</p>
+<ul>
+<li>等着就好：mean/std 的moving average 到loss基本不降一段时间后就会稳定；</li>
+<li>把学习率设为0</li>
+<li>后统计BN参数：<code>npk-sanitize-batch-normalization</code></li>
+<li>设置decay factor = 1，用最新的一个training minibatch的statistics。</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

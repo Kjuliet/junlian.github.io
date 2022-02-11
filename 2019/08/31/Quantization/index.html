@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Juliet&#39;s blog">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/junlian.github.io/img/favicon.ico">
+
+    <title>
+        
+        NNIE Quantization - 学 | 慢慢来
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/junlian.github.io/css/aircloud.css">
+    <link rel="stylesheet" href="/junlian.github.io/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/junlian.github.io/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>慎思之，笃行之</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/junlian.github.io/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/junlian.github.io/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-为什么量化"><span class="toc-text">1. 为什么量化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-量化过程"><span class="toc-text">1.1 量化过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-量化评价指标"><span class="toc-text">1.2 量化评价指标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-量化层次"><span class="toc-text">1.3 量化层次</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-量化方式"><span class="toc-text">1.4 量化方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-NNIE"><span class="toc-text">2.NNIE</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-SVP-Smart-Vision-Platform"><span class="toc-text">2.1 SVP Smart Vision Platform</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-NNIE-Neural-Network-Inference-Engine"><span class="toc-text">2.2 NNIE Neural Network Inference Engine</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-测试工具链"><span class="toc-text">2.3 测试工具链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-NNIE开发流程"><span class="toc-text">2.4 NNIE开发流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-量化函数"><span class="toc-text">2.5 量化函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-全局量化"><span class="toc-text">2.6 全局量化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-校准-Calibration"><span class="toc-text">2.7 校准 Calibration</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-掉点问题"><span class="toc-text">3. 掉点问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-模型-校准集"><span class="toc-text">3.1 模型/校准集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-高精度模式"><span class="toc-text">3.2 高精度模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-CPU模式"><span class="toc-text">3.3 CPU模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-找海思"><span class="toc-text">3.4 找海思</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必慎其独也。 ——摘《大学》 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        NNIE Quantization
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-31 22:20:42</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>由于NNIE编译器只支持编译Caffe 模型，所以需要将现有的Model先转换成Caffe模型，再使用海思提供NNIE 编译器，将Caffe模型转换为NNIE可运行的wk模型。编译过程主要包含量化相关的操作，即将Float32类型的参数转换为INT8类型的参数，计算feature map量化的scale参数，这一步要求在编译的时候提供部分数据作为校准集，用于估计feature map的分布并计算scale参数。</p>
+<h1 id="1-为什么量化"><a href="#1-为什么量化" class="headerlink" title="1. 为什么量化"></a>1. 为什么量化</h1><p>深度神经网络模型是在GPU 上训练的浮点模型，浮点计算（包括复杂的小数点对齐等操作。）在GPU这种高功耗的设备上大规模使用是没问题的，但对目前兴起的专用神经网络加速芯片，低比特非浮点的运算方式越来越普及，比如最新的 Nvidia 的 Tensorcore 也支持 INT8 甚至 INT4计算。所以量化要解决的问题就是如何把一个GPU上训练的浮点模型转化为低比特非浮点的量化模型。</p>
+<h2 id="1-1-量化过程"><a href="#1-1-量化过程" class="headerlink" title="1.1 量化过程"></a>1.1 量化过程</h2><p>从浮点模型到量化模型的转化过程按转化代价从低到高可以分为4种：</p>
+<ul>
+<li><strong>1. 不需要训练，不需要校准数据：</strong>用得比较少，8bit以上还可以，小于8bit就会严重掉点。</li>
+<li><strong>2. 不需要训练，需要校准数据：</strong>可以到4bit</li>
+<li><strong>3. 需要训练，但不需要从头训练，只需要finetune：</strong>可以小于4bit</li>
+<li><strong>4. 需要从头训练</strong></li>
+</ul>
+<p>基于训练的方法，finetune 的成本比较低，对一个原始的 float模型，直接finetune 几个epoch 得到对应的量化模型。这个过程中用浮点来模拟量化过程的模型叫 Quantized-float 模型 (Qfloat模型)，最终能直接在设备上运行的模型叫 Quantized模型（Q模型），一般Qfloat模型没办法完全模拟Q模型，有时候还可能模拟地非常差，所以在精度上面它们三个的关系是<code>float &gt; Qfloat &gt; Q</code> 或者 <code>float &gt; Q &gt; Qfloat</code>，</p>
+<p>训练时优化的过程一般分两个阶段：</p>
+<ul>
+<li>第一个阶段偏工程，拉近 Qfloat 和 Q 的精度，这样训练阶段的精度可以作为最终Q精度的代理指标。</li>
+<li>第二个阶段偏算法，提高Qfloat让它带着Q一起逼近float，这样就可以让量化模型的性能尽可能恢复到float的精度，</li>
+</ul>
+<h2 id="1-2-量化评价指标"><a href="#1-2-量化评价指标" class="headerlink" title="1.2 量化评价指标"></a>1.2 量化评价指标</h2><p>给定向量$x$ 和 $x’=Q(x)$，度量距离的方式有：</p>
+<ul>
+<li><p>余弦距离 Cosine，只衡量夹角，比较弱的指标：</p>
+<script type="math/tex; mode=display">D = \frac{x\cdot x'}{||x|| \cdot ||x'||}</script></li>
+<li><p>模长相对变化 Relative-L1，可以排除向量本身scale的影响：</p>
+<script type="math/tex; mode=display">D = \frac{abs(||x|| - ||x'||)}{||x||}</script></li>
+<li><p>整数绝对误差，表示平均每个元素偏差多少个量化slot，假设 $y$ 和 $y’$ 分别是 $x$ 和 $x’$ 的整数表示，整数绝对误差定义为：</p>
+<script type="math/tex; mode=display">D = mean(abs(y-y'))</script></li>
+</ul>
+<p>常用的是余弦距离和模长相对变化。</p>
+<h2 id="1-3-量化层次"><a href="#1-3-量化层次" class="headerlink" title="1.3 量化层次"></a>1.3 量化层次</h2><p>Qfloat 是量化模拟训练的核心，我们希望得到的Qfloat是它能够带着 Q 向 float 逼近。Qfloat 分为三个层次：</p>
+<ul>
+<li>LV1. 量化函数：输入浮点数w，返回量化后等效浮点数 $w’ = Q(w)$</li>
+<li>LV2. 单个算子：分为NN算子和非NN算子<ul>
+<li>NN 算子，如conv，是通过 $y=Q(conv(Q(w)), Q(x))$ 来模拟，如果conv后面接BN可以用fold方式转化；</li>
+<li>非NN算子，如concat，通过 $x’=Q(concat(Q(x_1), Q(x_2)))$ 来模拟，需要看具体的硬件实现。</li>
+</ul>
+</li>
+<li>LV3. 多个算子。由多个LV2的算子组合而成的更复杂的结构</li>
+</ul>
+<p>以上三个层次要求是逐渐降低的，对一个硬件平台，一般按照以上步骤检查各个层次的模拟情况，比如如果用cosine指标，LV1是严格的1.0，LV2 0.999，LV3 0.99</p>
+<h2 id="1-4-量化方式"><a href="#1-4-量化方式" class="headerlink" title="1.4 量化方式"></a>1.4 量化方式</h2><ul>
+<li>线性均匀量化，如TO2 方案 (量化区间关于原点对称，2bit/4bit)</li>
+<li>非线性对数量化，如NNIE 海思方案 (对称，量化区间内正数会多一个slot，8bit/16bit)</li>
+</ul>
+<blockquote>
+<p>‘量化区间关于原点对称’:<br>实际上因为零点的存在，正负分配数会相差1，比如 8bit 的对称线性量化中，量化区间为[-128, 127]</p>
+</blockquote>
+<h1 id="2-NNIE"><a href="#2-NNIE" class="headerlink" title="2.NNIE"></a>2.NNIE</h1><h2 id="2-1-SVP-Smart-Vision-Platform"><a href="#2-1-SVP-Smart-Vision-Platform" class="headerlink" title="2.1 SVP Smart Vision Platform"></a>2.1 SVP Smart Vision Platform</h2><p>海思媒体处理芯片智能视觉异构加速平台，这个平台包括多个硬件处理单元和运行在这些硬件上SDK开发环境，以及配套的工具链开发环境。其中硬件处理单元有CPU，NNIE等，不同芯片的SVP硬件资源不同。</p>
+<h2 id="2-2-NNIE-Neural-Network-Inference-Engine"><a href="#2-2-NNIE-Neural-Network-Inference-Engine" class="headerlink" title="2.2 NNIE Neural Network Inference Engine"></a>2.2 NNIE Neural Network Inference Engine</h2><p>海思专门针对深度学习卷积神经网络进行加速处理的硬件单元，支持大部分公开的网络，如Alexnet，VGG16，GoogLenet，Resnet19，Resnet50等分类网络，Faster R-CNN，YOLO，SSD，RFCN 等检测网络，SegNet，FCN等场景分割网络。</p>
+<p>目前NNIE 配套软件和工具链只支持Caffe框架，其他框架下的网络模型需要转化为Caffe框架下的模型。</p>
+<h2 id="2-3-测试工具链"><a href="#2-3-测试工具链" class="headerlink" title="2.3 测试工具链"></a>2.3 测试工具链</h2><p>由于mapper仅支持编译Caffe 模型，所以需要将现有的Model先转换成Caffe模型，再使用海思提供NNIE 编译器，将Caffe模型转换为NNIE可运行的wk模型。编译过程主要包含量化相关的操作，即将Float32类型的参数转换为INT8类型的参数，计算feature map量化的scale参数，这一步要求在编译的时候提供部分数据作为校准集，用于估计feature map的分布并计算scale参数。</p>
+<h2 id="2-4-NNIE开发流程"><a href="#2-4-NNIE开发流程" class="headerlink" title="2.4 NNIE开发流程"></a>2.4 NNIE开发流程</h2><p>在Caffe上训练，用NNIE的mapper工具转化过程离线完成。mapper将caffe模型转化成在仿真器、仿真库、板端可加载执行的数据指令文件。一般是先用仿真器对模型进行精度、性能、带宽的初步评估，等到符合预期后，再用仿真库进行完整功能的仿真，最后把程序移植到板端。</p>
+<h2 id="2-5-量化函数"><a href="#2-5-量化函数" class="headerlink" title="2.5 量化函数"></a>2.5 量化函数</h2><p>海思没有明确给出量化的细节，但给了一个仿真器，就是输入任意一个向量，仿真器会返回量化后的值。</p>
+<h2 id="2-6-全局量化"><a href="#2-6-全局量化" class="headerlink" title="2.6 全局量化"></a>2.6 全局量化</h2><p>只靠单层计算产生的误差不足以说明最终结果，逐层计算会把误差累积放大，所以需要对实际模型进行累积误差验证。<br>建立Quant Check BMK，对所有图片分别提取GPU和NNIE的feature，计算余弦相似度，然后对不同余弦相似度区间的图片进行采样，得到最终的图片BMK。<br>计算发现NNIE对于大部分数据而言量化前后的余弦相似度均在[0.9, 1.0)范围内，仅部分图片可能会产生较大误差。</p>
+<h2 id="2-7-校准-Calibration"><a href="#2-7-校准-Calibration" class="headerlink" title="2.7 校准 Calibration"></a>2.7 校准 Calibration</h2><p>如量化函数Q 一节介绍，每一层参数或激活值的量化，都需要给出相应的 min, max 值，作为一个截断区间。神经网络 NN 参数权重是固定的，所以可以精确地量化；NN 各层激活值的量化，存在未知输入带来的不确定性，所以需要通过与应用场景接近的 Validation 集来反馈可能得量化参数。</p>
+<p>通常我们会在 Validation 集或其子集上计算相应的每一层的量化参数（如简单取min, max），这一过程也被称为校准过程，这个用来计算量化参数的数据集被称为校准集（Calibration set）。</p>
+<p>当前主流的量化函数库都包含Calibraion 过程，分为以下几种模式：</p>
+<ul>
+<li>No Calibration: 生成模型时不做 Calibration，量化参数实时计算（on the fly）得到。但这种模式会大大降低 inference速度，精度也有损害。</li>
+<li>Naive: 直接取Calibration set在每层的 min, max 作为量化参数。这种方式简单直接，但是当Calibration set图片量变多时，最终精度会随之有明显下降。</li>
+<li>Entropy: 这里采用相对熵，或称为 K-L 散度（Kullback–Leibler divergence）来衡量 Float32和Int8分布的差异程度。通过最小化 K-L 散度来计算合适的量化参数<br>该方法在精度上有较好的效果。</li>
+</ul>
+<p>Calibration set选取建议从网络模型的测试场景随机选择20~50张作为参考图片进行量化，选择的图像要尽量覆盖模型的各个场景（图像要包含分类或检测的目标，如分类网的目标是苹果、梨、桃子，则参考图像至少要包含苹果、梨、桃子。比如检测人、车的模型，参考图像中必须由人、车，不能仅使用人或者无人无车的图像进行量化）。图片影响量化系数，选择典型场景的图片计算出来的量化系数对典型场景的量化误差越小。所以请不要选择偏僻场景、过度曝光、纯黑、纯白的图片，请选择识别率高，色彩均匀的典型场景图片。</p>
+<h1 id="3-掉点问题"><a href="#3-掉点问题" class="headerlink" title="3. 掉点问题"></a>3. 掉点问题</h1><h2 id="3-1-模型-校准集"><a href="#3-1-模型-校准集" class="headerlink" title="3.1 模型/校准集"></a>3.1 模型/校准集</h2><ul>
+<li>吸BN：<script type="math/tex; mode=display">\frac{w * x - \mu}{\sigma} \cdot \gamma + \beta = \frac{w \cdot \gamma}{\sigma} * x + (\beta - \frac{\mu}{\sigma} \cdot \gamma)</script></li>
+<li>换校准集</li>
+</ul>
+<h2 id="3-2-高精度模式"><a href="#3-2-高精度模式" class="headerlink" title="3.2 高精度模式"></a>3.2 高精度模式</h2><h2 id="3-3-CPU模式"><a href="#3-3-CPU模式" class="headerlink" title="3.3 CPU模式"></a>3.3 CPU模式</h2><h2 id="3-4-找海思"><a href="#3-4-找海思" class="headerlink" title="3.4 找海思"></a>3.4 找海思</h2><p>解决步骤：</p>
+<ul>
+<li>确认数据是否正确。 </li>
+<li>确认data层输入一致。</li>
+<li>确认是否量化误差导致。 </li>
+<li>确认层是否匹配。 </li>
+<li>确认后处理是否正确。 </li>
+<li>反馈问题给海思分析。</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/junlian.github.io/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/junlian.github.io/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
