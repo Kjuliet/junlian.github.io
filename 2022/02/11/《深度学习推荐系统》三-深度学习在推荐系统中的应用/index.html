@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深度学习推荐模型的演化关系图"><span class="toc-text">深度学习推荐模型的演化关系图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AutoRec-——-单隐层神经网络推荐模型"><span class="toc-text">AutoRec —— 单隐层神经网络推荐模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AutoRec-模型的基本原理"><span class="toc-text">AutoRec 模型的基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-AutoRec-模型的结构"><span class="toc-text">2.2 AutoRec 模型的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-基于-AutoRec-模型的推荐过程"><span class="toc-text">2.3 基于 AutoRec 模型的推荐过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-AutoRec-模型的特点和局限性"><span class="toc-text">2.4 AutoRec 模型的特点和局限性</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深度学习推荐模型的演化关系图"><span class="toc-text">深度学习推荐模型的演化关系图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AutoRec-——-单隐层神经网络推荐模型"><span class="toc-text">AutoRec —— 单隐层神经网络推荐模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AutoRec-模型的基本原理"><span class="toc-text">AutoRec 模型的基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-AutoRec-模型的结构"><span class="toc-text">2.2 AutoRec 模型的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-基于-AutoRec-模型的推荐过程"><span class="toc-text">2.3 基于 AutoRec 模型的推荐过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-AutoRec-模型的特点和局限性"><span class="toc-text">2.4 AutoRec 模型的特点和局限性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Deep-Crossing-模型——经典的深度学习架构"><span class="toc-text">3 Deep Crossing 模型——经典的深度学习架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Deep-Crossing-模型的应用场景"><span class="toc-text">3.1 Deep Crossing 模型的应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Deep-Crossing-模型的网络结构"><span class="toc-text">3.2 Deep Crossing 模型的网络结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Deep-Crossing-模型对特征交叉方法的革命"><span class="toc-text">3.3 Deep Crossing 模型对特征交叉方法的革命</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -159,6 +159,53 @@
 <p>和协同过滤算法一样，AutoRec 也分基于物品的 I-AutoRec（输入向量是物品的评分向量）和基于用户的 U-AutoRec(输入向量是用户的评分向量）。U-AutoRec 得到的优势是在生成推荐列表过程中，只需输入一次目标用户的用户向量，就可以重建用户对所有物品的评分向量，即只需一次模型推断过程就能得到用户的推荐列表。劣势是用户向量的稀疏性可能会影响模型效果。</p>
 <h2 id="2-4-AutoRec-模型的特点和局限性"><a href="#2-4-AutoRec-模型的特点和局限性" class="headerlink" title="2.4 AutoRec 模型的特点和局限性"></a>2.4 AutoRec 模型的特点和局限性</h2><p>优点：1）拉开了使用深度学习解决推荐问题的序幕；2）用单隐层的AutoEncoder泛化用户和物品评分，使模型有一定的泛化和表达能力<br>局限：模型结构简单，存在表达能力不足的问题。</p>
 <p>AutoRec 结构和词向量模型（word2vec）完全一致，单优化目标和训练方法有所不同。</p>
+<h1 id="3-Deep-Crossing-模型——经典的深度学习架构"><a href="#3-Deep-Crossing-模型——经典的深度学习架构" class="headerlink" title="3 Deep Crossing 模型——经典的深度学习架构"></a>3 Deep Crossing 模型——经典的深度学习架构</h1><h2 id="3-1-Deep-Crossing-模型的应用场景"><a href="#3-1-Deep-Crossing-模型的应用场景" class="headerlink" title="3.1 Deep Crossing 模型的应用场景"></a>3.1 Deep Crossing 模型的应用场景</h2><p>应用场景是微软搜索引擎 Bing 中的搜索广告推荐场景，用户在搜索引擎中输入搜索词之后，搜索引擎除了会返回相关结果，还会返回与搜索词相关的广告，这也是大多数搜索引擎的主要盈利模式。Deep Crossing 的优化目标是准确地预测广告点击率，以此作为广告排序的指标之一。</p>
+<p>使用的特征分三类：1）可以被处理成 one-hot 或 multi-hot 向量的类别型特征，如用户搜索词，广告关键词，广告标题，落地页，匹配类型等；2）数值型特征/计数型Counting特征，如点击率，预估点击率等；3）需要进一步处理的特征，如广告计划（广告主创建的广告投放计划，包括预算、定向条件等），曝光样例（记录了广告在实际曝光场景中的相关信息），点击样例等。</p>
+<p>类别型特征可以通过one-hot或multi-hot编码生成特征向量，数值型特征则可以直接拼接进特征向量中。</p>
+<h2 id="3-2-Deep-Crossing-模型的网络结构"><a href="#3-2-Deep-Crossing-模型的网络结构" class="headerlink" title="3.2 Deep Crossing 模型的网络结构"></a>3.2 Deep Crossing 模型的网络结构</h2><p>深度学习网络的特点是可以根据需求灵活地对网络结构进行调整，从而达成从原始特征向量到最终的优化目标的端到端的训练目的。为了完成端到端的训练，Deep Crossing 需要解决以下问题；</p>
+<ul>
+<li>如何解决稀疏特征向量稠密化问题：离散类特征编码后过于稀疏，不利于直接输入神经网络进行训练</li>
+<li>如何解决特征自动交叉组合的问题</li>
+<li>如何在输出层达成问题设定的优化目标</li>
+</ul>
+<p>Deep Crossing 模型分别设置了不同的神经网络层来解决这三个问题，其网络结构包括4层：Embedding 层，Stacking 层，Muiltiple Residual Units 层和 Score 层</p>
+<p>Embedding 层</p>
+<ul>
+<li>作用：将稀疏的类别型特征转化成稠密的embedding向量。每一个经one-hot编码后的稀疏特征向量，经过embedding层后，会转换成对应的embedding向量。数值型特征不需要经过Embedding层，直接进入 Stacking 层。</li>
+<li>结构：以全连接层Fully Connected Layer 结构为主，还有 Word2vec、Graph Embedding 等多种不同的Embedding方法。</li>
+<li>特点：Embedding 向量的维度应远小于原始的稀疏特征向量，几十到上百维一般就能满足需求。</li>
+</ul>
+<p>Stacking 层/ 连接(Concatenate)层</p>
+<ul>
+<li>作用：把不同的 Embedding 特征和数值型特征拼接在一起，形成新的包含全部特征的特征向量</li>
+</ul>
+<p>Multiple Residual Units 层</p>
+<ul>
+<li>作用：通过多层残差网络对特征向量各个维度进行充分的交叉组合，使模型能够抓取到更多的非线性特征和组合特征的信息，增大模型表达能力。</li>
+<li>结构：主要结构是多层感知机，Deep Crossing 模型采用了多层残差网络作为MLP的具体实现。</li>
+</ul>
+<p>Scoring 层</p>
+<ul>
+<li>作用：输出层，训练时用于拟合优化目标。</li>
+<li>结构：CTR预估这类二分类问题往往使用逻辑回归模型，多分类问题往往用softmax模型</li>
+</ul>
+<blockquote>
+<p>残差神经网络<br>残差神经网络就是由残差单元组成的神经网络。相比传统感知机，残差单元结构上主要有两个不同：</p>
+<ul>
+<li>输入经过两层以ReLU为激活函数的全连接层后，生成输出向量</li>
+<li>输入可以通过一个短路（Shortcut）通路直接与输出向量进行元素加（element-wise plus）操作，生成最终的输出向量</li>
+</ul>
+</blockquote>
+<p>这种结构下，残差单元中的两层 ReLU 其实拟合的就是输出和输入之间的残差，即残差神经网络名称的由来。</p>
+<p>设计残差神经网络主要是为了解决两个问题：</p>
+<ul>
+<li>减少过拟合：基于传统感知机的神经网络，当网络加深后往往会出现过拟合，即在测试集上表现越差。残差神经网络中由于存在输入向量短路，很多时候可以越过两层ReLU网络，减少过拟合现象发生。</li>
+<li>避免梯度消失，加快收敛速度：当网络加深后往往存在严重的梯度消失现象（在梯度反向传播过程中，越靠近输入端，梯度的幅度越小，参数收敛的速度越慢）。残差单元用ReLU激活函数取代sigmoid激活函数，输入向量短路相当于直接把梯度毫无变化地传递到下一层，都是的残差网络的手链速度更快。    </li>
+</ul>
+<h2 id="3-3-Deep-Crossing-模型对特征交叉方法的革命"><a href="#3-3-Deep-Crossing-模型对特征交叉方法的革命" class="headerlink" title="3.3 Deep Crossing 模型对特征交叉方法的革命"></a>3.3 Deep Crossing 模型对特征交叉方法的革命</h2><ul>
+<li>没有任何人工特征工程的参与</li>
+<li>相比 FM，FFM 只具备二阶特征交叉的能力，可以通过调整神经网络的深度进行特征间的深度交叉</li>
+</ul>
 
         
         <br />
